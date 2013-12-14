@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <!-- Parent -->
+    <parent>
+        <groupId>com.spectral.cc.core</groupId>
+        <artifactId>com.spectral.cc.core.portal</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
+
+    <groupId>com.spectral.cc.core.portal</groupId>
+    <artifactId>com.spectral.cc.core.portal.commons-services</artifactId>
+    <name>Control and Conquer Core Portal Commons Services</name>
+    <packaging>bundle</packaging>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${version.java.source}</source>
+                    <target>${version.java.target}</target>
+                    <showDeprecation>true</showDeprecation>
+                    <showWarnings>true</showWarnings>
+                    <optimize>true</optimize>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-ipojo-plugin</artifactId>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>ipojo-bundle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- This plugin takes care of packaging the artifact as an OSGi Bundle -->
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <configuration>
+                    <instructions>
+                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
+                        <Embed-Transitive>true</Embed-Transitive>
+                        <Export-Package>
+                            com.spectral.cc.core.portal.commons.registry;version=${project.version},
+                            com.spectral.cc.core.portal.commons.model;version=${project.version},
+                            com.spectral.cc.core.portal.commons.idm;version=${project.version}
+                        </Export-Package>
+                        <Import-Package>
+                            org.apache.shiro;version="${version.org.apache.shiro}",
+                            org.apache.shiro.config;version="${version.org.apache.shiro}",
+                            org.apache.shiro.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.session.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.util;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.config;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.env;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.filter;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.filter.authc;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.filter.authz;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.filter.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.filter.session;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.servlet;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.session;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.session.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.subject;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.subject.support;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.util;version="${version.org.apache.shiro}",
+                            org.apache.shiro.web.tags;version="${version.org.apache.shiro}",
+                            org.slf4j;version="${version.org.slf4j}"
+                        </Import-Package>
+                    </instructions>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>
