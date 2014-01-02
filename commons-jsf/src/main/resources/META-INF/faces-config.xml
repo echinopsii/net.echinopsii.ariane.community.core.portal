@@ -14,7 +14,7 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
-        <managed-bean-name>userPreferencesController</managed-bean-name>
+        <managed-bean-name>userProfileController</managed-bean-name>
         <managed-bean-class>com.spectral.cc.core.portal.commons.controller.UserProfileController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
