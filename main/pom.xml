@@ -36,12 +36,6 @@
 
         <!-- Dependencies packaged with the war -->
         <dependency>
-            <groupId>org.primefaces</groupId>
-            <artifactId>primefaces</artifactId>
-            <version>${version.org.primefaces.primefaces}</version>
-            <scope>compile</scope> <!-- default parent pom is provided ! -->
-        </dependency>
-        <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
             <scope>runtime</scope>
@@ -110,7 +104,6 @@
                         <Import-Package>
                             org.osgi.framework;version="[${version.osgimin.org.osgi.framework},${version.osgimax.org.osgi.framework})",
                             org.osgi.util.tracker;version="[${version.osgimin.org.osgi.util.tracker},${version.osgimax.org.osgi.util.tracker})",
-                            javax.servlet.jsp.jstl.tlv;version="${version.javax.servlet.jstl}",
                             com.spectral.cc.core.portal.commons.consumer;version=${project.version},
                             com.spectral.cc.core.portal.commons.controller;version=${project.version},
                             com.spectral.cc.core.portal.commons.model;version=${project.version},
@@ -199,23 +192,13 @@
                             javax.faces.view;version="${version.javax.faces.api}",
                             javax.faces.view.facelets;version="${version.javax.faces.api}",
                             javax.faces.webapp;version="${version.javax.faces.api}",
+                            javax.servlet;version="${version.javax.servlet.servlet-api}",
+                            javax.servlet.jsp.jstl.tlv;version="${version.javax.servlet.jstl}",
                             org.apache.commons.fileupload;version="${version.commons.fileupload}",
                             org.apache.commons.fileupload.disk;version="${version.commons.fileupload}",
                             org.apache.commons.fileupload.portlet;version="${version.commons.fileupload}",
                             org.apache.commons.fileupload.servlet;version="${version.commons.fileupload}",
                             org.apache.commons.fileupload.util;version="${version.commons.fileupload}",
-                            org.apache.commons.lang3;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.builder;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.concurrent;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.event;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.exception;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.math;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.mutable;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.reflect;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.text;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.text.translate;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.time;version="${version.org.apache.commons.commons-lang3}",
-                            org.apache.commons.lang3.tuple;version="${version.org.apache.commons.commons-lang3}",
                             org.primefaces;version="${version.org.primefaces.primefaces}",
                             org.primefaces.application;version="${version.org.primefaces.primefaces}",
                             org.primefaces.component.accordionpanel;version="${version.org.primefaces.primefaces}",
@@ -372,7 +355,8 @@
                             org.primefaces.visit;version="${version.org.primefaces.primefaces}",
                             org.primefaces.webapp;version="${version.org.primefaces.primefaces}",
                             org.primefaces.webapp.filter;version="${version.org.primefaces.primefaces}",
-                            com.sun.el;version="${version.org.glassfish.web.el-impl}"
+                            com.sun.el;version="${version.org.glassfish.web.el-impl}",
+                            org.slf4j;version="${version.org.slf4j}"
                         </Import-Package>
                         <Export-Package/>
                     </instructions>
