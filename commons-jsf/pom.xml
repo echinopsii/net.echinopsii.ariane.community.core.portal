@@ -60,7 +60,7 @@
                         <Export-Package>
                             com.spectral.cc.core.portal.commons.consumer;version=${project.version},
                             com.spectral.cc.core.portal.commons.controller;version=${project.version},
-                            com.spectral.cc.core.portal.commons.service;version=${project.version},
+                            com.spectral.cc.core.portal.commons.fresolver;version=${project.version},
                             com.spectral.cc.core.portal.commons.tools;version=${project.version}
                         </Export-Package>
                         <Import-Package>

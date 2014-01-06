@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.service.iPojo;
+package com.spectral.cc.core.portal.commons.fresolver.iPojo;
 
-import com.spectral.cc.core.portal.commons.service.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.commons.fresolver.FaceletsResourceResolverService;
 import com.spectral.cc.core.portal.commons.tools.FaceletsResourceResolver;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;

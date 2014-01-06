@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.service;
+package com.spectral.cc.core.portal.commons.fresolver;
 
 import java.net.URL;
 
