@@ -37,7 +37,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
 
     @Override
     public URL resolveUrl(String path) {
-        log.debug("Resolve {} from current war...", new Object[]{path});
+        log.debug("Resolve {} from portal main...", new Object[]{path});
         URL url = parent.resolveUrl(path);
         if (url == null)
             url = resolveUrlFromThisJar(path);
@@ -45,7 +45,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
     }
 
     public static URL resolveUrlFromThisJar(String path) {
-        log.debug("Resolve {} from portal commons-jsf jar...", new Object[]{path});
+        log.debug("Resolve {} from portal commons-jsf...", new Object[]{path});
         return FaceletsResourceResolver.class.getResource(basePath + path);
     }
 }
