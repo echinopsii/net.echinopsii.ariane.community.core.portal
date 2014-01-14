@@ -44,6 +44,7 @@ public class UserProfileController implements Serializable {
     private String username ;
 
     private HashMap<String, String> preferences;
+    private HashMap<String, String> sessionPreferences;
 
     public String getTheme() {
         subject = SecurityUtils.getSubject();
@@ -201,5 +202,15 @@ public class UserProfileController implements Serializable {
                 user.setPreferences(this.preferences);
             }
         }
+    }
+
+    public HashMap<String, String> getSessionPreferences() {
+        getPreferences();
+        sessionPreferences = new HashMap<String,String>(preferences);
+        return sessionPreferences;
+    }
+
+    public void setSessionPreferences(HashMap<String, String> sessionPreferences) {
+        this.sessionPreferences = sessionPreferences;
     }
 }

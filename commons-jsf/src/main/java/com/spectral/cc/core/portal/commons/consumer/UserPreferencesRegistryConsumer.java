@@ -34,13 +34,13 @@ public class UserPreferencesRegistryConsumer {
 
     @Bind
     public void bindMainMenuEntityRegistry(UserPreferencesRegistry r) {
-        log.debug("Consumer bound to user preferences registry...");
+        log.info("Consumer bound to user preferences registry...");
         userPreferencesRegistry = r;
     }
 
     @Unbind
     public void unbindMainMenuEntityRegistry() {
-        log.debug("Consumer unbound from user preferences registry...");
+        log.info("Consumer unbound from user preferences registry...");
         userPreferencesRegistry = null;
     }
 

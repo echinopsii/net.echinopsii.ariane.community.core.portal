@@ -19,10 +19,17 @@
 package com.spectral.cc.core.portal.main.controller;
 
 import com.spectral.cc.core.portal.commons.model.UserPreferenceEntityType;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
+@ManagedBean
+@RequestScoped
 public class UserPreferenceEntityTypeController implements Serializable{
+    private static final Logger log = LoggerFactory.getLogger(UserPreferenceEntityTypeController.class);
 
     public int getUserPreferenceEntityInplaceString() {
         return UserPreferenceEntityType.TYPE_USR_PREF_ENTITY_INPLACE_STRING;

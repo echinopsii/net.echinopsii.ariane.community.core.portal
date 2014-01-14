@@ -1,6 +1,6 @@
 /**
- * Portal Main
- * User Preference Section Type Controller
+ * Portal Commons JSF bundle
+ * Facelets Resource Resolver Service Interface
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,24 +17,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.main.controller;
+package com.spectral.cc.core.portal.commons.facesplugin;
 
-import com.spectral.cc.core.portal.commons.model.UserPreferenceSectionType;
+import java.net.URL;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import java.io.Serializable;
-
-@ManagedBean
-@RequestScoped
-public class UserPreferenceSectionTypeController implements Serializable {
-
-    public int getUserPreferenceSectionTypeUsrPrefSectionSingleton(){
-        return UserPreferenceSectionType.TYPE_USR_PREF_SECTION_SINGLETON;
-    }
-
-    public int getUserPreferenceSectionTypeUsrPrefSectionMap() {
-        return UserPreferenceSectionType.TYPE_USR_PREF_SECTION_MAP;
-    }
-
+public interface FaceletsResourceResolverService {
+    public URL resolveURL(String path);
 }

@@ -18,9 +18,14 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.util.TreeSet;
 
 public class UserPreferenceSection implements Comparable<UserPreferenceSection> {
+
+    private static final Logger log = LoggerFactory.getLogger(UserPreferenceSection.class);
 
     private String name ;
     private String description ;
@@ -51,6 +56,7 @@ public class UserPreferenceSection implements Comparable<UserPreferenceSection> 
     }
 
     public UserPreferenceSection addEntity(UserPreferenceEntity entity) {
+        log.debug("Add entity {} to user preference section {}", new Object[]{entity.getFieldName(),name});
         this.entityRegistry.add(entity);
         return this;
     }

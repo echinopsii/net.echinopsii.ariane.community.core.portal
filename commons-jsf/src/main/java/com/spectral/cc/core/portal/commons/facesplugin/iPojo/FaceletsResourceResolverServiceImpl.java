@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.fresolver.iPojo;
+package com.spectral.cc.core.portal.commons.facesplugin.iPojo;
 
-import com.spectral.cc.core.portal.commons.fresolver.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.commons.facesplugin.FaceletsResourceResolverService;
 import com.spectral.cc.core.portal.commons.tools.FaceletsResourceResolver;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
@@ -37,12 +37,12 @@ public class FaceletsResourceResolverServiceImpl implements FaceletsResourceReso
 
     @Validate
     public void validate() throws Exception {
-        log.debug("{} is started.", new Object[]{FACELETS_RESOURCE_RESOLVER_SERVICE_NAME});
+        log.info("{} is started.", new Object[]{FACELETS_RESOURCE_RESOLVER_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate(){
-        log.debug("{} is stopped.", new Object[]{FACELETS_RESOURCE_RESOLVER_SERVICE_NAME});
+        log.info("{} is stopped.", new Object[]{FACELETS_RESOURCE_RESOLVER_SERVICE_NAME});
     }
 
     @Override

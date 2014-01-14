@@ -34,13 +34,13 @@ public class MainMenuRegistryConsumer {
 
     @Bind
     public void bindMainMenuEntityRegistry(MainMenuEntityRegistry r) {
-        log.debug("Consumer bound to main menu item registry...");
+        log.info("Consumer bound to main menu item registry...");
         mainMenuEntityRegistry = r;
     }
 
     @Unbind
     public void unbindMainMenuEntityRegistry() {
-        log.debug("Consumer unbound from main menu item registry...");
+        log.info("Consumer unbound from main menu item registry...");
         mainMenuEntityRegistry = null;
     }
 

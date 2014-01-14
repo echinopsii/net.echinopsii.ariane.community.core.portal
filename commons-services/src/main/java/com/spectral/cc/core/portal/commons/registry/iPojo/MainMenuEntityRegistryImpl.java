@@ -76,14 +76,14 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
                                        MenuEntityType.TYPE_MENU_ITEM, 83,
                                        "icon-beer icon-large").setParent(homeSB).setActionListener("#{loginController.logout}"));
         */
-        log.debug("{} is started.", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("{} is started...", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate(){
-        log.debug("Stopping {}...", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("Stopping {}...", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
         registry.clear();
-        log.debug("{} is stopped.", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("{} is stopped.", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Override

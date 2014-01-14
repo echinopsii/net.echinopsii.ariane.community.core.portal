@@ -68,6 +68,7 @@ public class WebSecurityManagerProxyImpl implements WebSecurityManagerProxy {
 
     @Validate
     public void validate(){
+        log.info("{} is starting...", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
         factory = new WebIniSecurityManagerFactory(convertPathToIni());
         securityManager = (WebSecurityManager)factory.getInstance();
         /*
@@ -98,13 +99,13 @@ public class WebSecurityManagerProxyImpl implements WebSecurityManagerProxy {
         //((DefaultWebSessionManager)((DefaultWebSecurityManager)securityManager).getSessionManager()).setSessionIdCookie(rememberMeManager.getCookie());
         ((DefaultWebSessionManager)((DefaultWebSecurityManager)securityManager).getSessionManager()).setSessionIdCookieEnabled(true);
         SecurityUtils.setSecurityManager(securityManager);
-        log.debug("{} is started.", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
+        log.info("{} is started...", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate(){
         //log.debug("Stopping {} ...", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
-        log.debug("{} is stopped.", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
+        log.info("{} is stopped...", new Object[]{SECURITY_MANAGER_PROXY_SERVICE_NAME});
     }
 
     @Override

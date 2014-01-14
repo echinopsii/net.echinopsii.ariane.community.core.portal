@@ -21,6 +21,8 @@ package com.spectral.cc.core.portal.main.controller;
 import com.spectral.cc.core.portal.commons.consumer.UserPreferencesRegistryConsumer;
 import com.spectral.cc.core.portal.commons.model.UserPreferenceEntity;
 import com.spectral.cc.core.portal.commons.model.UserPreferenceSection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
@@ -32,6 +34,8 @@ import java.util.List;
 @ManagedBean
 @RequestScoped
 public class UserHomeController implements Serializable {
+
+    private static final Logger log = LoggerFactory.getLogger(UserHomeController.class);
 
     private List<UserPreferenceSection> preferencesSectionOnLeft;
     private String activePreferencesSectionOnLeft;
@@ -45,9 +49,11 @@ public class UserHomeController implements Serializable {
         boolean isOdd = true;
         for(UserPreferenceSection section : UserPreferencesRegistryConsumer.getInstance().getUserPreferencesRegistry().getUserPreferenceSections()) {
             if (isOdd) {
+                log.debug("Add section {} on left", section.getName());
                 preferencesSectionOnLeft.add(section);
                 isOdd=false;
             } else {
+                log.debug("Add section {} on right", section.getName());
                 preferencesSectionOnRight.add(section);
                 isOdd=true;
             }
@@ -108,7 +114,9 @@ public class UserHomeController implements Serializable {
     public List<UserPreferenceEntity> getPreferencesEntitiesFromSection(UserPreferenceSection section) {
         ArrayList<UserPreferenceEntity> ret = new ArrayList<UserPreferenceEntity>();
         if (section !=null) {
+            log.debug("Get entities from section {}", section.getName());
             for(UserPreferenceEntity entity : section.getEntityRegistry()) {
+                log.debug("Entity ({},{}) from section {}", new Object[]{entity.getFieldName(),entity.getFieldType(),section.getName()});
                 ret.add(entity);
             }
         }

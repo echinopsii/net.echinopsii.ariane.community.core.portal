@@ -38,12 +38,12 @@ public class UserRegistryImpl implements UserRegistry {
 
     @Validate
     public void validate() throws Exception {
-        log.debug("{} is started...", new Object[]{USER_REGISTRY_SERVICE_NAME});
+        log.info("{} is started...", new Object[]{USER_REGISTRY_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate() {
-        log.debug("{} is stopped...", new Object[]{USER_REGISTRY_SERVICE_NAME});
+        log.info("{} is stopped...", new Object[]{USER_REGISTRY_SERVICE_NAME});
     }
 
     @Override

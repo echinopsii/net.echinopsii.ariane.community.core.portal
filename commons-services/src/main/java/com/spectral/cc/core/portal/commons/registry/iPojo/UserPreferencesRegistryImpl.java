@@ -56,18 +56,29 @@ public class UserPreferencesRegistryImpl implements UserPreferencesRegistry {
 
         this.registerUserPreferenceSection(new UserPreferenceSection("bookmarkedDSL", "Manage your bookmarked DSL requests", UserPreferenceSectionType.TYPE_USR_PREF_SECTION_MAP));
         */
-        log.debug("{} is started.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("{} is started.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate(){
-        log.debug("Stopping {}...", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("Stopping {}...", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
         sectionRegistry.clear();
-        log.debug("{} is stopped.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
+        log.info("{} is stopped.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Override
     public UserPreferenceSection registerUserPreferenceSection(UserPreferenceSection section) {
+        log.debug("Register new user preference section {} from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
+                         new Object[]{
+                                             section.getName(),
+                                             (Thread.currentThread().getStackTrace().length>0) ? Thread.currentThread().getStackTrace()[0].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>1) ? Thread.currentThread().getStackTrace()[1].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>2) ? Thread.currentThread().getStackTrace()[2].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>3) ? Thread.currentThread().getStackTrace()[3].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>4) ? Thread.currentThread().getStackTrace()[4].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>5) ? Thread.currentThread().getStackTrace()[5].getClassName() : "",
+                                             (Thread.currentThread().getStackTrace().length>6) ? Thread.currentThread().getStackTrace()[6].getClassName() : ""
+                         });
         sectionRegistry.add(section);
         return section;
     }

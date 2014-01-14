@@ -48,7 +48,8 @@ public class Registrator implements Runnable {
 
         while(MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry()==null)
             try {
-                Thread.sleep(10);
+                log.warn("Portal main menu registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }

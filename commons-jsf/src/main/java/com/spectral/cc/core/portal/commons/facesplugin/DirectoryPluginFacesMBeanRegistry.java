@@ -1,7 +1,7 @@
 /**
- * Portal Commons JSF bundle
- * Facelets Resource Resolver Service Interface
- * Copyright (C) 2013 Mathilde Ffrench
+ * Directory Commons JSF bundle
+ * Faces Managed Bean Directory Registry interface
+ * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -17,10 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.fresolver;
+package com.spectral.cc.core.portal.commons.facesplugin;
 
+import javax.servlet.ServletContext;
 import java.net.URL;
 
-public interface FaceletsResourceResolverService {
-    public URL resolveURL(String path);
+public interface DirectoryPluginFacesMBeanRegistry {
+    public void registerPluginFacesMBeanConfig(URL facesConfig);
+    public void unregisterPluginFacesMBeanConfig(URL facesConfig) throws IllegalAccessException, ClassNotFoundException, InstantiationException;
+
+    public void registerServletContext(ServletContext sc);
+    public void addPluginFacesMBeanConfigsToServletContext();
+    public void delPluginFacesMBeanConfigsFromServletContext();
 }

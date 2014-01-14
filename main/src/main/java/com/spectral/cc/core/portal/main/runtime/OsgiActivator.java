@@ -30,7 +30,7 @@ import java.util.ArrayList;
 
 public class OsgiActivator implements BundleActivator {
 
-    protected static final String PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME = "PORTAL MAIN MENU REGISTRATOR";
+    protected static final String PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME = "Portal main menu registrator";
     private static final Logger log = LoggerFactory.getLogger(OsgiActivator.class);
 
     protected static ArrayList<MainMenuEntity> mainPortalMainMenuEntityList = new ArrayList<MainMenuEntity>() ;
@@ -38,7 +38,7 @@ public class OsgiActivator implements BundleActivator {
     @Override
     public void start(BundleContext context) {
        new Thread(new Registrator()).start();
-       log.debug("{} is started.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
+       log.info("{} is started.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
     }
 
     @Override
@@ -49,6 +49,6 @@ public class OsgiActivator implements BundleActivator {
             }
         }
         mainPortalMainMenuEntityList.clear();
-        log.debug("{} is stopped.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
+        log.info("{} is stopped.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
     }
 }

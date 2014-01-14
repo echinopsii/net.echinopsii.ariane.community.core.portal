@@ -34,13 +34,13 @@ public class SecurityManagerProxyConsumer {
 
     @Bind
     public void bindSecurityManagerProxy(WebSecurityManagerProxy p) {
-        log.debug("Consumer bound to security manager proxy...");
+        log.info("Consumer bound to security manager proxy...");
         webSecurityManagerProxy = p;
     }
 
     @Unbind
     public void unbindSecurityManagerProxy() {
-        log.debug("Consumer unbound to security manager proxy...");
+        log.info("Consumer unbound to security manager proxy...");
         webSecurityManagerProxy = null;
     }
 
