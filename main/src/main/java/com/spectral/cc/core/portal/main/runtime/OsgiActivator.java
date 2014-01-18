@@ -38,7 +38,7 @@ public class OsgiActivator implements BundleActivator {
     @Override
     public void start(BundleContext context) {
        new Thread(new Registrator()).start();
-       log.info("{} is started.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
+       log.info("{} is started...", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
     }
 
     @Override
@@ -49,6 +49,6 @@ public class OsgiActivator implements BundleActivator {
             }
         }
         mainPortalMainMenuEntityList.clear();
-        log.info("{} is stopped.", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
+        log.info("{} is stopped...", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
     }
 }

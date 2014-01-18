@@ -22,11 +22,13 @@ package com.spectral.cc.core.portal.commons.facesplugin;
 import javax.servlet.ServletContext;
 import java.net.URL;
 
-public interface DirectoryPluginFacesMBeanRegistry {
+public interface PluginFacesMBeanRegistry {
     public void registerPluginFacesMBeanConfig(URL facesConfig);
     public void unregisterPluginFacesMBeanConfig(URL facesConfig) throws IllegalAccessException, ClassNotFoundException, InstantiationException;
 
     public void registerServletContext(ServletContext sc);
+    public ServletContext getRegisteredServletContext();
+
     public void addPluginFacesMBeanConfigsToServletContext();
     public void delPluginFacesMBeanConfigsFromServletContext();
 }

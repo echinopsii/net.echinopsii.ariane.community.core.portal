@@ -20,34 +20,20 @@
 package com.spectral.cc.core.portal.commons.facesplugin.iPojo;
 
 import com.spectral.cc.core.portal.commons.facesplugin.PluginFacesMBeanRegistry;
-import com.sun.faces.application.ApplicationAssociate;
-import com.sun.faces.application.ApplicationResourceBundle;
-import com.sun.faces.config.DbfFactory;
-import com.sun.faces.el.ELUtils;
-import com.sun.faces.mgbean.BeanManager;
-import com.sun.faces.mgbean.ManagedBeanInfo;
-import com.sun.faces.util.TypedCollections;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 import javax.servlet.ServletContext;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 import java.net.URL;
-import java.text.MessageFormat;
 import java.util.*;
 
 @Component
 @Provides
-@Instantiate(name="DirectoryPluginFacesMBeanRegistryImpl")
-public class DirectoryPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRegistry {
-    private static final Logger log = LoggerFactory.getLogger(DirectoryPluginFacesMBeanRegistryImpl.class);
-    private static final String PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME = "Plugin faces managed bean directory registry";
+@Instantiate(name="InjectorPluginFacesMBeanRegistryImpl")
+public class  InjectorPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRegistry {
+    private static final Logger log = LoggerFactory.getLogger(InjectorPluginFacesMBeanRegistryImpl.class);
+    private static final String PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME = "Plugin faces managed bean injector registry";
 
     private Set<URL> pluginFacesConfigToAdd = new HashSet<>();
     private Set<URL> pluginFacesConfigToDel = new HashSet<>();
@@ -62,7 +48,7 @@ public class DirectoryPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRe
     public void invalidate(){
         log.info("Stopping {}...", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
         pluginFacesConfigToAdd.clear();
-
+        //TODO remove correctly faces config
         pluginFacesConfigToDel.clear();
         log.info("{} is stopped.", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
     }

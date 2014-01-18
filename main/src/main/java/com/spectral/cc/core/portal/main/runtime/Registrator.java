@@ -48,8 +48,8 @@ public class Registrator implements Runnable {
 
         while(MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry()==null)
             try {
-                log.warn("Portal main menu registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
-                Thread.sleep(10000);
+                log.info("Portal main menu registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
+                Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -59,9 +59,11 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
+            /*
             entity = new MainMenuEntity("injectorsMItem", "Injectors", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_INJECT_RANK, "icon-filter icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            */
 
             entity = new MainMenuEntity("spreadsheetMItem", "Spreadsheet", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_SPREAD_RANK, "icon-table icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
