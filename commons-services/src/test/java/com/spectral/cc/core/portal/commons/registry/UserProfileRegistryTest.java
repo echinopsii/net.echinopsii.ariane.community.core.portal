@@ -19,8 +19,36 @@
 
 package com.spectral.cc.core.portal.commons.registry;
 
+import com.spectral.cc.core.portal.commons.model.UserProfile;
+import com.spectral.cc.core.portal.commons.registry.iPojo.UserProfileRegistryImpl;
 import junit.framework.TestCase;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 public class UserProfileRegistryTest extends TestCase {
 
+    private static UserProfileRegistry userProfileRegistry = new UserProfileRegistryImpl();
+
+    @BeforeClass
+    public static void testSetup() {
+    }
+
+    @AfterClass
+    public static void testCleanup() {
+    }
+
+    @Test
+    public void testRegisterUnregisterUserProfile() throws Exception {
+        UserProfile userProfile = new UserProfile("shiroPrincipal");
+        userProfile.setFirstname("Define your first name...");
+        userProfile.setLastname("Define your last name...");
+        userProfile.setEmail("Define your mail...");
+        userProfile.setPhone("Define your phone number...");
+        userProfile.getPreferences().put("Field name","Field value");
+        userProfileRegistry.registerUser(userProfile);
+        assertTrue(userProfileRegistry.getUserFromPrincipal("shiroPrincipal").equals(userProfile));
+        userProfileRegistry.unregisterUser(userProfile);
+        assertTrue(userProfileRegistry.getUserFromPrincipal("shiroPrincipal")==null);
+    }
 }
