@@ -41,15 +41,10 @@ public class MainMenuEntityRegistryTest extends TestCase {
     }
 
     @Test
-    public void testRegisteringEntity() throws Exception {
+    public void testRegisteringUnregisteringEntity() throws Exception {
         MainMenuEntity mmEntity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, 1, "icon-dashboard icon-large");
         mainMenuEntityRegistry.registerMainMenuEntity(mmEntity);
         assertTrue(mainMenuEntityRegistry.getMainMenuEntities().contains(mmEntity));
-    }
-
-    @Test
-    public void testUnregisteringEntity() throws Exception {
-        MainMenuEntity mmEntity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, 1, "icon-dashboard icon-large");
         mainMenuEntityRegistry.unregisterMainMenuEntity(mmEntity);
         assertFalse(mainMenuEntityRegistry.getMainMenuEntities().contains(mmEntity));
     }
