@@ -49,7 +49,7 @@
                                 <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceString}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle} : " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:inplace editor="true">
                                                     <p:inputText required="true" label="text" value="#{userProfileController.preferences[entity.fieldName]}"/>
@@ -60,7 +60,7 @@
                                     </ui:fragment>
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceSelect}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle}: " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription}: " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:inplace label="#{userProfileController.preferences[entity.fieldName]}" editor="true">
                                                     <h:selectOneMenu value="#{userProfileController.preferences[entity.fieldName]}">
@@ -73,7 +73,7 @@
                                     </ui:fragment>
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityOneButtonSelect}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle} : " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:selectOneButton value="#{userProfileController.preferences[entity.fieldName]}">
                                                     <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}"/>
@@ -112,7 +112,7 @@
                                 <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceString}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle} : " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:inplace editor="true">
                                                     <p:inputText required="true" label="text" value="#{userProfileController.preferences[entity.fieldName]}"/>
@@ -123,7 +123,7 @@
                                     </ui:fragment>
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceSelect}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle}: " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription}: " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:inplace label="#{userProfileController.preferences[entity.fieldName]}" editor="true">
                                                     <h:selectOneMenu value="#{userProfileController.preferences[entity.fieldName]}">
@@ -136,7 +136,7 @@
                                     </ui:fragment>
                                     <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityOneButtonSelect}">
                                         <h:panelGrid columns="2" cellpadding="5">
-                                            <h:outputText value="#{entity.fieldTitle} : " styleClass="inputTitle"/>
+                                            <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
                                             <h:form>
                                                 <p:selectOneButton value="#{userProfileController.preferences[entity.fieldName]}">
                                                     <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}"/>
