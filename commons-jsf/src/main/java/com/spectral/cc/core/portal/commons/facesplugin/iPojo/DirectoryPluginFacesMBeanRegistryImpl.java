@@ -29,6 +29,12 @@ import javax.servlet.ServletContext;
 import java.net.URL;
 import java.util.*;
 
+/**
+ * Provide registry tooling for external plugin faces-config.xml : register / unregister faces config URL and add / remove managed bean from this faces config.<br/><br/>
+ *
+ *  This is the iPojo implementation of {@link PluginFacesMBeanRegistry} for CC directory. The component is instantiated at commons-jsf bundle startup.
+ *  It provides the {@link PluginFacesMBeanRegistry} service for CC directory.
+ */
 @Component
 @Provides
 @Instantiate(name="DirectoryPluginFacesMBeanRegistryImpl")

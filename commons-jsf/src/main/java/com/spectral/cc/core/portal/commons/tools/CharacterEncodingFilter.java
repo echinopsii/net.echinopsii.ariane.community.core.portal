@@ -21,6 +21,33 @@ package com.spectral.cc.core.portal.commons.tools;
 import javax.servlet.*;
 import java.io.IOException;
 
+/**
+ * JSF character encoding filter. Called during a war startup if properly configured.<br/><br/>
+ *
+ * Example of war configuration (web.xml) to use this filter : <br/><br/>
+ *
+ * <pre>
+ * <!-- Character Encoding Filter -->
+ * <filter>
+ *  <filter-name>CharacterEncodingFilter</filter-name>
+ *  <filter-class>com.spectral.cc.core.portal.commons.tools.CharacterEncodingFilter</filter-class>
+ *  <init-param>
+ *      <description>override any encodings from client</description>
+ *      <param-name>ignore</param-name>
+ *      <param-value>true</param-value>
+ *  </init-param>
+ *      <init-param>
+ *      <description>the encoding to use</description>
+ *      <param-name>encoding</param-name>
+ *      <param-value>UTF-8</param-value>
+ *  </init-param>
+ * </filter>
+ * <filter-mapping>
+ *  <filter-name>CharacterEncodingFilter</filter-name>
+ *      <url-pattern>*.jsf</url-pattern>
+ *  </filter-mapping>
+ * </pre>
+ */
 public class CharacterEncodingFilter implements Filter {
 
     /**
@@ -44,6 +71,16 @@ public class CharacterEncodingFilter implements Filter {
         this.filterConfig = null;
     }
 
+    /**
+     * Set the client request encoding filter to encoding param value if it's not specified by the client or the ignore param has been defined to true.
+     *
+     * @param request the client request
+     * @param response the servlet response
+     * @param chain the filter chain to forward
+     *
+     * @throws IOException
+     * @throws ServletException
+     */
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
     throws IOException, ServletException {
         // Conditionally select and set the character encoding to be used
@@ -57,6 +94,13 @@ public class CharacterEncodingFilter implements Filter {
         chain.doFilter(request, response);
     }
 
+    /**
+     * Read the filter config and set encoding and ignore params
+     *
+     * @param filterConfig
+     *
+     * @throws ServletException
+     */
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
         this.encoding = filterConfig.getInitParameter("encoding");

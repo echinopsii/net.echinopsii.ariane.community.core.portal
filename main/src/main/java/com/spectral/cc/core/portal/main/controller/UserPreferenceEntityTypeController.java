@@ -26,6 +26,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
+/**
+ * Provide helper methods to get user preference entity type enumeration fields.<br/>
+ * This is a request managed bean.
+ */
 @ManagedBean
 @RequestScoped
 public class UserPreferenceEntityTypeController implements Serializable{

@@ -31,6 +31,10 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Helper for user home view. Define user preferences sections lists and provide helper methods to navigate in these sections. Used by user home view.<br/>
+ * This is a request managed bean.
+ */
 @ManagedBean
 @RequestScoped
 public class UserHomeController implements Serializable {

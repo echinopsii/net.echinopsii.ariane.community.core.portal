@@ -23,6 +23,9 @@ import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * iPojo singleton which consume the portal user profile registry service. Instantiated during portal commons-jsf bundle startup. FactoryMethod : getInstance.
+ */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
 public class UserProfileRegistryConsumer {
@@ -44,10 +47,20 @@ public class UserProfileRegistryConsumer {
         userProfileRegistry = null;
     }
 
+    /**
+     * Get user preference registry binded to this consumer...
+     *
+     * @return user profile registry binded by this consumer. If null the registry is still not binded or has been unbinded...
+     */
     public UserProfileRegistry getUserProfileRegistry() {
         return userProfileRegistry;
     }
 
+    /**
+     * Factory method for this singleton.
+     *
+     * @return instantiated user profile registry consumer
+     */
     public static UserProfileRegistryConsumer getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new UserProfileRegistryConsumer();

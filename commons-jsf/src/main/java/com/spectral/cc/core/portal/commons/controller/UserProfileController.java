@@ -28,6 +28,10 @@ import org.slf4j.LoggerFactory;
 import java.io.Serializable;
 import java.util.HashMap;
 
+/**
+ * Get logged user profile from user profile registry. Used by user home view and other components view for which specific preferences has been registered.
+ * This is a session managed bean.
+ */
 public class UserProfileController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(UserProfileController.class);
@@ -46,6 +50,11 @@ public class UserProfileController implements Serializable {
     private HashMap<String, String> preferences;
     private HashMap<String, String> sessionPreferences;
 
+    /**
+     * get logged user profile theme
+     *
+     * @return logged user profile theme
+     */
     public String getTheme() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
@@ -58,6 +67,11 @@ public class UserProfileController implements Serializable {
         return theme;
     }
 
+    /**
+     * set logged user theme
+     *
+     * @param theme primefaces theme
+     */
     public void setTheme(String theme) {
         this.theme = theme;
         subject = SecurityUtils.getSubject();
@@ -69,6 +83,11 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    /**
+     * get logged user name
+     *
+     * @return logged user name
+     */
     public String getUsername() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated())
@@ -78,6 +97,11 @@ public class UserProfileController implements Serializable {
         return username;
     }
 
+    /**
+     * get logged user first name
+     *
+     * @return logged first name
+     */
     public String getFirstname() {
         firstname = "";
         subject = SecurityUtils.getSubject();
@@ -90,6 +114,11 @@ public class UserProfileController implements Serializable {
         return firstname;
     }
 
+    /**
+     * set logged user first name
+     *
+     * @param firstname
+     */
     public void setFirstname(String firstname) {
         this.firstname = firstname;
         subject = SecurityUtils.getSubject();
@@ -101,6 +130,11 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    /**
+     * get logged user first name
+     *
+     * @return logged user first name
+     */
     public String getLastname() {
         lastname = "";
         subject = SecurityUtils.getSubject();
@@ -113,6 +147,11 @@ public class UserProfileController implements Serializable {
         return lastname;
     }
 
+    /**
+     * set logged user last name
+     *
+     * @param lastname
+     */
     public void setLastname(String lastname) {
         this.lastname = lastname;
         subject = SecurityUtils.getSubject();
@@ -124,6 +163,11 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    /**
+     * get logged user email
+     *
+     * @return logged user email
+     */
     public String getEmail() {
         email = "";
         subject = SecurityUtils.getSubject();
@@ -136,6 +180,11 @@ public class UserProfileController implements Serializable {
         return email;
     }
 
+    /**
+     * set logged user email
+     *
+     * @param email
+     */
     public void setEmail(String email) {
         this.email = email;
         subject = SecurityUtils.getSubject();
@@ -147,6 +196,11 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    /**
+     * get logged user phone
+     *
+     * @return logged user phone
+     */
     public String getPhone() {
         phone = "";
         subject = SecurityUtils.getSubject();
@@ -159,6 +213,11 @@ public class UserProfileController implements Serializable {
         return phone;
     }
 
+    /**
+     * set logged user phone
+     *
+     * @param phone
+     */
     public void setPhone(String phone) {
         this.phone = phone;
         subject = SecurityUtils.getSubject();
@@ -170,6 +229,11 @@ public class UserProfileController implements Serializable {
         }
     }
 
+    /**
+     * get logged user preferences
+     *
+     * @return logged user preferences
+     */
     public HashMap<String, String> getPreferences() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
@@ -182,6 +246,11 @@ public class UserProfileController implements Serializable {
         return preferences;
     }
 
+    /**
+     * set logged user preferences
+     *
+     * @param preferences
+     */
     public void setPreferences(HashMap<String, String> preferences) {
         this.preferences = preferences;
         subject = SecurityUtils.getSubject();

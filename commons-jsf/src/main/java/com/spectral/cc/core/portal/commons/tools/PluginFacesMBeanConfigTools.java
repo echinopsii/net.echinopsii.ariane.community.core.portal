@@ -41,10 +41,19 @@ import java.net.URL;
 import java.text.MessageFormat;
 import java.util.*;
 
+/**
+ * Helper to register faces managed bean from external plugin jar to a specified web context. Used by plugin faces managed bean registries.
+ */
 public class PluginFacesMBeanConfigTools {
 
     private static final Logger log = LoggerFactory.getLogger(InjectorPluginFacesMBeanRegistryImpl.class);
 
+    /**
+     * register faces managed bean in dom to the servletContext
+     *
+     * @param dom document resulting of faces-config.xml parsing {@link #parseXML(URL) parseXML}
+     * @param servletContext the target servlet context
+     */
     public static void registerFromDocument(Document dom, ServletContext servletContext) {
         String namespace = dom.getDocumentElement().getNamespaceURI();
         NodeList managedBeans = dom.getDocumentElement().getElementsByTagNameNS(namespace, "managed-bean");
@@ -57,6 +66,16 @@ public class PluginFacesMBeanConfigTools {
         }
     }
 
+    /**
+     * unregister faces managed bean in dom from the servletContext
+     *
+     * @param dom document resulting of faces-config.xml parsing {@link #parseXML(URL) parseXML}
+     * @param servletContext the target servlet context
+     *
+     * @throws IllegalAccessException
+     * @throws InstantiationException
+     * @throws ClassNotFoundException
+     */
     public static void unregisterFromDocument(Document dom, ServletContext servletContext) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         String namespace = dom.getDocumentElement().getNamespaceURI();
         log.debug("Namespaces : {}", namespace);
@@ -70,6 +89,13 @@ public class PluginFacesMBeanConfigTools {
         }
     }
 
+    /**
+     * parse a faces-config.xml file and return the document
+     *
+     * @param facesConfig URL of the faces-config.xml file
+     *
+     * @return parsed document
+     */
     public static Document parseXML(URL facesConfig) {
         Document dom = null;
         // Make an  instance of the DocumentBuilderFactory

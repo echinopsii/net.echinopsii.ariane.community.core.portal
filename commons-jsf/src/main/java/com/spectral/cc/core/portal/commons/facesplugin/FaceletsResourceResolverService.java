@@ -21,6 +21,16 @@ package com.spectral.cc.core.portal.commons.facesplugin;
 
 import java.net.URL;
 
+/**
+ * Provide access to portal facelets resource from web application which are using their own facelets resource resolver (IE : not the portal one).
+ */
 public interface FaceletsResourceResolverService {
+    /**
+     * resolve facelets resource from portal main war or portal commons-jsf jar
+     *
+     * @param path path of the resource
+     *
+     * @return the resource URL (null if not found)
+     */
     public URL resolveURL(String path);
 }

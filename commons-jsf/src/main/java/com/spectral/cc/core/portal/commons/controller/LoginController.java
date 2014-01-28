@@ -35,6 +35,10 @@ import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
 
+/**
+ * Provide Shiro login to CC web applications. Called by login view.<br/>
+ * This is a request managed bean
+ */
 public class LoginController implements Serializable{
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(LoginController.class);
@@ -43,22 +47,50 @@ public class LoginController implements Serializable{
     private String password;
     private Subject subject;
 
+    /**
+     * get user name
+     *
+     * @return login user name
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * set user name
+     *
+     * @param username login user name
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * get password
+     *
+     * @return login password
+     */
     public String getPassword() {
         return password;
     }
 
+    /**
+     * set password
+     *
+     * @param password
+     */
     public void setPassword(String password) {
         this.password = password;
     }
 
+    /**
+     * login action listener
+     *
+     * if successfully logged (TODO: retrieved persisted user profile or)
+     * register a new user profile according to default preferences (TODO: and idm user data)
+     *
+     * @throws Exception
+     */
     public void login() throws Exception {
         RequestContext context = RequestContext.getCurrentInstance();
         FacesMessage msg = null;
@@ -102,6 +134,11 @@ public class LoginController implements Serializable{
         context.addCallbackParam("redirectTo", "/");
     }
 
+    /**
+     * logout action listener
+     *
+     * @throws IOException
+     */
     public void logout() throws IOException {
         subject = SecurityUtils.getSubject();
         String principal = subject.getPrincipal().toString();

@@ -33,6 +33,10 @@ import org.primefaces.model.MenuModel;
 import javax.faces.context.FacesContext;
 import java.io.Serializable;
 
+/**
+ * Generate primefaces menu model from Main menu entity registry. Used by main layout view.</br>
+ * This is a request managed bean.
+ */
 public class MainMenuController implements Serializable{
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(MainMenuController.class);

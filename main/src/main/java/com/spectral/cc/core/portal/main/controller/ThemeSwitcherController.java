@@ -34,6 +34,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+/**
+ * Helper for theme switcher UI component. Used by user home view.
+ * This is a request managed bean.
+ */
 @ManagedBean
 @RequestScoped
 public class ThemeSwitcherController implements Serializable {
@@ -47,18 +51,38 @@ public class ThemeSwitcherController implements Serializable {
     @ManagedProperty("#{userProfileController}")
     private UserProfileController gp;
 
+    /**
+     * Set user profile controller attached to this theme switcher
+     *
+     * @param gp
+     */
     public void setGp(UserProfileController gp) {
         this.gp = gp;
     }
 
+    /**
+     * Get primefaces themes Map<name, image>
+     *
+     * @return primefaces themes Map
+     */
     public Map<String, String> getThemes() {
         return themes;
     }
 
+    /**
+     * Get selected theme
+     *
+     * @return selected theme
+     */
     public String getTheme() {
         return theme;
     }
 
+    /**
+     * Set new selected theme
+     *
+     * @param theme selected theme
+     */
     public void setTheme(String theme) {
         log.debug("Change theme from {} to {}", new Object[]{this.theme,theme});
         this.theme = theme;
@@ -150,10 +174,18 @@ public class ThemeSwitcherController implements Serializable {
         themes.put("Vader", "vader");
     }
 
+    /**
+     * save selected theme into user profile
+     */
     public void saveTheme() {
         gp.setTheme(theme);
     }
 
+    /**
+     * return advanced themes list
+     *
+     * @return advanced themes list
+     */
     public List<Theme> getAdvancedThemes() {
         return advancedThemes;
     }

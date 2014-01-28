@@ -24,6 +24,18 @@ import org.slf4j.LoggerFactory;
 import java.net.URL;
 import javax.faces.view.facelets.ResourceResolver;
 
+/**
+ * Well named class. Helper to resolve any facelets resource from portal main and portal commons-jsf.<br/><br/>
+ *
+ * Example of war configuration (web.xml) to use this resolver : <br/><br/>
+ *
+ * <pre>
+ *  <context-param>
+ *      <param-name>javax.faces.FACELETS_RESOURCE_RESOLVER</param-name>
+ *      <param-value>com.spectral.cc.core.portal.commons.tools.FaceletsResourceResolver</param-value>
+ *  </context-param>
+ * </pre>
+ */
 public class FaceletsResourceResolver extends ResourceResolver {
 
     private static final Logger log = LoggerFactory.getLogger(FaceletsResourceResolver.class);
@@ -35,6 +47,12 @@ public class FaceletsResourceResolver extends ResourceResolver {
         this.basePath = "/META-INF";
     }
 
+    /**
+     * Resource resolver implementation.
+     * If the resource is not found in the parent (portal main war) then try to resolve it from commons-jsf jar.
+     * @param path path of the resource to search
+     * @return the resource URL (null if not found)
+     */
     @Override
     public URL resolveUrl(String path) {
         log.debug("Resolve {} from portal main...", new Object[]{path});
@@ -44,6 +62,13 @@ public class FaceletsResourceResolver extends ResourceResolver {
         return url;
     }
 
+    /**
+     * resolve the resource from portal commons-jsf jar.
+     *
+     * @param path path of the resource
+     *
+     * @return the resource URL (null if not found)
+     */
     public static URL resolveUrlFromThisJar(String path) {
         log.debug("Resolve {} from portal commons-jsf...", new Object[]{path});
         return FaceletsResourceResolver.class.getResource(basePath + path);

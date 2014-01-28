@@ -27,6 +27,12 @@ import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
+/**
+ * Provide access to portal facelets resource from web application which are using their own facelets resource resolver (IE : not the portal one).<br/><br/>
+ *
+ * This is the iPojo implementation of {@link FaceletsResourceResolverService}. The component is instantiated at commons-jsf bundle startup.
+ * It provides the {@link FaceletsResourceResolverService} service for CC directory.
+ */
 @Component
 @Provides
 @Instantiate

@@ -42,6 +42,46 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 
+/**
+ * This class extends the Shiro ResourceBasedWebEnvironment in order to enable Shiro ini config file splitting accross different war which share the same Shiro environment
+ * (which is loaded by web security manager proxy).<br/>
+ * Then each war can add some specific shiro web configuration (containing only shiro webapp filter and urls).<br/><br/>
+ *
+ * Example of valid war shiro configuration :
+ * <pre>
+ *     [urls]
+ *      /index.html = anon
+ *      /views/** = authc
+ *      /rest/** = authc, rest
+ * </pre><br/><br/>
+ *
+ * Example of Shiro war configuration (web.xml) to use this Shiro web environment implementation :
+ * <pre>
+ *  <!-- SHIRO CONFIGURATION -->
+ *  <context-param>
+ *      <param-name>shiroEnvironmentClass</param-name>
+ *      <param-value>com.spectral.cc.core.portal.commons.tools.IniOSGIWebEnvironment</param-value>
+ *  </context-param>
+ *  <listener>
+ *      <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
+ *  </listener>
+ *  <filter>
+ *      <filter-name>ShiroFilter</filter-name>
+ *      <filter-class>org.apache.shiro.web.servlet.ShiroFilter</filter-class>
+ *  </filter>
+ *  <filter-mapping>
+ *      <filter-name>ShiroFilter</filter-name>
+ *      <url-pattern>/*</url-pattern>
+ *      <dispatcher>REQUEST</dispatcher>
+ *      <dispatcher>FORWARD</dispatcher>
+ *      <dispatcher>INCLUDE</dispatcher>
+ *      <dispatcher>ERROR</dispatcher>
+ *  </filter-mapping>
+ * </pre><br/><br/>
+ *
+ * NOTE:  the splitted Shiro web configuration is working well on war bundle startup but there is a bad behavior when stopping a war bundle as it stop the entire shared
+ * Shiro environment and then access to other running war bundle are not working anymore. MUST BE FIXED.
+ */
 public class IniOSGIWebEnvironment extends ResourceBasedWebEnvironment implements Initializable, Destroyable {
     public static final String DEFAULT_WEB_INI_RESOURCE_PATH = "/WEB-INF/shiro.ini";
     private static final Logger log = LoggerFactory.getLogger(IniOSGIWebEnvironment.class);
@@ -50,6 +90,11 @@ public class IniOSGIWebEnvironment extends ResourceBasedWebEnvironment implement
      */
     private Ini ini;
 
+    /**
+     * Init the shared securityManager for the underlying web context and add the war shiro configuration to shared securityManageer...
+     *
+     * @throws ShiroException
+     */
     @Override
     public void init() throws ShiroException {
         String[] configLocations = getConfigLocations();

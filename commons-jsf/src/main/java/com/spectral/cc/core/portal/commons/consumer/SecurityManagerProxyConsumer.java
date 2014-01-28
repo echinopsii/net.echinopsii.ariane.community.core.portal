@@ -23,6 +23,9 @@ import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * iPojo singleton which consume the web security manager proxy service. Instantiate during portal commons-jsf bundle startup. FactoryMethod : getInstance.
+ */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
 public class SecurityManagerProxyConsumer {
@@ -44,10 +47,20 @@ public class SecurityManagerProxyConsumer {
         webSecurityManagerProxy = null;
     }
 
+    /**
+     * Get web security manager proxy binded to this consumer...
+     *
+     * @return web security manager proxy binded by this consumer. If null the proxy is still not binded or has been unbinded...
+     */
     public WebSecurityManagerProxy getWebSecurityManagerProxy() {
         return webSecurityManagerProxy;
     }
 
+    /**
+     * Factory method for this singleton.
+     *
+     * @return instantiated web security manager proxy consumer
+     */
     public static SecurityManagerProxyConsumer getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new SecurityManagerProxyConsumer();

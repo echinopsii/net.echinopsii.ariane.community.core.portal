@@ -22,13 +22,49 @@ package com.spectral.cc.core.portal.commons.facesplugin;
 import javax.servlet.ServletContext;
 import java.net.URL;
 
+/**
+ * Provide registry tooling for external plugin faces-config.xml : register / unregister faces config URL and add / remove managed bean from this faces config.
+ */
 public interface PluginFacesMBeanRegistry {
+    /**
+     * register the provided faces config
+     *
+     * @param facesConfig faces config URL to register
+     */
     public void registerPluginFacesMBeanConfig(URL facesConfig);
+
+    /**
+     * unregister the provided faces config
+     *
+     * @param facesConfig faces config URL to unregister
+     *
+     * @throws IllegalAccessException
+     * @throws ClassNotFoundException
+     * @throws InstantiationException
+     */
     public void unregisterPluginFacesMBeanConfig(URL facesConfig) throws IllegalAccessException, ClassNotFoundException, InstantiationException;
 
+    /**
+     * register the target servlet context.
+     *
+     * @param sc the target servlet context
+     */
     public void registerServletContext(ServletContext sc);
+
+    /**
+     * unregister the target servlet context
+     *
+     * @return the unregistered servlet context
+     */
     public ServletContext getRegisteredServletContext();
 
+    /**
+     * add faces managed bean in the faces config registered previously to the target registered servlet context
+     */
     public void addPluginFacesMBeanConfigsToServletContext();
+
+    /**
+     * delete faces managed bean in the faces config registered previously from the target registered servlet context
+     */
     public void delPluginFacesMBeanConfigsFromServletContext();
 }

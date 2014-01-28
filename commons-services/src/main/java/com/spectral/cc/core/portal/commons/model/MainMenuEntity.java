@@ -44,7 +44,7 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     /**
      * MainMenuEntity constructor
      *
-     * @param id Identify the main menu entity in the CC Portal main menu registry.<br/>
+     * @param id Identify the main menu entity in the CC Portal JSF rendering.<br/>
      *           MUST BE UNIQUE
      * @param value Define the main menu entity value which will be displayed in the final CC main menu.<br/>
      *              Used in compareTo implementation.

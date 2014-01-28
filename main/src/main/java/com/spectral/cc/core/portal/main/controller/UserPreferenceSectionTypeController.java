@@ -25,11 +25,15 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
+/**
+ * Provide helper methods to get user preference section type enumeration fields.<br/>
+ * This is a request managed bean.
+ */
 @ManagedBean
 @RequestScoped
 public class UserPreferenceSectionTypeController implements Serializable {
 
-    public int getUserPreferenceSectionTypeUsrPrefSectionSingleton(){
+    public int getUserPreferenceSectionTypeUsrPrefSectionSingleton() {
         return UserPreferenceSectionType.TYPE_USR_PREF_SECTION_SINGLETON;
     }
 

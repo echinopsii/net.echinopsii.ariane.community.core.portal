@@ -23,6 +23,9 @@ import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * iPojo singleton which consume the portal main menu entity registry service. Instantiated during portal commons-jsf bundle startup. FactoryMethod : getInstance
+ */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
 public class MainMenuRegistryConsumer {
@@ -44,10 +47,20 @@ public class MainMenuRegistryConsumer {
         mainMenuEntityRegistry = null;
     }
 
+    /**
+     * Get main menu entity registry binded to this consumer...
+     *
+     * @return main menu entity registry binded by this consumer. If null the registry is still not binded or has been unbinded...
+     */
     public MainMenuEntityRegistry getMainMenuEntityRegistry() {
         return mainMenuEntityRegistry;
     }
 
+    /**
+     * Factory method for this singleton.
+     *
+     * @return instanciated main menu entity registry consumer
+     */
     public synchronized static MainMenuRegistryConsumer getInstance() {
         if (INSTANCE == null) {
             INSTANCE = new MainMenuRegistryConsumer();
