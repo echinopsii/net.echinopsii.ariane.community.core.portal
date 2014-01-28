@@ -1,6 +1,6 @@
 /**
  * Portal Commons JSF bundle
- * User Registry consumer singleton
+ * UserProfile Registry consumer singleton
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,39 +18,39 @@
  */
 package com.spectral.cc.core.portal.commons.consumer;
 
-import com.spectral.cc.core.portal.commons.registry.UserRegistry;
+import com.spectral.cc.core.portal.commons.registry.UserProfileRegistry;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
-public class UserRegistryConsumer {
-    private static final Logger log = LoggerFactory.getLogger(UserRegistryConsumer.class);
-    private static UserRegistryConsumer INSTANCE;
+public class UserProfileRegistryConsumer {
+    private static final Logger log = LoggerFactory.getLogger(UserProfileRegistryConsumer.class);
+    private static UserProfileRegistryConsumer INSTANCE;
 
     @Requires
-    private UserRegistry userRegistry;
+    private UserProfileRegistry userProfileRegistry;
 
     @Bind
-    public void bindMainMenuEntityRegistry(UserRegistry r) {
+    public void bindMainMenuEntityRegistry(UserProfileRegistry r) {
         log.info("Consumer bound to user registry...");
-        userRegistry = r;
+        userProfileRegistry = r;
     }
 
     @Unbind
     public void unbindMainMenuEntityRegistry() {
         log.info("Consumer unbound from user registry...");
-        userRegistry = null;
+        userProfileRegistry = null;
     }
 
-    public UserRegistry getUserRegistry() {
-        return userRegistry;
+    public UserProfileRegistry getUserProfileRegistry() {
+        return userProfileRegistry;
     }
 
-    public static UserRegistryConsumer getInstance() {
+    public static UserProfileRegistryConsumer getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new UserRegistryConsumer();
+            INSTANCE = new UserProfileRegistryConsumer();
         }
         return INSTANCE;
     }

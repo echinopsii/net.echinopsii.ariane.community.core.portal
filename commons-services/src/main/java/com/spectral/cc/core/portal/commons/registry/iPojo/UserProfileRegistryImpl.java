@@ -1,6 +1,6 @@
 /**
  * Portal Commons Services bundle
- * User Registry iPojo impl
+ * UserProfile Registry iPojo impl
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,23 +18,30 @@
  */
 package com.spectral.cc.core.portal.commons.registry.iPojo;
 
-import com.spectral.cc.core.portal.commons.model.User;
-import com.spectral.cc.core.portal.commons.registry.UserRegistry;
+import com.spectral.cc.core.portal.commons.model.UserProfile;
+import com.spectral.cc.core.portal.commons.registry.UserProfileRegistry;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 
+/**
+ * This registry contains all CC user profiles. <br/>
+ * This is used by the CC login to controller to register new default use profile on login and by the user home controller which reads the registry according to
+ * the Shiro logged user principal and forward it to the user home view.
+ *
+ * This is the iPojo implementation of {@link UserProfileRegistry}. The component is instantiated at commons-services bundle startup. It provides the {@link UserProfileRegistry} service.
+ */
 @Component
 @Provides
 @Instantiate
-public class UserRegistryImpl implements UserRegistry {
+public class UserProfileRegistryImpl implements UserProfileRegistry {
 
     private static final String USER_REGISTRY_SERVICE_NAME = "Portal User Registry Service";
-    private static final Logger log = LoggerFactory.getLogger(UserRegistryImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(UserProfileRegistryImpl.class);
 
-    private HashMap<String,User> registry = new HashMap<String,User>();
+    private HashMap<String,UserProfile> registry = new HashMap<String,UserProfile>();
 
     @Validate
     public void validate() throws Exception {
@@ -47,19 +54,19 @@ public class UserRegistryImpl implements UserRegistry {
     }
 
     @Override
-    public User registerUser(User user) {
-        registry.put(user.getPrincipal(),user);
-        return user;
+    public UserProfile registerUser(UserProfile userProfile) {
+        registry.put(userProfile.getPrincipal(), userProfile);
+        return userProfile;
     }
 
     @Override
-    public User unregisterUser(User user) {
-        registry.remove(user.getPrincipal());
-        return user;
+    public UserProfile unregisterUser(UserProfile userProfile) {
+        registry.remove(userProfile.getPrincipal());
+        return userProfile;
     }
 
     @Override
-    public User getUserFromPrincipal(String principal) {
+    public UserProfile getUserFromPrincipal(String principal) {
         return registry.get(principal);
     }
 }

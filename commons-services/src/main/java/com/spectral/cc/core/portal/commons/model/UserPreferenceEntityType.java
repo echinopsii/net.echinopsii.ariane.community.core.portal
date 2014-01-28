@@ -1,6 +1,6 @@
 /**
  * Portal Commons Services bundle
- * User Preference Entity Type
+ * UserProfile Preference Entity Type
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,9 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+/**
+ * The user preference entity type class is an enumeration where your can find supported PrimeFaces user preference entity type.
+ */
 public enum UserPreferenceEntityType {
     ;
     public final static int TYPE_USR_PREF_ENTITY_INPLACE_STRING = 1;

@@ -1,6 +1,6 @@
 /**
  * Portal Commons Services bundle
- * User Preference Registry iPojo Impl
+ * UserProfile Preference Registry iPojo Impl
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -26,6 +26,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.TreeSet;
 
+/**
+ * This registry contains all CC user preferences. <br/>
+ * This is used by any CC component which needs to register its user preference sections (and so its user preference entities)
+ * and by the user home controller which reads the registry and forward it to the user home view.<br/><br/>
+ *
+ * This is the iPojo implementation of {@link UserPreferencesRegistry}. The component is instantiated at commons-services bundle startup. It provides the {@link UserPreferencesRegistry} service.
+ */
 @Component
 @Provides
 @Instantiate
@@ -38,30 +45,11 @@ public class UserPreferencesRegistryImpl implements UserPreferencesRegistry {
 
     @Validate
     public void validate() throws Exception {
-        //log.debug("Starting {}...", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
-        //TODO : move the bellow lines into JUNIT test case
-        /*
-        UserPreferenceSection mappingDisplay = new UserPreferenceSection("mappingDisplay", "Define your mapping preferences", UserPreferenceSectionType.TYPE_USR_PREF_SECTION_MAP).
-            addEntity(
-                new UserPreferenceEntity(
-                    "mappingDisplayLayout",
-                    UserPreferenceEntityType.TYPE_USR_PREF_ENTITY_ONEBUTTON_SELECT,
-                    "Define your prefered layout").addSelectValue("Tree").addSelectValue("Network").addSelectValue("Random").setFieldDefault("Tree")).
-            addEntity(
-                new UserPreferenceEntity(
-                    "mappingDisplayView",
-                    UserPreferenceEntityType.TYPE_USR_PREF_ENTITY_ONEBUTTON_SELECT,
-                    "Define your prefered view").addSelectValue("Infrastructure").addSelectValue("Component").addSelectValue("Application").setFieldDefault("Infrastructure"));
-        this.registerUserPreferenceSection(mappingDisplay);
-
-        this.registerUserPreferenceSection(new UserPreferenceSection("bookmarkedDSL", "Manage your bookmarked DSL requests", UserPreferenceSectionType.TYPE_USR_PREF_SECTION_MAP));
-        */
         log.info("{} is started.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Invalidate
     public void invalidate(){
-        log.info("Stopping {}...", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
         sectionRegistry.clear();
         log.info("{} is stopped.", new Object[]{USER_PREFERENCES_ITEM_REGISTRY_SERVICE_NAME});
     }

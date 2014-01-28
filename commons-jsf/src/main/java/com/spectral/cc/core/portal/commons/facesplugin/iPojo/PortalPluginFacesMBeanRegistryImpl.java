@@ -1,6 +1,6 @@
 /**
  * Portal Commons JSF bundle
- * Faces Managed Bean Directory Registry implementation
+ * Faces Managed Bean Portal Registry implementation
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -27,14 +27,15 @@ import org.slf4j.LoggerFactory;
 
 import javax.servlet.ServletContext;
 import java.net.URL;
-import java.util.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Component
 @Provides
-@Instantiate(name="DirectoryPluginFacesMBeanRegistryImpl")
-public class DirectoryPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRegistry {
-    private static final Logger log = LoggerFactory.getLogger(DirectoryPluginFacesMBeanRegistryImpl.class);
-    private static final String PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME = "Plugin faces managed bean directory registry";
+@Instantiate(name="PortalPluginFacesMBeanRegistryImpl")
+public class PortalPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRegistry {
+    private static final Logger log = LoggerFactory.getLogger(PortalPluginFacesMBeanRegistryImpl.class);
+    private static final String PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME = "Plugin faces managed bean portal registry";
 
     private Set<URL> pluginFacesConfigToAdd = new HashSet<>();
     private Set<URL> pluginFacesConfigToDel = new HashSet<>();
@@ -49,7 +50,7 @@ public class DirectoryPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRe
     public void invalidate(){
         log.info("Stopping {}...", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
         pluginFacesConfigToAdd.clear();
-
+        //TODO remove correctly faces config
         pluginFacesConfigToDel.clear();
         log.info("{} is stopped.", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
     }

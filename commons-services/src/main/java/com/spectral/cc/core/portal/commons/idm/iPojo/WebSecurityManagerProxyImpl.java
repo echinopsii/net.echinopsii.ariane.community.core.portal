@@ -35,6 +35,12 @@ import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
 
+/**
+ * This service target is the Shiro system sharing accross CC components.<br/><br/>
+ *
+ * This is the iPojo implementation of {@link WebSecurityManagerProxy}. The component is instantiated at commons-services bundle startup.
+ * It provides the {@link WebSecurityManagerProxy} service.
+ */
 @Component
 @Provides
 @Instantiate
@@ -46,7 +52,6 @@ public class WebSecurityManagerProxyImpl implements WebSecurityManagerProxy {
 
     private WebIniSecurityManagerFactory factory;
     private WebSecurityManager securityManager;
-    private Ini ini;
 
     private static Ini convertPathToIni() {
         Ini ini = null;
@@ -60,10 +65,6 @@ public class WebSecurityManagerProxyImpl implements WebSecurityManagerProxy {
             }
         }
         return ini;
-    }
-
-    private void initSessionManager() {
-
     }
 
     @Validate

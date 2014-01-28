@@ -18,6 +18,9 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+/**
+ * The menu entity type class is an enumeration where your can find supported PrimeFaces menu entity type.
+ */
 public enum MenuEntityType {
     ;
 

@@ -21,7 +21,19 @@ package com.spectral.cc.core.portal.commons.idm;
 import org.apache.shiro.web.config.WebIniSecurityManagerFactory;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 
+/**
+ * This service target is the Shiro system sharing accross CC components.
+ */
 public interface WebSecurityManagerProxy {
+    /**
+     * Get the instantiated Shiro web security manager
+     * @return
+     */
     public WebSecurityManager           getWebSecurityManager() ;
+
+    /**
+     * Get the instantiated Shiro Web ini security manager factory
+     * @return
+     */
     public WebIniSecurityManagerFactory getWebIniSecurityManagerFactory();
 }

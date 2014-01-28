@@ -18,6 +18,15 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+/**
+ * A main menu entity is an object which aims to be registered into the CC Portal Main Menu Registry.<br/>
+ * The fields definitions of this entity are closely linked to the PrimeFaces MenuItem class.<br/><br/>
+ *
+ * This class implements Comparable in order to help the CC Portal Main Menu registry to sort the registered main menu entity.
+ *
+ * @see <a href="http://www.primefaces.org/docs/api/3.5/org/primefaces/component/menuitem/MenuItem.html">PrimeFaces 3.5 MenuItem</a>
+ *
+ */
 public class MainMenuEntity implements Comparable<MainMenuEntity> {
 
     private String id;
@@ -28,8 +37,24 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     private MainMenuEntity parent;
     private String icon;
     private String actionListener;
-    private boolean onRight = false;
+    //onRight not working on primefaces 3.5
+    //TODO : check with primefaces communauty
+    //private boolean onRight = false;
 
+    /**
+     * MainMenuEntity constructor
+     *
+     * @param id Identify the main menu entity in the CC Portal main menu registry.<br/>
+     *           MUST BE UNIQUE
+     * @param value Define the main menu entity value which will be displayed in the final CC main menu.<br/>
+     *              Used in compareTo implementation.
+     * @param contextAddress Define the target link part after scheme, server name and port of the CC main menu entity.
+     * @param type Type of this menu item. Menu item types are defined in Menu entity type class.<br/>
+     * @param rank The display from left to right rank of this menu item.<br/>
+     *             Used in compareTo implementation.
+     * @param icon The icon which will be displayed with this main menu entity.<br/>
+     *             This is icon could be a fontawesome or jquery-ui icon.
+     */
     public MainMenuEntity(String id, String value, String contextAddress, int type, int rank, String icon) {
         this.id = id;
         this.value = value;
@@ -59,10 +84,25 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         return rank;
     }
 
+    /**
+     * Return the parent of this item. <br/>
+     * If this item is contained into a submenu then parent is equal to the submenu main menu item.<br/>
+     * Else this field is null.<br/>
+     * Used in the compareTo implementation.
+     *
+     * @return parent MainMenuEntity
+     */
     public MainMenuEntity getParent() {
         return parent;
     }
 
+    /**
+     * Set the parent of this item.<br/>
+     * Used in the compareTo implementation.
+     *
+     * @param parent
+     * @return this Main Menu Entity
+     */
     public MainMenuEntity setParent(MainMenuEntity parent) {
         this.parent = parent;
         return this;
@@ -72,18 +112,31 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         return icon;
     }
 
+    /**
+     * Return the action listener primefaces will call when this item will be clicked.<br/>
+     * (a good example is the logout main menu item which will call the backend logout method on click)
+     *
+     * @return the action listener definition
+     */
     public String getActionListener() {
         return actionListener;
     }
 
+    /**
+     * Set the action listener primefaces will call when this item will be clicked.<br/>
+     *
+     * @param actionListener Correspond to the action listener primefaces will call when this item will be clicked.<br/>
+     *                       (a good example is the logout main menu item which will call the backend logout method on click)
+     * @return this Main Menu Entity
+     */
     public MainMenuEntity setActionListener(String actionListener) {
         this.actionListener = actionListener;
         return this;
     }
 
-    private boolean isOnRight() {
-        return onRight;
-    }
+    //private boolean isOnRight() {
+    //    return onRight;
+    //}
 
     public boolean isValid() {
         switch(this.type) {
@@ -117,9 +170,9 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         if (type != that.type) {
             return false;
         }
-        if (onRight != that.onRight) {
-            return false;
-        }
+        //if (onRight != that.onRight) {
+        //    return false;
+        //}
         if (type!= MenuEntityType.TYPE_MENU_SEPARATOR && !value.equals(that.value)) {
             return false;
         }
@@ -144,7 +197,7 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         result = 31 * result + type;
         result = 31 * result + (parent != null ? parent.hashCode() : 0);
         result = 31 * result + icon.hashCode();
-        result = 31 * result + (onRight ? 1 : 0);
+        //result = 31 * result + (onRight ? 1 : 0);
         return result;
     }
 
@@ -180,7 +233,7 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         if (this == that)
             return EQUAL;
 
-        else if ((this.isOnRight() && that.isOnRight()) || (!this.isOnRight() && !this.isOnRight())) {
+        //else if ((this.isOnRight() && that.isOnRight()) || (!this.isOnRight() && !this.isOnRight())) {
             if (this.getParent()==null && that.getParent()==null) {
                 if (this.getRank() > that.getRank())
                     return AFTER;
@@ -207,12 +260,13 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
                     return this.getParent().compareTo(that.getParent());
                 }
             }
-        }
-
+        //}
+        /*
         else if (this.isOnRight())
             return AFTER;
 
         else
             return BEFORE;
+        */
     }
 }

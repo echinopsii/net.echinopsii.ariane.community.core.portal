@@ -20,32 +20,53 @@ package com.spectral.cc.core.portal.commons.model;
 
 import java.io.Serializable;
 
+/**
+ * The theme class is mainly used by the ThemeSwitcherController. <br/>
+ * This is the PrimeFaces theme definition. Closely dependent of theme contained in org.primefaces.themes:all-themes.
+ */
 public class Theme implements Serializable {
 
     private String name;
-
     private String image;
 
-    public Theme() {
-    }
-
+    /**
+     * PrimeFaces theme definition. Closely dependent of theme contained in org.primefaces.themes:all-themes
+     * @param name name of the theme
+     * @param image image file of the theme
+     */
     public Theme(String name, String image) {
         this.name = name;
         this.image = image;
     }
 
+    /**
+     *
+     * @return image file of this theme
+     */
     public String getImage() {
         return image;
     }
 
+    /**
+     *
+     * @param image image file of this theme
+     */
     public void setImage(String image) {
         this.image = image;
     }
 
+    /**
+     *
+     * @return name of this theme
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     *
+     * @param name name of this theme
+     */
     public void setName(String name) {
         this.name = name;
     }

@@ -17,8 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.facesplugin.iPojo;
+package com.spectral.cc.core.portal.commons.tools;
 
+import com.spectral.cc.core.portal.commons.facesplugin.iPojo.InjectorPluginFacesMBeanRegistryImpl;
 import com.sun.faces.application.ApplicationAssociate;
 import com.sun.faces.application.ApplicationResourceBundle;
 import com.sun.faces.config.DbfFactory;
@@ -44,7 +45,7 @@ public class PluginFacesMBeanConfigTools {
 
     private static final Logger log = LoggerFactory.getLogger(InjectorPluginFacesMBeanRegistryImpl.class);
 
-    protected static void registerFromDocument(Document dom, ServletContext servletContext) {
+    public static void registerFromDocument(Document dom, ServletContext servletContext) {
         String namespace = dom.getDocumentElement().getNamespaceURI();
         NodeList managedBeans = dom.getDocumentElement().getElementsByTagNameNS(namespace, "managed-bean");
         log.debug("get {} managed beans to add", managedBeans.getLength());
@@ -56,7 +57,7 @@ public class PluginFacesMBeanConfigTools {
         }
     }
 
-    protected static void unregisterFromDocument(Document dom, ServletContext servletContext) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+    public static void unregisterFromDocument(Document dom, ServletContext servletContext) throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         String namespace = dom.getDocumentElement().getNamespaceURI();
         log.debug("Namespaces : {}", namespace);
         NodeList managedBeans = dom.getDocumentElement().getElementsByTagNameNS(namespace, "managed-bean");
@@ -69,7 +70,7 @@ public class PluginFacesMBeanConfigTools {
         }
     }
 
-    protected static Document parseXML(URL facesConfig) {
+    public static Document parseXML(URL facesConfig) {
         Document dom = null;
         // Make an  instance of the DocumentBuilderFactory
         try {

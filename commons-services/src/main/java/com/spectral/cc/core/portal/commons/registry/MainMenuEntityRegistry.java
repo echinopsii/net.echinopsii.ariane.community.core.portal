@@ -22,10 +22,43 @@ import com.spectral.cc.core.portal.commons.model.MainMenuEntity;
 
 import java.util.TreeSet;
 
+/**
+ * This registry contains all CC main menu entity. <br/>
+ * This is used by any CC component which needs to register its main menu entities and by the main menu controller which reads the registry and forward it to the main menu view.
+ */
 public interface MainMenuEntityRegistry {
+
+    /**
+     * Register a menu entity to the main menu registry
+     *
+     * @param mainMenuEntity the menu entity to register
+     * @return the registered menu entity
+     * @throws Exception if the menu entity is not valid
+     */
     public MainMenuEntity registerMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
+
+    /**
+     * Unregister a menu entity from the main menu registry
+     *
+     * @param mainMenuEntity the menu entity to unregister
+     * @return the unregistered menu entity
+     * @throws Exception if the menu entity is not valid
+     */
     public MainMenuEntity unregisterMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
 
+    /**
+     * Get sorted main menu entities
+     *
+     * @return sorted main menu entities
+     */
     public TreeSet<MainMenuEntity> getMainMenuEntities();
+
+    /**
+     * Get sorted main menu entities from a parent
+     *
+     * @param parent the parent entity start point
+     *
+     * @return sorte main menu entities from the parent
+     */
     public TreeSet<MainMenuEntity> getMainMenuEntitiesFromParent(MainMenuEntity parent);
 }

@@ -1,6 +1,6 @@
 /**
- * Directory Commons JSF bundle
- * Faces Managed Bean Directory Registry implementation
+ * Portal Commons JSF bundle
+ * Faces Managed Bean Injector Registry implementation
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,6 +20,7 @@
 package com.spectral.cc.core.portal.commons.facesplugin.iPojo;
 
 import com.spectral.cc.core.portal.commons.facesplugin.PluginFacesMBeanRegistry;
+import com.spectral.cc.core.portal.commons.tools.PluginFacesMBeanConfigTools;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

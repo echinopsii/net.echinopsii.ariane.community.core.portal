@@ -19,8 +19,8 @@
 package com.spectral.cc.core.portal.commons.controller;
 
 import com.spectral.cc.core.portal.commons.consumer.UserPreferencesRegistryConsumer;
-import com.spectral.cc.core.portal.commons.consumer.UserRegistryConsumer;
-import com.spectral.cc.core.portal.commons.model.User;
+import com.spectral.cc.core.portal.commons.consumer.UserProfileRegistryConsumer;
+import com.spectral.cc.core.portal.commons.model.UserProfile;
 import com.spectral.cc.core.portal.commons.model.UserPreferenceEntity;
 import com.spectral.cc.core.portal.commons.model.UserPreferenceSection;
 import org.apache.shiro.SecurityUtils;
@@ -82,18 +82,18 @@ public class LoginController implements Serializable{
         log.debug("Principal:{}", new Object[]{(subject.getPrincipal()!=null)?subject.getPrincipal().toString():"guest"});
 
         if(loggedIn) {
-            if (subject.getPrincipal()!=null && UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString())==null) {
-                User user = new User(subject.getPrincipal().toString());
-                user.setFirstname("Define your first name...");
-                user.setLastname("Define your last name...");
-                user.setEmail("Define your mail...");
-                user.setPhone("Define your phone number...");
+            if (subject.getPrincipal()!=null && UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString())==null) {
+                UserProfile userProfile = new UserProfile(subject.getPrincipal().toString());
+                userProfile.setFirstname("Define your first name...");
+                userProfile.setLastname("Define your last name...");
+                userProfile.setEmail("Define your mail...");
+                userProfile.setPhone("Define your phone number...");
                 for (UserPreferenceSection section : UserPreferencesRegistryConsumer.getInstance().getUserPreferencesRegistry().getUserPreferenceSections()) {
                     for (UserPreferenceEntity entity : section.getEntityRegistry()) {
-                        user.getPreferences().put(entity.getFieldName(),entity.getFieldDefault());
+                        userProfile.getPreferences().put(entity.getFieldName(),entity.getFieldDefault());
                     }
                 }
-                UserRegistryConsumer.getInstance().getUserRegistry().registerUser(user);
+                UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().registerUser(userProfile);
             }
         }
 

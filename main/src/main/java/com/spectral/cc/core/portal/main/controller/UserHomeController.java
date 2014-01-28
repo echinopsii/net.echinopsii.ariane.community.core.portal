@@ -1,6 +1,6 @@
 /**
  * Portal Main
- * User Home Controller
+ * UserProfile Home Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

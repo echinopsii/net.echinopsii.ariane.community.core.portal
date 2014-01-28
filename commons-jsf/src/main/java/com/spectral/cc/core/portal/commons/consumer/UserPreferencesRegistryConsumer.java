@@ -1,6 +1,6 @@
 /**
  * Portal Commons JSF bundle
- * User Preference Registry consumer singleton
+ * UserProfile Preference Registry consumer singleton
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

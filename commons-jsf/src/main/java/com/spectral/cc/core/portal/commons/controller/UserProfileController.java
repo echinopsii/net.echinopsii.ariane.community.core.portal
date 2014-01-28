@@ -1,6 +1,6 @@
 /**
  * Portal Commons JSF bundle
- * User Profile Controller
+ * UserProfile Profile Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,8 +18,8 @@
  */
 package com.spectral.cc.core.portal.commons.controller;
 
-import com.spectral.cc.core.portal.commons.consumer.UserRegistryConsumer;
-import com.spectral.cc.core.portal.commons.model.User;
+import com.spectral.cc.core.portal.commons.consumer.UserProfileRegistryConsumer;
+import com.spectral.cc.core.portal.commons.model.UserProfile;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
@@ -49,9 +49,9 @@ public class UserProfileController implements Serializable {
     public String getTheme() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                theme = user.getTheme();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                theme = userProfile.getTheme();
             }
         }
         log.debug("Theme : {}", new Object[]{theme});
@@ -62,9 +62,9 @@ public class UserProfileController implements Serializable {
         this.theme = theme;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                user.setTheme(this.theme);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                userProfile.setTheme(this.theme);
             }
         }
     }
@@ -82,9 +82,9 @@ public class UserProfileController implements Serializable {
         firstname = "";
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                firstname = user.getFirstname();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                firstname = userProfile.getFirstname();
             }
         }
         return firstname;
@@ -94,9 +94,9 @@ public class UserProfileController implements Serializable {
         this.firstname = firstname;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                user.setFirstname(this.firstname);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                userProfile.setFirstname(this.firstname);
             }
         }
     }
@@ -105,9 +105,9 @@ public class UserProfileController implements Serializable {
         lastname = "";
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                lastname = user.getLastname();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                lastname = userProfile.getLastname();
             }
         }
         return lastname;
@@ -117,9 +117,9 @@ public class UserProfileController implements Serializable {
         this.lastname = lastname;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                user.setLastname(this.lastname);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                userProfile.setLastname(this.lastname);
             }
         }
     }
@@ -128,9 +128,9 @@ public class UserProfileController implements Serializable {
         email = "";
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                email = user.getEmail();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                email = userProfile.getEmail();
             }
         }
         return email;
@@ -140,9 +140,9 @@ public class UserProfileController implements Serializable {
         this.email = email;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                user.setEmail(this.email);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                userProfile.setEmail(this.email);
             }
         }
     }
@@ -151,9 +151,9 @@ public class UserProfileController implements Serializable {
         phone = "";
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                phone = user.getPhone();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                phone = userProfile.getPhone();
             }
         }
         return phone;
@@ -163,9 +163,9 @@ public class UserProfileController implements Serializable {
         this.phone = phone;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if (user!=null) {
-                user.setPhone(this.phone);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if (userProfile !=null) {
+                userProfile.setPhone(this.phone);
             }
         }
     }
@@ -173,9 +173,9 @@ public class UserProfileController implements Serializable {
     public HashMap<String, String> getPreferences() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                preferences = user.getPreferences();
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                preferences = userProfile.getPreferences();
                 log.debug("Synchronize from db preferences. {}", new Object[]{this.preferences.toString()});
             }
         }
@@ -186,9 +186,9 @@ public class UserProfileController implements Serializable {
         this.preferences = preferences;
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
-                user.setPreferences(this.preferences);
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
+                userProfile.setPreferences(this.preferences);
             }
         }
     }
@@ -196,10 +196,10 @@ public class UserProfileController implements Serializable {
     public void syncPreferences() {
         subject = SecurityUtils.getSubject();
         if (subject!=null && subject.isAuthenticated()) {
-            User user = UserRegistryConsumer.getInstance().getUserRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
-            if(user!=null) {
+            UserProfile userProfile = UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString());
+            if(userProfile !=null) {
                 log.debug("Synchronize preferences to DB. {}", new Object[]{preferences.toString()});
-                user.setPreferences(this.preferences);
+                userProfile.setPreferences(this.preferences);
             }
         }
     }

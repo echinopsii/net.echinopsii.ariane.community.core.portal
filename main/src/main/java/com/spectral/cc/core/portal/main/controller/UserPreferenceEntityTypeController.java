@@ -1,6 +1,6 @@
 /**
  * Portal Main
- * User Preference Entity Type Controller
+ * UserProfile Preference Entity Type Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

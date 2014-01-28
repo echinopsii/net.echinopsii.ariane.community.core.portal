@@ -32,7 +32,6 @@ public class Registrator implements Runnable {
 
     private static String MAIN_MENU_PORTAL_CONTEXT = "/CCmain/";
     private static int    MAIN_MENU_DASH_RANK = 1;
-    private static int    MAIN_MENU_INJECT_RANK = 3;
     private static int    MAIN_MENU_SPREAD_RANK = 5;
     private static int    MAIN_MENU_HELP_RANK = 6;
     private static int    MAIN_MENU_ADMIN_RANK = 7;
@@ -49,7 +48,7 @@ public class Registrator implements Runnable {
         while(MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry()==null)
             try {
                 log.info("Portal main menu registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
-                Thread.sleep(1000);
+                Thread.sleep(10000);
             } catch (InterruptedException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -58,12 +57,6 @@ public class Registrator implements Runnable {
             entity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_DASH_RANK, "icon-dashboard icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-
-            /*
-            entity = new MainMenuEntity("injectorsMItem", "Injectors", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_INJECT_RANK, "icon-filter icon-large");
-            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
-            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-            */
 
             entity = new MainMenuEntity("spreadsheetMItem", "Spreadsheet", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_SPREAD_RANK, "icon-table icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);

@@ -1,6 +1,6 @@
 /**
  * Portal Commons Services bundle
- * User Preference Section Type
+ * UserProfile Preference Section Type
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -18,6 +18,9 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+/**
+ * The user preference section entity type class is an enumeration where your can find supported user preference section entity type.
+ */
 public enum UserPreferenceSectionType {
     ;
     public final static int TYPE_USR_PREF_SECTION_MAP       = 1;

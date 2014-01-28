@@ -1,6 +1,6 @@
 /**
  * Portal Main
- * User Preference Section Type Controller
+ * UserProfile Preference Section Type Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
