@@ -59,7 +59,7 @@ public class MainMenuRegistryConsumer {
     /**
      * Factory method for this singleton.
      *
-     * @return instanciated main menu entity registry consumer
+     * @return instantiated main menu entity registry consumer
      */
     public synchronized static MainMenuRegistryConsumer getInstance() {
         if (INSTANCE == null) {
