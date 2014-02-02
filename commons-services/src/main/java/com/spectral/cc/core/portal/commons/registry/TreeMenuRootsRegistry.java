@@ -23,7 +23,7 @@ import com.spectral.cc.core.portal.commons.model.TreeMenuEntity;
 import java.util.TreeSet;
 
 /**
- * The tree menu roots registry store the root tree menu entity.
+ * The tree menu roots registry store the root tree menu entity. This is used by any CC component which need to define tree menu and so expose tree menu roots registry service.
  */
 public interface TreeMenuRootsRegistry {
     /**

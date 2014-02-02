@@ -22,7 +22,7 @@ package com.spectral.cc.core.portal.commons.model;
 import java.util.TreeSet;
 
 /**
- * A Tree Menu Entity represent a tree menu entry with its child.
+ * A Tree Menu Entity represent a tree menu entry with its childs and parent.
  */
 public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
 
