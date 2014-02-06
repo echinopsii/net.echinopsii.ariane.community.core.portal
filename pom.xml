@@ -6,7 +6,7 @@
     <groupId>com.spectral.cc.core</groupId>
     <artifactId>com.spectral.cc.core.portal</artifactId>
     <name>Control and Conquer Core Portal Parent</name>
-    <version>0.1</version>
+    <version>0.1.0.RELEASE</version>
     <packaging>pom</packaging>
 
     <modules>
