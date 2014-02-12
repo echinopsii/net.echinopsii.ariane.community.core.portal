@@ -18,7 +18,7 @@
  */
 package com.spectral.cc.core.portal.commons.consumer;
 
-import com.spectral.cc.core.portal.commons.idm.WebSecurityManagerProxy;
+import com.spectral.cc.core.idm.commons.proxy.WebSecurityManagerProxy;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

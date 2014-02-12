@@ -69,6 +69,9 @@
         <version.org.primefaces.themes.all-themes>1.0.10</version.org.primefaces.themes.all-themes>
         <version.rome.rome>1.0</version.rome.rome>
 
+        <!-- CC module dependencies -->
+        <version.com.spectral.cc.core.idm>0.1.0.SNAPSHOT</version.com.spectral.cc.core.idm>
+
         <!-- Technical stuff -->
         <version.commons.beanutils>1.8.3</version.commons.beanutils>
         <version.org.apache.ipojo>1.10.1</version.org.apache.ipojo>
@@ -227,6 +230,12 @@
             <artifactId>itext</artifactId>
             <scope>provided</scope>
             <version>${version.com.lowagie.itext}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.spectral.cc.core.idm</groupId>
+            <artifactId>com.spectral.cc.core.idm.commons-services</artifactId>
+            <scope>provided</scope>
+            <version>${version.com.spectral.cc.core.idm}</version>
         </dependency>
         <dependency>
             <groupId>com.sun.faces</groupId>
