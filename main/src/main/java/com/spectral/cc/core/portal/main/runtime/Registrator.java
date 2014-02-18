@@ -94,19 +94,11 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(adminSB);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(adminSB);
 
-            entity = new MainMenuEntity("udirectoryMItem", "User directory", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(adminSB);
+            entity = new MainMenuEntity("configurationMItem", "Configuration", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
-            entity = new MainMenuEntity("usersMItem", "Users", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-user icon-large").setParent(adminSB);
-            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
-            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-
-            entity = new MainMenuEntity("groupsMItem", "Groups", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-group icon-large").setParent(adminSB);
-            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
-            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-
-            entity = new MainMenuEntity("rolesMItem", "Roles", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(adminSB);
+            entity = new MainMenuEntity("securityMItem", "Security",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/security.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-key icon-large").setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
@@ -122,22 +114,26 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
-            entity = new MainMenuEntity("installMItem", "Install new software...", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-circle-arrow-down icon-large").setParent(adminSB);
+            entity = new MainMenuEntity("installMItem", "Install new software", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-circle-arrow-down icon-large").setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-
-
 
             submenuCount = 0;
             MainMenuEntity homeEntity = new MainMenuEntity("homeSButton", "Home", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HOME_RANK, "icon-home icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(homeEntity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(homeEntity);
 
-            entity = new MainMenuEntity(
-                                                              "accountMItem", "Manage account",
-                                                              MAIN_MENU_PORTAL_CONTEXT + "views/userHome.jsf",
-                                                              MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HOME_RANK * 10 + submenuCount++,
-                                                              "icon-user icon-large").setParent(homeEntity);
+            entity = new MainMenuEntity("accountMItem", "Manage account",
+                                        MAIN_MENU_PORTAL_CONTEXT + "views/home/userProfile.jsf",
+                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HOME_RANK * 10 + submenuCount++,
+                                        "icon-user icon-large").setParent(homeEntity);
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+
+            entity = new MainMenuEntity("wpMItem", "White pages",
+                                        MAIN_MENU_PORTAL_CONTEXT + "#",
+                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HOME_RANK * 10 + submenuCount++,
+                                        "icon-group icon-large").setParent(homeEntity);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 

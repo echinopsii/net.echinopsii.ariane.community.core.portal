@@ -10,9 +10,9 @@
     </parent>
 
     <groupId>com.spectral.cc.core.portal</groupId>
-    <artifactId>com.spectral.cc.core.portal.main</artifactId>
-    <name>Control and Conquer Core Portal Main</name>
-    <packaging>war</packaging>
+    <artifactId>com.spectral.cc.core.portal.idm-jsf</artifactId>
+    <name>Control and Conquer Core Portal IDM JSF</name>
+    <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
@@ -23,52 +23,19 @@
         </dependency>
         <dependency>
             <groupId>com.spectral.cc.core.portal</groupId>
-            <artifactId>com.spectral.cc.core.portal.idm-jsf</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.spectral.cc.core.portal</groupId>
             <artifactId>com.spectral.cc.core.portal.commons-jsf</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.cc.core.portal</groupId>
-            <artifactId>com.spectral.cc.core.portal.commons-resources</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <!-- Dependencies packaged with the war -->
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>primefaces-extensions</artifactId>
-            <scope>runtime</scope>
-            <version>${version.org.primefaces.extensions.primefaces-extension}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.extensions</groupId>
-            <artifactId>resources-codemirror</artifactId>
-            <scope>runtime</scope>
-            <version>${version.org.primefaces.extensions.resources-codemirror}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.primefaces.themes</groupId>
-            <artifactId>all-themes</artifactId>
-            <scope>runtime</scope>
-            <version>${version.org.primefaces.themes.all-themes}</version>
+            <groupId>com.spectral.cc.core.idm</groupId>
+            <artifactId>com.spectral.cc.core.idm.commons-services</artifactId>
+            <version>${version.com.spectral.cc.core.idm}</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
     <build>
-        <resources>
-            <resource>
-                <directory>src/main/resources</directory>
-                <filtering>true</filtering>
-            </resource>
-        </resources>
-        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -81,62 +48,31 @@
                     <optimize>true</optimize>
                 </configuration>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
+                <artifactId>maven-ipojo-plugin</artifactId>
+                <extensions>true</extensions>
                 <executions>
                     <execution>
-                        <id>bundle-manifest</id>
-                        <phase>process-classes</phase>
                         <goals>
-                            <goal>manifest</goal>
+                            <goal>ipojo-bundle</goal>
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <!-- This plugin takes care of packaging the artifact as an OSGi Bundle -->
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
                 <configuration>
-                    <supportedProjectTypes>
-                        <supportedProjectType>jar</supportedProjectType>
-                        <supportedProjectType>bundle</supportedProjectType>
-                        <supportedProjectType>war</supportedProjectType>
-                    </supportedProjectTypes>
                     <instructions>
-                        <Bundle-Activator>com.spectral.cc.core.portal.main.runtime.OsgiActivator</Bundle-Activator>
-                        <Web-ContextPath>CCmain</Web-ContextPath>
-                        <Bundle-ClassPath>.,WEB-INF/,WEB-INF/lib,WEB-INF/classes/</Bundle-ClassPath>
-                        <Embed-Directory>WEB-INF/lib</Embed-Directory>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Import-Package>
-                            org.osgi.framework;version="[${version.osgimin.org.osgi.framework},${version.osgimax.org.osgi.framework})",
-                            org.osgi.util.tracker;version="[${version.osgimin.org.osgi.util.tracker},${version.osgimax.org.osgi.util.tracker})",
-                            com.spectral.cc.core.portal.idm.controller;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.controller.group;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.controller.permission;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.controller.resource;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.controller.role;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.controller.user;version="${project.version}",
-                            com.spectral.cc.core.portal.idm.tools;version="${project.version}",
-                            com.spectral.cc.core.portal.commons.consumer;version=${project.version},
-                            com.spectral.cc.core.portal.commons.controller;version=${project.version},
-                            com.spectral.cc.core.portal.commons.model;version=${project.version},
+                            com.spectral.cc.core.portal.commons.facesplugin;version=${project.version},
                             com.spectral.cc.core.portal.commons.registry;version=${project.version},
-                            com.spectral.cc.core.portal.commons.tools;version=${project.version},
-                            org.apache.shiro.web.config;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.env;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.filter;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.filter.authc;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.filter.authz;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.filter.mgt;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.filter.session;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.mgt;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.servlet;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.session;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.session.mgt;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.subject;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.subject.support;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.tags;version="${version.org.apache.shiro}",
-                            org.apache.shiro.web.util;version="${version.org.apache.shiro}",
+                            com.spectral.cc.core.idm.commons.proxy;version=${version.com.spectral.cc.core.idm},
+                            com.spectral.cc.core.idm.commons.model.jpa;version=${version.com.spectral.cc.core.idm},
                             com.sun.faces;version="${version.javax.faces.api}",
                             com.sun.faces.application;version="${version.javax.faces.api}",
                             com.sun.faces.application.annotation;version="${version.javax.faces.api}",
@@ -187,6 +123,7 @@
                             com.sun.faces.vendor;version="${version.javax.faces.api}",
                             com.sun.faces.xhtml;version="${version.javax.faces.api}",
                             javax.el;version="${version.javax.el}",
+                            javax.servlet;version="${version.javax.servlet.servlet-api}",
                             javax.faces;version="${version.javax.faces.api}",
                             javax.faces.application;version="${version.javax.faces.api}",
                             javax.faces.bean;version="${version.javax.faces.api}",
@@ -205,13 +142,9 @@
                             javax.faces.view;version="${version.javax.faces.api}",
                             javax.faces.view.facelets;version="${version.javax.faces.api}",
                             javax.faces.webapp;version="${version.javax.faces.api}",
-                            javax.servlet;version="${version.javax.servlet.servlet-api}",
-                            javax.servlet.jsp.jstl.tlv;version="${version.javax.servlet.jstl}",
-                            org.apache.commons.fileupload;version="${version.commons.fileupload}",
-                            org.apache.commons.fileupload.disk;version="${version.commons.fileupload}",
-                            org.apache.commons.fileupload.portlet;version="${version.commons.fileupload}",
-                            org.apache.commons.fileupload.servlet;version="${version.commons.fileupload}",
-                            org.apache.commons.fileupload.util;version="${version.commons.fileupload}",
+                            javax.persistence;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
+                            javax.persistence.criteria;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
+                            javax.transaction;version="${version.javax.transaction.jta}",
                             org.primefaces;version="${version.org.primefaces.primefaces}",
                             org.primefaces.application;version="${version.org.primefaces.primefaces}",
                             org.primefaces.component.accordionpanel;version="${version.org.primefaces.primefaces}",
@@ -368,20 +301,19 @@
                             org.primefaces.visit;version="${version.org.primefaces.primefaces}",
                             org.primefaces.webapp;version="${version.org.primefaces.primefaces}",
                             org.primefaces.webapp.filter;version="${version.org.primefaces.primefaces}",
-                            com.sun.el;version="${version.org.glassfish.web.el-impl}",
-                            org.slf4j;version="${version.org.slf4j}"
+                            org.slf4j;version="${version.org.slf4j}",
+                            org.w3c.dom;version="0.0.0"
                         </Import-Package>
-                        <Export-Package/>
+                        <Export-Package>
+                            com.spectral.cc.core.portal.idm.controller;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.controller.group;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.controller.permission;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.controller.resource;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.controller.role;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.controller.user;version="${project.version}",
+                            com.spectral.cc.core.portal.idm.tools;version="${project.version}"
+                        </Export-Package>
                     </instructions>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-war-plugin</artifactId>
-                <configuration>
-                    <archive>
-                        <manifestFile>${project.build.outputDirectory}/META-INF/MANIFEST.MF</manifestFile>
-                    </archive>
                 </configuration>
             </plugin>
         </plugins>

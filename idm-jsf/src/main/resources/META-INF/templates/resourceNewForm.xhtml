@@ -1,0 +1,16 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <h:panelGrid id="resourceNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid">
+
+        <h:outputText value="Name : " styleClass="inputTitle"/>
+        <p:inputText label="Name" required="true" value="#{resourceNewController.name}"/>
+
+        <h:outputText value="Description : " styleClass="inputTitle"/>
+        <p:inputText label="Description" required="true" value="#{resourceNewController.description}"/>
+
+    </h:panelGrid>
+</ui:composition>
+</html>

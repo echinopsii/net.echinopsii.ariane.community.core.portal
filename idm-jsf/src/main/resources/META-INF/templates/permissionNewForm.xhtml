@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <h:panelGrid id="permissionNewGrid" columns="2" columnClasses="colStyle25,colStyle75" cellpadding="5" styleClass="ui-widget-content grid">
+        <h:outputText value="Name : " styleClass="inputTitle"/>
+        <p:inputText label="Name" required="true" value="#{permissionNewController.name}"/>
+
+        <h:outputText value="Resource : " styleClass="inputTitle"/>
+        <h:panelGroup>
+            <p:commandLink onclick="resourceCreateDialog.show()">
+                <h:outputText value=" create new resource"/>
+            </p:commandLink><br/>
+            <h:selectOneMenu label="Select the resource" value="#{permissionNewController.resourceToBind}">
+                <f:selectItems value="#{resourcesListController.getAllForSelector()}"  var="res"
+                               itemLabel="#{res.name}" itemValue="#{res.name}"/>
+            </h:selectOneMenu>
+        </h:panelGroup>
+
+        <h:outputText value="Description : " styleClass="inputTitle"/>
+        <p:inputText label="Description" required="true" value="#{permissionNewController.description}"/>
+
+    </h:panelGrid>
+</ui:composition>
+</html>

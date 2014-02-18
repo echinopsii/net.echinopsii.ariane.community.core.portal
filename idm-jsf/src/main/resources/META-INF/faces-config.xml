@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<faces-config xmlns="http://java.sun.com/xml/ns/javaee"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
+              version="2.0">
+    <managed-bean>
+        <managed-bean-name>groupNewController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.group.GroupNewController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>groupsListController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.group.GroupsListController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>permissionNewController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.permission.PermissionNewController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>permissionsListController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.permission.PermissionsListController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>resourceNewController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.resource.ResourceNewController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>resourcesListController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.resource.ResourcesListController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>roleNewController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.role.RoleNewController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>rolesListController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.role.RolesListController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+
+    <managed-bean>
+        <managed-bean-name>userNewController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.user.UserNewController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>usersListController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.idm.controller.user.UsersListController</managed-bean-class>
+        <managed-bean-scope>session</managed-bean-scope>
+    </managed-bean>
+</faces-config>

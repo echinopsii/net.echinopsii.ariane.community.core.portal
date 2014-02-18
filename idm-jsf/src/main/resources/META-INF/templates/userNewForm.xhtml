@@ -1,0 +1,50 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <h:panelGrid id="userNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid">
+
+        <h:outputText value="Username : " styleClass="inputTitle"/>
+        <p:inputText label="Username" required="true" value="#{userNewController.userName}"/>
+
+        <h:outputText value="First name : " styleClass="inputTitle"/>
+        <p:inputText label="Firstname" required="true" value="#{userNewController.firstName}"/>
+
+        <h:outputText value="Last name : " styleClass="inputTitle"/>
+        <p:inputText label="Lastname" required="true" value="#{userNewController.lastName}"/>
+
+        <h:outputText value="Email : " styleClass="inputTitle"/>
+        <p:inputText label="Email" required="true" value="#{userNewController.email}"/>
+
+        <h:outputText value="Phone : " styleClass="inputTitle"/>
+        <p:inputText label="Phone" required="true" value="#{userNewController.phone}"/>
+
+        <h:outputText value="Password : " styleClass="inputTitle"/>
+        <p:inputText label="Password" required="true" value="#{userNewController.password}"/>
+
+        <h:outputText value="Groups : " styleClass="inputTitle"/>
+        <h:panelGroup>
+            <p:commandLink onclick="groupCreateDialog.show()">
+                <h:outputText value=" create new group"/>
+            </p:commandLink><br/>
+            <p:selectManyMenu value="#{userNewController.groupsToBind}" style="width:150px;height:100px">
+                <f:selectItems value="#{groupsListController.getAll()}"  var="group"
+                               itemLabel="#{group.name}" itemValue="#{group.name}"/>
+            </p:selectManyMenu>
+        </h:panelGroup>
+
+        <h:outputText value="Roles : " styleClass="inputTitle"/>
+        <h:panelGroup>
+            <p:commandLink onclick="roleCreateDialog.show()">
+                <h:outputText value=" create new role"/>
+            </p:commandLink><br/>
+            <p:selectManyMenu value="#{userNewController.rolesToBind}" style="width:150px;height:100px">
+                <f:selectItems value="#{rolesListController.getAll()}"  var="role"
+                               itemLabel="#{role.name}" itemValue="#{role.name}"/>
+            </p:selectManyMenu>
+        </h:panelGroup>
+    </h:panelGrid>
+</ui:composition>
+</html>
