@@ -18,6 +18,8 @@
  */
 package com.spectral.cc.core.portal.commons.tools;
 
+import com.spectral.cc.core.portal.commons.consumer.PortalFaceletsResourceResolverServiceConsumer;
+import com.spectral.cc.core.portal.commons.facesplugin.FaceletsResourceResolverService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,10 +57,22 @@ public class FaceletsResourceResolver extends ResourceResolver {
      */
     @Override
     public URL resolveUrl(String path) {
-        log.debug("Resolve {} from portal main...", new Object[]{path});
+        log.info("Resolve {} from portal main...", new Object[]{path});
         URL url = parent.resolveUrl(path);
         if (url == null)
             url = resolveUrlFromThisJar(path);
+
+        if (url == null &&
+                    PortalFaceletsResourceResolverServiceConsumer.getInstance()!=null &&
+                    PortalFaceletsResourceResolverServiceConsumer.getInstance().getFaceletsResourceResolverServices()!=null) {
+            for (FaceletsResourceResolverService fResolver : PortalFaceletsResourceResolverServiceConsumer.getInstance().getFaceletsResourceResolverServices()) {
+                log.info("Resolve {} from {} face resolver ...", new Object[]{path, fResolver.getClass().getPackage()});
+                url = fResolver.resolveURL(path);
+                if (url!=null)
+                    break;
+            }
+        }
+
         return url;
     }
 
@@ -70,7 +84,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
      * @return the resource URL (null if not found)
      */
     public static URL resolveUrlFromThisJar(String path) {
-        log.debug("Resolve {} from portal commons-jsf...", new Object[]{path});
+        log.info("Resolve {} from portal commons-jsf...", new Object[]{path});
         return FaceletsResourceResolver.class.getResource(basePath + path);
     }
 }
