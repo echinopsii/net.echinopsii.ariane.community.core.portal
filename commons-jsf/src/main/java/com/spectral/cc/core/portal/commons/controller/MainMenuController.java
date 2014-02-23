@@ -22,6 +22,8 @@ import com.spectral.cc.core.portal.commons.consumer.MainMenuRegistryConsumer;
 import com.spectral.cc.core.portal.commons.model.MainMenuEntity;
 import com.spectral.cc.core.portal.commons.model.MenuEntityType;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.subject.Subject;
 import org.primefaces.component.menuitem.MenuItem;
 import org.primefaces.component.submenu.Submenu;
 import org.primefaces.component.separator.Separator;
@@ -42,6 +44,27 @@ public class MainMenuController implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(MainMenuController.class);
 
     private MenuModel model = new DefaultMenuModel();
+
+    private static boolean isAuthorized(Subject subject, MainMenuEntity entity) {
+        boolean ret = false;
+        if (subject.hasRole("Jedi") || subject.isPermitted("ccuniverse:zeone") || entity.getDisplayRoles().size()==0) {
+            ret = true;
+        } else {
+            for (String role : entity.getDisplayRoles())
+                if (subject.hasRole(role)) {
+                    ret = true;
+                    break;
+                }
+            if (!ret) {
+                for (String perm : entity.getDisplayPermissions())
+                    if (subject.isPermitted(perm)) {
+                        ret = true;
+                        break;
+                    }
+            }
+        }
+        return ret;
+    }
 
     private static MenuItem createMenuItemFromEntity(MainMenuEntity entity) {
         FacesContext context = FacesContext.getCurrentInstance();
@@ -65,7 +88,7 @@ public class MainMenuController implements Serializable{
         return item;
     }
 
-    private static Submenu createSubMenuFromEntity(MainMenuEntity entity) {
+    private static Submenu createSubMenuFromEntity(Subject subject, MainMenuEntity entity) {
         Submenu submenu = new Submenu();
         submenu.setId(entity.getId());
         submenu.setStyleClass("menuItem");
@@ -74,13 +97,17 @@ public class MainMenuController implements Serializable{
         for (MainMenuEntity subEntity : MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().getMainMenuEntitiesFromParent(entity)) {
             switch(subEntity.getType()) {
                 case MenuEntityType.TYPE_MENU_ITEM:
-                    MenuItem item = createMenuItemFromEntity(subEntity);
-                    submenu.getChildren().add(item);
+                    if (isAuthorized(subject, entity)) {
+                        MenuItem item = createMenuItemFromEntity(subEntity);
+                        submenu.getChildren().add(item);
+                    }
                     break;
                 case MenuEntityType.TYPE_MENU_SEPARATOR:
-                    Separator separator = new Separator();
-                    separator.setId(subEntity.getId());
-                    submenu.getChildren().add(separator);
+                    if (isAuthorized(subject, entity)) {
+                        Separator separator = new Separator();
+                        separator.setId(subEntity.getId());
+                        submenu.getChildren().add(separator);
+                    }
                     break;
                 default:
                     break;
@@ -91,17 +118,22 @@ public class MainMenuController implements Serializable{
 
     public MenuModel getModel() {
         log.debug("Get Menu Model...");
-        if (MainMenuRegistryConsumer.getInstance()!=null) {
+        Subject subject = SecurityUtils.getSubject();
+        if (subject.isAuthenticated() && MainMenuRegistryConsumer.getInstance()!=null) {
             for (MainMenuEntity entity : MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().getMainMenuEntities()) {
                 if (entity.getParent()==null) {
                     switch (entity.getType()) {
                         case MenuEntityType.TYPE_MENU_ITEM:
-                            MenuItem item = createMenuItemFromEntity(entity);
-                            model.addMenuItem(item);
+                            if (isAuthorized(subject, entity)) {
+                                MenuItem item = createMenuItemFromEntity(entity);
+                                model.addMenuItem(item);
+                            }
                             break;
                         case MenuEntityType.TYPE_MENU_SUBMENU:
-                            Submenu submenu = createSubMenuFromEntity(entity);
-                            model.addSubmenu(submenu);
+                            if (isAuthorized(subject, entity)) {
+                                Submenu submenu = createSubMenuFromEntity(subject, entity);
+                                model.addSubmenu(submenu);
+                            }
                             break;
                         default:
                             break;

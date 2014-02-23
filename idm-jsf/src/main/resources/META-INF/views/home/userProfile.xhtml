@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:spectralview="http://spectral.com/spectral/view">
+<h:body>
+    <ui:composition template="/templates/mainLayout.xhtml">
+        <ui:define name="moduleContent">
+            <ui:fragment rendered="#{spectralview:isAuthenticated()}">
+                <p:growl id="userProfileGrowl" showDetail="true"/>
+                <div>
+                    <div style="width:49%; float:left;">
+                        <p:accordionPanel id="portalPreferencesOnLeft" multiple="true">
+                            <p:tab title="Your profile">
+                                <h:panelGrid columns="2" cellpadding="5">
+                                    <h:outputText value="Username : " styleClass="inputTitle"/>
+                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                        <h:form>
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{userProfileController.username}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                        <h:outputText value="#{userProfileController.username}"/>
+                                    </ui:fragment>
+
+                                    <h:outputText value="First name : " styleClass="inputTitle"/>
+                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                        <h:form>
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{userProfileController.firstname}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                        <h:outputText value="#{userProfileController.firstname}"/>
+                                    </ui:fragment>
+
+                                    <h:outputText value="Last name : " styleClass="inputTitle"/>
+                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                        <h:form>
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{userProfileController.lastname}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                        <h:outputText value="#{userProfileController.lastname}"/>
+                                    </ui:fragment>
+
+                                    <h:outputText value="E-Mail : " styleClass="inputTitle"/>
+                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                        <h:form>
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{userProfileController.email}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                        <h:outputText value="#{userProfileController.email}"/>
+                                    </ui:fragment>
+
+                                    <h:outputText value="Phone number : " styleClass="inputTitle"/>
+                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                        <h:form>
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{userProfileController.phone}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                    </ui:fragment>
+                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                        <h:outputText value="#{userProfileController.phone}"/>
+                                    </ui:fragment>
+                                </h:panelGrid>
+                            </p:tab>
+                            <p:tab title="Reset your password">
+                                <h:form>
+                                    <h:panelGrid columns="2" id="matchGrid">
+                                        <h:outputLabel for="pwd1" value="Password : " />
+                                        <p:password id="pwd1" value="#{userProfileController.pwd1}" label="Password" match="pwd2" required="true" feedback="true"/>
+
+                                        <h:outputLabel for="pwd2" value="Password (again): " />
+                                        <p:password id="pwd2" value="#{userProfileController.pwd2}" label="Password (again)" required="true"/>
+                                    </h:panelGrid>
+                                    <p:commandButton id="saveButton" update="@form,:userProfileGrowl" value="Save new password !" icon="ui-icon-disk"
+                                                     actionListener="#{userProfileController.resetPassword}"/>
+                                </h:form>
+                            </p:tab>
+                            <p:tab title="Your groups">
+                                <p:dataList var="group" value="#{userProfileController.groups}" id="groups" paginator="true" rows="5"
+                                            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                            rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
+                                    <h:outputText value="#{group.name} - #{group.description}" style="margin-left:10px" /><br />
+                                </p:dataList>
+                            </p:tab>
+                            <p:tab title="Your roles">
+                                <p:dataList var="role" value="#{userProfileController.roles}" id="roles" paginator="true" rows="5"
+                                            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                            rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
+                                    <h:outputText value="#{role.name} - #{role.description}" style="margin-left:10px" /><br />
+                                </p:dataList>
+                            </p:tab>
+                        </p:accordionPanel>
+                        <p:accordionPanel id="componentPreferencesOnLeft" multiple="true" value="#{userHomeController.preferencesSectionsOnLeft}"
+                                          var="section">
+                            <p:tab title="#{section.description}">
+                                <ui:fragment rendered="#{section.type==userPreferenceSectionTypeController.userPreferenceSectionTypeUsrPrefSectionMap}">
+                                    <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceString}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:inplace editor="true">
+                                                        <p:inputText required="true" label="text" value="#{userProfileController.preferences[entity.fieldName]}"/>
+                                                        <p:ajax event="save" listener="#{userProfileController.syncPreferences}" />
+                                                    </p:inplace>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceSelect}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription}: " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:inplace label="#{userProfileController.preferences[entity.fieldName]}" editor="true">
+                                                        <h:selectOneMenu value="#{userProfileController.preferences[entity.fieldName]}">
+                                                            <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}" />
+                                                        </h:selectOneMenu>
+                                                        <p:ajax event="save" listener="#{userProfileController.syncPreferences}" />
+                                                    </p:inplace>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityOneButtonSelect}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:selectOneButton value="#{userProfileController.preferences[entity.fieldName]}">
+                                                        <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}"/>
+                                                        <p:ajax listener="#{userProfileController.syncPreferences}" />
+                                                    </p:selectOneButton>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                    </ui:repeat>
+                                </ui:fragment>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </div>
+                    <div style="width:49%; float:right;">
+                        <p:accordionPanel id="portalPreferencesOnRight" multiple="true">
+                            <p:tab title="Your theme (current theme is #{userProfileController.theme})">
+                                <p:dataGrid var="atheme" value="#{themeSwitcherController.advancedThemes}" columns="3"
+                                            rows="9" paginator="true"
+                                            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                            rowsPerPageTemplate="9,12,15">
+                                    <p:panel header="#{atheme.name}" style="text-align:center">
+                                        <h:form>
+                                            <p:selectOneRadio id="options" value="#{themeSwitcherController.theme}" onchange="submit()">
+                                                <f:selectItem itemLabel="" itemValue="#{atheme.name}" />
+                                            </p:selectOneRadio>
+                                            <p:graphicImage value="/images/themes/#{atheme.image}"/>
+                                        </h:form>
+                                    </p:panel>
+                                </p:dataGrid>
+                            </p:tab>
+                        </p:accordionPanel>
+                        <p:accordionPanel id="componentPreferencesOnRight" multiple="true" value="#{userHomeController.preferencesSectionsOnRight}"
+                                          var="section">
+                            <p:tab title="#{section.description}">
+                                <ui:fragment rendered="#{section.type==userPreferenceSectionTypeController.userPreferenceSectionTypeUsrPrefSectionMap}">
+                                    <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceString}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:inplace editor="true">
+                                                        <p:inputText required="true" label="text" value="#{userProfileController.preferences[entity.fieldName]}"/>
+                                                        <p:ajax event="save" listener="#{userProfileController.syncPreferences}" />
+                                                    </p:inplace>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityInplaceSelect}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription}: " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:inplace label="#{userProfileController.preferences[entity.fieldName]}" editor="true">
+                                                        <h:selectOneMenu value="#{userProfileController.preferences[entity.fieldName]}">
+                                                            <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}" />
+                                                        </h:selectOneMenu>
+                                                        <p:ajax event="save" listener="#{userProfileController.syncPreferences}" />
+                                                    </p:inplace>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                        <ui:fragment rendered="#{entity.fieldType==userPreferenceEntityTypeController.userPreferenceEntityOneButtonSelect}">
+                                            <h:panelGrid columns="2" cellpadding="5">
+                                                <h:outputText value="#{entity.fieldDescription} : " styleClass="inputTitle"/>
+                                                <h:form>
+                                                    <p:selectOneButton value="#{userProfileController.preferences[entity.fieldName]}">
+                                                        <f:selectItems value="#{userHomeController.getSelectValuesFromEntity(entity)}"/>
+                                                        <p:ajax listener="#{userProfileController.syncPreferences}" />
+                                                    </p:selectOneButton>
+                                                </h:form>
+                                            </h:panelGrid>
+                                        </ui:fragment>
+                                    </ui:repeat>
+                                </ui:fragment>
+                            </p:tab>
+                        </p:accordionPanel>
+                    </div>
+                </div>
+            </ui:fragment>
+        </ui:define>
+    </ui:composition>
+</h:body>
+</html>

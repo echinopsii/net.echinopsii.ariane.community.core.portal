@@ -1,6 +1,6 @@
 /**
- * Directory Commons JSF bundle
- * Directories View Utils
+ * Portal IDM JSF bundle
+ * IDM View Utils
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -20,13 +20,11 @@
 package com.spectral.cc.core.portal.idm.tools;
 
 import com.spectral.cc.core.portal.idm.ccplugin.IDMJPAProviderConsumer;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.persistence.EntityManager;
-import javax.persistence.Id;
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -39,14 +37,7 @@ import java.util.List;
 public final class IDMViewUtils {
     private static final Logger log = LoggerFactory.getLogger(IDMViewUtils.class);
 
-    public static <T> List<T> asList(Collection<T> collection) {
-        if (collection == null) {
-            return null;
-        }
-        return new ArrayList<T>(collection);
-    }
-
-    public static <T> List<T> asList2(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
+    public static <T> List<T> asList(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
         if (collectionName == null && collectionName.equals(""))
             return null;
 
@@ -68,43 +59,18 @@ public final class IDMViewUtils {
         return ret;
     }
 
-    public static String display(Object object) {
+    public static boolean isAuthenticated() {
+        return SecurityUtils.getSubject().isAuthenticated();
+    }
 
-        if (object == null) {
-            return null;
-        }
+    public static boolean hasPermission(String permission) {
+        log.debug("principal : {} ; permission : {} - {}", new Object[]{SecurityUtils.getSubject().getPrincipal(), permission, SecurityUtils.getSubject().isPermitted(permission)});
+        return SecurityUtils.getSubject().isPermitted(permission);
+    }
 
-        try {
-            // Invoke toString if declared in the class. If not found, the NoSuchMethodException is caught and handled
-            object.getClass().getDeclaredMethod("toString");
-            return object.toString();
-        } catch (NoSuchMethodException noMethodEx) {
-            try {
-                for (Field field : object.getClass().getDeclaredFields()) {
-                    // Find the primary key field and display it
-                    if (field.getAnnotation(Id.class) != null) {
-                        // Find a matching getter and invoke it to display the key
-                        for (Method method : object.getClass().getDeclaredMethods()) {
-                            if (method.equals(new PropertyDescriptor(field.getName(), object.getClass()).getReadMethod())) {
-                                return method.invoke(object).toString();
-                            }
-                        }
-                    }
-                }
-                for (Method method : object.getClass().getDeclaredMethods()) {
-                    // Find the primary key as a property instead of a field, and display it
-                    if (method.getAnnotation(Id.class) != null) {
-                        return method.invoke(object).toString();
-                    }
-                }
-            }
-            catch (Exception ex) {
-                // Unlikely, but abort and stop view generation if any exception is thrown
-                throw new RuntimeException(ex);
-            }
-        }
-
-        return null;
+    public static boolean hasRole(String role) {
+        log.debug("principal : {} ; role : {} - {}", new Object[]{SecurityUtils.getSubject().getPrincipal(), role, SecurityUtils.getSubject().hasRole(role)});
+        return SecurityUtils.getSubject().hasRole(role);
     }
 
     private IDMViewUtils() {

@@ -50,7 +50,8 @@ public class UserNewController implements Serializable {
     private String lastName;
     private String email;
     private String phone;
-    private String password;
+    private String pwd1 ;
+    private String pwd2 ;
 
     private List<String> groupsToBind = new ArrayList<String>();
     private Set<Group> groups = new HashSet<Group>();
@@ -106,12 +107,20 @@ public class UserNewController implements Serializable {
         this.phone = phone;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPwd1() {
+        return pwd1;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPwd1(String pwd1) {
+        this.pwd1 = pwd1;
+    }
+
+    public String getPwd2() {
+        return pwd2;
+    }
+
+    public void setPwd2(String pwd2) {
+        this.pwd2 = pwd2;
     }
 
     public List<String> getGroupsToBind() {
@@ -187,7 +196,7 @@ public class UserNewController implements Serializable {
         user.setLastName(lastName);
         user.setEmail(email);
         user.setPhone(phone);
-        user.setPassword(password);
+        user.setPassword(pwd2);
         user.setGroups(groups);
         user.setRoles(roles);
 

@@ -64,7 +64,6 @@
                             com.spectral.cc.core.portal.commons.tools;version=${project.version}
                         </Export-Package>
                         <Import-Package>
-                            com.spectral.cc.core.idm.commons.proxy;version=${version.com.spectral.cc.core.idm},
                             com.spectral.cc.core.portal.commons.model;version=${project.version},
                             com.spectral.cc.core.portal.commons.registry;version=${project.version},
                             com.sun.faces;version="${version.javax.faces.api}",
@@ -141,6 +140,7 @@
                             org.apache.shiro.config;version="${version.org.apache.shiro}",
                             org.apache.shiro.io;version="${version.org.apache.shiro}",
                             org.apache.shiro.mgt;version="${version.org.apache.shiro}",
+                            org.apache.shiro.session;version="${version.org.apache.shiro}",
                             org.apache.shiro.session.mgt;version="${version.org.apache.shiro}",
                             org.apache.shiro.subject;version="${version.org.apache.shiro}",
                             org.apache.shiro.util;version="${version.org.apache.shiro}",

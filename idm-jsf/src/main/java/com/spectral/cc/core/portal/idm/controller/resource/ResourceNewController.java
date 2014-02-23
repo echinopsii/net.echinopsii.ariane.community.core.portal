@@ -81,7 +81,7 @@ public class ResourceNewController {
             }
             em.flush();
             em.getTransaction().commit();
-            log.info("Save new Resource {} !", new Object[]{name});
+            log.debug("Save new Resource {} !", new Object[]{name});
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                                                        "Resource created successfully !",
                                                        "Resource name : " + resource.getName());

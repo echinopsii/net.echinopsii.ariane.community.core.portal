@@ -5,7 +5,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
-    <title>..: C-C :..</title>
+    <title>..: c c :..</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <h:outputStylesheet library="css" name="font-awesome.css" />
@@ -28,6 +28,15 @@
             “Nothing great in the world has ever been accomplished without passion.” Georg Wilhelm Friedrich Hegel
         </p:layoutUnit>
         <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit">
+            <p:idleMonitor timeout="600000"
+                           onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
+            <p:dialog header="Logout countdown" resizable="false"
+                      widgetVar="idleDialog" width="350" onShow="pbAjax.start();">
+                <h:outputText value="You're idle since 10mn. Logout count down: " />
+                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{logoutCounterDownController.counter}" styleClass="animated">
+                    <p:ajax event="complete" listener="#{loginController.logout}"/>
+                </p:progressBar>
+            </p:dialog>
             <ui:insert name="moduleContent"></ui:insert>
         </p:layoutUnit>
     </p:layout>

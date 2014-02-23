@@ -45,7 +45,7 @@ public class PortalFaceletsResourceResolverServiceConsumer {
      * @return all facelets resource resolver service binded on this consumer. If null no registry has been binded ...
      */
     public FaceletsResourceResolverService[] getFaceletsResourceResolverServices() {
-        log.info("{} FaceletsResourceResolverService are bound to this consumer...", (faceletsResolverList!=null) ? faceletsResolverList.length : "0");
+        log.debug("{} FaceletsResourceResolverService are bound to this consumer...", (faceletsResolverList!=null) ? faceletsResolverList.length : "0");
         return faceletsResolverList;
     }
 

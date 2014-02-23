@@ -16,7 +16,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.spectral.cc.core.portal.commons.consumer;
+package com.spectral.cc.core.portal.idm.ccplugin;
 
 import com.spectral.cc.core.idm.commons.proxy.WebSecurityManagerProxy;
 import org.apache.felix.ipojo.annotations.*;

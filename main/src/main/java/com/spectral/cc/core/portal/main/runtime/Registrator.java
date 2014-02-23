@@ -31,8 +31,8 @@ public class Registrator implements Runnable {
     private static final Logger log = LoggerFactory.getLogger(Registrator.class);
 
     private static String MAIN_MENU_PORTAL_CONTEXT = "/CCmain/";
-    private static int    MAIN_MENU_DASH_RANK = 1;
-    private static int    MAIN_MENU_SPREAD_RANK = 5;
+    //private static int    MAIN_MENU_DASH_RANK = 1;
+    //private static int    MAIN_MENU_SPREAD_RANK = 5;
     private static int    MAIN_MENU_HELP_RANK = 6;
     private static int    MAIN_MENU_ADMIN_RANK = 7;
     private static int    MAIN_MENU_HOME_RANK = 8;
@@ -54,6 +54,7 @@ public class Registrator implements Runnable {
             }
 
         try {
+            /*
             entity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_DASH_RANK, "icon-dashboard icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
@@ -61,6 +62,7 @@ public class Registrator implements Runnable {
             entity = new MainMenuEntity("spreadsheetMItem", "Spreadsheet", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_SPREAD_RANK, "icon-table icon-large");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            */
 
             submenuCount = 0;
             MainMenuEntity helpSB = new MainMenuEntity("helpSButton", "Help", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HELP_RANK, "icon-question-sign icon-large");
@@ -91,17 +93,34 @@ public class Registrator implements Runnable {
 
             submenuCount = 0;
             MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-cog icon-large");
+            adminSB.getDisplayRoles().add("ccsecadmin");
+            adminSB.getDisplayRoles().add("ccsecreviewer");
+            adminSB.getDisplayPermissions().add("ccSecResource:display");
+            adminSB.getDisplayPermissions().add("ccSecPermission:display");
+            adminSB.getDisplayPermissions().add("ccSecRole:display");
+            adminSB.getDisplayPermissions().add("ccSecGroup:display");
+            adminSB.getDisplayPermissions().add("ccSecUser:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(adminSB);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(adminSB);
 
+            /*
             entity = new MainMenuEntity("configurationMItem", "Configuration", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            */
 
             entity = new MainMenuEntity("securityMItem", "Security",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/security.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-key icon-large").setParent(adminSB);
+            entity.getDisplayRoles().add("ccsecadmin");
+            entity.getDisplayRoles().add("ccsecreviewer");
+            entity.getDisplayPermissions().add("ccSecResource:display");
+            entity.getDisplayPermissions().add("ccSecPermission:display");
+            entity.getDisplayPermissions().add("ccSecRole:display");
+            entity.getDisplayPermissions().add("ccSecGroup:display");
+            entity.getDisplayPermissions().add("ccSecUser:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
+            /*
             entity = new MainMenuEntity("aasSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
@@ -117,6 +136,7 @@ public class Registrator implements Runnable {
             entity = new MainMenuEntity("installMItem", "Install new software", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-circle-arrow-down icon-large").setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            */
 
             submenuCount = 0;
             MainMenuEntity homeEntity = new MainMenuEntity("homeSButton", "Home", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HOME_RANK, "icon-home icon-large");
@@ -130,12 +150,14 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
+            /*
             entity = new MainMenuEntity("wpMItem", "White pages",
                                         MAIN_MENU_PORTAL_CONTEXT + "#",
                                         MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HOME_RANK * 10 + submenuCount++,
                                         "icon-group icon-large").setParent(homeEntity);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            */
 
             entity = new MainMenuEntity(
                                                "accountSeparator", null, null,

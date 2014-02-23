@@ -14,7 +14,7 @@
             <p:commandLink onclick="permissionCreateDialog.show()">
                 <h:outputText value=" create new permission"/>
             </p:commandLink><br/>
-            <p:selectManyMenu value="#{roleNewController.permissionsToBind}" style="width:150px;height:100px">
+            <p:selectManyMenu value="#{roleNewController.permissionsToBind}" style="width:250px;height:100px">
                 <f:selectItems value="#{permissionsListController.getAll()}"  var="perm"
                                itemLabel="#{perm.name}" itemValue="#{perm.name}"/>
             </p:selectManyMenu>

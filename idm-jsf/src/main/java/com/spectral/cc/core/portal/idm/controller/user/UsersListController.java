@@ -19,6 +19,7 @@
 
 package com.spectral.cc.core.portal.idm.controller.user;
 
+import com.spectral.cc.core.idm.commons.model.jpa.UserPreference;
 import com.spectral.cc.core.portal.idm.ccplugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.portal.idm.controller.group.GroupsListController;
 import com.spectral.cc.core.portal.idm.controller.role.RolesListController;
@@ -282,8 +283,11 @@ public class UsersListController implements Serializable {
                     group.getUsers().remove(user2BeRemoved);
                 for (Role role : user2BeRemoved.getRoles())
                     role.getUsers().remove(user2BeRemoved);
-                em.remove(user2BeRemoved);
+                for (UserPreference pref : user2BeRemoved.getPreferences())
+                    em.remove(pref);
+                user2BeRemoved.getPreferences().clear();
                 em.flush();
+                em.remove(user2BeRemoved);
                 em.getTransaction().commit();
                 FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
                                                            "User deleted successfully !",

@@ -18,6 +18,9 @@
  */
 package com.spectral.cc.core.portal.commons.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A main menu entity is an object which aims to be registered into the CC Portal Main Menu Registry.<br/>
  * The fields definitions of this entity are closely linked to the PrimeFaces MenuItem class.<br/><br/>
@@ -37,6 +40,8 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     private MainMenuEntity parent;
     private String icon;
     private String actionListener;
+    private List<String> displayRoles = new ArrayList<String>();
+    private List<String> displayPermissions = new ArrayList<String>();
     //onRight not working on primefaces 3.5
     //TODO : check with primefaces communauty
     //private boolean onRight = false;
@@ -132,6 +137,22 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     public MainMenuEntity setActionListener(String actionListener) {
         this.actionListener = actionListener;
         return this;
+    }
+
+    public List<String> getDisplayPermissions() {
+        return displayPermissions;
+    }
+
+    public void setDisplayPermissions(List<String> displayPermissions) {
+        this.displayPermissions = displayPermissions;
+    }
+
+    public List<String> getDisplayRoles() {
+        return displayRoles;
+    }
+
+    public void setDisplayRoles(List<String> displayRoles) {
+        this.displayRoles = displayRoles;
     }
 
     //private boolean isOnRight() {

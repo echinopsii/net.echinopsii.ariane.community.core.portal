@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.commons.tools;
+package com.spectral.cc.core.portal.idm.tools;
 
-import com.spectral.cc.core.portal.commons.consumer.SecurityManagerProxyConsumer;
+import com.spectral.cc.core.portal.idm.ccplugin.SecurityManagerProxyConsumer;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.config.Ini;
@@ -60,7 +60,7 @@ import java.util.Map;
  *  <!-- SHIRO CONFIGURATION -->
  *  <context-param>
  *      <param-name>shiroEnvironmentClass</param-name>
- *      <param-value>com.spectral.cc.core.portal.commons.tools.IniOSGIWebEnvironment</param-value>
+ *      <param-value>com.spectral.cc.core.portal.idm.tools.IniOSGIWebEnvironment</param-value>
  *  </context-param>
  *  <listener>
  *      <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>

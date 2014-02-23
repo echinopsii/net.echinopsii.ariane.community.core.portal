@@ -57,7 +57,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
      */
     @Override
     public URL resolveUrl(String path) {
-        log.info("Resolve {} from portal main...", new Object[]{path});
+        log.debug("Resolve {} from portal main...", new Object[]{path});
         URL url = parent.resolveUrl(path);
         if (url == null)
             url = resolveUrlFromThisJar(path);
@@ -66,7 +66,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
                     PortalFaceletsResourceResolverServiceConsumer.getInstance()!=null &&
                     PortalFaceletsResourceResolverServiceConsumer.getInstance().getFaceletsResourceResolverServices()!=null) {
             for (FaceletsResourceResolverService fResolver : PortalFaceletsResourceResolverServiceConsumer.getInstance().getFaceletsResourceResolverServices()) {
-                log.info("Resolve {} from {} face resolver ...", new Object[]{path, fResolver.getClass().getPackage()});
+                log.debug("Resolve {} from {} face resolver ...", new Object[]{path, fResolver.getClass().getPackage()});
                 url = fResolver.resolveURL(path);
                 if (url!=null)
                     break;
@@ -84,7 +84,7 @@ public class FaceletsResourceResolver extends ResourceResolver {
      * @return the resource URL (null if not found)
      */
     public static URL resolveUrlFromThisJar(String path) {
-        log.info("Resolve {} from portal commons-jsf...", new Object[]{path});
+        log.debug("Resolve {} from portal commons-jsf...", new Object[]{path});
         return FaceletsResourceResolver.class.getResource(basePath + path);
     }
 }

@@ -1,943 +1,988 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:forgeview="http://jboss.org/forge/view">
+      xmlns:spectralview="http://spectral.com/spectral/view">
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <p:tabView id="securityTabView" orientation="top">
-                <p:tab>
-                    <f:facet name="title">
-                        <i class="icon-user icon-large"/>&nbsp;&nbsp;
-                        <h:outputText value="Users"/>
-                    </f:facet>
-
-                    <h:form id="userTableForm">
-                        <p:growl id="userTableMessages" showDetail="true" />
-                        <p:dataTable id="userTable" var="user" value="#{usersListController.lazyModel}"
-                                     selectionMode="multiple" selection="#{usersListController.selectedUserList}" rowKey="#{user.id}"
-                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                     rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                            <f:facet name="header">
-                                Users
-                            </f:facet>
-
-                            <p:ajax event="rowToggle" listener="#{usersListController.onRowToggle}" />
-
-                            <p:column style="width:2%">
-                                <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Username" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                <h:outputText value="#{user.userName}" />
-                            </p:column>
-
-                            <p:column headerText="First name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
-                                <h:outputText value="#{user.firstName}" />
-                            </p:column>
-
-                            <p:column headerText="Last name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
-                                <h:outputText value="#{user.lastName}" />
-                            </p:column>
-
-                            <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                <h:outputText value="#{user.email}" />
-                            </p:column>
-
-                            <p:column headerText="Phone" sortBy="#{user.phone}" filterBy="#{user.phone}">
-                                <h:outputText value="#{user.phone}" />
-                            </p:column>
-
-                            <p:rowExpansion>
-                                <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                    <h:outputText value="Username : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{user.userName}"/>
-                                            <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="First name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{user.firstName}"/>
-                                            <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Last name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{user.lastName}"/>
-                                            <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Email : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{user.email}"/>
-                                            <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Phone : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{user.phone}"/>
-                                            <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                     rows="5" paginator="true" selection="#{usersListController.removedRoles[user.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                <h:outputText value="#{role.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                <h:outputText value="#{role.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
-                                                        <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                       itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{usersListController.syncAddedRole(user)}"
-                                                            update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{usersListController.syncRemovedRoles(user)}"
-                                                                 update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                    <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
-                                                     rows="5" paginator="true" selection="#{usersListController.removedGroups[user.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                                <h:outputText value="#{group.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                                <h:outputText value="#{group.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
-                                                        <f:selectItems value="#{groupsListController.getAll()}" var="group_"
-                                                                       itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{usersListController.syncAddedGroup(user)}"
-                                                            update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{usersListController.syncRemovedGroups(user)}"
-                                                                 update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                </h:panelGrid>
-
-                            </p:rowExpansion>
-                            <f:facet name="footer">
-                                <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"/>
-                                <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
-                                                 update=":removeUserDialogForm:usrdisplay"/>
-                                <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                 update=":securityTabView:roleTableForm:roleTable,
-                                                         :securityTabView:groupTableForm:groupTable,
-                                                         :securityTabView:userTableForm:userTable"/>
-                            </f:facet>
-                        </p:dataTable>
-                    </h:form>
-                </p:tab>
-
-
-
-
-                <p:tab>
-                    <f:facet name="title">
-                        <i class="icon-group icon-large"/>&nbsp;&nbsp;
-                        <h:outputText value="Groups"/>
-                    </f:facet>
-
-                    <h:form id="groupTableForm">
-                        <p:growl id="groupTableMessages" showDetail="true" />
-                        <p:dataTable id="groupTable" var="group" value="#{groupsListController.lazyModel}"
-                                     selectionMode="multiple" selection="#{groupsListController.selectedGroupList}" rowKey="#{group.id}"
-                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                     rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                            <f:facet name="header">
-                                Groups
-                            </f:facet>
-
-                            <p:ajax event="rowToggle" listener="#{groupsListController.onRowToggle}" />
-
-                            <p:column style="width:2%">
-                                <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                <h:outputText value="#{group.name}" />
-                            </p:column>
-
-                            <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                <h:outputText value="#{group.description}" />
-                            </p:column>
-
-                            <p:rowExpansion>
-                                <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                    <h:outputText value="Name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{group.name}"/>
-                                            <p:ajax event="save" listener="#{groupsListController.update(role)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Description : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{group.description}"/>
-                                            <p:ajax event="save" listener="#{groupsListController.update(role)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                     rows="5" paginator="true" selection="#{groupsListController.removedRoles[group.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                <h:outputText value="#{role.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                <h:outputText value="#{role.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
-                                                        <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                       itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{groupsListController.syncAddedRole(group)}"
-                                                            update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{groupsListController.syncRemovedRoles(group)}"
-                                                                 update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                    <h:outputText value="Users : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
-                                                     rows="5" paginator="true" selection="#{groupsListController.removedUsers[group.id]}" selectionMode="multiple">
-                                            <p:column headerText="User name" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                                <h:outputText value="#{user.userName}"/>
-                                            </p:column>
-                                            <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                                <h:outputText value="#{user.email}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
-                                                        <f:selectItems value="#{usersListController.getAll()}" var="user_"
-                                                                       itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{groupsListController.syncAddedUser(group)}"
-                                                            update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{groupsListController.syncRemovedUsers(group)}"
-                                                                 update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-                                </h:panelGrid>
-
-                            </p:rowExpansion>
-
-                            <f:facet name="footer">
-                                <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"/>
-                                <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
-                                                 update=":removeGroupDialogForm:grpdisplay"/>
-                                <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                 update=":securityTabView:roleTableForm:roleTable,
-                                                         :securityTabView:groupTableForm:groupTable,
-                                                         :securityTabView:userTableForm:userTable"/>
-                            </f:facet>
-                        </p:dataTable>
-                    </h:form>
-                </p:tab>
-
-
-
-
-                <p:tab>
-                    <f:facet name="title">
-                        <i class="icon-star icon-large"/>&nbsp;&nbsp;
-                        <h:outputText value="Roles"/>
-                    </f:facet>
-
-                    <h:form id="roleTableForm">
-                        <p:growl id="roleTableMessages" showDetail="true" />
-                        <p:dataTable id="roleTable" var="role" value="#{rolesListController.lazyModel}"
-                                     selectionMode="multiple" selection="#{rolesListController.selectedRoleList}" rowKey="#{role.id}"
-                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                     rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                            <f:facet name="header">
-                                Roles
-                            </f:facet>
-
-                            <p:ajax event="rowToggle" listener="#{rolesListController.onRowToggle}" />
-
-                            <p:column style="width:2%">
-                                <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                <h:outputText value="#{role.name}" />
-                            </p:column>
-
-                            <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                <h:outputText value="#{role.description}" />
-                            </p:column>
-
-                            <p:rowExpansion>
-                                <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                    <h:outputText value="Name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{role.name}"/>
-                                            <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-                                    <h:outputText value="Description : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:inputText required="true" label="text" value="#{role.description}"/>
-                                            <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
-                                                     rows="5" paginator="true" selection="#{rolesListController.removedPermissions[role.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
-                                                <h:outputText value="#{perm.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
-                                                <h:outputText value="#{perm.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
-                                                        <f:selectItems value="#{permissionsListController.getAll()}" var="res_"
-                                                                       itemLabel="#{res_.name}" itemValue="#{res_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{rolesListController.syncAddedPermission(role)}"
-                                                            update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{rolesListController.syncRemovedPermissions(role)}"
-                                                                 update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                    <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
-                                                     rows="5" paginator="true" selection="#{rolesListController.removedGroups[role.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                                <h:outputText value="#{group.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                                <h:outputText value="#{group.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
-                                                        <f:selectItems value="#{groupsListController.getAll()}" var="group_"
-                                                                       itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{rolesListController.syncAddedGroup(role)}"
-                                                            update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{rolesListController.syncRemovedGroups(role)}"
-                                                                 update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                    <h:outputText value="Users : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
-                                                     rows="5" paginator="true" selection="#{rolesListController.removedUsers[role.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                                <h:outputText value="#{user.userName}"/>
-                                            </p:column>
-                                            <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                                <h:outputText value="#{user.email}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
-                                                        <f:selectItems value="#{usersListController.getAll()}" var="user_"
-                                                                       itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{rolesListController.syncAddedUser(role)}"
-                                                            update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{rolesListController.syncRemovedUsers(role)}"
-                                                                 update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                </h:panelGrid>
-                            </p:rowExpansion>
-
-                            <f:facet name="footer">
-                                <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"/>
-                                <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
-                                                 update=":removeRoleDialogForm:roledisplay"/>
-                                <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                 update=":securityTabView:roleTableForm:roleTable,
-                                                         :securityTabView:permissionTableForm:permissionTable,
-                                                         :securityTabView:groupTableForm:groupTable,
-                                                         :securityTabView:userTableForm:userTable"/>
-                            </f:facet>
-                        </p:dataTable>
-                    </h:form>
-                </p:tab>
-
-
-
-
-                <p:tab>
-                    <f:facet name="title">
-                        <i class="icon-legal icon-large"/>&nbsp;&nbsp;
-                        <h:outputText value="Permissions"/>
-                    </f:facet>
-
-                    <h:form id="permissionTableForm">
-                        <p:growl id="permissionTableMessages" showDetail="true" />
-                        <p:dataTable id="permissionTable" var="permission" value="#{permissionsListController.lazyModel}"
-                                     selectionMode="multiple" selection="#{permissionsListController.selectedPermissionList}" rowKey="#{permission.id}"
-                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                     rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                            <f:facet name="header">
-                                Permissions
-                            </f:facet>
-
-                            <p:ajax event="rowToggle" listener="#{permissionsListController.onRowToggle}" />
-
-                            <p:column style="width:2%">
-                                <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Name" sortBy="#{permission.name}" filterBy="#{permission.name}">
-                                <h:outputText value="#{permission.name}" />
-                            </p:column>
-
-                            <p:column headerText="Description" sortBy="#{permission.description}" filterBy="#{permission.description}">
-                                <h:outputText value="#{permission.description}" />
-                            </p:column>
-
-                            <p:column headerText="Resource">
-                                <h:outputText value="#{permission.resource.name}" />
-                            </p:column>
-
-                            <p:rowExpansion>
-                                <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                    <h:outputText value="Name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
-                                            <p:inputText required="true" label="text" value="#{permission.name}"/>
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Description : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
-                                            <p:inputText required="true" label="text" value="#{permission.description}"/>
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Resource : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
-                                            <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
-                                                <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
-                                                               itemLabel="#{res.name}" itemValue="#{res.name}"/>
-                                            </h:selectOneMenu>
-                                            <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                     rows="5" paginator="true" selection="#{permissionsListController.removedRoles[permission.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                <h:outputText value="#{role.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                <h:outputText value="#{role.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
-                                                        <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                       itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{permissionsListController.syncAddedRole(permission)}"
-                                                            update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{permissionsListController.syncRemovedRoles(permission)}"
-                                                                 update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-
-                                </h:panelGrid>
-                            </p:rowExpansion>
-                            <f:facet name="footer">
-                                <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"/>
-                                <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
-                                                 update=":removePermissionDialogForm:permdisplay"/>
-                                <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                 update=":securityTabView:resourceTableForm:resourceTable,
-                                                         :securityTabView:permissionTableForm:permissionTable,
-                                                         :securityTabView:roleTableForm:roleTable"/>
-                            </f:facet>
-                        </p:dataTable>
-                    </h:form>
-
-                </p:tab>
-
-
-
-
-                <p:tab>
-                    <f:facet name="title">
-                        <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
-                        <h:outputText value="Resources"/>
-                    </f:facet>
-
-                    <h:form id="resourceTableForm">
-                        <p:growl id="resourceTableMessages" showDetail="true" />
-                        <p:dataTable id="resourceTable" var="res" value="#{resourcesListController.lazyModel}"
-                                     selectionMode="multiple" selection="#{resourcesListController.selectedResourceList}" rowKey="#{res.id}"
-                                     paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                     rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                            <f:facet name="header">
-                                Resources
-                            </f:facet>
-
-                            <p:ajax event="rowToggle" listener="#{resourcesListController.onRowToggle}" />
-
-                            <p:column style="width:2%">
-                                <p:rowToggler/>
-                            </p:column>
-
-                            <p:column headerText="Name" sortBy="#{res.name}" filterBy="#{res.name}">
-                                <h:outputText value="#{res.name}" />
-                            </p:column>
-
-                            <p:column headerText="Description" sortBy="#{res.description}" filterBy="#{res.description}">
-                                <h:outputText value="#{res.description}" />
-                            </p:column>
-
-                            <p:rowExpansion>
-                                <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                    <h:outputText value="Name : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                            <p:inputText required="true" label="text" value="#{res.name}"/>
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Description : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:inplace editor="true">
-                                            <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                            <p:inputText required="true" label="text" value="#{res.description}"/>
-                                        </p:inplace>
-                                    </h:form>
-
-                                    <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                    <h:form>
-                                        <p:dataTable value="#{forgeview:asList2(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
-                                                     rows="5" paginator="true" selection="#{resourcesListController.removedPermissions[res.id]}" selectionMode="multiple">
-                                            <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
-                                                <h:outputText value="#{perm.name}"/>
-                                            </p:column>
-                                            <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
-                                                <h:outputText value="#{perm.description}"/>
-                                            </p:column>
-                                            <f:facet name="footer">
-                                                <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
-                                                    <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
-                                                        <f:selectItems value="#{permissionsListController.getAll()}" var="perm_"
-                                                                       itemLabel="#{perm_.name}" itemValue="#{perm_.name}"/>
-                                                    </h:selectOneMenu>
-                                                    <p:ajax event="save" listener="#{resourcesListController.syncAddedPermission(res)}"
-                                                            update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
-                                                </p:inplace>
-                                                <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
-                                                                 process="@form" actionListener="#{resourcesListController.syncRemovedPermissions(res)}"
-                                                                 update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
-                                            </f:facet>
-                                        </p:dataTable>
-                                    </h:form>
-                                </h:panelGrid>
-                            </p:rowExpansion>
-                            <f:facet name="footer">
-                                <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"/>
-                                <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
-                                                 update=":removeResourceDialogForm:resdisplay"/>
-                                <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
-                                                 update=":securityTabView:resourceTableForm:resourceTable,
-                                                         :securityTabView:permissionTableForm:permissionTable" />
-                            </f:facet>
-                        </p:dataTable>
-                    </h:form>
-                </p:tab>
-            </p:tabView>
-
-
-
-
-            <p:dialog header="Confirm your remove order !" widgetVar="userRemoveDialog"
-                      width="500" showEffect="fade" hideEffect="explode">
-                <h:form id="removeUserDialogForm">
-                    <h:outputText value="Are you sure you want delete following users ?" styleClass="inputTitle"/><br/>
-                    <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{usersListController.delete}" oncomplete="userRemoveDialog.hide();"
-                                     update=":securityTabView:userTableForm:userTable,
-                                             :securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:userTableForm:userTableMessages"/>
-                    <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="userRemoveDialog.hide();"/>
-                    <p:separator/>
-                    <p:dataList id="usrdisplay"
-                                value="#{usersListController.selectedUserList}"
-                                var="selectedUser" type="definition">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Username : " styleClass="inputTitle"/>
-                            <h:outputText value="#{selectedUser.userName}"/>
-
-                            <h:outputText value="Roles : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedUser,'roles')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
+            <ui:fragment rendered="#{spectralview:isAuthenticated()}">
+                <p:tabView id="securityTabView" orientation="top">
+                    <p:tab rendered="#{spectralview:hasPermission('ccSecUser:display')}">
+                        <f:facet name="title">
+                            <i class="icon-user icon-large"/>&nbsp;&nbsp;
+                            <h:outputText value="Users"/>
+                        </f:facet>
+
+                        <h:form id="userTableForm">
+                            <p:growl id="userTableMessages" showDetail="true" />
+                            <p:dataTable id="userTable" var="user" value="#{usersListController.lazyModel}"
+                                         selectionMode="multiple" selection="#{usersListController.selectedUserList}" rowKey="#{user.id}"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                <f:facet name="header">
+                                    Users
+                                </f:facet>
+
+                                <p:ajax event="rowToggle" listener="#{usersListController.onRowToggle}" />
+
+                                <p:column style="width:2%">
+                                    <p:rowToggler/>
                                 </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
+
+                                <p:column headerText="Username" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                    <h:outputText value="#{user.userName}" />
                                 </p:column>
+
+                                <p:column headerText="First name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
+                                    <h:outputText value="#{user.firstName}" />
+                                </p:column>
+
+                                <p:column headerText="Last name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
+                                    <h:outputText value="#{user.lastName}" />
+                                </p:column>
+
+                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                    <h:outputText value="#{user.email}" />
+                                </p:column>
+
+                                <p:column headerText="Phone" sortBy="#{user.phone}" filterBy="#{user.phone}">
+                                    <h:outputText value="#{user.phone}" />
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:outputText value="Username : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecUser:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="username" value="#{user.userName}"/>
+                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{user.userName}" rendered="#{!(spectralview:hasPermission('ccSecUser:update'))}"/>
+
+
+                                        <h:outputText value="First name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecUser:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{user.firstName}"/>
+                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(spectralview:hasPermission('ccSecUser:update'))}"/>
+
+                                        <h:outputText value="Last name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecUser:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{user.lastName}"/>
+                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(spectralview:hasPermission('ccSecUser:update'))}"/>
+
+                                        <h:outputText value="Email : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecUser:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{user.email}"/>
+                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(spectralview:hasPermission('ccSecUser:update'))}"/>
+
+                                        <h:outputText value="Phone : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecUser:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{user.phone}"/>
+                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(spectralview:hasPermission('ccSecUser:update'))}"/>
+
+                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                         rows="5" paginator="true" selection="#{usersListController.removedRoles[user.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                    <h:outputText value="#{role.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                    <h:outputText value="#{role.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecUser:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
+                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{usersListController.syncAddedRole(user)}"
+                                                                    update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{usersListController.syncRemovedRoles(user)}"
+                                                                         update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                        <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                                         rows="5" paginator="true" selection="#{usersListController.removedGroups[user.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                                    <h:outputText value="#{group.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                                    <h:outputText value="#{group.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecUser:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
+                                                                <f:selectItems value="#{groupsListController.getAll()}" var="group_"
+                                                                               itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{usersListController.syncAddedGroup(user)}"
+                                                                    update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{usersListController.syncRemovedGroups(user)}"
+                                                                         update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:rowExpansion>
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"
+                                                     rendered="#{spectralview:hasPermission('ccSecUser:create')}"/>
+                                    <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
+                                                     update=":removeUserDialogForm:usrdisplay"
+                                                     rendered="#{spectralview:hasPermission('ccSecUser:create')}"/>
+                                    <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                     update=":securityTabView:roleTableForm:roleTable,
+                                                                     :securityTabView:groupTableForm:groupTable,
+                                                                     :securityTabView:userTableForm:userTable"/>
+                                </f:facet>
                             </p:dataTable>
+                        </h:form>
+                    </p:tab>
 
-                            <h:outputText value="Groups : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedUser,'groups')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
+
+
+                    <p:tab rendered="#{spectralview:hasPermission('ccSecGroup:display')}">
+                        <f:facet name="title">
+                            <i class="icon-group icon-large"/>&nbsp;&nbsp;
+                            <h:outputText value="Groups"/>
+                        </f:facet>
+
+                        <h:form id="groupTableForm">
+                            <p:growl id="groupTableMessages" showDetail="true" />
+                            <p:dataTable id="groupTable" var="group" value="#{groupsListController.lazyModel}"
+                                         selectionMode="multiple" selection="#{groupsListController.selectedGroupList}" rowKey="#{group.id}"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                <f:facet name="header">
+                                    Groups
+                                </f:facet>
+
+                                <p:ajax event="rowToggle" listener="#{groupsListController.onRowToggle}" />
+
+                                <p:column style="width:2%">
+                                    <p:rowToggler/>
                                 </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
+
+                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                    <h:outputText value="#{group.name}" />
                                 </p:column>
+
+                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                    <h:outputText value="#{group.description}" />
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:outputText value="Name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecGroup:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{group.name}"/>
+                                                <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{group.name}" rendered="#{!(spectralview:hasPermission('ccSecGroup:update'))}"/>
+
+                                        <h:outputText value="Description : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecGroup:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{group.description}"/>
+                                                <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{group.description}" rendered="#{!(spectralview:hasPermission('ccSecGroup:update'))}"/>
+
+                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                         rows="5" paginator="true" selection="#{groupsListController.removedRoles[group.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                    <h:outputText value="#{role.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                    <h:outputText value="#{role.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecGroup:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
+                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{groupsListController.syncAddedRole(group)}"
+                                                                    update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{groupsListController.syncRemovedRoles(group)}"
+                                                                         update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                        <h:outputText value="Users : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                                         rows="5" paginator="true" selection="#{groupsListController.removedUsers[group.id]}" selectionMode="multiple">
+                                                <p:column headerText="User name" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                                    <h:outputText value="#{user.userName}"/>
+                                                </p:column>
+                                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                                    <h:outputText value="#{user.email}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecGroup:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
+                                                                <f:selectItems value="#{usersListController.getAll()}" var="user_"
+                                                                               itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{groupsListController.syncAddedUser(group)}"
+                                                                    update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{groupsListController.syncRemovedUsers(group)}"
+                                                                         update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </h:panelGrid>
+
+                                </p:rowExpansion>
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"
+                                                     rendered="#{spectralview:hasPermission('ccSecGroup:create')}"/>
+                                    <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
+                                                     update=":removeGroupDialogForm:grpdisplay"
+                                                     rendered="#{spectralview:hasPermission('ccSecGroup:remove')}"/>
+                                    <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                     update=":securityTabView:roleTableForm:roleTable,
+                                                             :securityTabView:groupTableForm:groupTable,
+                                                             :securityTabView:userTableForm:userTable"/>
+                                </f:facet>
                             </p:dataTable>
-                        </h:panelGrid>
-                        <p:separator/>
-                    </p:dataList>
-                </h:form>
-            </p:dialog>
+                        </h:form>
+                    </p:tab>
 
-            <p:dialog header="Confirm your remove order !" widgetVar="groupRemoveDialog"
-                      width="500" showEffect="fade" hideEffect="explode">
-                <h:form id="removeGroupDialogForm">
-                    <h:outputText value="Are you sure you want delete following groups ?" styleClass="inputTitle"/><br/>
-                    <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{groupsListController.delete}" oncomplete="groupRemoveDialog.hide();"
-                                     update=":securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:userTableForm:userTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :createUserDialogForm:userNewGrid,
-                                             :securityTabView:groupTableForm:groupTableMessages"/>
-                    <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="groupRemoveDialog.hide();"/>
-                    <p:separator/>
-                    <p:dataList id="grpdisplay"
-                                value="#{groupsListController.selectedGroupList}"
-                                var="selectedGroup" type="definition">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Name : " styleClass="inputTitle"/>
-                            <h:outputText value="#{selectedGroup.name}"/>
 
-                            <h:outputText value="Roles : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedGroup, 'roles')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
+
+
+                    <p:tab rendered="#{spectralview:hasPermission('ccSecRole:display')}">
+                        <f:facet name="title">
+                            <i class="icon-star icon-large"/>&nbsp;&nbsp;
+                            <h:outputText value="Roles"/>
+                        </f:facet>
+
+                        <h:form id="roleTableForm">
+                            <p:growl id="roleTableMessages" showDetail="true" />
+                            <p:dataTable id="roleTable" var="role" value="#{rolesListController.lazyModel}"
+                                         selectionMode="multiple" selection="#{rolesListController.selectedRoleList}" rowKey="#{role.id}"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                <f:facet name="header">
+                                    Roles
+                                </f:facet>
+
+                                <p:ajax event="rowToggle" listener="#{rolesListController.onRowToggle}" />
+
+                                <p:column style="width:2%">
+                                    <p:rowToggler/>
                                 </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
+
+                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                    <h:outputText value="#{role.name}" />
                                 </p:column>
+
+                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                    <h:outputText value="#{role.description}" />
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:outputText value="Name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecRole:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{role.name}"/>
+                                                <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{role.name}" rendered="#{!(spectralview:hasPermission('ccSecRole:update'))}"/>
+
+                                        <h:outputText value="Description : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecRole:update')}">
+                                            <p:inplace editor="true">
+                                                <p:inputText required="true" label="text" value="#{role.description}"/>
+                                                <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{role.description}" rendered="#{!(spectralview:hasPermission('ccSecRole:update'))}"/>
+
+                                        <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                                         rows="5" paginator="true" selection="#{rolesListController.removedPermissions[role.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
+                                                    <h:outputText value="#{perm.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
+                                                    <h:outputText value="#{perm.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecRole:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
+                                                                <f:selectItems value="#{permissionsListController.getAll()}" var="res_"
+                                                                               itemLabel="#{res_.name}" itemValue="#{res_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedPermission(role)}"
+                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{rolesListController.syncRemovedPermissions(role)}"
+                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                        <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                                         rows="5" paginator="true" selection="#{rolesListController.removedGroups[role.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                                    <h:outputText value="#{group.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                                    <h:outputText value="#{group.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecRole:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
+                                                                <f:selectItems value="#{groupsListController.getAll()}" var="group_"
+                                                                               itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedGroup(role)}"
+                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{rolesListController.syncRemovedGroups(role)}"
+                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                        <h:outputText value="Users : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                                         rows="5" paginator="true" selection="#{rolesListController.removedUsers[role.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                                    <h:outputText value="#{user.userName}"/>
+                                                </p:column>
+                                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                                    <h:outputText value="#{user.email}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecRole:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
+                                                                <f:selectItems value="#{usersListController.getAll()}" var="user_"
+                                                                               itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedUser(role)}"
+                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{rolesListController.syncRemovedUsers(role)}"
+                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                    </h:panelGrid>
+                                </p:rowExpansion>
+
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"
+                                                     rendered="#{spectralview:hasPermission('ccSecRole:create')}"/>
+                                    <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
+                                                     update=":removeRoleDialogForm:roledisplay"
+                                                     rendered="#{spectralview:hasPermission('ccSecRole:remove')}"/>
+                                    <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                     update=":securityTabView:roleTableForm:roleTable,
+                                                             :securityTabView:permissionTableForm:permissionTable,
+                                                             :securityTabView:groupTableForm:groupTable,
+                                                             :securityTabView:userTableForm:userTable"/>
+                                </f:facet>
                             </p:dataTable>
+                        </h:form>
+                    </p:tab>
 
-                            <h:outputText value="Users : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedGroup, 'users')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Username">
-                                    <h:outputText value="#{_item.username}"/>
-                                </p:column>
-                                <p:column headerText="Email">
-                                    <h:outputText value="#{_item.email}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:panelGrid>
-                        <p:separator/>
-                    </p:dataList>
-                </h:form>
-            </p:dialog>
 
-            <p:dialog header="Confirm your remove order !" widgetVar="roleRemoveDialog"
-                      width="500" showEffect="fade" hideEffect="explode">
-                <h:form id="removeRoleDialogForm">
-                    <h:outputText value="Are you sure you want delete following roles ?" styleClass="inputTitle"/><br/>
-                    <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{rolesListController.delete}" oncomplete="roleRemoveDialog.hide();"
-                                     update=":securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:userTableForm:userTable,
-                                             :securityTabView:permissionTableForm:permissionTable,
-                                             :createUserDialogForm:userNewGrid,
-                                             :createGroupDialogForm:groupNewGrid,
-                                             :securityTabView:roleTableForm:roleTableMessages"/>
-                    <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="roleRemoveDialog.hide();"/>
-                    <p:separator/>
-                    <p:dataList id="roledisplay"
-                                value="#{rolesListController.selectedRoleList}"
-                                var="selectedRole" type="definition">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Name : " styleClass="inputTitle"/>
-                            <h:outputText value="#{selectedRole.name}"/>
 
-                            <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedRole,'permissions')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
+
+                    <p:tab rendered="#{spectralview:hasPermission('ccSecPermission:display')}">
+                        <f:facet name="title">
+                            <i class="icon-legal icon-large"/>&nbsp;&nbsp;
+                            <h:outputText value="Permissions"/>
+                        </f:facet>
+
+                        <h:form id="permissionTableForm">
+                            <p:growl id="permissionTableMessages" showDetail="true" />
+                            <p:dataTable id="permissionTable" var="permission" value="#{permissionsListController.lazyModel}"
+                                         selectionMode="multiple" selection="#{permissionsListController.selectedPermissionList}" rowKey="#{permission.id}"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                <f:facet name="header">
+                                    Permissions
+                                </f:facet>
+
+                                <p:ajax event="rowToggle" listener="#{permissionsListController.onRowToggle}" />
+
+                                <p:column style="width:2%">
+                                    <p:rowToggler/>
                                 </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
+
+                                <p:column headerText="Name" sortBy="#{permission.name}" filterBy="#{permission.name}">
+                                    <h:outputText value="#{permission.name}" />
                                 </p:column>
+
+                                <p:column headerText="Description" sortBy="#{permission.description}" filterBy="#{permission.description}">
+                                    <h:outputText value="#{permission.description}" />
+                                </p:column>
+
                                 <p:column headerText="Resource">
-                                    <h:outputText value="#{_item.resource.name}"/>
+                                    <h:outputText value="#{permission.resource.name}" />
                                 </p:column>
-                            </p:dataTable>
 
-                            <h:outputText value="Groups : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedRole,'groups')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
-                                </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
-                                </p:column>
-                            </p:dataTable>
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:outputText value="Name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecPermission:update')}">
+                                            <p:inplace editor="true">
+                                                <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
+                                                <p:inputText required="true" label="text" value="#{permission.name}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{permission.name}" rendered="#{!(spectralview:hasPermission('ccSecPermission:update'))}"/>
 
-                            <h:outputText value="Users : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedRole,'users')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.userName}"/>
-                                </p:column>
-                                <p:column headerText="Email">
-                                    <h:outputText value="#{_item.email}"/>
-                                </p:column>
+                                        <h:outputText value="Description : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecPermission:update')}">
+                                            <p:inplace editor="true">
+                                                <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
+                                                <p:inputText required="true" label="text" value="#{permission.description}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{permission.description}" rendered="#{!(spectralview:hasPermission('ccSecPermission:update'))}"/>
+
+                                        <h:outputText value="Resource : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecPermission:update')}">
+                                            <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
+                                                <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
+                                                    <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
+                                                                   itemLabel="#{res.name}" itemValue="#{res.name}"/>
+                                                </h:selectOneMenu>
+                                                <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(spectralview:hasPermission('ccSecPermission:update'))}"/>
+
+                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                         rows="5" paginator="true" selection="#{permissionsListController.removedRoles[permission.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                    <h:outputText value="#{role.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                    <h:outputText value="#{role.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecPermission:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
+                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{permissionsListController.syncAddedRole(permission)}"
+                                                                    update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{permissionsListController.syncRemovedRoles(permission)}"
+                                                                         update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+
+                                    </h:panelGrid>
+                                </p:rowExpansion>
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"
+                                                     rendered="#{spectralview:hasPermission('ccSecPermission:create')}"/>
+                                    <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
+                                                     update=":removePermissionDialogForm:permdisplay"
+                                                     rendered="#{spectralview:hasPermission('ccSecPermission:remove')}"/>
+                                    <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                     update=":securityTabView:resourceTableForm:resourceTable,
+                                                             :securityTabView:permissionTableForm:permissionTable,
+                                                             :securityTabView:roleTableForm:roleTable"/>
+                                </f:facet>
                             </p:dataTable>
-                        </h:panelGrid>
+                        </h:form>
+
+                    </p:tab>
+
+
+
+
+                    <p:tab rendered="#{spectralview:hasPermission('ccSecResource:display')}">
+                        <f:facet name="title">
+                            <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
+                            <h:outputText value="Resources"/>
+                        </f:facet>
+
+                        <h:form id="resourceTableForm">
+                            <p:growl id="resourceTableMessages" showDetail="true" />
+                            <p:dataTable id="resourceTable" var="res" value="#{resourcesListController.lazyModel}"
+                                         selectionMode="multiple" selection="#{resourcesListController.selectedResourceList}" rowKey="#{res.id}"
+                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                <f:facet name="header">
+                                    Resources
+                                </f:facet>
+
+                                <p:ajax event="rowToggle" listener="#{resourcesListController.onRowToggle}" />
+
+                                <p:column style="width:2%">
+                                    <p:rowToggler/>
+                                </p:column>
+
+                                <p:column headerText="Name" sortBy="#{res.name}" filterBy="#{res.name}">
+                                    <h:outputText value="#{res.name}" />
+                                </p:column>
+
+                                <p:column headerText="Description" sortBy="#{res.description}" filterBy="#{res.description}">
+                                    <h:outputText value="#{res.description}" />
+                                </p:column>
+
+                                <p:rowExpansion>
+                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:outputText value="Name : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecResource:update')}">
+                                            <p:inplace editor="true">
+                                                <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                                <p:inputText required="true" label="text" value="#{res.name}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{res.name}" rendered="#{!(spectralview:hasPermission('ccSecResource:update'))}"/>
+
+                                        <h:outputText value="Description : " styleClass="inputTitle"/>
+                                        <h:form rendered="#{spectralview:hasPermission('ccSecResource:update')}">
+                                            <p:inplace editor="true">
+                                                <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                                <p:inputText required="true" label="text" value="#{res.description}"/>
+                                            </p:inplace>
+                                        </h:form>
+                                        <h:outputText value="#{res.name}" rendered="#{!(spectralview:hasPermission('ccSecResource:update'))}"/>
+
+                                        <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                        <h:form>
+                                            <p:dataTable value="#{spectralview:asList(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                                         rows="5" paginator="true" selection="#{resourcesListController.removedPermissions[res.id]}" selectionMode="multiple">
+                                                <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
+                                                    <h:outputText value="#{perm.name}"/>
+                                                </p:column>
+                                                <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
+                                                    <h:outputText value="#{perm.description}"/>
+                                                </p:column>
+                                                <c:if test="#{spectralview:hasPermission('ccSecPermission:update')}">
+                                                    <f:facet name="footer">
+                                                        <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
+                                                            <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
+                                                                <f:selectItems value="#{permissionsListController.getAll()}" var="perm_"
+                                                                               itemLabel="#{perm_.name}" itemValue="#{perm_.name}"/>
+                                                            </h:selectOneMenu>
+                                                            <p:ajax event="save" listener="#{resourcesListController.syncAddedPermission(res)}"
+                                                                    update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
+                                                        </p:inplace>
+                                                        <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
+                                                                         process="@form" actionListener="#{resourcesListController.syncRemovedPermissions(res)}"
+                                                                         update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
+                                                    </f:facet>
+                                                </c:if>
+                                            </p:dataTable>
+                                        </h:form>
+                                    </h:panelGrid>
+                                </p:rowExpansion>
+                                <f:facet name="footer">
+                                    <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"
+                                                     rendered="#{spectralview:hasPermission('ccSecResource:create')}"/>
+                                    <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
+                                                     update=":removeResourceDialogForm:resdisplay"
+                                                     rendered="#{spectralview:hasPermission('ccSecResource:remove')}"/>
+                                    <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
+                                                     update=":securityTabView:resourceTableForm:resourceTable,
+                                                             :securityTabView:permissionTableForm:permissionTable" />
+                                </f:facet>
+                            </p:dataTable>
+                        </h:form>
+                    </p:tab>
+                </p:tabView>
+
+
+
+
+                <p:dialog header="Confirm your remove order !" widgetVar="userRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode">
+                    <h:form id="removeUserDialogForm">
+                        <h:outputText value="Are you sure you want delete following users ?" styleClass="inputTitle"/><br/>
+                        <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{usersListController.delete}" oncomplete="userRemoveDialog.hide();"
+                                         update=":securityTabView:userTableForm:userTable,
+                                                 :securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:userTableForm:userTableMessages"/>
+                        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="userRemoveDialog.hide();"/>
                         <p:separator/>
-                    </p:dataList>
-                </h:form>
-            </p:dialog>
+                        <p:dataList id="usrdisplay"
+                                    value="#{usersListController.selectedUserList}"
+                                    var="selectedUser" type="definition">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Username : " styleClass="inputTitle"/>
+                                <h:outputText value="#{selectedUser.userName}"/>
 
-            <p:dialog header="Confirm your remove order !" widgetVar="permissionRemoveDialog"
-                      width="500" showEffect="fade" hideEffect="explode">
-                <h:form id="removePermissionDialogForm">
-                    <h:outputText value="Are you sure you want delete following permissions ?" styleClass="inputTitle"/><br/>
-                    <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{permissionsListController.delete}" oncomplete="permissionRemoveDialog.hide();"
-                                     update=":securityTabView:permissionTableForm:permissionTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:resourceTableForm:resourceTable,
-                                             :createRoleDialogForm:roleNewGrid,
-                                             :securityTabView:permissionTableForm:permissionTableMessages"/>
-                    <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="permissionRemoveDialog.hide();"/>
-                    <p:separator/>
-                    <p:dataList id="permdisplay"
-                                value="#{permissionsListController.selectedPermissionList}"
-                                var="selectedPermission" type="definition">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Name : " styleClass="inputTitle"/>
-                            <h:outputText value="#{selectedPermission.name}"/>
+                                <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedUser,'roles')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
 
-                            <h:outputText value="Roles : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedPermission,'roles')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
-                                </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:panelGrid>
+                                <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedUser,'groups')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:dataList>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog header="Confirm your remove order !" widgetVar="groupRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode">
+                    <h:form id="removeGroupDialogForm">
+                        <h:outputText value="Are you sure you want delete following groups ?" styleClass="inputTitle"/><br/>
+                        <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{groupsListController.delete}" oncomplete="groupRemoveDialog.hide();"
+                                         update=":securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:userTableForm:userTable,
+                                                 :securityTabView:roleTableForm:roleTable,
+                                                 :createUserDialogForm:userNewGrid,
+                                                 :securityTabView:groupTableForm:groupTableMessages"/>
+                        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="groupRemoveDialog.hide();"/>
                         <p:separator/>
-                    </p:dataList>
-                </h:form>
-            </p:dialog>
+                        <p:dataList id="grpdisplay"
+                                    value="#{groupsListController.selectedGroupList}"
+                                    var="selectedGroup" type="definition">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Name : " styleClass="inputTitle"/>
+                                <h:outputText value="#{selectedGroup.name}"/>
 
-            <p:dialog header="Confirm your remove order !" widgetVar="resourceRemoveDialog"
-                      width="500" showEffect="fade" hideEffect="explode">
-                <h:form id="removeResourceDialogForm">
-                    <h:outputText value="Are you sure you want delete following resources ?" styleClass="inputTitle"/><br/>
-                    <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{resourcesListController.delete}" oncomplete="resourceRemoveDialog.hide();"
-                                     update=":securityTabView:resourceTableForm:resourceTable,
-                                             :securityTabView:permissionTableForm:permissionTable,
-                                             :createPermissionDialogForm:permissionNewGrid,
-                                             :securityTabView:resourceTableForm:resourceTableMessages"/>
-                    <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="resourceRemoveDialog.hide();"/>
-                    <p:separator/>
-                    <p:dataList id="resdisplay"
-                                value="#{resourcesListController.selectedResourceList}"
-                                var="selectedResource" type="definition">
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="Name : " styleClass="inputTitle"/>
-                            <h:outputText value="#{selectedResource.name}"/>
+                                <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedGroup, 'roles')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
 
-                            <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                            <p:dataTable  value="#{forgeview:asList2(selectedResource, 'permissions')}" var="_item"
-                                          rows="5" paginator="true">
-                                <p:column headerText="Name">
-                                    <h:outputText value="#{_item.name}"/>
-                                </p:column>
-                                <p:column headerText="Description">
-                                    <h:outputText value="#{_item.description}"/>
-                                </p:column>
-                            </p:dataTable>
-                        </h:panelGrid>
+                                <h:outputText value="Users : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedGroup, 'users')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Username">
+                                        <h:outputText value="#{_item.userName}"/>
+                                    </p:column>
+                                    <p:column headerText="Email">
+                                        <h:outputText value="#{_item.email}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:dataList>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog header="Confirm your remove order !" widgetVar="roleRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode">
+                    <h:form id="removeRoleDialogForm">
+                        <h:outputText value="Are you sure you want delete following roles ?" styleClass="inputTitle"/><br/>
+                        <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{rolesListController.delete}" oncomplete="roleRemoveDialog.hide();"
+                                         update=":securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:userTableForm:userTable,
+                                                 :securityTabView:permissionTableForm:permissionTable,
+                                                 :createUserDialogForm:userNewGrid,
+                                                 :createGroupDialogForm:groupNewGrid,
+                                                 :securityTabView:roleTableForm:roleTableMessages"/>
+                        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="roleRemoveDialog.hide();"/>
                         <p:separator/>
-                    </p:dataList>
-                </h:form>
-            </p:dialog>
+                        <p:dataList id="roledisplay"
+                                    value="#{rolesListController.selectedRoleList}"
+                                    var="selectedRole" type="definition">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Name : " styleClass="inputTitle"/>
+                                <h:outputText value="#{selectedRole.name}"/>
+
+                                <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedRole,'permissions')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                    <p:column headerText="Resource">
+                                        <h:outputText value="#{_item.resource.name}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedRole,'groups')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
+
+                                <h:outputText value="Users : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedRole,'users')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.userName}"/>
+                                    </p:column>
+                                    <p:column headerText="Email">
+                                        <h:outputText value="#{_item.email}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:dataList>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog header="Confirm your remove order !" widgetVar="permissionRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode">
+                    <h:form id="removePermissionDialogForm">
+                        <h:outputText value="Are you sure you want delete following permissions ?" styleClass="inputTitle"/><br/>
+                        <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{permissionsListController.delete}" oncomplete="permissionRemoveDialog.hide();"
+                                         update=":securityTabView:permissionTableForm:permissionTable,
+                                                 :securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:resourceTableForm:resourceTable,
+                                                 :createRoleDialogForm:roleNewGrid,
+                                                 :securityTabView:permissionTableForm:permissionTableMessages"/>
+                        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="permissionRemoveDialog.hide();"/>
+                        <p:separator/>
+                        <p:dataList id="permdisplay"
+                                    value="#{permissionsListController.selectedPermissionList}"
+                                    var="selectedPermission" type="definition">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Name : " styleClass="inputTitle"/>
+                                <h:outputText value="#{selectedPermission.name}"/>
+
+                                <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedPermission,'roles')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:dataList>
+                    </h:form>
+                </p:dialog>
+
+                <p:dialog header="Confirm your remove order !" widgetVar="resourceRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode">
+                    <h:form id="removeResourceDialogForm">
+                        <h:outputText value="Are you sure you want delete following resources ?" styleClass="inputTitle"/><br/>
+                        <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{resourcesListController.delete}" oncomplete="resourceRemoveDialog.hide();"
+                                         update=":securityTabView:resourceTableForm:resourceTable,
+                                                 :securityTabView:permissionTableForm:permissionTable,
+                                                 :createPermissionDialogForm:permissionNewGrid,
+                                                 :securityTabView:resourceTableForm:resourceTableMessages"/>
+                        <p:commandButton value="No" styleClass="ui-confirmdialog-no" icon="ui-icon-close" onclick="resourceRemoveDialog.hide();"/>
+                        <p:separator/>
+                        <p:dataList id="resdisplay"
+                                    value="#{resourcesListController.selectedResourceList}"
+                                    var="selectedResource" type="definition">
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="Name : " styleClass="inputTitle"/>
+                                <h:outputText value="#{selectedResource.name}"/>
+
+                                <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                <p:dataTable  value="#{spectralview:asList(selectedResource, 'permissions')}" var="_item"
+                                              rows="5" paginator="true">
+                                    <p:column headerText="Name">
+                                        <h:outputText value="#{_item.name}"/>
+                                    </p:column>
+                                    <p:column headerText="Description">
+                                        <h:outputText value="#{_item.description}"/>
+                                    </p:column>
+                                </p:dataTable>
+                            </h:panelGrid>
+                            <p:separator/>
+                        </p:dataList>
+                    </h:form>
+                </p:dialog>
 
 
 
 
 
-            <p:dialog header="Create a new user" widgetVar="userCreateDialog"
-                      width="450" showEffect="fade" hideEffect="explode">
-                <h:form id="createUserDialogForm">
-                    <ui:insert name="createUser" >
-                        <ui:include src="/templates/userNewForm.xhtml" />
-                    </ui:insert>
-                    <p:commandButton value="Save this user" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{userNewController.save}" oncomplete="userCreateDialog.hide();"
-                                     update=":securityTabView:userTableForm:userTable,
-                                             :securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:userTableForm:userTableMessages"/>
-                </h:form>
-            </p:dialog>
+                <p:dialog header="Create a new user" widgetVar="userCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode">
+                    <h:form id="createUserDialogForm">
+                        <ui:insert name="createUser" >
+                            <ui:include src="/templates/userNewForm.xhtml" />
+                        </ui:insert>
+                        <p:commandButton value="Save this user" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{userNewController.save}" oncomplete="userCreateDialog.hide();"
+                                         update=":securityTabView:userTableForm:userTable,
+                                                 :securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:userTableForm:userTableMessages"/>
+                    </h:form>
+                </p:dialog>
 
-            <p:dialog header="Create a new group" widgetVar="groupCreateDialog"
-                      width="450" showEffect="fade" hideEffect="explode">
-                <h:form id="createGroupDialogForm">
-                    <ui:insert name="createGroup" >
-                        <ui:include src="/templates/groupNewForm.xhtml" />
-                    </ui:insert>
-                    <p:commandButton value="Save this group" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{groupNewController.save}" oncomplete="groupCreateDialog.hide();"
-                                     update=":securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:userTableForm:userTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :createUserDialogForm:userNewGrid,
-                                             :securityTabView:groupTableForm:groupTableMessages"/>
-                </h:form>
-            </p:dialog>
+                <p:dialog header="Create a new group" widgetVar="groupCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode">
+                    <h:form id="createGroupDialogForm">
+                        <ui:insert name="createGroup" >
+                            <ui:include src="/templates/groupNewForm.xhtml" />
+                        </ui:insert>
+                        <p:commandButton value="Save this group" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{groupNewController.save}" oncomplete="groupCreateDialog.hide();"
+                                         update=":securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:userTableForm:userTable,
+                                                 :securityTabView:roleTableForm:roleTable,
+                                                 :createUserDialogForm:userNewGrid,
+                                                 :securityTabView:groupTableForm:groupTableMessages"/>
+                    </h:form>
+                </p:dialog>
 
-            <p:dialog header="Create a new role" widgetVar="roleCreateDialog"
-                      width="450" showEffect="fade" hideEffect="explode">
-                <h:form id="createRoleDialogForm">
-                    <ui:insert name="createRole" >
-                        <ui:include src="/templates/roleNewForm.xhtml" />
-                    </ui:insert>
-                    <p:commandButton value="Save this role" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{roleNewController.save}" oncomplete="roleCreateDialog.hide();"
-                                     update=":securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:groupTableForm:groupTable,
-                                             :securityTabView:userTableForm:userTable,
-                                             :securityTabView:permissionTableForm:permissionTable,
-                                             :createUserDialogForm:userNewGrid,
-                                             :createGroupDialogForm:groupNewGrid,
-                                             :securityTabView:roleTableForm:roleTableMessages"/>
-                </h:form>
-            </p:dialog>
+                <p:dialog header="Create a new role" widgetVar="roleCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode">
+                    <h:form id="createRoleDialogForm">
+                        <ui:insert name="createRole" >
+                            <ui:include src="/templates/roleNewForm.xhtml" />
+                        </ui:insert>
+                        <p:commandButton value="Save this role" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{roleNewController.save}" oncomplete="roleCreateDialog.hide();"
+                                         update=":securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:groupTableForm:groupTable,
+                                                 :securityTabView:userTableForm:userTable,
+                                                 :securityTabView:permissionTableForm:permissionTable,
+                                                 :createUserDialogForm:userNewGrid,
+                                                 :createGroupDialogForm:groupNewGrid,
+                                                 :securityTabView:roleTableForm:roleTableMessages"/>
+                    </h:form>
+                </p:dialog>
 
-            <p:dialog header="Create a new permission" widgetVar="permissionCreateDialog"
-                      width="450" showEffect="fade" hideEffect="explode">
-                <h:form id="createPermissionDialogForm">
-                    <ui:insert name="createPermission" >
-                        <ui:include src="/templates/permissionNewForm.xhtml" />
-                    </ui:insert>
-                    <p:commandButton value="Save this permission" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{permissionNewController.save}" oncomplete="permissionCreateDialog.hide();"
-                                     update=":securityTabView:permissionTableForm:permissionTable,
-                                             :securityTabView:roleTableForm:roleTable,
-                                             :securityTabView:resourceTableForm:resourceTable,
-                                             :createRoleDialogForm:roleNewGrid,
-                                             :securityTabView:permissionTableForm:permissionTableMessages"/>
-                </h:form>
-            </p:dialog>
+                <p:dialog header="Create a new permission" widgetVar="permissionCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode">
+                    <h:form id="createPermissionDialogForm">
+                        <ui:insert name="createPermission" >
+                            <ui:include src="/templates/permissionNewForm.xhtml" />
+                        </ui:insert>
+                        <p:commandButton value="Save this permission" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{permissionNewController.save}" oncomplete="permissionCreateDialog.hide();"
+                                         update=":securityTabView:roleTableForm:roleTable,
+                                                 :securityTabView:resourceTableForm:resourceTable,
+                                                 :createRoleDialogForm:roleNewGrid,
+                                                 :securityTabView:permissionTableForm:permissionTable,
+                                                 :securityTabView:permissionTableForm:permissionTableMessages"/>
+                    </h:form>
+                </p:dialog>
 
-            <p:dialog header="Create a new resource" widgetVar="resourceCreateDialog"
-                      width="450" showEffect="fade" hideEffect="explode">
-                <h:form id="createResourceDialogForm">
-                    <ui:insert name="createResource" >
-                        <ui:include src="/templates/resourceNewForm.xhtml" />
-                    </ui:insert>
-                    <p:commandButton value="Save this resource" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-                                     actionListener="#{resourceNewController.save}" oncomplete="resourceCreateDialog.hide();"
-                                     update=":securityTabView:resourceTableForm:resourceTable,
-                                             :securityTabView:permissionTableForm:permissionTable,
-                                             :createPermissionDialogForm:permissionNewGrid,
-                                             :securityTabView:resourceTableForm:resourceTableMessages"/>
-                </h:form>
-            </p:dialog>
+                <p:dialog header="Create a new resource" widgetVar="resourceCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode">
+                    <h:form id="createResourceDialogForm">
+                        <ui:insert name="createResource" >
+                            <ui:include src="/templates/resourceNewForm.xhtml" />
+                        </ui:insert>
+                        <p:commandButton value="Save this resource" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                                         actionListener="#{resourceNewController.save}" oncomplete="resourceCreateDialog.hide();"
+                                         update=":securityTabView:resourceTableForm:resourceTable,
+                                                 :securityTabView:permissionTableForm:permissionTable,
+                                                 :createPermissionDialogForm:permissionNewGrid,
+                                                 :securityTabView:resourceTableForm:resourceTableMessages"/>
+                    </h:form>
+                </p:dialog>
+            </ui:fragment>
         </ui:define>
     </ui:composition>
 </h:body>

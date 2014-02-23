@@ -54,9 +54,7 @@ public class PortalPluginFacesMBeanRegistryImpl implements PluginFacesMBeanRegis
 
     @Invalidate
     public void invalidate(){
-        log.info("Stopping {}...", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
         pluginFacesConfigToAdd.clear();
-        //TODO remove correctly faces config
         pluginFacesConfigToDel.clear();
         log.info("{} is stopped.", new Object[]{PLUGINS_FACES_MBEAN_DIRECTORY_REGISTRY_SERVICE_NAME});
     }

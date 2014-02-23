@@ -2,7 +2,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
@@ -36,8 +35,8 @@
                              id="username" required="true" label="username" />
 
                 <h:outputLabel for="password" value="Password:" />
-                <h:inputSecret value="#{loginController.password}"
-                               id="password" required="true" label="password" />
+                <p:password value="#{loginController.password}"
+                            id="password" required="true" label="password" />
 
                 <f:facet name="footer">
                     <p:commandButton id="loginButton" value="Login" update="growl"

@@ -88,7 +88,7 @@ public class RolesListController implements Serializable {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Permission permission : PermissionsListController.getAll()) {
-                if (permission.getName().equals(this.addedGroup.get(role.getId()))) {
+                if (permission.getName().equals(this.addedPermission.get(role.getId()))) {
                     em.getTransaction().begin();
                     role = em.find(role.getClass(), role.getId());
                     permission = em.find(permission.getClass(),permission.getId());

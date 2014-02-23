@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal IDM JSF bundle
  * Login controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -16,13 +16,8 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.spectral.cc.core.portal.commons.controller;
+package com.spectral.cc.core.portal.idm.controller;
 
-import com.spectral.cc.core.portal.commons.consumer.UserPreferencesRegistryConsumer;
-import com.spectral.cc.core.portal.commons.consumer.UserProfileRegistryConsumer;
-import com.spectral.cc.core.portal.commons.model.UserProfile;
-import com.spectral.cc.core.portal.commons.model.UserPreferenceEntity;
-import com.spectral.cc.core.portal.commons.model.UserPreferenceSection;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -34,6 +29,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * Provide Shiro login to CC web applications. Called by login view.<br/>
@@ -98,10 +94,8 @@ public class LoginController implements Serializable{
 
         subject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(username, password);
-        //token.setRememberMe(true);
 
         try {
-            //subject.login(new UsernamePasswordToken(username, password));
             subject.login(token);
             loggedIn = true;
             msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
@@ -110,24 +104,8 @@ public class LoginController implements Serializable{
             msg = new FacesMessage(FacesMessage.SEVERITY_WARN, "Login Error", "Invalid credentials");
         }
 
-        log.debug("Is authenticated:{} ; Is remembered:{}", new Object[]{subject.isAuthenticated(),subject.isRemembered()});
-        log.debug("Principal:{}", new Object[]{(subject.getPrincipal()!=null)?subject.getPrincipal().toString():"guest"});
-
-        if(loggedIn) {
-            if (subject.getPrincipal()!=null && UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().getUserFromPrincipal(subject.getPrincipal().toString())==null) {
-                UserProfile userProfile = new UserProfile(subject.getPrincipal().toString());
-                userProfile.setFirstname("Define your first name...");
-                userProfile.setLastname("Define your last name...");
-                userProfile.setEmail("Define your mail...");
-                userProfile.setPhone("Define your phone number...");
-                for (UserPreferenceSection section : UserPreferencesRegistryConsumer.getInstance().getUserPreferencesRegistry().getUserPreferenceSections()) {
-                    for (UserPreferenceEntity entity : section.getEntityRegistry()) {
-                        userProfile.getPreferences().put(entity.getFieldName(),entity.getFieldDefault());
-                    }
-                }
-                UserProfileRegistryConsumer.getInstance().getUserProfileRegistry().registerUser(userProfile);
-            }
-        }
+        log.debug("Is authenticated:{} ; Is remembered:{}", new Object[]{subject.isAuthenticated(), subject.isRemembered()});
+        log.debug("Principal:{}", new Object[]{(subject.getPrincipal() != null) ? subject.getPrincipal().toString() : "guest"});
 
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);

@@ -95,7 +95,6 @@ public class RoleNewController implements Serializable {
                     permission = em.find(permission.getClass(), permission.getId());
                     this.permissions.add(permission);
                     log.debug("Synced permission : {} {}", new Object[]{permission.getId(), permission.getName()});
-                    break;
                 }
         }
     }
@@ -122,7 +121,7 @@ public class RoleNewController implements Serializable {
             em.persist(role);
             for (Permission permission : role.getPermissions()) {
                 permission.getRoles().add(role);
-                em.merge(role);
+                em.merge(permission);
             }
             em.flush();
             em.getTransaction().commit();

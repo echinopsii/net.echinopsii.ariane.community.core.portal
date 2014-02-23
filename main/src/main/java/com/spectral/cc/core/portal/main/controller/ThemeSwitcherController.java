@@ -18,7 +18,7 @@
  */
 package com.spectral.cc.core.portal.main.controller;
 
-import com.spectral.cc.core.portal.commons.controller.UserProfileController;
+import com.spectral.cc.core.portal.idm.controller.UserProfileController;
 import com.spectral.cc.core.portal.commons.model.Theme;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
