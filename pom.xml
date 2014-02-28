@@ -10,11 +10,12 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>commons-resources</module>
-        <module>commons-services</module>
-	    <module>idm-jsf</module>
-        <module>commons-jsf</module>
-        <module>main</module>
+        <module>taitale</module>
+        <module>wresources</module>
+        <module>base</module>
+	    <module>idmwat</module>
+        <module>wat</module>
+        <module>wab</module>
     </modules>
 
     <properties>
@@ -45,7 +46,7 @@
         <version.build.helper.plugin>1.8</version.build.helper.plugin>
         <version.license.plugin>1.5</version.license.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
-        <version.ipojo.plugin>1.10.0</version.ipojo.plugin>
+        <version.ipojo.plugin>1.11.0</version.ipojo.plugin>
 
         <!-- Dependencies versions-->
         <version.com.fasterxml.jackson>2.1.2</version.com.fasterxml.jackson>
@@ -64,6 +65,7 @@
         <version.org.apache.shiro>1.2.2</version.org.apache.shiro>
         <version.org.atmosphere>2.0.0</version.org.atmosphere>
         <version.org.glassfish.web.el-impl>2.2.1-b05</version.org.glassfish.web.el-impl>
+        <version.org.jboss.resteasy>2.3.6.Final</version.org.jboss.resteasy>
         <version.org.primefaces.primefaces>3.5</version.org.primefaces.primefaces>
         <version.org.primefaces.extensions.primefaces-extension>0.7.1</version.org.primefaces.extensions.primefaces-extension>
         <version.org.primefaces.extensions.resources-codemirror>0.7.1</version.org.primefaces.extensions.resources-codemirror>
@@ -75,7 +77,7 @@
 
         <!-- Technical stuff -->
         <version.commons.beanutils>1.8.3</version.commons.beanutils>
-        <version.org.apache.ipojo>1.10.1</version.org.apache.ipojo>
+        <version.org.apache.ipojo>1.11.0</version.org.apache.ipojo>
         <version.org.slf4j>1.6.4</version.org.slf4j>
 
         <!-- JPA / JTA / Hibernate-->
@@ -100,6 +102,9 @@
 
         <version.osgimin.hibernate>4.2.8</version.osgimin.hibernate>
         <version.osgimax.hibernate>5.0.0</version.osgimax.hibernate>
+
+        <version.osgimin.org.jboss.resteasy>2.3.6</version.osgimin.org.jboss.resteasy>
+        <version.osgimax.org.jboss.resteasy>2.4</version.osgimax.org.jboss.resteasy>
 
         <!-- jUnit test version -->
         <version.junit.junit>4.11</version.junit.junit>
@@ -246,12 +251,6 @@
             <version>${version.com.lowagie.itext}</version>
         </dependency>
         <dependency>
-            <groupId>com.spectral.cc.core.idm</groupId>
-            <artifactId>com.spectral.cc.core.idm.commons-services</artifactId>
-            <scope>provided</scope>
-            <version>${version.com.spectral.cc.core.idm}</version>
-        </dependency>
-        <dependency>
             <groupId>com.sun.faces</groupId>
             <artifactId>jsf-api</artifactId>
             <exclusions>
@@ -382,6 +381,24 @@
             <artifactId>el-impl</artifactId>
             <scope>provided</scope>
             <version>${version.org.glassfish.web.el-impl}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxrs</artifactId>
+            <scope>provided</scope>
+            <version>${version.org.jboss.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jaxb-provider</artifactId>
+            <scope>provided</scope>
+            <version>${version.org.jboss.resteasy}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.resteasy</groupId>
+            <artifactId>resteasy-jettison-provider</artifactId>
+            <scope>provided</scope>
+            <version>${version.org.jboss.resteasy}</version>
         </dependency>
         <dependency>
             <groupId>org.primefaces</groupId>
