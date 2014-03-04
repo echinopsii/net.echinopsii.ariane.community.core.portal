@@ -139,25 +139,23 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         return this;
     }
 
+    /**
+     * Get the display permissions of this main menu entity
+     *
+     * @return the display permissions list
+     */
     public List<String> getDisplayPermissions() {
         return displayPermissions;
     }
 
-    public void setDisplayPermissions(List<String> displayPermissions) {
-        this.displayPermissions = displayPermissions;
-    }
-
+    /**
+     * Get the display roles of this main menu entity
+     *
+     * @return the display roles list
+     */
     public List<String> getDisplayRoles() {
         return displayRoles;
     }
-
-    public void setDisplayRoles(List<String> displayRoles) {
-        this.displayRoles = displayRoles;
-    }
-
-    //private boolean isOnRight() {
-    //    return onRight;
-    //}
 
     public boolean isValid() {
         switch(this.type) {

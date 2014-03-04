@@ -37,13 +37,6 @@ import java.util.List;
 public final class IDMViewUtils {
     private static final Logger log = LoggerFactory.getLogger(IDMViewUtils.class);
 
-    public static <T> List<T> asList(Collection<T> collection) {
-        if (collection == null) {
-            return null;
-        }
-        return new ArrayList<T>(collection);
-    }
-
     public static <T> List<T> asList(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
         if (collectionName == null && collectionName.equals(""))
             return null;
@@ -67,6 +60,7 @@ public final class IDMViewUtils {
     }
 
     public static boolean isAuthenticated() {
+        log.debug("principal : {} ; authenticated : {} ", new Object[]{SecurityUtils.getSubject().getPrincipal(),SecurityUtils.getSubject().isAuthenticated()});
         return SecurityUtils.getSubject().isAuthenticated();
     }
 

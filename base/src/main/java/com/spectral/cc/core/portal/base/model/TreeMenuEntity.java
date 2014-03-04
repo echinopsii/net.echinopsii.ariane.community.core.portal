@@ -19,6 +19,8 @@
 
 package com.spectral.cc.core.portal.base.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.TreeSet;
 
 /**
@@ -26,12 +28,14 @@ import java.util.TreeSet;
  */
 public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
 
-    private String id             = null;
-    private String value          = null;
-    private int    type           = 0;
-    private String contextAddress = "";
-    private String description    = "";
-    private String icon           = "";
+    private String id                       = null;
+    private String value                    = null;
+    private int    type                     = 0;
+    private String contextAddress           = "";
+    private String description              = "";
+    private String icon                     = "";
+    private List<String> displayRoles       = new ArrayList<String>();
+    private List<String> displayPermissions = new ArrayList<String>();
 
     private TreeMenuEntity parent = null;
     private TreeSet<TreeMenuEntity> childs = new TreeSet<TreeMenuEntity>();
@@ -164,6 +168,34 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
      */
     public TreeMenuEntity setIcon(String icon) {
         this.icon = icon;
+        return this;
+    }
+
+    /**
+     * Get the display roles for this tree entity
+     *
+     * @return the display roles list
+     */
+    public List<String> getDisplayRoles() {
+        return displayRoles;
+    }
+
+    /**
+     * Get the display permissions for this tree entity
+     *
+     * @return the display permissions list
+     */
+    public List<String> getDisplayPermissions() {
+        return displayPermissions;
+    }
+
+    public TreeMenuEntity addDisplayRole(String role) {
+        displayRoles.add(role);
+        return this;
+    }
+
+    public TreeMenuEntity addDisplayPermission(String permission) {
+        displayRoles.add(permission);
         return this;
     }
 

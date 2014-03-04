@@ -5,11 +5,11 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:spectralview="http://spectral.com/spectral/view">
+      xmlns:ccidm="http://spectral.com/cc/idm">
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <ui:fragment rendered="#{spectralview:isAuthenticated()}">
+            <ui:fragment rendered="#{ccidm:isAuthenticated()}">
                 <p:growl id="userProfileGrowl" showDetail="true"/>
                 <div>
                     <div style="width:49%; float:left;">
@@ -17,62 +17,62 @@
                             <p:tab title="Your profile">
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:outputText value="Username : " styleClass="inputTitle"/>
-                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{ccidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{userProfileController.username}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{!ccidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.username}"/>
                                     </ui:fragment>
 
                                     <h:outputText value="First name : " styleClass="inputTitle"/>
-                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{ccidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{userProfileController.firstname}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{!ccidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.firstname}"/>
                                     </ui:fragment>
 
                                     <h:outputText value="Last name : " styleClass="inputTitle"/>
-                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{ccidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{userProfileController.lastname}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{!ccidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.lastname}"/>
                                     </ui:fragment>
 
                                     <h:outputText value="E-Mail : " styleClass="inputTitle"/>
-                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{ccidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{userProfileController.email}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{!ccidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.email}"/>
                                     </ui:fragment>
 
                                     <h:outputText value="Phone number : " styleClass="inputTitle"/>
-                                    <ui:fragment rendered="#{spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{ccidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{userProfileController.phone}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
-                                    <ui:fragment rendered="#{!spectralview:hasRole('Jedi')}">
+                                    <ui:fragment rendered="#{!ccidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.phone}"/>
                                     </ui:fragment>
                                 </h:panelGrid>
