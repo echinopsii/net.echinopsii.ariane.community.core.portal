@@ -273,9 +273,9 @@ public class UsersListController implements Serializable {
      * User delete tool
      */
     public void delete() {
-        EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Remove selected User !");
         for (User user2BeRemoved: selectedUserList) {
+            EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
             try {
                 em.getTransaction().begin();
                 user2BeRemoved = em.find(user2BeRemoved.getClass(), user2BeRemoved.getId());
@@ -302,6 +302,8 @@ public class UsersListController implements Serializable {
                 FacesContext.getCurrentInstance().addMessage(null, msg);
                 if (em.getTransaction().isActive())
                     em.getTransaction().rollback();
+            } finally {
+                em.close();
             }
         }
         selectedUserList=null;
