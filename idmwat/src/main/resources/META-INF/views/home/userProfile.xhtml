@@ -104,6 +104,13 @@
                                     <h:outputText value="#{role.name} - #{role.description}" style="margin-left:10px" /><br />
                                 </p:dataList>
                             </p:tab>
+                            <p:tab title="Your permissions">
+                                <p:dataList var="permission" value="#{userProfileController.permissions}" id="permissions" paginator="true" rows="15"
+                                            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                            rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
+                                    <h:outputText value="#{permission.name} - #{permission.description}" style="margin-left:10px" /><br />
+                                </p:dataList>
+                            </p:tab>
                         </p:accordionPanel>
                         <p:accordionPanel id="componentPreferencesOnLeft" multiple="true" value="#{userHomeController.preferencesSectionsOnLeft}"
                                           var="section">

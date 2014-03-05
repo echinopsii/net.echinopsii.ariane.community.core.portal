@@ -18,6 +18,7 @@
  */
 package com.spectral.cc.core.portal.base.registry;
 
+import com.spectral.cc.core.portal.base.model.MainMenuEntity;
 import com.spectral.cc.core.portal.base.model.TreeMenuEntity;
 
 import java.util.TreeSet;
@@ -77,4 +78,18 @@ public interface TreeMenuRootsRegistry {
      * @return if found the tree menu entity else null
      */
     public TreeMenuEntity getTreeMenuEntityFromContextAddress(String contextAddress);
+
+    /**
+     * get the main menu entity linked to this tree menu roots registry
+     *
+     * @return linked main menu entity
+     */
+    public MainMenuEntity getLinkedMainMenuEntity();
+
+    /**
+     * set the provided main menu entity linked to this tree menu roots registry
+     *
+     * @param mainMenuEntity
+     */
+    public void setLinkedMainMenuEntity(MainMenuEntity mainMenuEntity);
 }

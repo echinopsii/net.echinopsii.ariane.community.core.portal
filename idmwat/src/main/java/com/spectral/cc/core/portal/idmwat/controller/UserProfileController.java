@@ -18,10 +18,7 @@
  */
 package com.spectral.cc.core.portal.idmwat.controller;
 
-import com.spectral.cc.core.idm.base.model.jpa.Group;
-import com.spectral.cc.core.idm.base.model.jpa.Role;
-import com.spectral.cc.core.idm.base.model.jpa.User;
-import com.spectral.cc.core.idm.base.model.jpa.UserPreference;
+import com.spectral.cc.core.idm.base.model.jpa.*;
 import com.spectral.cc.core.portal.wat.consumer.UserPreferencesRegistryConsumer;
 import com.spectral.cc.core.portal.base.model.UserPreferenceEntity;
 import com.spectral.cc.core.portal.base.model.UserPreferenceSection;
@@ -68,6 +65,7 @@ public class UserProfileController implements Serializable {
 
     private List<Group> groups ;
     private List<Role>  roles  ;
+    private List<Permission> permissions;
 
     private HashMap<String, String> preferences = new HashMap<>();
     private HashMap<String, String> sessionPreferences = new HashMap<>();
@@ -101,7 +99,9 @@ public class UserProfileController implements Serializable {
                 for (Role role : group.getRoles())
                     if (!roles.contains(role))
                         roles.add(role);
-
+            permissions = new ArrayList<Permission>();
+            for (Role role : roles)
+                permissions.addAll(role.getPermissions());
 
             UserPreference themePreference = null;
             for (UserPreference preference : user.getPreferences()) {
@@ -388,6 +388,14 @@ public class UserProfileController implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Permission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<Permission> permissions) {
+        this.permissions = permissions;
     }
 
     /**

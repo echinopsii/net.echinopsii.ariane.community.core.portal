@@ -189,13 +189,53 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
         return displayPermissions;
     }
 
+    /**
+     * add the provided display role if not already in the display roles list
+     *
+     * @param role
+     *
+     * @return this tree menu entity
+     */
     public TreeMenuEntity addDisplayRole(String role) {
-        displayRoles.add(role);
+        if (!displayRoles.contains(role))
+            displayRoles.add(role);
         return this;
     }
 
+    /**
+     * add the provided display permission if not already in the display permissions list
+     *
+     * @param permission
+     *
+     * @return this tree menu entity
+     */
     public TreeMenuEntity addDisplayPermission(String permission) {
-        displayRoles.add(permission);
+        if (!displayPermissions.contains(permission))
+            displayPermissions.add(permission);
+        return this;
+    }
+
+    /**
+     * remove provided display role from display roles list
+     *
+     * @param role
+     *
+     * @return this tree menu entity
+     */
+    public TreeMenuEntity removeDisplayRole(String role) {
+        displayRoles.remove(role);
+        return this;
+    }
+
+    /**
+     * remove provided display permission from display permissions list
+     *
+     * @param permission
+     *
+     * @return this tree menu entity
+     */
+    public TreeMenuEntity removeDisplayPermission(String permission) {
+        displayPermissions.remove(permission);
         return this;
     }
 
