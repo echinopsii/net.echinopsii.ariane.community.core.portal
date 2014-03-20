@@ -120,6 +120,37 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
+            entity = new MainMenuEntity("dbSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
+            entity.getDisplayRoles().add("ccdbadmin");
+            entity.getDisplayPermissions().add("ccSQLConsole:display");
+            entity.getDisplayPermissions().add("ccNeo4JConsole:display");
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+
+            entity = new MainMenuEntity("neo4JMItem", "Neo4J Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/neo4j.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
+            entity.getDisplayRoles().add("ccdbadmin");
+            entity.getDisplayPermissions().add("ccNeo4JConsole:display");
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+
+            entity = new MainMenuEntity("sqlMItem", "SQL Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/sql.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
+            entity.getDisplayRoles().add("ccdbadmin");
+            entity.getDisplayPermissions().add("ccSQLConsole:display");
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+
+            entity = new MainMenuEntity("virgoSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
+            entity.getDisplayRoles().add("ccvirgoadmin");
+            entity.getDisplayPermissions().add("ccVirgoConsole:display");
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+            entity = new MainMenuEntity("virgoMItem", "Virgo Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/virgo.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
+
+            entity.getDisplayRoles().add("ccvirgoadmin");
+            entity.getDisplayPermissions().add("ccVirgoConsole:display");
+            OsgiActivator.mainPortalMainMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
+
             /*
             entity = new MainMenuEntity("aasSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
