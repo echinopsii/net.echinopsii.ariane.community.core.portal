@@ -12,7 +12,7 @@
 
     <groupId>com.spectral.cc.core.portal</groupId>
     <artifactId>com.spectral.cc.core.portal.wat</artifactId>
-    <name>Control and Conquer Core Portal WebApp Tooling</name>
+    <name>CC Core Portal WebApp Tooling</name>
     <packaging>bundle</packaging>
 
     <dependencies>

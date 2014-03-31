@@ -12,7 +12,7 @@
 
     <groupId>com.spectral.cc.core.portal</groupId>
     <artifactId>com.spectral.cc.core.portal.taitale</artifactId>
-    <name>Control and Conquer Core Portal Taitale Graph Render</name>
+    <name>CC Core Portal Taitale Graph Render</name>
     <packaging>bundle</packaging>
 
     <build>
