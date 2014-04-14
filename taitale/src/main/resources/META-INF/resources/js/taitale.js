@@ -111,13 +111,57 @@ requirejs (
                  * load here any PrimeFaces JQuery (ie : global $)
                  * object events related to map
                  */
+                $(execQuery.jqId).click([loader_, dic], function(){
+                    var request = $(mdslQuery.jqId)[0].value
+                    var requestURI = homeURI + "/rest/service/map/query?mdsl="+encodeURI(request)
+                    helper_.debug(requestURI.toString());
+                    options.setURI(requestURI);
+                    try {
+                        loader_.reloadMap(options);
+                        if (options.getLayout()===dic.mapLayout.NTWWW) {
+                            document.getElementById('treeOptions').style.display = "none";
+                            document.getElementById('networkOptions').style.display = "";
+                            for (var i = 0, ii = networkLayoutDisplayOptions.inputs.length; i < ii; i++) {
+                                var input = networkLayoutDisplayOptions.inputs[i];
+                                if (input.value==="displayDC") {
+                                    loader_.displayDC(input.checked);
+                                } else if (input.value==="displayArea") {
+                                    loader_.displayArea(input.checked);
+                                } else if (input.value==="displayLan") {
+                                    loader_.displayLan(input.checked);
+                                }
+                            }
+                        } else if (options.getLayout()===dic.mapLayout.TREE) {
+                            document.getElementById('treeOptions').style.display = "";
+                            document.getElementById('networkOptions').style.display = "none";
+                        }
+                        helper_.growlMsgs(
+                            {
+                                severity: 'info',
+                                summary: 'Map successfully loaded ',
+                                detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
+                            }
+                        );
+                    } catch (e) {
+                        helper_.addMsgToGrowl(e);
+                        helper_.growlMsgs(
+                            {
+                                severity: 'error',
+                                summary: 'Failed to load map',
+                                detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode(),
+                                sticky: true
+                            }
+                        );
+                        console.log(e.stack);
+                    }
+                });
                 $(layoutSelector.jqId).change([loader_, dic], function() {
                     for (var i = 0, ii = layoutSelector.inputs.length; i < ii; i++) {
                         var input = layoutSelector.inputs[i];
                         if (input.checked) {
                             var num = input.value;
                             options.setLayout(num);
-                            options.setURI(homeURI + "/rest/service/map/all");
+                            //options.setURI(homeURI + "/rest/service/map/all");
                             try {
                                 loader_.reloadMap(options);
                                 if (options.getLayout()===dic.mapLayout.NTWWW) {
@@ -323,6 +367,7 @@ requirejs (
             }
         }
 
+        /*
         try {
             if (options.getLayout()!==dic.mapLayout.NTWWW) {
                 document.getElementById('networkOptions').style.display = "none";
@@ -358,4 +403,5 @@ requirejs (
                 });
             console.log(e.stack);
         }
+        */
     });

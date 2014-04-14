@@ -58,7 +58,7 @@ define(
 
                 var linkedContainers  = ((treeObject instanceof container) ? treeObject.getLinkedContainers():treeObject.getLinkedTreeObjects()),
                     idFromRoot        = 0,
-                    childMulticastBus = [];
+                    childMulticastBus = ((linkedContainers.length == 0 && rvertex.getFloor()==0) ? ((treeObject instanceof container) ? treeObject.getLinkedBus() : []):[]);
                 for (var i = 0, ii = linkedContainers.length; i<ii; i++) {
                     var linkedContainer = linkedContainers[i];
                     if (!linkedContainer.isInserted()) {
@@ -96,7 +96,7 @@ define(
                                     childBus.setInserted();
                                     helper_.debug(
                                         "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
-                                        " added (" + linkedContainer.getName() + "). Floor =  " + linkedVertex.getFloor() +
+                                        " added (" + childBus.toString + "). Floor =  " + linkedVertex.getFloor() +
                                         ", ID from root = " + linkedVertex.getIdFromRoot());
                                 }
                                 linkedVertex.pushLinkedVertex(busVertex);
