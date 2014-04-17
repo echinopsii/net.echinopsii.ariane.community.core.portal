@@ -20,7 +20,7 @@
 package com.spectral.cc.core.portal.idmwat.controller.user;
 
 import com.spectral.cc.core.idm.base.model.jpa.UserPreference;
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.portal.idmwat.controller.group.GroupsListController;
 import com.spectral.cc.core.portal.idmwat.controller.role.RolesListController;
 import com.spectral.cc.core.idm.base.model.jpa.Group;

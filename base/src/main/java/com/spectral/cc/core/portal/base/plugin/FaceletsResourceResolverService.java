@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.wat.facesplugin;
+package com.spectral.cc.core.portal.base.plugin;
 
 import java.net.URL;
 

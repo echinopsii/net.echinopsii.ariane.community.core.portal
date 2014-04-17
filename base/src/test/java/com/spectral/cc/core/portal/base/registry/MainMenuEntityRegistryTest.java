@@ -21,8 +21,8 @@ package com.spectral.cc.core.portal.base.registry;
 
 import com.spectral.cc.core.portal.base.model.MainMenuEntity;
 import com.spectral.cc.core.portal.base.model.MenuEntityType;
-import com.spectral.cc.core.portal.base.registry.MainMenuEntityRegistry;
-import com.spectral.cc.core.portal.base.registry.iPojo.MainMenuEntityRegistryImpl;
+import com.spectral.cc.core.portal.base.plugin.MainMenuEntityRegistry;
+import com.spectral.cc.core.portal.base.plugin.iPojo.MainMenuEntityRegistryImpl;
 import junit.framework.TestCase;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

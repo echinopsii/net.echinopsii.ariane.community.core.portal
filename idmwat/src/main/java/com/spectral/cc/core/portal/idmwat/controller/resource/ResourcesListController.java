@@ -18,7 +18,7 @@
  */
 package com.spectral.cc.core.portal.idmwat.controller.resource;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.portal.idmwat.controller.permission.PermissionsListController;
 import com.spectral.cc.core.idm.base.model.jpa.*;
 import org.primefaces.event.ToggleEvent;

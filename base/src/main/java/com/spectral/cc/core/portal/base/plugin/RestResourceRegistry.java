@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.base.registry;
+package com.spectral.cc.core.portal.base.plugin;
 
 import javax.servlet.ServletContext;
 import java.io.IOException;

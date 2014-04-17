@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.idmwat.controller.group;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.idm.base.model.jpa.Group;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;

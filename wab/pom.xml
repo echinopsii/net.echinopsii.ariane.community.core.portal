@@ -33,14 +33,20 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Dependencies packaged with the war -->
         <dependency>
             <groupId>com.spectral.cc.core.portal</groupId>
             <artifactId>com.spectral.cc.core.portal.wresources</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
-
-        <!-- Dependencies packaged with the war -->
+        <dependency>
+            <groupId>com.spectral.cc.core.portal</groupId>
+            <artifactId>com.spectral.cc.core.portal.taitale</artifactId>
+            <scope>runtime</scope>
+            <version>${project.version}</version>
+        </dependency>
         <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
@@ -58,12 +64,6 @@
             <artifactId>all-themes</artifactId>
             <scope>runtime</scope>
             <version>${version.org.primefaces.themes.all-themes}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.spectral.cc.core.portal</groupId>
-            <artifactId>com.spectral.cc.core.portal.taitale</artifactId>
-            <scope>runtime</scope>
-            <version>${project.version}</version>
         </dependency>
     </dependencies>
 
@@ -119,7 +119,7 @@
                         <supportedProjectType>war</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <Bundle-Activator>com.spectral.cc.core.portal.wab.runtime.OsgiActivator</Bundle-Activator>
+                        <Bundle-Activator>com.spectral.cc.core.portal.wab.bootstrap.OsgiActivator</Bundle-Activator>
                         <Web-ContextPath>CC</Web-ContextPath>
                         <Bundle-ClassPath>.,WEB-INF/,WEB-INF/lib/,WEB-INF/classes/</Bundle-ClassPath>
                         <Embed-Directory>WEB-INF/lib</Embed-Directory>
@@ -138,11 +138,11 @@
                             com.spectral.cc.core.portal.idmwat.controller.role;version="${project.version}",
                             com.spectral.cc.core.portal.idmwat.controller.user;version="${project.version}",
                             com.spectral.cc.core.portal.idmwat.tools;version="${project.version}",
-                            com.spectral.cc.core.portal.wat.consumer;version=${project.version},
+                            com.spectral.cc.core.portal.wat.plugin;version=${project.version},
                             com.spectral.cc.core.portal.wat.controller;version=${project.version},
                             com.spectral.cc.core.portal.wat.tools;version=${project.version},
                             com.spectral.cc.core.portal.base.model;version=${project.version},
-                            com.spectral.cc.core.portal.base.registry;version=${project.version},
+                            com.spectral.cc.core.portal.base.plugin;version=${project.version},
                             org.apache.shiro.web.config;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.env;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.filter;version="${version.org.apache.shiro}",
@@ -207,6 +207,7 @@
                             com.sun.faces.util;version="${version.javax.faces.api}",
                             com.sun.faces.vendor;version="${version.javax.faces.api}",
                             com.sun.faces.xhtml;version="${version.javax.faces.api}",
+                            javax.annotation;version="${version.javax.annotations.jsr250-api}",
                             javax.el;version="${version.javax.el}",
                             javax.faces;version="${version.javax.faces.api}",
                             javax.faces.application;version="${version.javax.faces.api}",

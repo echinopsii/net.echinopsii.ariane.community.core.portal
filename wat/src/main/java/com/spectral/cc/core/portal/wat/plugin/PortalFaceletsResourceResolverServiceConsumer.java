@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.wat.consumer;
+package com.spectral.cc.core.portal.wat.plugin;
 
-import com.spectral.cc.core.portal.wat.facesplugin.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.base.plugin.FaceletsResourceResolverService;
 import org.apache.felix.ipojo.annotations.Component;
 import org.apache.felix.ipojo.annotations.Instantiate;
 import org.apache.felix.ipojo.annotations.Requires;

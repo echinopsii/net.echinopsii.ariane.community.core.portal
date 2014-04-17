@@ -22,12 +22,6 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.cc.core.portal</groupId>
-            <artifactId>com.spectral.cc.core.portal.wat</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
             <groupId>com.spectral.cc.core.idm</groupId>
             <artifactId>com.spectral.cc.core.idm.base</artifactId>
             <version>${version.com.spectral.cc.core.idm}</version>
@@ -69,10 +63,8 @@
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Import-Package>
-                            com.spectral.cc.core.portal.wat.consumer;version=${project.version},
-                            com.spectral.cc.core.portal.wat.facesplugin;version=${project.version},
+                            com.spectral.cc.core.portal.base.plugin;version=${project.version},
                             com.spectral.cc.core.portal.base.model;version=${project.version},
-                            com.spectral.cc.core.portal.base.registry;version=${project.version},
                             com.spectral.cc.core.idm.base.proxy;version=${version.com.spectral.cc.core.idm},
                             com.spectral.cc.core.idm.base.model.jpa;version=${version.com.spectral.cc.core.idm},
                             com.sun.faces;version="${version.javax.faces.api}",

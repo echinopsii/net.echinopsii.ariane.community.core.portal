@@ -18,7 +18,7 @@
  */
 package com.spectral.cc.core.portal.wat.controller;
 
-import com.spectral.cc.core.portal.wat.consumer.MainMenuRegistryConsumer;
+import com.spectral.cc.core.portal.wat.plugin.MainMenuRegistryConsumer;
 import com.spectral.cc.core.portal.base.model.MainMenuEntity;
 import com.spectral.cc.core.portal.base.model.MenuEntityType;
 

@@ -49,7 +49,7 @@
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Export-Package>
-                            com.spectral.cc.core.portal.base.registry;version=${project.version},
+                            com.spectral.cc.core.portal.base.plugin;version=${project.version},
                             com.spectral.cc.core.portal.base.model;version=${project.version}
                         </Export-Package>
                     </instructions>

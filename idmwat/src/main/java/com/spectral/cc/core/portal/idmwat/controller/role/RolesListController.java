@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.idmwat.controller.role;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.portal.idmwat.controller.group.GroupsListController;
 import com.spectral.cc.core.portal.idmwat.controller.permission.PermissionsListController;
 import com.spectral.cc.core.portal.idmwat.controller.user.UsersListController;

@@ -19,10 +19,10 @@
 package com.spectral.cc.core.portal.idmwat.controller;
 
 import com.spectral.cc.core.idm.base.model.jpa.*;
-import com.spectral.cc.core.portal.wat.consumer.UserPreferencesRegistryConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.UserPreferencesRegistryConsumer;
 import com.spectral.cc.core.portal.base.model.UserPreferenceEntity;
 import com.spectral.cc.core.portal.base.model.UserPreferenceSection;
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;

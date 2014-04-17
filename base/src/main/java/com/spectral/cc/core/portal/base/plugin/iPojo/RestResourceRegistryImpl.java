@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.base.registry.iPojo;
+package com.spectral.cc.core.portal.base.plugin.iPojo;
 
-import com.spectral.cc.core.portal.base.registry.RestResourceRegistry;
+import com.spectral.cc.core.portal.base.plugin.RestResourceRegistry;
 import com.spectral.cc.core.portal.base.tools.RestEndpointsConfig;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;

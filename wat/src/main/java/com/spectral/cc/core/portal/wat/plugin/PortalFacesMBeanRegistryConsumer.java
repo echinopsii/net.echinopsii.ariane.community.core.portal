@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.wat.consumer;
+package com.spectral.cc.core.portal.wat.plugin;
 
-import com.spectral.cc.core.portal.base.registry.FacesMBeanRegistry;
+import com.spectral.cc.core.portal.base.plugin.FacesMBeanRegistry;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

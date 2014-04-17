@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.idmwat.controller.permission;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.portal.idmwat.controller.resource.ResourcesListController;
 import com.spectral.cc.core.portal.idmwat.controller.role.RolesListController;
 import com.spectral.cc.core.idm.base.model.jpa.*;

@@ -17,9 +17,9 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.base.registry.iPojo;
+package com.spectral.cc.core.portal.base.plugin.iPojo;
 
-import com.spectral.cc.core.portal.base.registry.FacesMBeanRegistry;
+import com.spectral.cc.core.portal.base.plugin.FacesMBeanRegistry;
 import com.spectral.cc.core.portal.base.tools.FacesMBeanConfig;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
@@ -32,8 +32,8 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Provide registry tooling for external plugin faces-config.xml : register / unregister faces config URL and add / remove managed bean from this faces config.<br/><br/>
  *
- *  This is the iPojo implementation of {@link com.spectral.cc.core.portal.base.registry.FacesMBeanRegistry} for CC portal. The component is instantiated at commons-jsf bundle startup.
- *  It provides the {@link com.spectral.cc.core.portal.base.registry.FacesMBeanRegistry} service for CC portal.
+ *  This is the iPojo implementation of {@link com.spectral.cc.core.portal.base.plugin.FacesMBeanRegistry} for CC portal. The component is instantiated at commons-jsf bundle startup.
+ *  It provides the {@link com.spectral.cc.core.portal.base.plugin.FacesMBeanRegistry} service for CC portal.
  */
 @Component
 @Provides

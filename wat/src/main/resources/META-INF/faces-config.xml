@@ -3,10 +3,34 @@
               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
               xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-facesconfig_2_0.xsd"
               version="2.0">
-
     <managed-bean>
         <managed-bean-name>mainMenuController</managed-bean-name>
         <managed-bean-class>com.spectral.cc.core.portal.wat.controller.MainMenuController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>themeSwitcherController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.wat.controller.ThemeSwitcherController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+        <managed-property>
+            <property-name>gp</property-name>
+            <property-class>com.spectral.cc.core.portal.idmwat.controller.UserProfileController</property-class>
+            <value>#{userProfileController}</value>
+        </managed-property>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userHomeController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.wat.controller.UserHomeController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userPreferenceEntityTypeController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.wat.controller.UserPreferenceEntityTypeController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
+        <managed-bean-name>userPreferenceSectionTypeController</managed-bean-name>
+        <managed-bean-class>com.spectral.cc.core.portal.wat.controller.UserPreferenceSectionTypeController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 </faces-config>

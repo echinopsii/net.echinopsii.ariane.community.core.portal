@@ -16,10 +16,10 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.spectral.cc.core.portal.base.registry.iPojo;
+package com.spectral.cc.core.portal.base.plugin.iPojo;
 
 import com.spectral.cc.core.portal.base.model.UserPreferenceSection;
-import com.spectral.cc.core.portal.base.registry.UserPreferencesRegistry;
+import com.spectral.cc.core.portal.base.plugin.UserPreferencesRegistry;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

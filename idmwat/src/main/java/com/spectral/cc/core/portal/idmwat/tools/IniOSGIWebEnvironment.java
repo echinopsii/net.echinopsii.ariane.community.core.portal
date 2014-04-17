@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.idmwat.tools;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.SecurityManagerProxyConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.SecurityManagerProxyConsumer;
 import org.apache.shiro.ShiroException;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.config.Ini;

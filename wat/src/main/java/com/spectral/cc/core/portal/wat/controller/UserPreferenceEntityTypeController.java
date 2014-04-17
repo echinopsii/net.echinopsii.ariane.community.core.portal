@@ -16,22 +16,18 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.spectral.cc.core.portal.wab.controller;
+package com.spectral.cc.core.portal.wat.controller;
 
 import com.spectral.cc.core.portal.base.model.UserPreferenceEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
 /**
  * Provide helper methods to get user preference entity type enumeration fields.<br/>
  * This is a request managed bean.
  */
-@ManagedBean
-@RequestScoped
 public class UserPreferenceEntityTypeController implements Serializable{
     private static final Logger log = LoggerFactory.getLogger(UserPreferenceEntityTypeController.class);
 

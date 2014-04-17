@@ -17,20 +17,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.wab.controller;
+package com.spectral.cc.core.portal.wat.controller;
 
 import com.spectral.cc.core.portal.base.model.UserPreferenceSectionType;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 
 /**
  * Provide helper methods to get user preference section type enumeration fields.<br/>
  * This is a request managed bean.
  */
-@ManagedBean
-@RequestScoped
 public class UserPreferenceSectionTypeController implements Serializable {
 
     public int getUserPreferenceSectionTypeUsrPrefSectionSingleton() {

@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.idmwat.ccplugin;
+package com.spectral.cc.core.portal.idmwat.plugin;
 
 import com.spectral.cc.core.idm.base.proxy.IDMJPAProvider;
 import org.apache.felix.ipojo.annotations.*;

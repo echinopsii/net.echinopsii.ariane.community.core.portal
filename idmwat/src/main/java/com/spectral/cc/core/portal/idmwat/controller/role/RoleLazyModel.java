@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.idmwat.controller.role;
 
-import com.spectral.cc.core.portal.idmwat.ccplugin.IDMJPAProviderConsumer;
+import com.spectral.cc.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import com.spectral.cc.core.idm.base.model.jpa.Role;
 import org.primefaces.model.LazyDataModel;
 import org.primefaces.model.SortOrder;

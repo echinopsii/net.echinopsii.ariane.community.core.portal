@@ -22,6 +22,12 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>com.spectral.cc.core.portal</groupId>
+            <artifactId>com.spectral.cc.core.portal.idmwat</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -58,14 +64,14 @@
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Export-Package>
-                            com.spectral.cc.core.portal.wat.consumer;version=${project.version},
+                            com.spectral.cc.core.portal.wat.plugin;version=${project.version},
                             com.spectral.cc.core.portal.wat.controller;version=${project.version},
-                            com.spectral.cc.core.portal.wat.facesplugin;version=${project.version},
                             com.spectral.cc.core.portal.wat.tools;version=${project.version}
                         </Export-Package>
                         <Import-Package>
+                            com.spectral.cc.core.portal.idmwat.controller;version=${project.version},
                             com.spectral.cc.core.portal.base.model;version=${project.version},
-                            com.spectral.cc.core.portal.base.registry;version=${project.version},
+                            com.spectral.cc.core.portal.base.plugin;version=${project.version},
                             com.sun.faces;version="${version.javax.faces.api}",
                             com.sun.faces.application;version="${version.javax.faces.api}",
                             com.sun.faces.application.annotation;version="${version.javax.faces.api}",
@@ -115,6 +121,7 @@
                             com.sun.faces.util;version="${version.javax.faces.api}",
                             com.sun.faces.vendor;version="${version.javax.faces.api}",
                             com.sun.faces.xhtml;version="${version.javax.faces.api}",
+                            javax.annotation;version="${version.javax.annotations.jsr250-api}",
                             javax.el;version="${version.javax.el}",
                             javax.servlet;version="${version.javax.servlet.servlet-api}",
                             javax.faces;version="${version.javax.faces.api}",

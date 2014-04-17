@@ -16,17 +16,15 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package com.spectral.cc.core.portal.wab.controller;
+package com.spectral.cc.core.portal.wat.controller;
 
-import com.spectral.cc.core.portal.wat.consumer.UserPreferencesRegistryConsumer;
+import com.spectral.cc.core.portal.wat.plugin.UserPreferencesRegistryConsumer;
 import com.spectral.cc.core.portal.base.model.UserPreferenceEntity;
 import com.spectral.cc.core.portal.base.model.UserPreferenceSection;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.annotation.PostConstruct;
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +33,6 @@ import java.util.List;
  * Helper for user home view. Define user preferences sections lists and provide helper methods to navigate in these sections. Used by user home view.<br/>
  * This is a request managed bean.
  */
-@ManagedBean
-@RequestScoped
 public class UserHomeController implements Serializable {
 
     private static final Logger log = LoggerFactory.getLogger(UserHomeController.class);

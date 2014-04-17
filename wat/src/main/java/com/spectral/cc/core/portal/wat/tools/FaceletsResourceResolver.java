@@ -18,8 +18,8 @@
  */
 package com.spectral.cc.core.portal.wat.tools;
 
-import com.spectral.cc.core.portal.wat.consumer.PortalFaceletsResourceResolverServiceConsumer;
-import com.spectral.cc.core.portal.wat.facesplugin.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.wat.plugin.PortalFaceletsResourceResolverServiceConsumer;
+import com.spectral.cc.core.portal.base.plugin.FaceletsResourceResolverService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

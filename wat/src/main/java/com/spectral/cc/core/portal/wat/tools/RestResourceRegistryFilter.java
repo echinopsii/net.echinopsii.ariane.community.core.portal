@@ -19,7 +19,7 @@
 
 package com.spectral.cc.core.portal.wat.tools;
 
-import com.spectral.cc.core.portal.wat.consumer.PortalRestResourceRegistryConsumer;
+import com.spectral.cc.core.portal.wat.plugin.PortalRestResourceRegistryConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

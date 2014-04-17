@@ -1,6 +1,6 @@
 /**
- * Tibco rv addon directory bundle
- * Directory Facelets Resource Resolver Service iPojo impl
+ * Portal Commons JSF bundle
+ * Facelets Resource Resolver Service iPojo impl
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -17,23 +17,29 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package com.spectral.cc.core.portal.idmwat.ccplugin;
+package com.spectral.cc.core.portal.wat.plugin;
 
-import com.spectral.cc.core.portal.wat.facesplugin.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.base.plugin.FaceletsResourceResolverService;
+import com.spectral.cc.core.portal.wat.tools.FaceletsResourceResolver;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.URL;
 
+/**
+ * Provide access to portal facelets resource from web application which are using their own facelets resource resolver (IE : not the portal one).<br/><br/>
+ *
+ * This is the iPojo implementation of {@link FaceletsResourceResolverService}. The component is instantiated at commons-jsf bundle startup.
+ * It provides the {@link FaceletsResourceResolverService} service for CC directory.
+ */
 @Component
-@Provides(properties= {@StaticServiceProperty(name="targetCCcomponent", type="java.lang.String", value="Portal")})
+@Provides
 @Instantiate
-public class PortalFaceletsResourceResolverServiceImpl implements FaceletsResourceResolverService {
+public class FaceletsResourceResolverServiceImpl implements FaceletsResourceResolverService{
 
-    private static final String FACELETS_RESOURCE_RESOLVER_SERVICE_NAME = "CC Portal IDM Facelets Resource Resolver";
-    private static final Logger log = LoggerFactory.getLogger(PortalFaceletsResourceResolverServiceImpl.class);
-    private static final String basePath = "/META-INF";
+    private static final String FACELETS_RESOURCE_RESOLVER_SERVICE_NAME = "CC Portal Facelets Resource Resolver";
+    private static final Logger log = LoggerFactory.getLogger(FaceletsResourceResolverServiceImpl.class);
 
     @Validate
     public void validate() throws Exception {
@@ -47,7 +53,8 @@ public class PortalFaceletsResourceResolverServiceImpl implements FaceletsResour
 
     @Override
     public URL resolveURL(String path) {
-        log.debug("Resolve {} from idm commons-jsf...", new Object[]{path});
-        return PortalFaceletsResourceResolverServiceImpl.class.getResource(basePath + path);
+        return FaceletsResourceResolver.resolveUrlFromThisJar(path);
     }
+
+
 }

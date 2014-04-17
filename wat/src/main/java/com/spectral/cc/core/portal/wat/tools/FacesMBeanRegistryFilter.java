@@ -19,7 +19,7 @@
 package com.spectral.cc.core.portal.wat.tools;
 
 
-import com.spectral.cc.core.portal.wat.consumer.PortalFacesMBeanRegistryConsumer;
+import com.spectral.cc.core.portal.wat.plugin.PortalFacesMBeanRegistryConsumer;
 
 import javax.servlet.*;
 import java.io.IOException;
