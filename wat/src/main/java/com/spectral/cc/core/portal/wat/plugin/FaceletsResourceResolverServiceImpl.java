@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal wat bundle
  * Facelets Resource Resolver Service iPojo impl
  * Copyright (C) 2013 Mathilde Ffrench
  *

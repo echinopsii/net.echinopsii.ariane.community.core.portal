@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Permission Create Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -28,6 +28,7 @@ import com.spectral.cc.core.idm.base.model.jpa.Role;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -38,6 +39,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class provide stuff to create and save a new permission from the UI form
+ */
 public class PermissionNewController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(PermissionNewController.class);
@@ -52,6 +56,12 @@ public class PermissionNewController implements Serializable {
 
     private List<String> rolesToBind = new ArrayList<String>();
     private Set<Role> roles = new HashSet<Role>();
+
+    @PreDestroy
+    public void clean() {
+        log.debug("Close entity manager");
+        em.close();
+    }
 
     public EntityManager getEm() {
         return em;
@@ -109,6 +119,12 @@ public class PermissionNewController implements Serializable {
         this.roles = roles;
     }
 
+    /**
+     * populate resources list through resourcesToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSelectedResource() throws NotSupportedException, SystemException {
         for (Resource resource: ResourcesListController.getAll()) {
             if (resource.getName().equals(resourceToBind)) {
@@ -120,6 +136,12 @@ public class PermissionNewController implements Serializable {
         }
     }
 
+    /**
+     * populate roles list through rolesToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSeletectedRoles() throws NotSupportedException, SystemException {
         for (Role role: RolesListController.getAll()) {
             for (String roleToBind : rolesToBind) {
@@ -132,6 +154,15 @@ public class PermissionNewController implements Serializable {
         }
     }
 
+    /**
+     * save a new permission thanks data provided through UI form
+     *
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         try {
             bindSelectedResource();

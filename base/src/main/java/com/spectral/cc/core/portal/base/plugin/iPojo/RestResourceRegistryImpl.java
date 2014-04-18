@@ -1,7 +1,7 @@
 /**
- * [DEFINE YOUR PROJECT NAME/MODULE HERE]
- * [DEFINE YOUR PROJECT DESCRIPTION HERE] 
- * Copyright (C) 26/02/14 echinopsii
+ * Portal base bundle
+ * Rest Resource Registry Impl
+ * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as

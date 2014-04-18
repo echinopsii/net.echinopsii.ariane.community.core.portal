@@ -1,6 +1,6 @@
 /**
- * Directory Main
- * PersistenceConsumer
+ * Portal IDM wat bundle
+ * IDM JPA Provider Consumer
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

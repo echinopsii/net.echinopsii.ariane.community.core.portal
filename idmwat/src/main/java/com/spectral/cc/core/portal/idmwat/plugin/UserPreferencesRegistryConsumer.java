@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal IDM wat bundle
  * UserProfile Preference Registry consumer singleton
  * Copyright (C) 2013 Mathilde Ffrench
  *

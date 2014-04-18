@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal wat bundle
  * Plugin Faces Managed Bean Filter
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -17,7 +17,6 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package com.spectral.cc.core.portal.wat.tools;
-
 
 import com.spectral.cc.core.portal.wat.plugin.PortalFacesMBeanRegistryConsumer;
 
@@ -52,12 +51,12 @@ public class FacesMBeanRegistryFilter implements Filter {
     }
 
     /**
-     * Ask the directory plugin faces managed bean registry to add registers faces managed bean to the directory servlet context,
+     * Ask the faces managed bean registry to add registers faces managed bean to the portal servlet context,
      * and then pass control to the next filter
      *
-     * @param request
-     * @param response
-     * @param chain
+     * @param request the servlet request
+     * @param response the servlet response
+     * @param chain the filter chain
      *
      * @throws java.io.IOException
      * @throws javax.servlet.ServletException
@@ -70,9 +69,9 @@ public class FacesMBeanRegistryFilter implements Filter {
     }
 
     /**
-     * Register the directory servlet context into the directory plugin faces managed bean registry
+     * Register the servlet context into the portal faces managed bean registry
      *
-     * @param filterConfig
+     * @param filterConfig the filter config
      *
      * @throws javax.servlet.ServletException
      */

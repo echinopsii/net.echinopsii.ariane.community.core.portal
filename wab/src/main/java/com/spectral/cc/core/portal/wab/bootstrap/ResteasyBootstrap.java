@@ -31,10 +31,13 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+/**
+ * Initialize Web App servlet context with REST Easy deployment attributes
+ */
 public class ResteasyBootstrap implements ServletContextListener {
 
     private static final Logger log = LoggerFactory.getLogger(ResteasyBootstrap.class);
-    private static final String RESTEASY_BOOTSTRAP_NAME = "CC Portal RESTEasy Bootsrap";
+    private static final String RESTEASY_BOOTSTRAP_NAME = "CC Portal RESTEasy Bootstrap";
 
     @Override
     public void contextInitialized(ServletContextEvent event) {

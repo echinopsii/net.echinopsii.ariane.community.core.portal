@@ -1,5 +1,5 @@
 /**
- * Portal IDM JSF bundle
+ * Portal IDM wat bundle
  * UserProfile Profile Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *

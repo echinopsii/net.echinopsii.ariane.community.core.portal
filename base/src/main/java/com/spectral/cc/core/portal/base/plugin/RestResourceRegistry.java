@@ -1,6 +1,6 @@
 /**
- * Portal Commons Service bundle
- * Portal Rest Resource Registry interface
+ * Portal base bundle
+ * Rest Resource Registry interface
  * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

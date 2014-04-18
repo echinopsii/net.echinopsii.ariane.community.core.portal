@@ -25,7 +25,9 @@ import com.spectral.cc.core.portal.base.model.MenuEntityType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-
+/**
+ * This class define the main menu registrator task to be executed through a thread.
+ */
 public class Registrator implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(Registrator.class);

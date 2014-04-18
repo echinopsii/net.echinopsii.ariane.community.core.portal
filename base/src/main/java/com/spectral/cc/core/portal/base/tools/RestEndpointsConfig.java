@@ -1,7 +1,7 @@
 /**
- * [DEFINE YOUR PROJECT NAME/MODULE HERE]
- * [DEFINE YOUR PROJECT DESCRIPTION HERE] 
- * Copyright (C) 26/02/14 echinopsii
+ * Portal base bundle
+ * Rest Endpoint Configuration Tools
+ * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -38,9 +38,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * Helper to register new REST endpoint into webapp coming from external plugin. Used Rest Resource Registry.
+ */
 public class RestEndpointsConfig {
     private static final Logger log = LoggerFactory.getLogger(RestEndpointsConfig.class);
 
+    /**
+     * Register new REST endpoints defined in the rest endpoints config URI into servlet context
+     *
+     * @param restEPConfig the REST endpoint config
+     * @param servletContext the servlet context
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static void register(URL restEPConfig, ServletContext servletContext) throws URISyntaxException, IOException {
         Object deployment = servletContext.getAttribute(ResteasyDeployment.class.getName());
         if (deployment!=null && deployment instanceof ResteasyDeployment) {
@@ -62,6 +73,14 @@ public class RestEndpointsConfig {
         }
     }
 
+    /**
+     * Unregister new REST endpoints defined in the rest endpoints config URI from servlet context
+     *
+     * @param restEPConfigs the REST endpoint config
+     * @param servletContext the servlet context
+     * @throws URISyntaxException
+     * @throws IOException
+     */
     public static void unregister(CopyOnWriteArrayList<URL> restEPConfigs, ServletContext servletContext) throws URISyntaxException, IOException {
         Object deployment = servletContext.getAttribute(ResteasyDeployment.class.getName());
         if (deployment!=null && deployment instanceof ResteasyDeployment) {

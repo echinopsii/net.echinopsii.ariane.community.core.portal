@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal wat bundle
  * Main Menu Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -45,6 +45,14 @@ public class MainMenuController implements Serializable{
 
     private MenuModel model = new DefaultMenuModel();
 
+    /**
+     * check if subject is authorized to display the main menu entity
+     *
+     * @param subject the shiro subject
+     * @param entity the main menu entity to check
+     *
+     * @return if authorized true else false
+     */
     private static boolean isAuthorized(Subject subject, MainMenuEntity entity) {
         boolean ret = false;
         if (subject.hasRole("Jedi") || subject.isPermitted("ccuniverse:zeone") || entity.getDisplayRoles().size()==0) {
@@ -66,6 +74,13 @@ public class MainMenuController implements Serializable{
         return ret;
     }
 
+    /**
+     * Create PrimeFaces menu item from main menu entity
+     *
+     * @param entity the main menu entity
+     *
+     * @return the generated PrimeFaces menu item
+     */
     private static MenuItem createMenuItemFromEntity(MainMenuEntity entity) {
         FacesContext context = FacesContext.getCurrentInstance();
         MenuItem item = new MenuItem();
@@ -81,13 +96,21 @@ public class MainMenuController implements Serializable{
         item.setStyleClass("menuItem");
         if (entity.getActionListener()!=null && !entity.getActionListener().equals("")) {
             item.setActionExpression(context.getApplication().getExpressionFactory().createMethodExpression(
-                                                                                                                   context.getELContext(),entity.getActionListener(),
-                                                                                                                   null,new Class[]{}
+                                             context.getELContext(),entity.getActionListener(),
+                                             null,new Class[]{}
             ));
         }
         return item;
     }
 
+    /**
+     * Create PrimeFaces submenu from main menu entity
+     *
+     * @param subject the shiro subject
+     * @param entity the main menu entity
+     *
+     * @return the generated PrimeFaces sub menu
+     */
     private static Submenu createSubMenuFromEntity(Subject subject, MainMenuEntity entity) {
         Submenu submenu = new Submenu();
         submenu.setId(entity.getId());
@@ -116,6 +139,11 @@ public class MainMenuController implements Serializable{
         return submenu;
     }
 
+    /**
+     * Generate PrimeFaces MenuModel from Main Menu Entity Registry service and return it
+     *
+     * @return generated PrimeFaces MenuModel
+     */
     public MenuModel getModel() {
         log.debug("Get Menu Model...");
         Subject subject = SecurityUtils.getSubject();

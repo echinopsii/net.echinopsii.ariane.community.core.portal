@@ -1,6 +1,6 @@
 /**
- * Tibco rv addon directory bundle
- * Directory Facelets Resource Resolver Service iPojo impl
+ * Portal IDM wat bundle
+ * Portal Facelets Resource Resolver Service iPojo impl
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

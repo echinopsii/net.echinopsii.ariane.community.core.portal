@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Group Create Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -25,6 +25,7 @@ import com.spectral.cc.core.idm.base.model.jpa.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PreDestroy;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
@@ -35,6 +36,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class provide stuff to create and save a new group from the UI form
+ */
 public class GroupNewController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(GroupNewController.class);
@@ -46,6 +50,12 @@ public class GroupNewController implements Serializable {
 
     private List<String> rolesToBind = new ArrayList<String>();
     private Set<Role> roles = new HashSet<Role>();
+
+    @PreDestroy
+    public void clean() {
+        log.debug("Close entity manager");
+        em.close();
+    }
 
     public EntityManager getEm() {
         return em;
@@ -87,6 +97,12 @@ public class GroupNewController implements Serializable {
         this.roles = roles;
     }
 
+    /**
+     * populate roles list through rolesToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSelectedRoles() throws NotSupportedException, SystemException {
         for (Role role: RolesListController.getAll()) {
             for (String roleToBind : rolesToBind)
@@ -98,6 +114,15 @@ public class GroupNewController implements Serializable {
         }
     }
 
+    /**
+     * save a new group thanks data provided through UI form
+     *
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         try {
             bindSelectedRoles();

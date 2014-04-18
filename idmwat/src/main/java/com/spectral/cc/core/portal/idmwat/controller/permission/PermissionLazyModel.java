@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Permission PrimeFaces Lazy Model
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -37,12 +37,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class provide lazy loading stuff for our Permission PrimeFaces datatable implementation
+ */
 public class PermissionLazyModel extends LazyDataModel<Permission> {
     private static final Logger log = LoggerFactory.getLogger(PermissionLazyModel.class);
 
-    private int              rowCount      ;
+    private int              rowCount  ;
     private List<Permission> pageItems ;
 
+    /**
+     * Add search predicate to the JPA query
+     *
+     * @param em the current JPA entity manager in use
+     * @param root the current JPA root of the query
+     * @param filters the provided filters
+     * @return the generated JPA predicate
+     */
     private Predicate[] getSearchPredicates(EntityManager em, Root<Permission> root, Map<String,String> filters) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -58,6 +69,14 @@ public class PermissionLazyModel extends LazyDataModel<Permission> {
         return ret;
     }
 
+    /**
+     * Generate a JPA query and push the result into pageItems
+     *
+     * @param first first result of the query (the group id)
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     */
     private void paginate(int first, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -80,6 +99,12 @@ public class PermissionLazyModel extends LazyDataModel<Permission> {
         em.close();
     }
 
+    /**
+     * Return the permission assigned to a table row
+     *
+     * @param rowKey the row permission id
+     * @return permission object according to provided permission id
+     */
     @Override
     public Permission getRowData(String rowKey) {
         for(Permission permission : pageItems) {
@@ -89,11 +114,28 @@ public class PermissionLazyModel extends LazyDataModel<Permission> {
         return null;
     }
 
+    /**
+     * Return the permission id assigned to a table row
+     *
+     * @param permission the row permission
+     * @return the permission id
+     */
     @Override
     public Object getRowKey(Permission permission) {
         return permission.getId();
     }
 
+    /**
+     * Return the permissions list for the PrimeFaces table
+     *
+     * @param first first result of the query (the group id)
+     * @param pageSize the page size
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     *
+     * @return queried permissions list
+     */
     @Override
     public List<Permission> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         this.setPageSize(pageSize);

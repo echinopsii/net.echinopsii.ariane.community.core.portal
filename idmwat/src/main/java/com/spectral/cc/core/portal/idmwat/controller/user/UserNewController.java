@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * User Create Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -38,6 +38,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class provide stuff to create and save a new user from the UI form
+ */
 public class UserNewController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -155,6 +158,12 @@ public class UserNewController implements Serializable {
         this.roles = roles;
     }
 
+    /**
+     * populate groups list through groupsToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSelectedGroups() throws NotSupportedException, SystemException {
         for (Group group: GroupsListController.getAll()) {
             for (String groupToBind : groupsToBind)
@@ -166,6 +175,12 @@ public class UserNewController implements Serializable {
         }
     }
 
+    /**
+     * populate roles list through rolesToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSelectedRoles() throws NotSupportedException, SystemException {
         for (Role role: RolesListController.getAll()) {
             for (String roleToBind : rolesToBind)
@@ -177,6 +192,15 @@ public class UserNewController implements Serializable {
         }
     }
 
+    /**
+     * save a new user thanks data provided through UI form
+     *
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         try {
             bindSelectedGroups();

@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Resource PrimeFaces Lazy Model
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -37,12 +37,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class provide lazy loading stuff for our Resource PrimeFaces datatable implementation
+ */
 public class ResourceLazyModel extends LazyDataModel<Resource> {
     private static final Logger log = LoggerFactory.getLogger(ResourceLazyModel.class);
 
     private int            rowCount  ;
     private List<Resource> pageItems ;
 
+    /**
+     * Add search predicate to the JPA query
+     *
+     * @param em the current JPA entity manager in use
+     * @param root the current JPA root of the query
+     * @param filters the provided filters
+     * @return the generated JPA predicate
+     */
     private Predicate[] getSearchPredicates(EntityManager em, Root<Resource> root, Map<String,String> filters) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -59,6 +70,14 @@ public class ResourceLazyModel extends LazyDataModel<Resource> {
         return ret;
     }
 
+    /**
+     * Generate a JPA query and push the result into pageItems
+     *
+     * @param first first result of the query (the group id)
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     */
     private void paginate(int first, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         EntityManager entityManager = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         entityManager.getTransaction().begin();
@@ -86,6 +105,12 @@ public class ResourceLazyModel extends LazyDataModel<Resource> {
         entityManager.close();
     }
 
+    /**
+     * Return the resource assigned to a table row
+     *
+     * @param rowKey the row resource id
+     * @return resource object according to provided resource id
+     */
     @Override
     public Resource getRowData(String rowKey) {
         for(Resource resource : pageItems) {
@@ -95,11 +120,28 @@ public class ResourceLazyModel extends LazyDataModel<Resource> {
         return null;
     }
 
+    /**
+     * Return the resource id assigned to a table row
+     *
+     * @param resource the row resource
+     * @return the resource id
+     */
     @Override
     public Object getRowKey(Resource resource) {
         return resource.getId();
     }
 
+    /**
+     * Return the resources list for the PrimeFaces table
+     *
+     * @param first first result of the query (the group id)
+     * @param pageSize the page size
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     *
+     * @return queried resources list
+     */
     @Override
     public List<Resource> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         this.setPageSize(pageSize);

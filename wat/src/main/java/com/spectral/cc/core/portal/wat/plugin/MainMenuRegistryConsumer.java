@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal wat bundle
  * Main Menu Registry consumer singleton
  * Copyright (C) 2013 Mathilde Ffrench
  *

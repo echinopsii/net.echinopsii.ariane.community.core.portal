@@ -1,5 +1,5 @@
 /**
- * Portal IDM JSF bundle
+ * Portal IDM wat bundle
  * Login controller
  * Copyright (C) 2013 Mathilde Ffrench
  *

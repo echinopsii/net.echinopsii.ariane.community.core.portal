@@ -1,6 +1,6 @@
 /**
- * Directory Commons Services bundle
- * Directory Entity
+ * Portal base bundle
+ * Tree Menu Entity
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

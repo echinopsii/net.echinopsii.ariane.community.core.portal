@@ -1,5 +1,5 @@
 /**
- * Portal Commons Services bundle
+ * Portal base bundle
  * UserProfile Preference Entity Type
  * Copyright (C) 2013 Mathilde Ffrench
  *

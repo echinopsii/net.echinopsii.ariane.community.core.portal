@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Role PrimeFaces Lazy Model
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -37,12 +37,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class provide lazy loading stuff for our Role PrimeFaces datatable implementation
+ */
 public class RoleLazyModel extends LazyDataModel<Role> {
     private static final Logger log = LoggerFactory.getLogger(RoleLazyModel.class);
 
     private int        rowCount  ;
     private List<Role> pageItems ;
 
+    /**
+     * Add search predicate to the JPA query
+     *
+     * @param em the current JPA entity manager in use
+     * @param root the current JPA root of the query
+     * @param filters the provided filters
+     * @return the generated JPA predicate
+     */
     private Predicate[] getSearchPredicates(EntityManager em, Root<Role> root, Map<String,String> filters) {
         CriteriaBuilder builder = em.getCriteriaBuilder();
         List<Predicate> predicatesList = new ArrayList<Predicate>();
@@ -58,6 +69,14 @@ public class RoleLazyModel extends LazyDataModel<Role> {
         return ret;
     }
 
+    /**
+     * Generate a JPA query and push the result into pageItems
+     *
+     * @param first first result of the query (the group id)
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     */
     private void paginate(int first, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         CriteriaBuilder builder = em.getCriteriaBuilder();
@@ -82,6 +101,12 @@ public class RoleLazyModel extends LazyDataModel<Role> {
         em.close();
     }
 
+    /**
+     * Return the role assigned to a table row
+     *
+     * @param rowKey the row role id
+     * @return role object according to provided role id
+     */
     @Override
     public Role getRowData(String rowKey) {
         for(Role role : pageItems) {
@@ -91,11 +116,28 @@ public class RoleLazyModel extends LazyDataModel<Role> {
         return null;
     }
 
+    /**
+     * Return the role id assigned to a table row
+     *
+     * @param role the row role
+     * @return the role id
+     */
     @Override
     public Object getRowKey(Role role) {
         return role.getId();
     }
 
+    /**
+     * Return the roles list for the PrimeFaces table
+     *
+     * @param first first result of the query (the group id)
+     * @param pageSize the page size
+     * @param sortField the sort field of the query
+     * @param sortOrder the sort order of the query
+     * @param filters the provided filters
+     *
+     * @return queried roles list
+     */
     @Override
     public List<Role> load(int first, int pageSize, String sortField, SortOrder sortOrder, Map<String,String> filters) {
         this.setPageSize(pageSize);

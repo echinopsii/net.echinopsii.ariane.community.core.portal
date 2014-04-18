@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal base bundle
  * Faces Managed Bean Portal Registry implementation
  * Copyright (C) 2013 Mathilde Ffrench
  *

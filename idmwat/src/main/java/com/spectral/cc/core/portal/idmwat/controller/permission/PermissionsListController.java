@@ -1,5 +1,5 @@
 /**
- * IDM Commons JSF bundle
+ * Portal IDM wat bundle
  * Permission RUD Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -40,6 +40,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class provide stuff to display a permissions list in a PrimeFaces data table, display permissions, update a permission and remove permissions
+ */
 public class PermissionsListController implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -77,6 +80,13 @@ public class PermissionsListController implements Serializable {
         this.changedResource = changedResource;
     }
 
+    /**
+     * Synchronize a resource binded to a permisson into the db
+     *
+     * @param permission the persmission the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncResource(Permission permission) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -125,6 +135,13 @@ public class PermissionsListController implements Serializable {
         this.addedRole = addedRole;
     }
 
+    /**
+     * Synchronize added role into a permission to database
+     *
+     * @param permission the permission the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedRole(Permission permission) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -167,6 +184,13 @@ public class PermissionsListController implements Serializable {
         this.removedRoles = removedRoles;
     }
 
+    /**
+     * Synchronize removed role from a permission to database
+     *
+     * @param permission the permission the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedRoles(Permission permission) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -194,6 +218,13 @@ public class PermissionsListController implements Serializable {
         }
     }
 
+    /**
+     * When a PrimeFaces data table row is toogled init reference into the addedRole, removedRoles and changedResource lists with the correct permission id
+     * When a PrimeFaces data table row is untoogled remove reference from the addedRole, removedRoles and changedResource lists with the correct permission id
+     *
+     * @param event provided by the UI through PrimeFaces on a row toggle
+     * @throws CloneNotSupportedException
+     */
     public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Permission eventPermission = ((Permission) event.getData());
@@ -208,6 +239,16 @@ public class PermissionsListController implements Serializable {
         }
     }
 
+    /**
+     * When UI actions an update merge the corresponding permission bean with the correct permission instance in the DB and save this instance
+     *
+     * @param permission the permission the UI is working on
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void update(Permission permission) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -233,8 +274,8 @@ public class PermissionsListController implements Serializable {
         }
     }
 
-    /*
-     * Permission delete tool
+    /**
+     * Remove selected permissions
      */
     public void delete() {
         log.debug("Remove selected Permission !");
@@ -270,6 +311,13 @@ public class PermissionsListController implements Serializable {
         selectedPermissionList=null;
     }
 
+    /**
+     * Get all permissions from the db
+     *
+     * @return all permissions from the db
+     * @throws SystemException
+     * @throws NotSupportedException
+     */
     public static List<Permission> getAll() throws SystemException, NotSupportedException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all permissions from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",

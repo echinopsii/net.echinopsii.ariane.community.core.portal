@@ -1,5 +1,5 @@
 /**
- * IDM Commons JSF bundle
+ * Portal IDM wat bundle
  * Roles RUD Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -44,6 +44,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class provide stuff to display a roles list in a PrimeFaces data table, display roles, update a role and remove roles
+ */
 public class RolesListController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(RolesListController.class);
@@ -84,6 +87,13 @@ public class RolesListController implements Serializable {
         this.addedPermission = addedPermission;
     }
 
+    /**
+     * Synchronize added permission into a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedPermission(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -125,6 +135,13 @@ public class RolesListController implements Serializable {
         this.removedPermissions = removedPermissions;
     }
 
+    /**
+     * Synchronize deleted permission from a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedPermissions(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -163,6 +180,13 @@ public class RolesListController implements Serializable {
         this.addedUser = addedUser;
     }
 
+    /**
+     * Synchronize added user into a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedUser(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -203,6 +227,13 @@ public class RolesListController implements Serializable {
         this.removedUsers = removedUsers;
     }
 
+    /**
+     * Synchronize removed user from a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedUsers(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -241,6 +272,13 @@ public class RolesListController implements Serializable {
         this.addedGroup = addedGroup;
     }
 
+    /**
+     * Synchronize added group into a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedGroup(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -281,6 +319,13 @@ public class RolesListController implements Serializable {
         this.removedGroups = removedGroups;
     }
 
+    /**
+     * Synchronize removed group from a role to database
+     *
+     * @param role the role the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedGroups(Role role) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -311,6 +356,15 @@ public class RolesListController implements Serializable {
         }
     }
 
+    /**
+     * When a PrimeFaces data table row is toogled init reference into the addedPermission, removedPermissions, addedGroup, removedGroups, addedUser, removedUsers lists
+     * with the correct resource id
+     * When a PrimeFaces data table row is untoogled remove reference from the addedPermission, removedPermissions, addedGroup, removedGroups, addedUser, removedUsers lists
+     * with the correct resource id
+     *
+     * @param event provided by the UI through PrimeFaces on a row toggle
+     * @throws CloneNotSupportedException
+     */
     public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Role eventRole = ((Role) event.getData());
@@ -331,6 +385,16 @@ public class RolesListController implements Serializable {
         }
     }
 
+    /**
+     * When UI actions an update merge the corresponding role bean with the correct role instance in the DB and save this instance
+     *
+     * @param role the role the UI is working on
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void update(Role role) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -356,8 +420,8 @@ public class RolesListController implements Serializable {
         }
     }
 
-    /*
-     * Role delete tool
+    /**
+     * Remove selected roles
      */
     public void delete() {
         log.debug("Remove selected Role !");
@@ -395,8 +459,12 @@ public class RolesListController implements Serializable {
         selectedRoleList=null;
     }
 
-    /*
-     * User join tool
+    /**
+     * Get all roles from the db
+     *
+     * @return all roles from the db
+     * @throws SystemException
+     * @throws NotSupportedException
      */
     public static List<Role> getAll() throws SystemException, NotSupportedException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();

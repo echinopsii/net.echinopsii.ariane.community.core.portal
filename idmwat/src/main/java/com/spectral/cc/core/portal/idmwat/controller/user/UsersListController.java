@@ -1,5 +1,5 @@
 /**
- * IDM Commons JSF bundle
+ * Portal IDM wat bundle
  * User RUD Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -43,6 +43,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class provide stuff to display a users list in a PrimeFaces data table, display users, update a user and remove users
+ */
 public class UsersListController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(UsersListController.class);
@@ -76,6 +79,13 @@ public class UsersListController implements Serializable {
         this.addedGroup = addedGroup;
     }
 
+    /**
+     * Synchronize added group into a user to database
+     *
+     * @param user the user the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedGroup(User user) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -116,6 +126,13 @@ public class UsersListController implements Serializable {
         this.removedGroups = removedGroups;
     }
 
+    /**
+     * Synchronize removed group from a user to database
+     *
+     * @param user the user the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedGroups(User user) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -155,6 +172,13 @@ public class UsersListController implements Serializable {
         this.addedRole = addedRole;
     }
 
+    /**
+     * Synchronize added role into a user to database
+     *
+     * @param user the user the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedRole(User user) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -196,6 +220,13 @@ public class UsersListController implements Serializable {
         this.removedRoles = removedRoles;
     }
 
+    /**
+     * Synchronize removed role from a user to database
+     *
+     * @param user the user the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedRoles(User user) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -227,6 +258,15 @@ public class UsersListController implements Serializable {
         }
     }
 
+    /**
+     * When a PrimeFaces data table row is toogled init reference into the addedGroup, removedGroups, addedRole, removedRoles lists
+     * with the correct resource id
+     * When a PrimeFaces data table row is untoogled remove reference from the addedGroup, removedGroups, addedRole, removedRoles lists
+     * with the correct resource id
+     *
+     * @param event provided by the UI through PrimeFaces on a row toggle
+     * @throws CloneNotSupportedException
+     */
     public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         User eventUser = ((User) event.getData());
@@ -243,6 +283,16 @@ public class UsersListController implements Serializable {
         }
     }
 
+    /**
+     * When UI actions an update merge the corresponding user bean with the correct user instance in the DB and save this instance
+     *
+     * @param user the user the UI is working on
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void update(User user) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -269,8 +319,8 @@ public class UsersListController implements Serializable {
         }
     }
 
-    /*
-     * User delete tool
+    /**
+     * Remove selected users
      */
     public void delete() {
         log.debug("Remove selected User !");
@@ -309,9 +359,12 @@ public class UsersListController implements Serializable {
         selectedUserList=null;
     }
 
-
-    /*
-     * User join tool
+    /**
+     * Get all users from the db
+     *
+     * @return all users from the db
+     * @throws SystemException
+     * @throws NotSupportedException
      */
     public static List<User> getAll() throws SystemException, NotSupportedException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();

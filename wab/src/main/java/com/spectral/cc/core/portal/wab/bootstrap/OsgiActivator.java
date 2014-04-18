@@ -28,6 +28,11 @@ import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 
+/**
+ * This is the Portal WAB OsgiActivor :
+ * when starting it registers common portal main menu entity into main menu entity registry
+ * when stopping it unregisters the previously registered main menu entity
+ */
 public class OsgiActivator implements BundleActivator {
 
     protected static final String PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME = "CC Portal WAB";

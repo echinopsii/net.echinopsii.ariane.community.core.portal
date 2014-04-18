@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal IDM wat bundle
  * Shiro Resource Web Environment loader
  * Copyright (C) 2013 Mathilde Ffrench
  *

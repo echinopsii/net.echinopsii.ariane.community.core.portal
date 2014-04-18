@@ -1,5 +1,5 @@
 /**
- * Portal Commons Services bundle
+ * Portal base bundle
  * Main Menu Entity
  * Copyright (C) 2013 Mathilde Ffrench
  *

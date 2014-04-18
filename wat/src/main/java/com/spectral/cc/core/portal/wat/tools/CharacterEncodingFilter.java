@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal wat bundle
  * Character Encoding Filter
  * Copyright (C) 2013 Mathilde Ffrench
  *

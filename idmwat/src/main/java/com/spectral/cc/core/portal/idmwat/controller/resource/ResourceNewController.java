@@ -1,5 +1,5 @@
 /**
- * IDM JSF Commons
+ * Portal IDM wat bundle
  * Resource Create Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
@@ -31,6 +31,9 @@ import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.transaction.*;
 
+/**
+ * This class provide stuff to create and save a new resource from the UI form
+ */
 public class ResourceNewController {
 
     private static final long serialVersionUID = 1L;
@@ -67,6 +70,15 @@ public class ResourceNewController {
         this.description = description;
     }
 
+    /**
+     * save a new resource thanks data provided through UI form
+     *
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         Resource resource = new Resource();
         resource.setName(name);

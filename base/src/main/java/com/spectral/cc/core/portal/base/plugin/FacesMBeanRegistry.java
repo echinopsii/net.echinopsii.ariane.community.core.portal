@@ -1,5 +1,5 @@
 /**
- * Portal Commons Service bundle
+ * Portal base bundle
  * Portal Faces Managed Bean Registry interface
  * Copyright (C) 2014 Mathilde Ffrench
  *

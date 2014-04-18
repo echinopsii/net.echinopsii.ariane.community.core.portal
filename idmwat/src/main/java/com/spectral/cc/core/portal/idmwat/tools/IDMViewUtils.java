@@ -1,5 +1,5 @@
 /**
- * Portal IDM JSF bundle
+ * Portal IDM wat bundle
  * IDM View Utils
  * Copyright (C) 2013 Mathilde Ffrench
  *
@@ -32,7 +32,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Utilities for working with Java Server Faces views.
+ * Utilities for working with Java Server Faces views. Taglib defined in ccidm.taglib.xml.
  */
 public final class IDMViewUtils {
     private static final Logger log = LoggerFactory.getLogger(IDMViewUtils.class);

@@ -1,5 +1,5 @@
 /**
- * Portal IDM JSF bundle
+ * Portal IDM wat bundle
  * Logout counter down controller
  * Copyright (C) 2014 Mathilde Ffrench
  *

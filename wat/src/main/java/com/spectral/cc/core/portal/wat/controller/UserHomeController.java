@@ -1,5 +1,5 @@
 /**
- * Portal Web App Bundle
+ * Portal wat bundle
  * UserProfile Home Controller
  * Copyright (C) 2013 Mathilde Ffrench
  *

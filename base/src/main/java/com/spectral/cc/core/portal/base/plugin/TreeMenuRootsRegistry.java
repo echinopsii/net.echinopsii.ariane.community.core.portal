@@ -1,6 +1,6 @@
 /**
- * Directory Commons Services bundle
- * Root Directory Registry Interface
+ * Portal base bundle
+ * Tree Menu Roots Registry Interface
  * Copyright (C) 2013 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify

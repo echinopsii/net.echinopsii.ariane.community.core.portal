@@ -1,5 +1,5 @@
 /**
- * Portal Web App tools
+ * Portal wat bundle
  * Facelets Resource Resolver
  * Copyright (C) 2013 Mathilde Ffrench
  *

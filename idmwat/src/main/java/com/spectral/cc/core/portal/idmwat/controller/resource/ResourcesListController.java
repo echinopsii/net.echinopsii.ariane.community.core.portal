@@ -1,6 +1,6 @@
 /**
- * IDM Commons JSF bundle
- * Resource Controller
+ * Portal IDM wat bundle
+ * Resource RUD Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -38,6 +38,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+/**
+ * This class provide stuff to display a resources list in a PrimeFaces data table, display resources, update a resource and remove resources
+ */
 public class ResourcesListController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(ResourcesListController.class);
@@ -68,6 +71,13 @@ public class ResourcesListController implements Serializable {
         this.addedPermission = addedPermission;
     }
 
+    /**
+     * Synchronize added permission into a resource to database
+     *
+     * @param resource the resource the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncAddedPermission(Resource resource) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -114,6 +124,13 @@ public class ResourcesListController implements Serializable {
         this.removedPermissions = removedPermissions;
     }
 
+    /**
+     * Synchronize deleted permission from a resource to database
+     *
+     * @param resource the resource the UI is working on
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     public void syncRemovedPermissions(Resource resource) throws NotSupportedException, SystemException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -144,6 +161,13 @@ public class ResourcesListController implements Serializable {
         }
     }
 
+    /**
+     * When a PrimeFaces data table row is toogled init reference into the addedPermission, removedPermissions lists with the correct resource id
+     * When a PrimeFaces data table row is untoogled remove reference from the addedPermission, removedPermissions lists with the correct resource id
+     *
+     * @param event provided by the UI through PrimeFaces on a row toggle
+     * @throws CloneNotSupportedException
+     */
     public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Resource eventResource = ((Resource) event.getData());
@@ -156,6 +180,16 @@ public class ResourcesListController implements Serializable {
         }
     }
 
+    /**
+     * When UI actions an update merge the corresponding resource bean with the correct resource instance in the DB and save this instance
+     *
+     * @param resource the resource the UI is working on
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void update(Resource resource) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
@@ -182,8 +216,8 @@ public class ResourcesListController implements Serializable {
         }
     }
 
-    /*
-     * Resoource delete tool
+    /**
+     * Remove selected resources
      */
     public void delete() {
         log.debug("Remove selected Resource !");
@@ -219,6 +253,13 @@ public class ResourcesListController implements Serializable {
         selectedResourceList=null;
     }
 
+    /**
+     * Get all resources from the db
+     *
+     * @return all resources from the db
+     * @throws SystemException
+     * @throws NotSupportedException
+     */
     public static List<Resource> getAll() throws SystemException, NotSupportedException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all resources from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
@@ -241,6 +282,13 @@ public class ResourcesListController implements Serializable {
         return ret ;
     }
 
+    /**
+     * Get all resources from the db + "Select resource" for UI selector
+     *
+     * @return all resources from the db
+     * @throws SystemException
+     * @throws NotSupportedException
+     */
     public static List<Resource> getAllForSelector() throws SystemException, NotSupportedException {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all resources from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",

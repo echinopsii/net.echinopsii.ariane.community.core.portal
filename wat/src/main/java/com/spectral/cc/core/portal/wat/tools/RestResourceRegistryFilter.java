@@ -1,7 +1,7 @@
 /**
- * [DEFINE YOUR PROJECT NAME/MODULE HERE]
- * [DEFINE YOUR PROJECT DESCRIPTION HERE] 
- * Copyright (C) 26/02/14 echinopsii
+ * Portal wat bundle
+ * REST resource Registry Filter
+ * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -27,14 +27,36 @@ import javax.servlet.*;
 import java.io.IOException;
 import java.net.URISyntaxException;
 
+/**
+ * This servlet filter is an helper to add new REST endpoint coming from CC plugin to CC servlet context thanks the cc portal plugin faces mbean registry consumer.<br/>
+ * It must be configured properly in the web.xml file :<br/><br/>
+ * <pre>
+ *  <!-- Portal Rest Resource Registry Filter -->
+ *  <filter>
+ *      <filter-name>CCPortalRestResourceRegistryFilter</filter-name>
+ *      <filter-class>com.spectral.cc.core.portal.wat.tools.RestResourceRegistryFilter</filter-class>
+ *  </filter>
+ *  <filter-mapping>
+ *    <filter-name>CCPortalRestResourceRegistryFilter</filter-name>
+ *    <url-pattern>/rest/*</url-pattern>
+ *  </filter-mapping>
+ * </pre>
+ */
 public class RestResourceRegistryFilter implements Filter {
     private static final Logger log = LoggerFactory.getLogger(RestResourceRegistryFilter.class);
+
     /**
      * The filter configuration object we are associated with. If this value is null, this filter instance is not currently
      * configured.
      */
     protected FilterConfig filterConfig = null;
 
+    /**
+     * Register the servlet context into the portal rest resource registry
+     *
+     * @param filterConfig the filter config
+     * @throws ServletException
+     */
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
         this.filterConfig = filterConfig;
@@ -48,6 +70,17 @@ public class RestResourceRegistryFilter implements Filter {
         PortalRestResourceRegistryConsumer.getInstance().getPortalRestResourceRegistry().registerServletContext(filterConfig.getServletContext());
     }
 
+    /**
+     * Ask the rest resource registry to add registered rest endpoint to the portal servlet context,
+     * and then pass control to the next filter
+     *
+     * @param request the servlet request
+     * @param response the servlet response
+     * @param chain the filter chain
+     *
+     * @throws IOException
+     * @throws ServletException
+     */
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         try {

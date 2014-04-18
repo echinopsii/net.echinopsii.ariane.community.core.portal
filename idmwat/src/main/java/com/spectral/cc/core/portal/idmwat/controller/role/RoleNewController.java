@@ -1,6 +1,6 @@
 /**
- * IDM JSF Commons
- * Group Create Controller
+ * Portal IDM wat bundle
+ * Role Create Controller
  * Copyright (C) 2014 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
@@ -36,6 +36,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * This class provide stuff to create and save a new role from the UI form
+ */
 public class RoleNewController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(RoleNewController.class);
@@ -88,6 +91,12 @@ public class RoleNewController implements Serializable {
         this.permissions = permissions;
     }
 
+    /**
+     * populate permissions list through permissionsToBind list provided through UI form
+     *
+     * @throws NotSupportedException
+     * @throws SystemException
+     */
     private void bindSelectedPermissions() throws NotSupportedException, SystemException {
         for (Permission permission: PermissionsListController.getAll()) {
             for (String permissionToBind : permissionsToBind)
@@ -99,6 +108,15 @@ public class RoleNewController implements Serializable {
         }
     }
 
+    /**
+     * save a new role thanks data provided through UI form
+     *
+     * @throws SystemException
+     * @throws NotSupportedException
+     * @throws HeuristicRollbackException
+     * @throws HeuristicMixedException
+     * @throws RollbackException
+     */
     public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
         try {
             bindSelectedPermissions();

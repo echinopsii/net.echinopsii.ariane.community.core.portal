@@ -1,5 +1,5 @@
 /**
- * Portal Commons JSF bundle
+ * Portal base bundle
  * Facelets Resource Resolver Service Interface
  * Copyright (C) 2013 Mathilde Ffrench
  *

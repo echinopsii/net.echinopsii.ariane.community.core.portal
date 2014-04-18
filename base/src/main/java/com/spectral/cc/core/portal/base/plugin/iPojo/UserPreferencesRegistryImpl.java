@@ -1,5 +1,5 @@
 /**
- * Portal Commons Services bundle
+ * Portal base bundle
  * UserProfile Preference Registry iPojo Impl
  * Copyright (C) 2013 Mathilde Ffrench
  *
