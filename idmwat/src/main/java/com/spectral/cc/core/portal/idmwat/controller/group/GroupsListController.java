@@ -87,10 +87,8 @@ public class GroupsListController implements Serializable {
      * Synchronize added role into a group to database
      *
      * @param group the group the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedRole(Group group) throws NotSupportedException, SystemException {
+    public void syncAddedRole(Group group) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Role role : RolesListController.getAll()) {
@@ -135,10 +133,8 @@ public class GroupsListController implements Serializable {
      * Synchronize removed roles from a group to database
      *
      * @param group the group the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedRoles(Group group) throws NotSupportedException, SystemException {
+    public void syncRemovedRoles(Group group) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -181,10 +177,8 @@ public class GroupsListController implements Serializable {
      * Synchronize added user into a group to database
      *
      * @param group the group the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedUser(Group group) throws NotSupportedException, SystemException {
+    public void syncAddedUser(Group group) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (User user : UsersListController.getAll()) {
@@ -229,10 +223,8 @@ public class GroupsListController implements Serializable {
      * Synchronize removed users from a group to database
      *
      * @param group the group the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedUsers(Group group) throws NotSupportedException, SystemException {
+    public void syncRemovedUsers(Group group) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -264,13 +256,12 @@ public class GroupsListController implements Serializable {
     }
 
     /**
-     * When a PrimeFaces data table row is toogled init reference into the addedUser, removedUsers, addedRole and removedRoles list with the correct group id
-     * When a PrimeFaces data table row is untoogled remove reference from the addedUser, removedUsers, addedRole and removedRoles list with the correct group id
+     * When a PrimeFaces data table row is toogled init reference into the addedUser, removedUsers, addedRole and removedRoles lists with the correct group id <br/>
+     * When a PrimeFaces data table row is untoogled remove reference from the addedUser, removedUsers, addedRole and removedRoles lists with the correct group id <br/>
      *
      * @param event provided by the UI through PrimeFaces on a row toggle
-     * @throws CloneNotSupportedException
      */
-    public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
+    public void onRowToggle(ToggleEvent event) {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Group eventGroup = ((Group) event.getData());
         if (event.getVisibility().toString().equals("HIDDEN")) {
@@ -290,13 +281,8 @@ public class GroupsListController implements Serializable {
      * When UI actions an update merge the corresponding group bean with the correct group instance in the DB and save this instance
      *
      * @param group group bean UI is working on
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void update(Group group) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void update(Group group) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -361,10 +347,8 @@ public class GroupsListController implements Serializable {
      * Get all groups from the db
      *
      * @return all groups from the db
-     * @throws SystemException
-     * @throws NotSupportedException
      */
-    public static List<Group> getAll() throws SystemException, NotSupportedException {
+    public static List<Group> getAll() {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all groups from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
                          new Object[]{

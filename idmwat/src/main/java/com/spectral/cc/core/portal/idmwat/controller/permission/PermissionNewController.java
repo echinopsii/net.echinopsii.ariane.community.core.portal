@@ -156,14 +156,8 @@ public class PermissionNewController implements Serializable {
 
     /**
      * save a new permission thanks data provided through UI form
-     *
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void save() {
         try {
             bindSelectedResource();
             bindSeletectedRoles();

@@ -83,10 +83,8 @@ public class UsersListController implements Serializable {
      * Synchronize added group into a user to database
      *
      * @param user the user the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedGroup(User user) throws NotSupportedException, SystemException {
+    public void syncAddedGroup(User user) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Group group : GroupsListController.getAll()) {
@@ -130,10 +128,8 @@ public class UsersListController implements Serializable {
      * Synchronize removed group from a user to database
      *
      * @param user the user the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedGroups(User user) throws NotSupportedException, SystemException {
+    public void syncRemovedGroups(User user) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -176,10 +172,8 @@ public class UsersListController implements Serializable {
      * Synchronize added role into a user to database
      *
      * @param user the user the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedRole(User user) throws NotSupportedException, SystemException {
+    public void syncAddedRole(User user) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Role role : RolesListController.getAll()) {
@@ -224,10 +218,8 @@ public class UsersListController implements Serializable {
      * Synchronize removed role from a user to database
      *
      * @param user the user the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedRoles(User user) throws NotSupportedException, SystemException {
+    public void syncRemovedRoles(User user) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             List<Role> roles2beRM = this.removedRoles.get(user.getId());
@@ -265,9 +257,8 @@ public class UsersListController implements Serializable {
      * with the correct resource id
      *
      * @param event provided by the UI through PrimeFaces on a row toggle
-     * @throws CloneNotSupportedException
      */
-    public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
+    public void onRowToggle(ToggleEvent event) {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         User eventUser = ((User) event.getData());
         if (event.getVisibility().toString().equals("HIDDEN")) {
@@ -287,13 +278,8 @@ public class UsersListController implements Serializable {
      * When UI actions an update merge the corresponding user bean with the correct user instance in the DB and save this instance
      *
      * @param user the user the UI is working on
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void update(User user) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void update(User user) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -363,10 +349,8 @@ public class UsersListController implements Serializable {
      * Get all users from the db
      *
      * @return all users from the db
-     * @throws SystemException
-     * @throws NotSupportedException
      */
-    public static List<User> getAll() throws SystemException, NotSupportedException {
+    public static List<User> getAll() {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all users from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
                          new Object[]{

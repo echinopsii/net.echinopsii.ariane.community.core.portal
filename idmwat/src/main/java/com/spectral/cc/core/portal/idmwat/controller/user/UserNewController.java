@@ -194,14 +194,8 @@ public class UserNewController implements Serializable {
 
     /**
      * save a new user thanks data provided through UI form
-     *
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void save() {
         try {
             bindSelectedGroups();
             bindSelectedRoles();

@@ -75,10 +75,8 @@ public class ResourcesListController implements Serializable {
      * Synchronize added permission into a resource to database
      *
      * @param resource the resource the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedPermission(Resource resource) throws NotSupportedException, SystemException {
+    public void syncAddedPermission(Resource resource) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -128,10 +126,8 @@ public class ResourcesListController implements Serializable {
      * Synchronize deleted permission from a resource to database
      *
      * @param resource the resource the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedPermissions(Resource resource) throws NotSupportedException, SystemException {
+    public void syncRemovedPermissions(Resource resource) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -166,9 +162,8 @@ public class ResourcesListController implements Serializable {
      * When a PrimeFaces data table row is untoogled remove reference from the addedPermission, removedPermissions lists with the correct resource id
      *
      * @param event provided by the UI through PrimeFaces on a row toggle
-     * @throws CloneNotSupportedException
      */
-    public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
+    public void onRowToggle(ToggleEvent event) {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Resource eventResource = ((Resource) event.getData());
         if (event.getVisibility().toString().equals("HIDDEN")) {
@@ -184,13 +179,8 @@ public class ResourcesListController implements Serializable {
      * When UI actions an update merge the corresponding resource bean with the correct resource instance in the DB and save this instance
      *
      * @param resource the resource the UI is working on
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void update(Resource resource) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void update(Resource resource) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -257,10 +247,8 @@ public class ResourcesListController implements Serializable {
      * Get all resources from the db
      *
      * @return all resources from the db
-     * @throws SystemException
-     * @throws NotSupportedException
      */
-    public static List<Resource> getAll() throws SystemException, NotSupportedException {
+    public static List<Resource> getAll() {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all resources from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
                          new Object[]{
@@ -286,10 +274,8 @@ public class ResourcesListController implements Serializable {
      * Get all resources from the db + "Select resource" for UI selector
      *
      * @return all resources from the db
-     * @throws SystemException
-     * @throws NotSupportedException
      */
-    public static List<Resource> getAllForSelector() throws SystemException, NotSupportedException {
+    public static List<Resource> getAllForSelector() {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all resources from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
                          new Object[]{

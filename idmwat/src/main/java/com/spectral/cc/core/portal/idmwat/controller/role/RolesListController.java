@@ -91,10 +91,8 @@ public class RolesListController implements Serializable {
      * Synchronize added permission into a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedPermission(Role role) throws NotSupportedException, SystemException {
+    public void syncAddedPermission(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Permission permission : PermissionsListController.getAll()) {
@@ -139,10 +137,8 @@ public class RolesListController implements Serializable {
      * Synchronize deleted permission from a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedPermissions(Role role) throws NotSupportedException, SystemException {
+    public void syncRemovedPermissions(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             List<Permission> permissions2beRM = this.removedPermissions.get(role.getId());
@@ -184,10 +180,8 @@ public class RolesListController implements Serializable {
      * Synchronize added user into a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedUser(Role role) throws NotSupportedException, SystemException {
+    public void syncAddedUser(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (User user : UsersListController.getAll()) {
@@ -231,10 +225,8 @@ public class RolesListController implements Serializable {
      * Synchronize removed user from a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedUsers(Role role) throws NotSupportedException, SystemException {
+    public void syncRemovedUsers(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             List<User> users2beRM = this.removedUsers.get(role.getId());
@@ -276,10 +268,8 @@ public class RolesListController implements Serializable {
      * Synchronize added group into a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncAddedGroup(Role role) throws NotSupportedException, SystemException {
+    public void syncAddedGroup(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             for (Group group : GroupsListController.getAll()) {
@@ -323,10 +313,8 @@ public class RolesListController implements Serializable {
      * Synchronize removed group from a role to database
      *
      * @param role the role the UI is working on
-     * @throws NotSupportedException
-     * @throws SystemException
      */
-    public void syncRemovedGroups(Role role) throws NotSupportedException, SystemException {
+    public void syncRemovedGroups(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -363,9 +351,8 @@ public class RolesListController implements Serializable {
      * with the correct resource id
      *
      * @param event provided by the UI through PrimeFaces on a row toggle
-     * @throws CloneNotSupportedException
      */
-    public void onRowToggle(ToggleEvent event) throws CloneNotSupportedException {
+    public void onRowToggle(ToggleEvent event) {
         log.debug("Row Toogled : {}", new Object[]{event.getVisibility().toString()});
         Role eventRole = ((Role) event.getData());
         if (event.getVisibility().toString().equals("HIDDEN")) {
@@ -389,13 +376,8 @@ public class RolesListController implements Serializable {
      * When UI actions an update merge the corresponding role bean with the correct role instance in the DB and save this instance
      *
      * @param role the role the UI is working on
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void update(Role role) throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void update(Role role) {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         try {
             em.getTransaction().begin();
@@ -463,10 +445,8 @@ public class RolesListController implements Serializable {
      * Get all roles from the db
      *
      * @return all roles from the db
-     * @throws SystemException
-     * @throws NotSupportedException
      */
-    public static List<Role> getAll() throws SystemException, NotSupportedException {
+    public static List<Role> getAll() {
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         log.debug("Get all roles from : \n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}\n\t{}",
                          new Object[]{

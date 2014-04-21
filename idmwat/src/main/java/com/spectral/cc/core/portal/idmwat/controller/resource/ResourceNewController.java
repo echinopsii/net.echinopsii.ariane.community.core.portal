@@ -72,14 +72,8 @@ public class ResourceNewController {
 
     /**
      * save a new resource thanks data provided through UI form
-     *
-     * @throws SystemException
-     * @throws NotSupportedException
-     * @throws HeuristicRollbackException
-     * @throws HeuristicMixedException
-     * @throws RollbackException
      */
-    public void save() throws SystemException, NotSupportedException, HeuristicRollbackException, HeuristicMixedException, RollbackException {
+    public void save() {
         Resource resource = new Resource();
         resource.setName(name);
         resource.setDescription(description);
