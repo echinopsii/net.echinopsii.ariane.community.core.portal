@@ -99,6 +99,7 @@ public class ResourceLazyModel extends LazyDataModel<Resource> {
             criteria.orderBy(sortOrder.toString().equals("DESCENDING") ? builder.desc(root.get(sortField)) : builder.asc(root.get(sortField)));
         TypedQuery<Resource> query = entityManager.createQuery(criteria);
         query.setFirstResult(first).setMaxResults(getPageSize());
+        query.setHint("org.hibernate.cacheable", true);
         this.pageItems = query.getResultList();
 
         entityManager.getTransaction().commit();

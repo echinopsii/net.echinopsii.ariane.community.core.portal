@@ -95,6 +95,7 @@ public class PermissionLazyModel extends LazyDataModel<Permission> {
             criteria.orderBy(sortOrder.toString().equals("DESCENDING") ? builder.desc(root.get(sortField)) : builder.asc(root.get(sortField)));
         TypedQuery<Permission> query = em.createQuery(criteria);
         query.setFirstResult(first).setMaxResults(getPageSize());
+        query.setHint("org.hibernate.cacheable", true);
         this.pageItems = query.getResultList();
         em.close();
     }
