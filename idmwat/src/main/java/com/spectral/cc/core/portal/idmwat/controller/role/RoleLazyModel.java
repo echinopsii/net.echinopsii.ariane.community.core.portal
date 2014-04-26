@@ -96,6 +96,8 @@ public class RoleLazyModel extends LazyDataModel<Role> {
             criteria.orderBy(sortOrder.toString().equals("DESCENDING") ? builder.desc(root.get(sortField)) : builder.asc(root.get(sortField)));
         TypedQuery<Role> query = em.createQuery(criteria);
         query.setFirstResult(first).setMaxResults(getPageSize());
+        query.setHint("org.hibernate.readOnly", true);
+        IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(query);
         query.setHint("org.hibernate.cacheable", true);
         this.pageItems = query.getResultList();
 

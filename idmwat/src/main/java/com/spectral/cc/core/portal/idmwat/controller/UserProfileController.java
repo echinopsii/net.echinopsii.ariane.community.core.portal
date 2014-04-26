@@ -80,6 +80,8 @@ public class UserProfileController implements Serializable {
             Root<User> cmpRoot = cmpCriteria.from(User.class);
             cmpCriteria.select(cmpRoot).where(builder.equal(cmpRoot.<String>get("userName"), subject.getPrincipal().toString()));
             TypedQuery<User> cmpQuery = em.createQuery(cmpCriteria);
+            cmpQuery.setHint("org.hibernate.readOnly", true);
+            IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(cmpQuery);
             cmpQuery.setHint("org.hibernate.cacheable", true);
             try {
                 user = cmpQuery.getSingleResult();
