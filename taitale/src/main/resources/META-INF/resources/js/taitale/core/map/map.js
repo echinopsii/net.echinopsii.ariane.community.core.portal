@@ -256,10 +256,6 @@ define(
                 }
             };
 
-            this.pushContainerLocation = function(container) {
-                mapmatrix.addContainerZone(container);
-            };
-
             this.defineSize = function () {
                 mapmatrix.defineMtxZoneSize();
                 mapmatrix.defineMapContentSize();

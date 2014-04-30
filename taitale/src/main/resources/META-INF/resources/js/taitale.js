@@ -355,7 +355,7 @@ requirejs (
             if (input.checked) {
                 var num = input.value;
                 options.setLayout(num);
-                options.setURI(homeURI + "/rest/service/map/all");
+                //options.setURI(homeURI + "/rest/service/map/all");
                 break;
             }
         }

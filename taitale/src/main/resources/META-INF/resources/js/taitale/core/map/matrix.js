@@ -298,7 +298,7 @@ define(
                             }
                         }
                         // finally push container area
-                        pivotDC.pushContainerArea(container);
+                        container.getLayoutData().dc.pushContainerArea(container);
                         break;
                 }
             };
