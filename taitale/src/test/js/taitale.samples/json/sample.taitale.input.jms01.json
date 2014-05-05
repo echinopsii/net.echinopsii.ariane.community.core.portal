@@ -37,7 +37,7 @@
             "containerGateURI":"tibems-ssl://tibems01a.fr.echinopsii.net:7243",
             "containerCompany":"Tibco",
             "containerProduct":"Tibco EMS",
-            "containerType":"EMS Server",
+            "containerType":"Server",
             "containerProperties":{
                 "manualCoord":{
                     "x":500,
@@ -52,7 +52,7 @@
         {
             "containerID":4,
             "containerGateURI":"tibems-ssl://jmscon01.fr.echinopsii.net:6666",
-            "containerCompany":"My Company",
+            "containerCompany":"MariaDB Foundation",
             "containerProduct":"BackOffice APP",
             "containerProperties":{
                 "manualCoord":{
