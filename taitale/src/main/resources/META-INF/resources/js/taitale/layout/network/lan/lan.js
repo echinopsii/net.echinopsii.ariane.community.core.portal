@@ -472,12 +472,18 @@ define(
 
             this.setLayoutData = function(data) {
                 if (layoutData!=null) {
-                    for (var i = 0, ii = data.length; i < ii; i++) {
-                        if (layoutData[i]!=null)
-                            layoutData[i] = layoutData[i] || data[i];
-                        else
-                            layoutData[i] = data[i];
-                    }
+                    layoutData.isConnectedToLeftDC = layoutData.isConnectedToLeftDC || data.isConnectedToLeftDC
+                    layoutData.isConnectedToRightDC = layoutData.isConnectedToRightDC || data.isConnectedToRightDC
+                    layoutData.isConnectedToLeftArea = layoutData.isConnectedToLeftArea || data.isConnectedToLeftArea
+                    layoutData.isConnectedToRightArea = layoutData.isConnectedToRightArea || data.isConnectedToRightArea
+                    layoutData.isConnectedToLeftLan = layoutData.isConnectedToLeftLan || data.isConnectedToLeftLan
+                    layoutData.isConnectedToRightLan = layoutData.isConnectedToRightLan || data.isConnectedToRightLan
+                    layoutData.isConnectedToUpArea = layoutData.isConnectedToUpArea || data.isConnectedToUpArea
+                    layoutData.isConnectedToDownArea = layoutData.isConnectedToDownArea || data.isConnectedToDownArea
+                    layoutData.isConnectedToUpLan = layoutData.isConnectedToUpLan || data.isConnectedToUpLan
+                    layoutData.isConnectedToDownLan = layoutData.isConnectedToDownLan || data.isConnectedToDownLan
+                    layoutData.isConnectedInsideArea = layoutData.isConnectedInsideArea || data.isConnectedInsideArea
+                    layoutData.isConnectedInsideLan = layoutData.isConnectedInsideLan || data.isConnectedInsideLan
                 } else {
                     layoutData = data;
                 }

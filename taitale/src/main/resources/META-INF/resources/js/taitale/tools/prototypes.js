@@ -44,7 +44,7 @@ define( function() {
                     (
                         this.dcproto.equal(that.dcproto) &&
                         this.type===that.type &&
-                        this.marea===that.area &&
+                        this.marea===that.marea &&
                         this.lan===that.lan &&
                         this.subnetip===that.subnetip &&
                         this.subnetmask===that.subnetmask

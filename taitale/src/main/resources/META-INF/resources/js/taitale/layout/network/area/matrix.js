@@ -653,6 +653,7 @@ define(
                 var curlan          = container.getLayoutData().lan,
                     alreadyInserted = curlan.isInserted();
 
+
                 if (!alreadyInserted){
                     // if not inserted create lan and insert it in the area mtx
                     if (curlan.getLayoutData().isConnectedInsideArea) {
@@ -699,6 +700,16 @@ define(
                             var downColumn = getDownColumn();
                             rows[downColumn][downLine] = {obj:curlan,type:LAN};
                             curlan.setInserted();
+                        }
+                    }
+                } else {
+                    var linkedBus = container.getLinkedBus();
+                    for (var i = 0, ii = linkedBus.length; i < ii; i++) {
+                        var lBus = linkedBus[i];
+                        if (!lBus.isInserted()) {
+                            var newBusCoord = getMulticastBusCoord();
+                            rows[newBusCoord.column][newBusCoord.line] = {obj:lBus,type:BUS};
+                            lBus.setInserted();
                         }
                     }
                 }

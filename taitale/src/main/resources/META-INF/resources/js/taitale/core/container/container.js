@@ -219,6 +219,8 @@ define(
                         var attrect = {x: rx + dx, y: ry + dy},
                             attrtxt1 = {x: t0x + dx, y: t0y + dy};
 
+                        containerHat_.move(r, rx + (rectWidth/2) + dx, ry + dy);
+
                         rect.attr(attrect);
                         containerR[0].attr(attrtxt1);
 
@@ -228,7 +230,6 @@ define(
                             }
                         }
 
-                        containerHat_.move(r, rx + (rectWidth/2) + dx, ry + dy);
                         defineRectPoints(rect.attr("x"),rect.attr("y"));
                         r.safari();
                     }
