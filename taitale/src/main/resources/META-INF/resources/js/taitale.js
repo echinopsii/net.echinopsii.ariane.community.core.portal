@@ -113,7 +113,7 @@ requirejs (
                  */
                 $(execQuery.jqId).click([loader_, dic], function(){
                     var request = $(mdslQuery.jqId)[0].value
-                    var requestURI = homeURI + "/rest/service/map/query?mdsl="+encodeURI(request)
+                    var requestURI = homeURI + "/rest/mapping/service/map/query?mdsl="+encodeURI(request)
                     helper_.debug(requestURI.toString());
                     options.setURI(requestURI);
                     try {
