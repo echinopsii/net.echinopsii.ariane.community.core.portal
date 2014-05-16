@@ -98,6 +98,7 @@ public class UserLazyModel extends LazyDataModel<User> {
         query.setHint("org.hibernate.readOnly", true);
         IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(query);
         query.setHint("org.hibernate.cacheable", true);
+        query.setHint("org.hibernate.cacheRegion", "cc.core.idm.cache.queries");
         log.debug("Query: {}", new Object[]{query.toString()});
         this.pageItems = query.getResultList();
 

@@ -98,6 +98,7 @@ public class PermissionLazyModel extends LazyDataModel<Permission> {
         query.setHint("org.hibernate.readOnly", true);
         IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(query);
         query.setHint("org.hibernate.cacheable", true);
+        query.setHint("org.hibernate.cacheRegion", "cc.core.idm.cache.queries");
         this.pageItems = query.getResultList();
         em.close();
     }
