@@ -5,7 +5,7 @@
 
     <function>
         <function-name>asList</function-name>
-        <function-class>com.spectral.cc.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-class>net.echinopsii.ariane.core.portal.idmwat.tools.IDMViewUtils</function-class>
         <function-signature>
             java.util.List asList(java.lang.Object, java.lang.String)
         </function-signature>
@@ -13,7 +13,7 @@
 
     <function>
         <function-name>hasPermission</function-name>
-        <function-class>com.spectral.cc.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-class>net.echinopsii.ariane.core.portal.idmwat.tools.IDMViewUtils</function-class>
         <function-signature>
             java.lang.Boolean hasPermission(java.lang.String)
         </function-signature>
@@ -21,7 +21,7 @@
 
     <function>
         <function-name>hasRole</function-name>
-        <function-class>com.spectral.cc.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-class>net.echinopsii.ariane.core.portal.idmwat.tools.IDMViewUtils</function-class>
         <function-signature>
             java.lang.Boolean hasRole(java.lang.String)
         </function-signature>
@@ -29,7 +29,7 @@
 
     <function>
         <function-name>isAuthenticated</function-name>
-        <function-class>com.spectral.cc.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-class>net.echinopsii.ariane.core.portal.idmwat.tools.IDMViewUtils</function-class>
         <function-signature>
             java.lang.Boolean isAuthenticated()
         </function-signature>

@@ -6,74 +6,74 @@
 
     <managed-bean>
         <managed-bean-name>loginController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.LoginController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.LoginController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>logoutCounterDownController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.LogoutCounterDownController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.LogoutCounterDownController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>userProfileController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.UserProfileController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.UserProfileController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>groupNewController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.group.GroupNewController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.group.GroupNewController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>groupsListController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.group.GroupsListController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.group.GroupsListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>permissionNewController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.permission.PermissionNewController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.permission.PermissionNewController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>permissionsListController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.permission.PermissionsListController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.permission.PermissionsListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>resourceNewController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.resource.ResourceNewController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.resource.ResourceNewController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>resourcesListController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.resource.ResourcesListController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.resource.ResourcesListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>roleNewController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.role.RoleNewController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.role.RoleNewController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>rolesListController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.role.RolesListController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.role.RolesListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 
     <managed-bean>
         <managed-bean-name>userNewController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.user.UserNewController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.user.UserNewController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
         <managed-bean-name>usersListController</managed-bean-name>
-        <managed-bean-class>com.spectral.cc.core.portal.idmwat.controller.user.UsersListController</managed-bean-class>
+        <managed-bean-class>net.echinopsii.ariane.core.portal.idmwat.controller.user.UsersListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
 </faces-config>

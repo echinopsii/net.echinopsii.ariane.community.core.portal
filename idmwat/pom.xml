@@ -3,28 +3,28 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>com.spectral.cc.core</groupId>
-        <artifactId>com.spectral.cc.core.portal</artifactId>
-        <version>0.4.0.RELEASE</version>
+        <groupId>net.echinopsii.ariane.core</groupId>
+        <artifactId>net.echinopsii.ariane.core.portal</artifactId>
+        <version>0.5.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <groupId>com.spectral.cc.core.portal</groupId>
-    <artifactId>com.spectral.cc.core.portal.idmwat</artifactId>
-    <name>CC Core Portal IDM WebApp Tooling</name>
+    <groupId>net.echinopsii.ariane.core.portal</groupId>
+    <artifactId>net.echinopsii.ariane.core.portal.idmwat</artifactId>
+    <name>Ariane Core Portal IDM WebApp Tooling</name>
     <packaging>bundle</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>com.spectral.cc.core.portal</groupId>
-            <artifactId>com.spectral.cc.core.portal.base</artifactId>
+            <groupId>net.echinopsii.ariane.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.core.portal.base</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.cc.core.idm</groupId>
-            <artifactId>com.spectral.cc.core.idm.base</artifactId>
-            <version>${version.com.spectral.cc.core.idm}</version>
+            <groupId>net.echinopsii.ariane.core.idm</groupId>
+            <artifactId>net.echinopsii.ariane.core.idm.base</artifactId>
+            <version>${version.net.echinopsii.ariane.core.idm}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -63,10 +63,10 @@
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
                         <Embed-Transitive>true</Embed-Transitive>
                         <Import-Package>
-                            com.spectral.cc.core.portal.base.plugin;version=${project.version},
-                            com.spectral.cc.core.portal.base.model;version=${project.version},
-                            com.spectral.cc.core.idm.base.proxy;version=${version.com.spectral.cc.core.idm},
-                            com.spectral.cc.core.idm.base.model.jpa;version=${version.com.spectral.cc.core.idm},
+                            net.echinopsii.ariane.core.portal.base.plugin;version=${project.version},
+                            net.echinopsii.ariane.core.portal.base.model;version=${project.version},
+                            net.echinopsii.ariane.core.idm.base.proxy;version=${version.net.echinopsii.ariane.core.idm},
+                            net.echinopsii.ariane.core.idm.base.model.jpa;version=${version.net.echinopsii.ariane.core.idm},
                             com.sun.faces;version="${version.javax.faces.api}",
                             com.sun.faces.application;version="${version.javax.faces.api}",
                             com.sun.faces.application.annotation;version="${version.javax.faces.api}",
@@ -324,13 +324,13 @@
                             org.w3c.dom;version="0.0.0"
                         </Import-Package>
                         <Export-Package>
-                            com.spectral.cc.core.portal.idmwat.controller;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.controller.group;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.controller.permission;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.controller.resource;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.controller.role;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.controller.user;version="${project.version}",
-                            com.spectral.cc.core.portal.idmwat.tools;version="${project.version}"
+                            net.echinopsii.ariane.core.portal.idmwat.controller;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.controller.group;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.controller.permission;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.controller.resource;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.controller.role;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.controller.user;version="${project.version}",
+                            net.echinopsii.ariane.core.portal.idmwat.tools;version="${project.version}"
                         </Export-Package>
                     </instructions>
                 </configuration>
