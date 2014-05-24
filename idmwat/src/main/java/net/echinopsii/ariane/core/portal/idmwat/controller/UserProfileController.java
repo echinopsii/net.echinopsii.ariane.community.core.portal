@@ -83,7 +83,7 @@ public class UserProfileController implements Serializable {
             cmpQuery.setHint("org.hibernate.readOnly", true);
             IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(cmpQuery);
             cmpQuery.setHint("org.hibernate.cacheable", true);
-            cmpQuery.setHint("org.hibernate.cacheRegion", "cc.core.idm.cache.queries");
+            cmpQuery.setHint("org.hibernate.cacheRegion", "ariane.core.idm.cache.queries");
             try {
                 user = cmpQuery.getSingleResult();
             } catch (Exception e) {
