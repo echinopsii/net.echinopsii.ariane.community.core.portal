@@ -3,9 +3,9 @@
     <modelVersion>4.0.0</modelVersion>
 
     <!-- General information -->
-    <groupId>net.echinopsii.ariane.core</groupId>
-    <artifactId>net.echinopsii.ariane.core.portal</artifactId>
-    <name>Ariane Core Portal Parent</name>
+    <groupId>net.echinopsii.ariane.community.core</groupId>
+    <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
+    <name>Ariane Community Core Portal Parent</name>
     <version>0.5.0-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -317,20 +317,20 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.org.hibernate</groupId>
-            <artifactId>hibernate-osgi</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>net.echinopsii.3rdparty.org.hibernate.hibernate-osgi</artifactId>
             <version>${version.org.hibernate}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.org.hibernate</groupId>
-            <artifactId>hibernate-entitymanager</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>net.echinopsii.3rdparty.org.hibernate.hibernate-entitymanager</artifactId>
             <version>${version.org.hibernate}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>com.spectral.org.hibernate</groupId>
-            <artifactId>hibernate-core</artifactId>
+            <groupId>org.hibernate</groupId>
+            <artifactId>net.echinopsii.3rdparty.org.hibernate.hibernate-core</artifactId>
             <version>${version.org.hibernate}</version>
             <scope>provided</scope>
         </dependency>

@@ -11,7 +11,7 @@
         <param-value>/rest</param-value>
     </context-param>
     <listener>
-        <listener-class>net.echinopsii.ariane.core.portal.wab.bootstrap.ResteasyBootstrap</listener-class>
+        <listener-class>net.echinopsii.ariane.community.core.portal.wab.bootstrap.ResteasyBootstrap</listener-class>
     </listener>
     <servlet>
         <servlet-name>Ariane REST ws</servlet-name>
@@ -25,7 +25,7 @@
     <!-- SHIRO CONFIGURATION -->
     <context-param>
         <param-name>shiroEnvironmentClass</param-name>
-        <param-value>net.echinopsii.ariane.core.portal.idmwat.tools.IniOSGIWebEnvironment</param-value>
+        <param-value>net.echinopsii.ariane.community.core.portal.idmwat.tools.IniOSGIWebEnvironment</param-value>
     </context-param>
 
     <listener>
@@ -85,7 +85,7 @@
     </context-param>
     <context-param>
         <param-name>javax.faces.FACELETS_RESOURCE_RESOLVER</param-name>
-        <param-value>net.echinopsii.ariane.core.portal.wat.tools.FaceletsResourceResolver</param-value>
+        <param-value>net.echinopsii.ariane.community.core.portal.wat.tools.FaceletsResourceResolver</param-value>
     </context-param>
     <context-param>
         <param-name>com.sun.faces.allowTextChildren</param-name>
@@ -111,7 +111,7 @@
     <!-- Character Encoding Filter -->
     <filter>
         <filter-name>CharacterEncodingFilter</filter-name>
-        <filter-class>net.echinopsii.ariane.core.portal.wat.tools.CharacterEncodingFilter</filter-class>
+        <filter-class>net.echinopsii.ariane.community.core.portal.wat.tools.CharacterEncodingFilter</filter-class>
         <init-param>
             <description>override any encodings from client</description>
             <param-name>ignore</param-name>
@@ -131,7 +131,7 @@
     <!-- Portal Faces Managed Bean Registry Filter -->
     <filter>
         <filter-name>ArianePortalFacesMBeanRegistryFilter</filter-name>
-        <filter-class>net.echinopsii.ariane.core.portal.wat.tools.FacesMBeanRegistryFilter</filter-class>
+        <filter-class>net.echinopsii.ariane.community.core.portal.wat.tools.FacesMBeanRegistryFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>ArianePortalFacesMBeanRegistryFilter</filter-name>
@@ -141,7 +141,7 @@
     <!-- Portal Rest Resource Registry Filter -->
     <filter>
         <filter-name>ArianePortalRestResourceRegistryFilter</filter-name>
-        <filter-class>net.echinopsii.ariane.core.portal.wat.tools.RestResourceRegistryFilter</filter-class>
+        <filter-class>net.echinopsii.ariane.community.core.portal.wat.tools.RestResourceRegistryFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>ArianePortalRestResourceRegistryFilter</filter-name>

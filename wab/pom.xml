@@ -3,47 +3,47 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>net.echinopsii.ariane.core</groupId>
-        <artifactId>net.echinopsii.ariane.core.portal</artifactId>
+        <groupId>net.echinopsii.ariane.community.core</groupId>
+        <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
         <version>0.5.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <groupId>net.echinopsii.ariane.core.portal</groupId>
-    <artifactId>net.echinopsii.ariane.core.portal.wab</artifactId>
-    <name>Ariane Core Portal WebApp Bundle</name>
+    <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+    <artifactId>net.echinopsii.ariane.community.core.portal.wab</artifactId>
+    <name>Ariane Community Core Portal WebApp Bundle</name>
     <packaging>war</packaging>
 
     <dependencies>
         <dependency>
-            <groupId>net.echinopsii.ariane.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.core.portal.base</artifactId>
+            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.community.core.portal.base</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.echinopsii.ariane.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.core.portal.idmwat</artifactId>
+            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.community.core.portal.idmwat</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>net.echinopsii.ariane.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.core.portal.wat</artifactId>
+            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.community.core.portal.wat</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <!-- Dependencies packaged with the war -->
         <dependency>
-            <groupId>net.echinopsii.ariane.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.core.portal.wresources</artifactId>
+            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.community.core.portal.wresources</artifactId>
             <version>${project.version}</version>
             <scope>runtime</scope>
         </dependency>
         <dependency>
-            <groupId>net.echinopsii.ariane.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.core.portal.taitale</artifactId>
+            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+            <artifactId>net.echinopsii.ariane.community.core.portal.taitale</artifactId>
             <scope>runtime</scope>
             <version>${project.version}</version>
         </dependency>
@@ -119,7 +119,7 @@
                         <supportedProjectType>war</supportedProjectType>
                     </supportedProjectTypes>
                     <instructions>
-                        <Bundle-Activator>net.echinopsii.ariane.core.portal.wab.bootstrap.OsgiActivator</Bundle-Activator>
+                        <Bundle-Activator>net.echinopsii.ariane.community.core.portal.wab.bootstrap.OsgiActivator</Bundle-Activator>
                         <Web-ContextPath>Ariane</Web-ContextPath>
                         <Bundle-ClassPath>.,WEB-INF/,WEB-INF/lib/,WEB-INF/classes/</Bundle-ClassPath>
                         <Embed-Directory>WEB-INF/lib</Embed-Directory>
@@ -131,18 +131,18 @@
                         <Import-Package>
                             org.osgi.framework;version="[${version.osgimin.org.osgi.framework},${version.osgimax.org.osgi.framework})",
                             org.osgi.util.tracker;version="[${version.osgimin.org.osgi.util.tracker},${version.osgimax.org.osgi.util.tracker})",
-                            net.echinopsii.ariane.core.portal.idmwat.controller;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.controller.group;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.controller.permission;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.controller.resource;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.controller.role;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.controller.user;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.idmwat.tools;version="${project.version}",
-                            net.echinopsii.ariane.core.portal.wat.plugin;version=${project.version},
-                            net.echinopsii.ariane.core.portal.wat.controller;version=${project.version},
-                            net.echinopsii.ariane.core.portal.wat.tools;version=${project.version},
-                            net.echinopsii.ariane.core.portal.base.model;version=${project.version},
-                            net.echinopsii.ariane.core.portal.base.plugin;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller.group;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller.permission;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller.resource;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller.role;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.controller.user;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.idmwat.tools;version="${project.version}",
+                            net.echinopsii.ariane.community.core.portal.wat.plugin;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.wat.controller;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.wat.tools;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.base.model;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.base.plugin;version=${project.version},
                             org.apache.shiro.web.config;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.env;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.filter;version="${version.org.apache.shiro}",

@@ -4,15 +4,15 @@
 
     <!-- Parent -->
     <parent>
-        <groupId>net.echinopsii.ariane.core</groupId>
-        <artifactId>net.echinopsii.ariane.core.portal</artifactId>
+        <groupId>net.echinopsii.ariane.community.core</groupId>
+        <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
         <version>0.5.0-SNAPSHOT</version>
         <relativePath>..</relativePath>
     </parent>
 
-    <groupId>net.echinopsii.ariane.core.portal</groupId>
-    <artifactId>net.echinopsii.ariane.core.portal.taitale</artifactId>
-    <name>Ariane Core Portal Taitale Graph Render</name>
+    <groupId>net.echinopsii.ariane.community.core.portal</groupId>
+    <artifactId>net.echinopsii.ariane.community.core.portal.taitale</artifactId>
+    <name>Ariane Community Core Portal Taitale Graph Render</name>
     <packaging>bundle</packaging>
 
     <build>
