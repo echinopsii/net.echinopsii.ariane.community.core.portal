@@ -18,6 +18,21 @@
         <module>wab</module>
     </modules>
 
+    <repositories>
+        <repository>
+            <id>nexus.echinopsii.net</id>
+            <name>echinopsii.net repository</name>
+            <url>http://nexus.echinopsii.net/nexus/content/groups/public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>true</enabled>
+                <updatePolicy>always</updatePolicy>
+            </snapshots>
+        </repository>
+    </repositories>
+
     <properties>
         <!-- Encoding -->
         <file.encoding>UTF-8</file.encoding>
