@@ -68,7 +68,6 @@ public class UserProfileController implements Serializable {
     private List<Permission> permissions;
 
     private HashMap<String, String> preferences = new HashMap<>();
-    private HashMap<String, String> sessionPreferences = new HashMap<>();
 
     public void init() {
         subject = SecurityUtils.getSubject();
@@ -136,7 +135,7 @@ public class UserProfileController implements Serializable {
                         user.getPreferences().add(userPreference);
                     }
                     preferences.put(userPreference.getPkey(), userPreference.getPvalue());
-                    sessionPreferences.put(userPreference.getPkey(), userPreference.getPvalue());
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(userPreference.getPkey(), userPreference.getPvalue());
                 }
             }
 
@@ -420,14 +419,15 @@ public class UserProfileController implements Serializable {
         if (subject == null || !subject.isAuthenticated())
             init();
         this.preferences = preferences;
-        this.sessionPreferences = preferences;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
         user = em.find(user.getClass(), user.getId());
         for(String key : preferences.keySet()) {
             for (UserPreference userPreference : user.getPreferences()) {
-                if (userPreference.getPkey().equals(key))
+                if (userPreference.getPkey().equals(key)) {
                     userPreference.setPvalue(preferences.get(key));
+                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(userPreference.getPkey(), userPreference.getPvalue());
+                }
             }
         }
         em.flush();
@@ -437,17 +437,5 @@ public class UserProfileController implements Serializable {
 
     public void syncPreferences() {
         this.setPreferences(this.preferences);
-    }
-
-    public HashMap<String, String> getSessionPreferences() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
-        return sessionPreferences;
-    }
-
-    public void setSessionPreferences(HashMap<String, String> sessionPreferences) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
-        this.sessionPreferences = sessionPreferences;
     }
 }
