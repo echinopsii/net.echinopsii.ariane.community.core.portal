@@ -85,6 +85,7 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
         };
 
         this.loadMappy = function() {
+            document.getElementById("mappyCanvas").innerHTML = "";
             r = Raphael("mappyCanvas", mappy.getMapSize().width, mappy.getMapSize().height);
 
             /**

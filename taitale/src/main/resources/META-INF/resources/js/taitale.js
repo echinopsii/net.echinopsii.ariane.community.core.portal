@@ -117,7 +117,6 @@ requirejs (
                     helper_.debug(requestURI.toString());
                     options.setURI(requestURI);
                     try {
-                        loader_.reloadMap(options);
                         if (options.getLayout()===dic.mapLayout.NTWWW) {
                             document.getElementById('treeOptions').style.display = "none";
                             document.getElementById('networkOptions').style.display = "";
@@ -135,6 +134,7 @@ requirejs (
                             document.getElementById('treeOptions').style.display = "";
                             document.getElementById('networkOptions').style.display = "none";
                         }
+                        loader_.reloadMap(options);
                         helper_.growlMsgs(
                             {
                                 severity: 'info',
@@ -366,6 +366,15 @@ requirejs (
                 options.setMode(input.value);
             }
         }
+
+        if (options.getLayout()===dic.mapLayout.NTWWW) {
+            document.getElementById('treeOptions').style.display = "none";
+            document.getElementById('networkOptions').style.display = "";
+        } else if (options.getLayout()===dic.mapLayout.TREE) {
+            document.getElementById('treeOptions').style.display = "";
+            document.getElementById('networkOptions').style.display = "none";
+        }
+
 
         /*
         try {

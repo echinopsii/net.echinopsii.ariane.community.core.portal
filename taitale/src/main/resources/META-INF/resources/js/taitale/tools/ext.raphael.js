@@ -321,7 +321,7 @@ define(
              * => referentials for mouse event positioning offset
              */
             var mappyLayoutDiv       = document.getElementById("mainCenter"),
-                mainCenterDiv        = document.getElementById("mappyLayout");
+                mainCenterDiv        = document.getElementById("mappingLayout");
 
             var divOffsetTop  = ((mappyLayoutDiv!=null) ? mappyLayoutDiv.offsetTop : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetTop : 0),
                 divOffsetLeft = ((mappyLayoutDiv!=null) ? mappyLayoutDiv.offsetLeft : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetLeft : 0);
