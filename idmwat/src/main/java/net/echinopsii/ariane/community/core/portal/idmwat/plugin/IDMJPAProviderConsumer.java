@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * iPojo singleton which consume the IDM JPA provider.
- * Instantiated during IDM commons-jsf bundle startup. FactoryMethod : getInstance
+ * Instantiated during idmwat bundle startup. FactoryMethod : getInstance
  */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
