@@ -23,7 +23,7 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
     function loader () {
 
         // SAMPLE PURPOSE => when ajax sync we display a map whatever the httpd server state.
-        jQuery.ajaxSetup({async:false});
+        //jQuery.ajaxSetup({async:false});
         //jQuery.ajaxSetup({timeout:8000});
 
         var helper_  = new helper(),
@@ -107,11 +107,43 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
             }
         }
 
-        this.loadMap = function(options) {
+        var httpJSONmap = null;
+
+        this.buildMappy = function(options) {
             mappy       = new map(options);
+            mappy.parseJSON(httpJSONmap);
+            mappy.buildMap();
+
+            var mappyLayoutDivHeight = helper_.getMappyLayoutDivSize().height;
+            var mappyCanvasDivSize = helper_.getMappyCanvasDivSize();
+            var totalMinHeight   = mappyCanvasDivSize.height+mappyLayoutDivHeight;
+            var mappyWidth  = mappy.getMapSize().width,
+                mappyHeight = mappy.getMapSize().height;
+
+            if (mappyWidth<mappyCanvasDivSize.width)
+                mappyWidth=mappyCanvasDivSize.width;
+            if (mappyHeight<totalMinHeight)
+                mappyHeight=totalMinHeight;
+
+            mappy.setMapWidth(mappyWidth);
+            mappy.setMapHeight(mappyHeight);
+
+            this.loadMappy();
+
+            helper_.growlMsgs(
+                {
+                    severity: 'info',
+                    summary: 'Map successfully loaded ',
+                    detail: 'Layout: '+options.getLayout() //+"<br>Mode: "+options.getMode()
+                }
+            );
+        }
+
+        this.loadMap = function(options) {
             //jsonStrinfy = JSON.stringify(JSONmap);
-            var httpJSONmap = null,
-                httpJSON    = $.ajax({
+            document.getElementById('mappyLoading').style.display = "";
+            document.getElementById('mappyCanvas').style.display = "none";
+            var httpJSON    = $.ajax({
                     url: options.getURI(),
                     success:
                         function(data)	{
@@ -119,6 +151,9 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
                                 // error
                                 return;
                             }
+
+                            document.getElementById('mappyLoading').style.display = "none";
+                            document.getElementById('mappyCanvas').style.display = "";
 
                             var json = null;
                             try {
@@ -134,27 +169,12 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
                             }
 
                             httpJSONmap=json;
-                            mappy.parseJSON(httpJSONmap);
-                            mappy.buildMap();
-
-                            var mappyLayoutDivHeight = helper_.getMappyLayoutDivSize().height;
-                            var mappyCanvasDivSize = helper_.getMappyCanvasDivSize();
-                            var totalMinHeight   = mappyCanvasDivSize.height+mappyLayoutDivHeight;
-                            var mappyWidth  = mappy.getMapSize().width,
-                                mappyHeight = mappy.getMapSize().height;
-
-                            if (mappyWidth<mappyCanvasDivSize.width)
-                                mappyWidth=mappyCanvasDivSize.width;
-                            if (mappyHeight<totalMinHeight)
-                                mappyHeight=totalMinHeight;
-
-                            mappy.setMapWidth(mappyWidth);
-                            mappy.setMapHeight(mappyHeight);
-
-                            loader.loadMappy();
+                            loader.buildMappy(options);
                         },
                     error:
                         function (xhr, ajaxOptions, thrownError){
+                            document.getElementById('mappyLoading').style.display = "none";
+                            document.getElementById('mappyCanvas').style.display = "";
                             throw   {
                                 stack: new Error("JSON parse error").stack,
                                 severity: 'error',
@@ -177,7 +197,18 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
             this.loadMap(options);
         };
 
-        this.refreshMap = function() {
+        this.rebuildMap = function(options) {
+            if (zpd!=null)
+                zpd.clearEvents();
+            if (r!=null) {
+                r.raphael.unmousedown(mainMouseDown);
+                r.clear();
+            }
+            refreshZPDOffset=null;
+            this.buildMappy(options);
+        }
+
+        this.refreshMap = function(options) {
             if (zpd!=null) {
                 if (r!=null) {
                     refreshZPDOffset = r.getZPDoffsets();
@@ -189,6 +220,14 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
                 r.clear();
             }
             loader.loadMappy();
+
+            helper_.growlMsgs(
+                {
+                    severity: 'info',
+                    summary: 'Map successfully refreshed ',
+                    detail: '<br>Layout: '+options.getLayout()//+"<br>Mode: "+options.getMode()
+                }
+            );
         };
 
         this.displayDC = function(display) {

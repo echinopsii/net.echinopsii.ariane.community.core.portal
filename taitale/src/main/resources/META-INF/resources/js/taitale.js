@@ -111,6 +111,7 @@ requirejs (
                  * load here any PrimeFaces JQuery (ie : global $)
                  * object events related to map
                  */
+
                 $(execQuery.jqId).click([loader_, dic], function(){
                     var request = $(mdslQuery.jqId)[0].value
                     var requestURI = homeURI + "/rest/mapping/service/map/query?mdsl="+encodeURI(request)
@@ -135,13 +136,6 @@ requirejs (
                             document.getElementById('treeOptions').style.display = "";
                             document.getElementById('networkOptions').style.display = "none";
                         }
-                        helper_.growlMsgs(
-                            {
-                                severity: 'info',
-                                summary: 'Map successfully loaded ',
-                                detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                            }
-                        );
                     } catch (e) {
                         helper_.addMsgToGrowl(e);
                         helper_.growlMsgs(
@@ -163,7 +157,7 @@ requirejs (
                             options.setLayout(num);
                             //options.setURI(homeURI + "/rest/service/map/all");
                             try {
-                                loader_.reloadMap(options);
+                                loader_.rebuildMap(options);
                                 if (options.getLayout()===dic.mapLayout.NTWWW) {
                                     document.getElementById('treeOptions').style.display = "none";
                                     document.getElementById('networkOptions').style.display = "";
@@ -181,13 +175,6 @@ requirejs (
                                     document.getElementById('treeOptions').style.display = "";
                                     document.getElementById('networkOptions').style.display = "none";
                                 }
-                                helper_.growlMsgs(
-                                    {
-                                        severity: 'info',
-                                        summary: 'Map successfully loaded ',
-                                        detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                                    }
-                                );
                             } catch (e) {
                                 helper_.addMsgToGrowl(e);
                                 helper_.growlMsgs(
@@ -204,13 +191,14 @@ requirejs (
                         }
                     }
                 });
+                /*
                 $(modeSelector.jqId).change([loader_, dic], function() {
                     for (var i = 0, ii = modeSelector.inputs.length; i < ii; i++) {
                         var input = modeSelector.inputs[i];
                         if (input.checked) {
                             options.setMode(input.value);
                             try {
-                                loader_.refreshMap();
+                                loader_.refreshMap(options);
                                 if (options.getLayout()===dic.mapLayout.NTWWW) {
                                     for (var i = 0, ii = networkLayoutDisplayOptions.inputs.length; i < ii; i++) {
                                         var input = networkLayoutDisplayOptions.inputs[i];
@@ -223,13 +211,6 @@ requirejs (
                                         }
                                     }
                                 }
-                                helper_.growlMsgs(
-                                    {
-                                        severity: 'info',
-                                        summary: 'Map successfully refreshed ',
-                                        detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                                    }
-                                );
                             } catch (e) {
                                 helper_.addMsgToGrowl(e);
                                 helper_.growlMsgs(
@@ -244,6 +225,7 @@ requirejs (
                         }
                     }
                 });
+                */
                 $(notificationsOptions.jqId).change([loader_, dic], function() {
                     for (var i = 0, ii = notificationsOptions.inputs.length; i < ii; i++) {
                         var input = notificationsOptions.inputs[i];
@@ -277,14 +259,7 @@ requirejs (
                                 options.setRootTreeSorting(value);
                                 loader_.sortRootTree(value);
                                 loader_.rebuildMapTreeLayout();
-                                loader_.refreshMap();
-                                helper_.growlMsgs(
-                                    {
-                                        severity: 'info',
-                                        summary: 'Map successfully refreshed ',
-                                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                                    }
-                                );
+                                loader_.refreshMap(options);
                             } catch (e) {
                                 helper_.addMsgToGrowl(e);
                                 helper_.growlMsgs(
@@ -310,7 +285,7 @@ requirejs (
                                 options.setSubTreesSorting(value);
                                 loader_.sortSubTrees(options.getSubTreesSorting());
                                 loader_.rebuildMapTreeLayout();
-                                loader_.refreshMap();
+                                loader_.refreshMap(options);
                                 helper_.growlMsgs(
                                     {
                                         severity: 'info',
@@ -360,12 +335,14 @@ requirejs (
             }
         }
 
+        /*
         for (var i = 0, ii = modeSelector.inputs.length; i < ii; i++) {
             var input = modeSelector.inputs[i];
             if (input.checked) {
                 options.setMode(input.value);
             }
         }
+        */
 
         if (options.getLayout()===dic.mapLayout.NTWWW) {
             document.getElementById('treeOptions').style.display = "none";
@@ -374,7 +351,6 @@ requirejs (
             document.getElementById('treeOptions').style.display = "";
             document.getElementById('networkOptions').style.display = "none";
         }
-
 
         /*
         try {
