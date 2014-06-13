@@ -36,7 +36,7 @@ button,
 
 .ui-layout-north {
     z-index: 20 !important;
-    overflow: visible !important;;
+    overflow: visible !important;
 }
 
 .ui-layout-north .ui-layout-unit-content {
@@ -46,6 +46,10 @@ button,
 .ui-layout-unit {
     margin: 0;
     padding: 0;
+    padding-top: 0 !important;
+    padding-right:  0 !important;
+    padding-bottom:  0 !important;
+    padding-left:  0 !important;
 }
 
 .main-layout-unit.ui-layout-unit {
@@ -53,6 +57,10 @@ button,
     border: 0;
     margin: 0;
     padding: 0;
+    padding-top: 0 !important;
+    padding-right:  0 !important;
+    padding-bottom:  0 !important;
+    padding-left:  0 !important;
 }
 
 .menuButton .ui-button-text {
