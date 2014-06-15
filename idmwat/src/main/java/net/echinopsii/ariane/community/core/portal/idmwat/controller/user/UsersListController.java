@@ -314,8 +314,13 @@ public class UsersListController implements Serializable {
             try {
                 em.getTransaction().begin();
                 user2BeRemoved = em.find(user2BeRemoved.getClass(), user2BeRemoved.getId());
-                for (Group group : user2BeRemoved.getGroups())
+                for (Group group : user2BeRemoved.getGroups()) {
                     group.getUsers().remove(user2BeRemoved);
+                    if (group.getName().equals(user2BeRemoved.getUserName())) {
+                        user2BeRemoved.getGroups().remove(group);
+                        em.remove(group);
+                    }
+                }
                 for (Role role : user2BeRemoved.getRoles())
                     role.getUsers().remove(user2BeRemoved);
                 for (UserPreference pref : user2BeRemoved.getPreferences())
