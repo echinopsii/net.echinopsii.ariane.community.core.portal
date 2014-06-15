@@ -218,23 +218,34 @@ public class UserNewController implements Serializable {
         user.setGroups(groups);
         user.setRoles(roles);
 
+        Group usrGroup = new Group();
+        usrGroup.setName(userName);
+        usrGroup.setDescription(userName + " personal group");
+
         try {
             em.getTransaction().begin();
             em.persist(user);
+            em.persist(usrGroup);
+
+            user.getGroups().add(usrGroup);
+
             for (Group group : user.getGroups()) {
                 group = em.find(group.getClass(), group.getId());
                 group.getUsers().add(user);
             }
+
             for (Role role : user.getRoles()) {
                 role = em.find(role.getClass(), role.getId());
                 role.getUsers().add(user);
             }
+
             em.flush();
             em.getTransaction().commit();
             log.debug("Save new User {} !", new Object[]{userName});
+
             FacesMessage msg = new FacesMessage(FacesMessage.SEVERITY_INFO,
-                                                       "User created successfully !",
-                                                       "User name : " + user.getUserName());
+                                                "User created successfully !",
+                                                "User name : " + user.getUserName());
             FacesContext.getCurrentInstance().addMessage(null, msg);
         } catch (Throwable t) {
             log.debug("Throwable catched !");
