@@ -368,4 +368,13 @@ public class GroupsListController implements Serializable {
         em.close();
         return ret ;
     }
+
+    public static Group getGroupByName(EntityManager em, String name) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Group> criteria = builder.createQuery(Group.class);
+        Root<Group> root = criteria.from(Group.class);
+        criteria.select(root).where(builder.equal(root.<String>get("name"),name));
+        Group ret = em.createQuery(criteria).getSingleResult();
+        return ret;
+    }
 }

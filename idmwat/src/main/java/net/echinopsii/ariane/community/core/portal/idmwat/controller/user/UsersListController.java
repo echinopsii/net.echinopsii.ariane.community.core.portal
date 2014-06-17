@@ -374,4 +374,13 @@ public class UsersListController implements Serializable {
         em.close();
         return ret ;
     }
+
+    public static User getUserByUserName(EntityManager em, String username) {
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root).where(builder.equal(root.<String>get("userName"),username));
+        User ret = em.createQuery(criteria).getSingleResult();
+        return ret;
+    }
 }
