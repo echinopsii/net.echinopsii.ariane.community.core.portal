@@ -95,13 +95,13 @@ public class Registrator implements Runnable {
 
             submenuCount = 0;
             MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-cog icon-large");
-            adminSB.getDisplayRoles().add("ccsecadmin");
-            adminSB.getDisplayRoles().add("ccsecreviewer");
-            adminSB.getDisplayPermissions().add("ccSecResource:display");
-            adminSB.getDisplayPermissions().add("ccSecPermission:display");
-            adminSB.getDisplayPermissions().add("ccSecRole:display");
-            adminSB.getDisplayPermissions().add("ccSecGroup:display");
-            adminSB.getDisplayPermissions().add("ccSecUser:display");
+            adminSB.getDisplayRoles().add("secadmin");
+            adminSB.getDisplayRoles().add("secreviewer");
+            adminSB.getDisplayPermissions().add("secResource:display");
+            adminSB.getDisplayPermissions().add("secPermission:display");
+            adminSB.getDisplayPermissions().add("secRole:display");
+            adminSB.getDisplayPermissions().add("secGroup:display");
+            adminSB.getDisplayPermissions().add("secUser:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(adminSB);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(adminSB);
 
@@ -112,44 +112,44 @@ public class Registrator implements Runnable {
             */
 
             entity = new MainMenuEntity("securityMItem", "Security",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/security.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-key icon-large").setParent(adminSB);
-            entity.getDisplayRoles().add("ccsecadmin");
-            entity.getDisplayRoles().add("ccsecreviewer");
-            entity.getDisplayPermissions().add("ccSecResource:display");
-            entity.getDisplayPermissions().add("ccSecPermission:display");
-            entity.getDisplayPermissions().add("ccSecRole:display");
-            entity.getDisplayPermissions().add("ccSecGroup:display");
-            entity.getDisplayPermissions().add("ccSecUser:display");
+            entity.getDisplayRoles().add("secadmin");
+            entity.getDisplayRoles().add("secreviewer");
+            entity.getDisplayPermissions().add("secResource:display");
+            entity.getDisplayPermissions().add("secPermission:display");
+            entity.getDisplayPermissions().add("secRole:display");
+            entity.getDisplayPermissions().add("secGroup:display");
+            entity.getDisplayPermissions().add("secUser:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
             entity = new MainMenuEntity("dbSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
-            entity.getDisplayRoles().add("ccdbadmin");
-            entity.getDisplayPermissions().add("ccSQLConsole:display");
-            entity.getDisplayPermissions().add("ccNeo4JConsole:display");
+            entity.getDisplayRoles().add("dbadmin");
+            entity.getDisplayPermissions().add("SQLConsole:display");
+            entity.getDisplayPermissions().add("neo4JConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
             entity = new MainMenuEntity("neo4JMItem", "Neo4J Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/neo4j.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
-            entity.getDisplayRoles().add("ccdbadmin");
-            entity.getDisplayPermissions().add("ccNeo4JConsole:display");
+            entity.getDisplayRoles().add("dbadmin");
+            entity.getDisplayPermissions().add("neo4JConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
             entity = new MainMenuEntity("sqlMItem", "SQL Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/sql.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
-            entity.getDisplayRoles().add("ccdbadmin");
-            entity.getDisplayPermissions().add("ccSQLConsole:display");
+            entity.getDisplayRoles().add("dbadmin");
+            entity.getDisplayPermissions().add("SQLConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
             entity = new MainMenuEntity("virgoSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
-            entity.getDisplayRoles().add("ccvirgoadmin");
-            entity.getDisplayPermissions().add("ccVirgoConsole:display");
+            entity.getDisplayRoles().add("virgoadmin");
+            entity.getDisplayPermissions().add("virgoConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
             entity = new MainMenuEntity("virgoMItem", "Virgo Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/virgo.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
 
-            entity.getDisplayRoles().add("ccvirgoadmin");
-            entity.getDisplayPermissions().add("ccVirgoConsole:display");
+            entity.getDisplayRoles().add("virgoadmin");
+            entity.getDisplayPermissions().add("virgoConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 

@@ -12,7 +12,7 @@
         <ui:define name="moduleContent">
             <ui:fragment rendered="#{ccidm:isAuthenticated()}">
                 <p:tabView id="securityTabView" orientation="top">
-                    <p:tab rendered="#{ccidm:hasPermission('ccSecUser:display')}">
+                    <p:tab rendered="#{ccidm:hasPermission('secUser:display')}">
                         <f:facet name="title">
                             <i class="icon-user icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Users"/>
@@ -57,49 +57,49 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Username : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecUser:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="username" value="#{user.userName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.userName}" rendered="#{!(ccidm:hasPermission('ccSecUser:update'))}"/>
+                                        <h:outputText value="#{user.userName}" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="First name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecUser:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.firstName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(ccidm:hasPermission('ccSecUser:update'))}"/>
+                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Last name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecUser:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.lastName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(ccidm:hasPermission('ccSecUser:update'))}"/>
+                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Email : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecUser:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.email}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(ccidm:hasPermission('ccSecUser:update'))}"/>
+                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Phone : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecUser:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.phone}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(ccidm:hasPermission('ccSecUser:update'))}"/>
+                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
@@ -111,7 +111,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecUser:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secUser:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
@@ -139,7 +139,7 @@
                                                 <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
                                                     <h:outputText value="#{group.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecUser:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secUser:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
@@ -161,10 +161,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('ccSecUser:create')}"/>
+                                                     rendered="#{ccidm:hasPermission('secUser:create')}"/>
                                     <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
                                                      update=":removeUserDialogForm:usrdisplay"
-                                                     rendered="#{ccidm:hasPermission('ccSecUser:remove')}"/>
+                                                     rendered="#{ccidm:hasPermission('secUser:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                                      :securityTabView:groupTableForm:groupTable,
@@ -176,7 +176,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('ccSecGroup:display')}">
+                    <p:tab rendered="#{ccidm:hasPermission('secGroup:display')}">
                         <f:facet name="title">
                             <i class="icon-group icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Groups"/>
@@ -209,22 +209,22 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecGroup:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secGroup:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{group.name}"/>
                                                 <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{group.name}" rendered="#{!(ccidm:hasPermission('ccSecGroup:update'))}"/>
+                                        <h:outputText value="#{group.name}" rendered="#{!(ccidm:hasPermission('secGroup:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecGroup:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secGroup:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{group.description}"/>
                                                 <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{group.description}" rendered="#{!(ccidm:hasPermission('ccSecGroup:update'))}"/>
+                                        <h:outputText value="#{group.description}" rendered="#{!(ccidm:hasPermission('secGroup:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
@@ -236,7 +236,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecGroup:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secGroup:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
@@ -264,7 +264,7 @@
                                                 <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
                                                     <h:outputText value="#{user.email}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecGroup:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secGroup:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
@@ -287,10 +287,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('ccSecGroup:create')}"/>
+                                                     rendered="#{ccidm:hasPermission('secGroup:create')}"/>
                                     <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
                                                      update=":removeGroupDialogForm:grpdisplay"
-                                                     rendered="#{ccidm:hasPermission('ccSecGroup:remove')}"/>
+                                                     rendered="#{ccidm:hasPermission('secGroup:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                              :securityTabView:groupTableForm:groupTable,
@@ -303,7 +303,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('ccSecRole:display')}">
+                    <p:tab rendered="#{ccidm:hasPermission('secRole:display')}">
                         <f:facet name="title">
                             <i class="icon-star icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Roles"/>
@@ -336,22 +336,22 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecRole:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secRole:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{role.name}"/>
                                                 <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{role.name}" rendered="#{!(ccidm:hasPermission('ccSecRole:update'))}"/>
+                                        <h:outputText value="#{role.name}" rendered="#{!(ccidm:hasPermission('secRole:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecRole:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secRole:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{role.description}"/>
                                                 <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{role.description}" rendered="#{!(ccidm:hasPermission('ccSecRole:update'))}"/>
+                                        <h:outputText value="#{role.description}" rendered="#{!(ccidm:hasPermission('secRole:update'))}"/>
 
                                         <h:outputText value="Permissions : " styleClass="inputTitle"/>
                                         <h:form>
@@ -363,7 +363,7 @@
                                                 <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
                                                     <h:outputText value="#{perm.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecRole:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
@@ -391,7 +391,7 @@
                                                 <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
                                                     <h:outputText value="#{group.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecRole:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
@@ -419,7 +419,7 @@
                                                 <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
                                                     <h:outputText value="#{user.email}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecRole:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
@@ -442,10 +442,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('ccSecRole:create')}"/>
+                                                     rendered="#{ccidm:hasPermission('secRole:create')}"/>
                                     <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
                                                      update=":removeRoleDialogForm:roledisplay"
-                                                     rendered="#{ccidm:hasPermission('ccSecRole:remove')}"/>
+                                                     rendered="#{ccidm:hasPermission('secRole:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                              :securityTabView:permissionTableForm:permissionTable,
@@ -459,7 +459,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('ccSecPermission:display')}">
+                    <p:tab rendered="#{ccidm:hasPermission('secPermission:display')}">
                         <f:facet name="title">
                             <i class="icon-legal icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Permissions"/>
@@ -496,25 +496,25 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecPermission:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{permission.name}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.name}" rendered="#{!(ccidm:hasPermission('ccSecPermission:update'))}"/>
+                                        <h:outputText value="#{permission.name}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecPermission:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{permission.description}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.description}" rendered="#{!(ccidm:hasPermission('ccSecPermission:update'))}"/>
+                                        <h:outputText value="#{permission.description}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Resource : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecPermission:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
                                             <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
                                                 <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
                                                     <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
@@ -523,7 +523,7 @@
                                                 <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(ccidm:hasPermission('ccSecPermission:update'))}"/>
+                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
@@ -535,7 +535,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecPermission:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secPermission:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
@@ -557,10 +557,10 @@
                                 </p:rowExpansion>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('ccSecPermission:create')}"/>
+                                                     rendered="#{ccidm:hasPermission('secPermission:create')}"/>
                                     <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
                                                      update=":removePermissionDialogForm:permdisplay"
-                                                     rendered="#{ccidm:hasPermission('ccSecPermission:remove')}"/>
+                                                     rendered="#{ccidm:hasPermission('secPermission:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:resourceTableForm:resourceTable,
                                                              :securityTabView:permissionTableForm:permissionTable,
@@ -574,7 +574,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('ccSecResource:display')}">
+                    <p:tab rendered="#{ccidm:hasPermission('secResource:display')}">
                         <f:facet name="title">
                             <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Resources"/>
@@ -607,22 +607,22 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecResource:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secResource:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{res.name}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('ccSecResource:update'))}"/>
+                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('secResource:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('ccSecResource:update')}">
+                                        <h:form rendered="#{ccidm:hasPermission('secResource:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{res.description}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('ccSecResource:update'))}"/>
+                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('secResource:update'))}"/>
 
                                         <h:outputText value="Permissions : " styleClass="inputTitle"/>
                                         <h:form>
@@ -634,7 +634,7 @@
                                                 <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
                                                     <h:outputText value="#{perm.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('ccSecPermission:update')}">
+                                                <c:if test="#{ccidm:hasPermission('secPermission:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
@@ -655,10 +655,10 @@
                                 </p:rowExpansion>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('ccSecResource:create')}"/>
+                                                     rendered="#{ccidm:hasPermission('secResource:create')}"/>
                                     <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
                                                      update=":removeResourceDialogForm:resdisplay"
-                                                     rendered="#{ccidm:hasPermission('ccSecResource:remove')}"/>
+                                                     rendered="#{ccidm:hasPermission('secResource:remove')}"/>
                                     <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
                                                      update=":securityTabView:resourceTableForm:resourceTable,
                                                              :securityTabView:permissionTableForm:permissionTable" />
