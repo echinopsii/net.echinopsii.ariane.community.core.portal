@@ -146,8 +146,8 @@ public class Registrator implements Runnable {
             entity.getDisplayPermissions().add("virgoConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-            entity = new MainMenuEntity("virgoMItem", "Virgo Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/virgo.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
 
+            entity = new MainMenuEntity("virgoMItem", "Virgo Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/virgo.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
             entity.getDisplayRoles().add("virgoadmin");
             entity.getDisplayPermissions().add("virgoConsole:display");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
