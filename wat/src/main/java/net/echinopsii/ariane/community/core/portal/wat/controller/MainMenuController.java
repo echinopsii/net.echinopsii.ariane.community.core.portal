@@ -55,7 +55,7 @@ public class MainMenuController implements Serializable{
      */
     private static boolean isAuthorized(Subject subject, MainMenuEntity entity) {
         boolean ret = false;
-        if (subject.hasRole("Jedi") || subject.isPermitted("ccuniverse:zeone") || entity.getDisplayRoles().size()==0) {
+        if (subject.hasRole("Jedi") || subject.isPermitted("universe:zeone") || entity.getDisplayRoles().size()==0) {
             ret = true;
         } else {
             for (String role : entity.getDisplayRoles())
@@ -120,13 +120,13 @@ public class MainMenuController implements Serializable{
         for (MainMenuEntity subEntity : MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().getMainMenuEntitiesFromParent(entity)) {
             switch(subEntity.getType()) {
                 case MenuEntityType.TYPE_MENU_ITEM:
-                    if (isAuthorized(subject, entity)) {
+                    if (isAuthorized(subject, subEntity)) {
                         MenuItem item = createMenuItemFromEntity(subEntity);
                         submenu.getChildren().add(item);
                     }
                     break;
                 case MenuEntityType.TYPE_MENU_SEPARATOR:
-                    if (isAuthorized(subject, entity)) {
+                    if (isAuthorized(subject, subEntity)) {
                         Separator separator = new Separator();
                         separator.setId(subEntity.getId());
                         submenu.getChildren().add(separator);
