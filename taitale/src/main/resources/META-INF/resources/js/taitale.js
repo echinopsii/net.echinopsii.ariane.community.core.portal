@@ -142,7 +142,7 @@ requirejs (
                             {
                                 severity: 'error',
                                 summary: 'Failed to load map',
-                                detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode(),
+                                detail: 'Layout: '+options.getLayout(), // +"<br>Mode: "+options.getMode(),
                                 sticky: true
                             }
                         );
@@ -181,7 +181,7 @@ requirejs (
                                     {
                                         severity: 'error',
                                         summary: 'Failed to load map',
-                                        detail: 'Layout: '+options.getLayout()+"<br>Mode: "+options.getMode(),
+                                        detail: 'Layout: '+options.getLayout(), // +"<br>Mode: "+options.getMode(),
                                         sticky: true
                                     }
                                 );
@@ -290,7 +290,7 @@ requirejs (
                                     {
                                         severity: 'info',
                                         summary: 'Map successfully refreshed ',
-                                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
+                                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout() //+"<br>Mode: "+options.getMode()
                                     }
                                 );
                             } catch (e) {

@@ -104,13 +104,6 @@ requirejs (
                 loader_.displayDC($("#displayDC")[0].checked);
                 loader_.displayArea($("#displayArea")[0].checked);
                 loader_.displayLan($("#displayLan")[0].checked);
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully loaded ',
-                        detail: 'Name: '+ $('#test').val() + '<br>Layout: ' + options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -142,13 +135,6 @@ requirejs (
                 loader_.displayDC($("#displayDC")[0].checked);
                 loader_.displayArea($("#displayArea")[0].checked);
                 loader_.displayLan($("#displayLan")[0].checked);
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully loaded ',
-                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -170,13 +156,6 @@ requirejs (
                 loader_.displayDC($("#displayDC")[0].checked);
                 loader_.displayArea($("#displayArea")[0].checked);
                 loader_.displayLan($("#displayLan")[0].checked);
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully refreshed ',
-                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -209,13 +188,6 @@ requirejs (
                 loader_.displayDC($("#displayDC")[0].checked);
                 loader_.displayArea($("#displayArea")[0].checked);
                 loader_.displayLan($("#displayLan")[0].checked);
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully loaded ',
-                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -288,13 +260,6 @@ requirejs (
                 loader_.sortRootTree($('#rootTreeSorting').val());
                 loader_.rebuildMapTreeLayout();
                 loader_.refreshMap();
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully refreshed ',
-                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -315,13 +280,6 @@ requirejs (
                 loader_.sortSubTrees(options.getSubTreesSorting());
                 loader_.rebuildMapTreeLayout();
                 loader_.refreshMap();
-                helper_.growlMsgs(
-                    {
-                        severity: 'info',
-                        summary: 'Map successfully refreshed ',
-                        detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                    }
-                );
             } catch (e) {
                 helper_.addMsgToGrowl(e);
                 helper_.growlMsgs(
@@ -358,12 +316,6 @@ requirejs (
             loader_.displayDC($("#displayDC")[0].checked);
             loader_.displayArea($("#displayArea")[0].checked);
             loader_.displayLan($("#displayLan")[0].checked);
-            helper_.growlMsgs(
-                {
-                    severity: 'info',
-                    summary: 'Map successfully loaded',
-                    detail: 'Name: '+$('#test').val()+'<br>Layout: '+options.getLayout()+"<br>Mode: "+options.getMode()
-                });
         } catch (e) {
             helper_.addMsgToGrowl(e);
             helper_.growlMsgs(
