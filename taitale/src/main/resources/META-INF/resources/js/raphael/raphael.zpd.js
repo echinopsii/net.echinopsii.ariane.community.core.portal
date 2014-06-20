@@ -236,10 +236,10 @@ define(['raphael'], function (Raphael) {
                     if (me.opts.zoomThreshold[0] >= me.zoomCurrent) return;
                 me.zoomCurrent--;
             }
-            logOnFirbugConsole("[RaphaelZPD.zoomer] zoom:"+me.zoomCurrent);
+            //logOnFirbugConsole("[RaphaelZPD.zoomer] zoom:"+me.zoomCurrent);
 
             var z = 1 + delta; // Zoom factor: 0.7/1.3
-            logOnFirbugConsole("[RaphaelZPD.zoomer]zoom factor:"+z);
+            //logOnFirbugConsole("[RaphaelZPD.zoomer]zoom factor:"+z);
             var g = svgDoc.getElementById("viewport"+me.id);
             var pt = me.getEventPoint(evt);
             var p = pt.matrixTransform(g.getCTM().inverse());
@@ -277,7 +277,7 @@ define(['raphael'], function (Raphael) {
                 else
                     delta = -0.03;
             }
-            logOnFirbugConsole("[RaphaelZPD.me.handleMouseWheel]delta:"+delta);
+            //logOnFirbugConsole("[RaphaelZPD.me.handleMouseWheel]delta:"+delta);
 
             // Compute new scale matrix in current mouse position
             if (!me.isEditionMode()) {
@@ -308,20 +308,20 @@ define(['raphael'], function (Raphael) {
             if (me.state == 'pan') {
                 // Pan mode
                 if (!me.opts.pan) return;
-                logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseMove => PAN");
+                //logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseMove => PAN");
                 if (!me.isMapObjectMoving()) {
                     var pt = me.getEventPoint(evt);
                     var p = pt.matrixTransform(me.stateTf);
                     me.setCTM(g, me.stateTf.inverse().translate(p.x - me.stateOrigin.x, p.y - me.stateOrigin.y));
                     me.moveX = p.x - me.stateOrigin.x;
                     me.moveY = p.y - me.stateOrigin.y;
-                    logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]Panning : {"+me.moveX+","+me.moveY+"}");
+                    //logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]Panning : {"+me.moveX+","+me.moveY+"}");
                 }
             } else if (me.state == 'move') {
                 // Move mode
                 if (!me.opts.drag) return;
 
-                logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseMove => MOVE");
+                //logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseMove => MOVE");
 
                 var p = me.getEventPoint(evt).matrixTransform(g.getCTM().inverse());
 
@@ -348,7 +348,7 @@ define(['raphael'], function (Raphael) {
                 // Pan mode
                 if (!me.opts.pan) return;
 
-                logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseDown => PAN");
+                //logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseDown => PAN");
 
                 me.state = 'pan';
 
@@ -359,7 +359,7 @@ define(['raphael'], function (Raphael) {
                 // Move mode
                 if (!me.opts.drag || evt.target.draggable == false) return;
 
-                logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseDown => MOVE");
+                //logOnFirbugConsole("[RaphaelZPD.me.handleMouseMove]MouseDown => MOVE");
 
                 me.state = 'move';
 
@@ -387,7 +387,7 @@ define(['raphael'], function (Raphael) {
                 if (!me.isMapObjectMoving()) {
                     zpdOffsetX += me.moveX;
                     zpdOffsetY += me.moveY;
-                    logOnFirbugConsole("[RaphaelZPD.me.handleMouseUp]zpdOffset : {"+zpdOffsetX+","+zpdOffsetY+"}");
+                    //logOnFirbugConsole("[RaphaelZPD.me.handleMouseUp]zpdOffset : {"+zpdOffsetX+","+zpdOffsetY+"}");
                 }
                 me.state = '';
             }

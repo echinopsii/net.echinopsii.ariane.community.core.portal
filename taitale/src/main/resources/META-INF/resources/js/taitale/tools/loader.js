@@ -231,27 +231,27 @@ define(['jquery','raphael','raphael-zpd', 'taitale-params', 'taitale-map', 'tait
         };
 
         this.displayDC = function(display) {
-            mappy.displayDC(display);
+            if (mappy!=null && display!=null) mappy.displayDC(display);
         };
 
         this.displayArea = function(display) {
-            mappy.displayArea(display);
+            if (mappy!=null && display!=null) mappy.displayArea(display);
         };
 
         this.displayLan = function(display) {
-            mappy.displayLan(display);
+            if (mappy!=null && display!=null) mappy.displayLan(display);
         };
 
         this.sortRootTree = function(sort) {
-            mappy.sortRootTree(sort);
+            if (mappy!=null && sort!=null) mappy.sortRootTree(sort);
         };
 
         this.sortSubTrees = function(sort) {
-            mappy.sortSubTrees(sort);
+            if (mappy!=null && sort!=null) mappy.sortSubTrees(sort);
         };
 
         this.rebuildMapTreeLayout = function()  {
-            mappy.rebuildMapTreeLayout();
+            if (mappy!=null) mappy.rebuildMapTreeLayout();
         }
     };
 

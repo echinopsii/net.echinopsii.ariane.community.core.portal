@@ -50,10 +50,10 @@ define(
                     rvertex.incrementRepulsionFactor(treeObject.getLinkedTreeObjects().length);
                     vertexRegistry.push(rvertex);
                     treeObject.setInserted();
-                    helper_.debug("[tree.addVertex] New root vertex " + rvertex.getVertexID() + " added (" + treeObject.getName() + "). Floor =  " + 0 );
+                    //helper_.debug("[tree.addVertex] New root vertex " + rvertex.getVertexID() + " added (" + treeObject.getName() + "). Floor =  " + 0 );
                 } else {
                     rvertex = this.findVertexByID(treeObject.getID());
-                    helper_.debug("[tree.addVertex] Parent vertex " + rvertex.getVertexID() + " retrieved (" + treeObject.getName() + "). Floor =  " + rvertex.getFloor() );
+                    //helper_.debug("[tree.addVertex] Parent vertex " + rvertex.getVertexID() + " retrieved (" + treeObject.getName() + "). Floor =  " + rvertex.getFloor() );
                 }
 
                 var linkedContainers  = ((treeObject instanceof container) ? treeObject.getLinkedContainers():treeObject.getLinkedTreeObjects()),
@@ -70,10 +70,10 @@ define(
                         vertexRegistry.push(linkedVertex);
                         rvertex.pushLinkedVertex(linkedVertex);
                         linkedContainer.setInserted();
-                        helper_.debug(
-                            "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
-                            " added (" + linkedContainer.getName() + "). Floor =  " + linkedVertex.getFloor() +
-                            ", ID from root = " + linkedVertex.getIdFromRoot());
+                        //helper_.debug(
+                        //    "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
+                        //    " added (" + linkedContainer.getName() + "). Floor =  " + linkedVertex.getFloor() +
+                        //    ", ID from root = " + linkedVertex.getIdFromRoot());
                         if (linkedContainer.getLinkedTreeObjects().length!=0)
                             childMulticastBus = childMulticastBus.concat(this.addVertex(linkedContainer));
                     }
@@ -94,10 +94,10 @@ define(
                                     busVertex.incrementRepulsionFactor(childBus.getLinkedTreeObjectsCount());
                                     vertexRegistry.push(busVertex);
                                     childBus.setInserted();
-                                    helper_.debug(
-                                        "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
-                                        " added (" + childBus.toString + "). Floor =  " + linkedVertex.getFloor() +
-                                        ", ID from root = " + linkedVertex.getIdFromRoot());
+                                    //helper_.debug(
+                                    //    "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
+                                    //    " added (" + childBus.toString + "). Floor =  " + linkedVertex.getFloor() +
+                                    //    ", ID from root = " + linkedVertex.getIdFromRoot());
                                 }
                                 linkedVertex.pushLinkedVertex(busVertex);
                             }
@@ -143,7 +143,7 @@ define(
             };
 
             this.loadTree = function(treeRoot) {
-                helper_.debug("[tree] treeRoot = " + treeRoot.getID());
+                //helper_.debug("[tree] treeRoot = " + treeRoot.getID());
                 this.addVertex(treeRoot);
 
                 for (var i = 0, ii = vertexRegistry.length; i<ii; i++) {
