@@ -97,7 +97,7 @@ define(
                 lanLineHeight = 0;
 
             var setWanLineHeight = function(areaHeight) {
-                helper_.debug("last wanLineHeight: ".concat(wanLineHeight).concat(", next wanLineHeight: ").concat(areaHeight));
+                //helper_.debug("last wanLineHeight: ".concat(wanLineHeight).concat(", next wanLineHeight: ").concat(areaHeight));
                 wanLineHeight = areaHeight;
             }
 
@@ -110,7 +110,7 @@ define(
             };
 
             var setManLineHeight = function(areaHeight) {
-                helper_.debug("last manLineHeight: ".concat(manLineHeight).concat(", next manLineHeight: ").concat(areaHeight));
+                //helper_.debug("last manLineHeight: ".concat(manLineHeight).concat(", next manLineHeight: ").concat(areaHeight));
                 manLineHeight = areaHeight;
             }
 
@@ -123,7 +123,7 @@ define(
             };
 
             var setLanLineHeight = function(areaHeight) {
-                helper_.debug("last lanLineHeight: ".concat(lanLineHeight).concat(", next lanLineHeight: ").concat(areaHeight));
+                //helper_.debug("last lanLineHeight: ".concat(lanLineHeight).concat(", next lanLineHeight: ").concat(areaHeight));
                 lanLineHeight = areaHeight;
             }
 
@@ -222,7 +222,7 @@ define(
                 wmbMove = function(dx,dy) {
                     //block line move on x
                     dx = 0;
-                    helper_.debug("wan man line move - Y borders: {".concat(this.minY).concat(",").concat(this.maxY).concat("}"));
+                    //helper_.debug("wan man line move - Y borders: {".concat(this.minY).concat(",").concat(this.maxY).concat("}"));
                     if (this.cy+dy>this.minY && this.cy+dy<this.maxY) {
                         var wanManPath =
                                 [
@@ -260,7 +260,7 @@ define(
                         setManLineTopY(this.cy+dy);
                         wan_title.rotate(90).attr({x:datacenter.getZoneCoord().x+datacenter.getZoneSpan()/2,y:wanLineTopY+(getManLineTopY()-getWanLineTopY())/2}).rotate(-90);
                         man_title.rotate(90).attr({x:datacenter.getZoneCoord().x+datacenter.getZoneSpan()/2,y:manLineTopY+(getLanLineTopY()-getManLineTopY())/2}).rotate(-90);
-                        helper_.debug("wan man line Y: ".concat(getManLineTopY()));
+                        //helper_.debug("wan man line Y: ".concat(getManLineTopY()));
                     }
                 },
                 wmbUP = function() {
@@ -282,7 +282,7 @@ define(
                 wmbMouseMove = function(e) {
                     this.attr('cursor','move');
                     datacenter.show();
-                    helper_.debug("wan man line cursor: ".concat(this.attr("cursor")));
+                    //helper_.debug("wan man line cursor: ".concat(this.attr("cursor")));
                 };
 
             var mlbDragg = function () {
@@ -322,7 +322,7 @@ define(
                 mlbMove = function(dx,dy) {
                     //block line move on x
                     dx = 0;
-                    helper_.debug("man lan line move - Y borders: {".concat(this.minY).concat(",").concat(this.maxY).concat("}"));
+                    //helper_.debug("man lan line move - Y borders: {".concat(this.minY).concat(",").concat(this.maxY).concat("}"));
                     if (this.cy+dy>this.minY && this.cy+dy<this.maxY) {
                         var manLanPath =
                                 [
@@ -360,7 +360,7 @@ define(
                         setLanLineTopY(this.cy+dy);
                         man_title.rotate(90).attr({x:datacenter.getZoneCoord().x+datacenter.getZoneSpan()/2,y:manLineTopY+(getLanLineTopY()-getManLineTopY())/2}).rotate(-90);
                         lan_title.rotate(90).attr({x:datacenter.getZoneCoord().x+datacenter.getZoneSpan()/2,y:lanLineTopY+(getLanLineBrdY()-getLanLineTopY())/2}).rotate(-90);
-                        helper_.debug("man lan line Y: ".concat(getLanLineTopY()));
+                        //helper_.debug("man lan line Y: ".concat(getLanLineTopY()));
                     }
                 },
                 mlbUP = function() {
@@ -383,7 +383,7 @@ define(
                 mlbMouseMove = function(e) {
                     this.attr('cursor','move');
                     datacenter.show();
-                    helper_.debug("man lan line cursor: ".concat(this.attr("cursor")));
+                    //helper_.debug("man lan line cursor: ".concat(this.attr("cursor")));
                 };
 
 

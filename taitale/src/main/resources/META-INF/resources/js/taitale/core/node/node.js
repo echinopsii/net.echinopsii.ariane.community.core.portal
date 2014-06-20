@@ -365,48 +365,48 @@ define(
 
                 for (var i = 0, ii = nodeEpAvgLinksT.length; i < ii; i++) {
                     var epX=0,epY=0;
-                    helper_.debug("EP : " + nodeEpAvgLinksT[i].toString());
+                    //helper_.debug("EP : " + nodeEpAvgLinksT[i].toString());
                     var avgTeta = nodeEpAvgLinksT[i].getLinkAvgPoz().t;
 
                     if (avgTeta >= 0 && avgTeta <(Math.PI/4)) {
                         epX = rectTopRightX;
                         epY = rectMiddleY - ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI/4) && avgTeta < (Math.PI/2)) {
                         epY = rectTopRightY;
                         epX = rectMiddleX + ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI/2) && avgTeta < (3*Math.PI/4)) {
                         epY = rectTopRightY;
                         epX = rectMiddleX - ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (3*Math.PI/4) && avgTeta < (Math.PI)) {
                         epX = rectBottomLeftX;
                         epY = rectMiddleY - ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI) && avgTeta < (5*Math.PI/4)) {
                         epX = rectBottomLeftX;
                         epY = rectMiddleY + ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (5*Math.PI/4) && avgTeta < (3*Math.PI/2)) {
                         epY = rectBottomLeftY;
                         epX = rectMiddleX - ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (3*Math.PI/2) && avgTeta < (7*Math.PI/4)) {
                         epY = rectBottomLeftY;
                         epX = rectMiddleX + ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (7*Math.PI/4) && avgTeta <= (2*Math.PI)) {
                         epX = rectBottomRightX;
                         epY = rectMiddleY + ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
-                        helper_.debug(epX+","+epY+","+avgTeta);
+                        //helper_.debug(epX+","+epY+","+avgTeta);
 
                     }
                     nodeEpAvgLinksT[i].setPoz(epX,epY);

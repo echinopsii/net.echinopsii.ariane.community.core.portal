@@ -70,23 +70,23 @@ define(
             var reDefineRectPoints = function(x, y) {
                     topLeftX = x;
                     topLeftY = y;
-                    helper_.debug("[area.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
+                    //helper_.debug("[area.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
                 },
                 reDefineSize = function(width, height) {
                     areawidth = width;
                     areaheight = height;
-                    helper_.debug("[area.reDefineSize] { areawidth: ".concat(areawidth).concat(", areaheight: ").concat(areaheight).concat(" }"));
+                    //helper_.debug("[area.reDefineSize] { areawidth: ".concat(areawidth).concat(", areaheight: ").concat(areaheight).concat(" }"));
                 },
                 reDefineResizingJailRectPoints = function(xe, xw, yn, ys) {
                     if (xw!=null) mindcWX = xw-abrdSpan;
                     if (xe!=null) mindcEX = xe+abrdSpan;
                     if (yn!=null) mindcTY = yn-abrdSpan;
                     if (ys!=null) mindcSY = yn+abrdSpan;
-                    helper_.debug("[area.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
+                    //helper_.debug("[area.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
                 };
 
             var arDragg = function () {
-                    helper_.debug("[area.arDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
+                    //helper_.debug("[area.arDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
                     var mtxX        = armatrix.getMtxSize().x,
                         mtxY        = armatrix.getMtxSize().y;
                     if (rect.attr('cursor')==='default') {
@@ -138,9 +138,9 @@ define(
                     isMoving = true;
                 },
                 arMove = function (rx, ry, rw, rh, t0x, t0y, minTopLeftX, minTopLeftY, maxTopLeftX, maxTopLeftY, dx, dy) {
-                    helper_.debug("[area.arMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
-                    helper_.debug("[area.arMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
-                    helper_.debug("[area.arMove] { minTopLeftX: ".concat(minTopLeftX).concat(", minTopLeftY: ").concat(minTopLeftY).concat(", maxTopLeftX: ").concat(maxTopLeftX).concat(", maxTopLeftY: ").concat(maxTopLeftY).concat(" }"));
+                    //helper_.debug("[area.arMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[area.arMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
+                    //helper_.debug("[area.arMove] { minTopLeftX: ".concat(minTopLeftX).concat(", minTopLeftY: ").concat(minTopLeftY).concat(", maxTopLeftX: ").concat(maxTopLeftX).concat(", maxTopLeftY: ").concat(maxTopLeftY).concat(" }"));
                     var mtxX        = armatrix.getMtxSize().x,
                         mtxY        = armatrix.getMtxSize().y;
 
@@ -154,7 +154,7 @@ define(
                         if (maxTopLeftY < ry + dy)
                             dy = maxTopLeftY - ry;
                     };
-                    helper_.debug("[area.arMove] { dx: ".concat(dx).concat(", dy: ").concat(dy).concat(" }"));
+                    //helper_.debug("[area.arMove] { dx: ".concat(dx).concat(", dy: ").concat(dy).concat(" }"));
 
                     switch (rect.attr('cursor')) {
                         case 'n-resize' :
@@ -322,7 +322,7 @@ define(
                     r.safari();
                 },
                 arUP = function () {
-                    helper_.debug("[area.arUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[area.arUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
                     if (rect.attr('cursor')==='default') {
                         var mtxX        = armatrix.getMtxSize().x,
                             mtxY        = armatrix.getMtxSize().y;
@@ -348,7 +348,7 @@ define(
                     } else {
                         r.rectMouseMove(this, e, abrdResz, isResizing);
                     }
-                    helper_.debug("[area.areaMouseMove] cursor: ".concat(this.attr("cursor")));
+                    //helper_.debug("[area.areaMouseMove] cursor: ".concat(this.attr("cursor")));
 
                 };
 

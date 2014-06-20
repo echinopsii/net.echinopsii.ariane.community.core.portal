@@ -338,7 +338,7 @@ define(
             var zpdOffsets = this.getZPDoffsets();
             var relativeX = e.clientX - zpdOffsets.x - htmlOffsets.left - rect.attr('x');
             var relativeY = e.clientY - zpdOffsets.y - htmlOffsets.top - rect.attr('y');
-            helper_.debug("relative mouse positioning : {".concat(relativeX).concat(',').concat(relativeY).concat("}"));
+            //helper_.debug("relative mouse positioning : {".concat(relativeX).concat(',').concat(relativeY).concat("}"));
 
             var shapeWidth = rect.attr('width');
             var shapeHeight = rect.attr('height');
@@ -410,7 +410,7 @@ define(
                 }
             }
 
-            helper_.debug("[Raphael.fn.link] dx:" + dx + ", dy:" + dy);
+            //helper_.debug("[Raphael.fn.link] dx:" + dx + ", dy:" + dy);
 
             if (dis.length == 0) {
                 var res = [0, 4];
@@ -426,7 +426,7 @@ define(
             dx = Math.max(Math.abs(x1 - x4) / 2, 10);
             dy = Math.max(Math.abs(y1 - y4) / 2, 10);
 
-            helper_.debug("[Raphael.fn.link] dx:" + dx + ", dy:" + dy);
+            //helper_.debug("[Raphael.fn.link] dx:" + dx + ", dy:" + dy);
 
             var x2 = [x1, x1, x1 - dx, x1 + dx][res[0]].toFixed(3),
                 y2 = [y1 - dy, y1 + dy, y1, y1][res[0]].toFixed(3),

@@ -71,23 +71,23 @@ define(
             var reDefineRectPoints = function(x, y) {
                     topLeftX = x;
                     topLeftY = y;
-                    helper_.debug("[datacenter.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
+                    //helper_.debug("[datacenter.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
                 },
                 reDefineSize = function(width, height) {
                     dcwidth  = width;
                     dcheight = height;
-                    helper_.debug("[datacenter.reDefineSize] { dcwidth: ".concat(dcwidth).concat(", dcheight: ").concat(dcheight).concat(" }"));
+                    //helper_.debug("[datacenter.reDefineSize] { dcwidth: ".concat(dcwidth).concat(", dcheight: ").concat(dcheight).concat(" }"));
                 },
                 reDefineResizingJailRectPoints = function(xe, xw, yn, ys) {
                     if (xw!=null) mindcWX = xw-dbrdSpan;
                     if (xe!=null) mindcEX = xe+dbrdSpan;
                     if (yn!=null) mindcTY = yn-dbrdSpan;
                     if (ys!=null) mindcSY = yn+dbrdSpan;
-                    helper_.debug("[datacenter.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
+                    //helper_.debug("[datacenter.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
                 };
 
             var dDragg = function () {
-                    helper_.debug("[datacenter.dDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
+                    //helper_.debug("[datacenter.dDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
                     if (rect.attr('cursor')==='default') {
                         var mtxS        = dcmatrix.getWanMtxSize();
                         for (var i = 0, ii =  mtxS; i < ii; i++) {
@@ -187,8 +187,8 @@ define(
                     isMoving = true;
                 },
                 dMove = function (rx, ry, rw, rh, t0x, t0y, t1x, t1y, dx, dy) {
-                    helper_.debug("[datacenter.dMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
-                    helper_.debug("[datacenter.dMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
+                    //helper_.debug("[datacenter.dMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[datacenter.dMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
                     switch (rect.attr('cursor')) {
                         case 'n-resize' :
                             var RY = ry + dy,
@@ -449,7 +449,7 @@ define(
                     r.safari();
                 },
                 dUP = function () {
-                    helper_.debug("[datacenter.dUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[datacenter.dUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
                     if (rect.attr('cursor')==='default') {
                         var mtxS        = dcmatrix.getWanMtxSize();
                         for (var i = 0, ii =  mtxS; i < ii; i++) {
@@ -515,7 +515,7 @@ define(
                     } else {
                         r.rectMouseMove(this, e, dbrdResz, isResizing);
                     }
-                    helper_.debug("[datacenter.dcMouseMove] cursor: ".concat(this.attr("cursor")));
+                    //helper_.debug("[datacenter.dcMouseMove] cursor: ".concat(this.attr("cursor")));
                 };
 
             this.isEditionMode = function() {

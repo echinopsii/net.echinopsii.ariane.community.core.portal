@@ -71,23 +71,23 @@ define(
             var reDefineRectPoints = function(x, y) {
                     topLeftX = x;
                     topLeftY = y;
-                    helper_.debug("[lan.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
+                    //helper_.debug("[lan.reDefineRectPoints] { topLeftX: ".concat(topLeftX).concat(", topLeftY: ").concat(topLeftY).concat(" }"));
                 },
                 reDefineSize = function(width, height) {
                     lanwidth = width;
                     lanheight = height;
-                    helper_.debug("[lan.reDefineSize] { lanwidth: ".concat(lanwidth).concat(", lanheight: ").concat(lanheight).concat(" }"));
+                    //helper_.debug("[lan.reDefineSize] { lanwidth: ".concat(lanwidth).concat(", lanheight: ").concat(lanheight).concat(" }"));
                 },
                 reDefineResizingJailRectPoints = function(xe, xw, yn, ys) {
                     if (xw!=null) mindcWX = xw-lbrdSpan;
                     if (xe!=null) mindcEX = xe+lbrdSpan;
                     if (yn!=null) mindcTY = yn-lbrdSpan;
                     if (ys!=null) mindcSY = yn+lbrdSpan;
-                    helper_.debug("[lan.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
+                    //helper_.debug("[lan.reDefineResizingJailRectPoints] { mindcWX: ".concat(mindcWX).concat(", mindcEX: ").concat(mindcEX).concat(", mindcTY: ").concat(mindcTY).concat(", mindcSY: ").concat(mindcSY).concat(" }"));
                 };
 
             var lDragg = function() {
-                    helper_.debug("[lan.lDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
+                    //helper_.debug("[lan.lDragg] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving: ").concat(isMoving).concat(", isResizing: ").concat(isResizing).concat(" }"));
                     var mtxX        = lanmatrix.getMtxSize().x,
                         mtxY        = lanmatrix.getMtxSize().y;
                     if (rect.attr('cursor')==='default') {
@@ -133,13 +133,13 @@ define(
                     isMoving = true;
                 },
                 lMove = function(rx, ry, rw, rh, t0x, t0y, minTopLeftX, minTopLeftY, maxTopLeftX, maxTopLeftY, dx, dy) {
-                    helper_.debug("[lan.lMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
-                    helper_.debug("[lan.lMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
+                    //helper_.debug("[lan.lMove] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[lan.lMove] { rx: ".concat(rx).concat(", ry: ").concat(ry).concat(", rw: ").concat(rw).concat(", rh: ").concat(rh).concat(", dx: ").concat(dx).concat(", dy: ").concat(dy).concat(" }"));
                     var mtxX        = lanmatrix.getMtxSize().x,
                         mtxY        = lanmatrix.getMtxSize().y;
 
 
-                    helper_.debug("[lan.lMove] { minTopLeftX: ".concat(minTopLeftX).concat(", minTopLeftY: ").concat(minTopLeftY).concat(", maxTopLeftX: ").concat(maxTopLeftX).concat(", maxTopLeftY: ").concat(maxTopLeftY).concat(" }"));
+                    //helper_.debug("[lan.lMove] { minTopLeftX: ".concat(minTopLeftX).concat(", minTopLeftY: ").concat(minTopLeftY).concat(", maxTopLeftX: ").concat(maxTopLeftX).concat(", maxTopLeftY: ").concat(maxTopLeftY).concat(" }"));
 
                     if (isJailed) {
                         if (minTopLeftX > rx + dx)
@@ -151,7 +151,7 @@ define(
                         if (maxTopLeftY < ry + dy)
                             dy = maxTopLeftY - ry;
                     };
-                    helper_.debug("[lan.lMove] { dx: ".concat(dx).concat(", dy: ").concat(dy).concat(" }"));
+                    //helper_.debug("[lan.lMove] { dx: ".concat(dx).concat(", dy: ").concat(dy).concat(" }"));
 
                     switch (rect.attr('cursor')) {
                         case 'n-resize' :
@@ -312,7 +312,7 @@ define(
                     r.safari();
                 },
                 lUP = function() {
-                    helper_.debug("[lan.lUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
+                    //helper_.debug("[lan.lUP] { cursor: ".concat(rect.attr('cursor')).concat(", isMoving:").concat(isMoving).concat(", isResizing:").concat(isResizing).concat(" }"));
                     if (rect.attr('cursor')==='default') {
                         var mtxX        = lanmatrix.getMtxSize().x,
                             mtxY        = lanmatrix.getMtxSize().y;
@@ -372,7 +372,7 @@ define(
                     } else {
                         r.rectMouseMove(this, e, lbrdResz, isResizing);
                     }
-                    helper_.debug("[lan.lanMouseMove] cursor: ".concat(this.attr("cursor")));
+                    //helper_.debug("[lan.lanMouseMove] cursor: ".concat(this.attr("cursor")));
                 };
 
             this.dragger = function() {

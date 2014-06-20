@@ -96,9 +96,9 @@ define(
                     if (this.bpMulticast!=null && this.bpMulticast.x!=null && this.bpMulticast.y!=null)
                         this.bpMulticast = this.multicastBus.getMBus().getBindedCircle(this.bpMulticast);
                     if (this.bpMulticast!=null) {
-                        this.helper.debug("[link.toCompute] New bpMulticast - coord: {" +
-                            this.bpMulticast.attr("cx") + "," +
-                            this.bpMulticast.attr("cy") + "} - transform:" + this.bpMulticast.attr("transform").toString());
+                        //this.helper.debug("[link.toCompute] New bpMulticast - coord: {" +
+                        //    this.bpMulticast.attr("cx") + "," +
+                        //    this.bpMulticast.attr("cy") + "} - transform:" + this.bpMulticast.attr("transform").toString());
                         return {
                             from: this.epSource.getCircle(),
                             to: this.bpMulticast,
@@ -136,10 +136,10 @@ define(
                     this.bpMulticast = up.to;
                     this.setLine(up.line);
                     this.setBg(up.bg);
-                    this.helper.debug("[link.toUpdate] Updated bpMulticast - coord: {".
-                        concat(this.bpMulticast.attr("cx")).concat(",").
-                        concat(this.bpMulticast.attr("cy")).concat("} - transform:").
-                        concat(this.bpMulticast.attr("transform").toString()));
+                    //this.helper.debug("[link.toUpdate] Updated bpMulticast - coord: {".
+                    //    concat(this.bpMulticast.attr("cx")).concat(",").
+                    //    concat(this.bpMulticast.attr("cy")).concat("} - transform:").
+                    //    concat(this.bpMulticast.attr("transform").toString()));
                 } else {
                     throw {
                         severity: 'error',
@@ -162,7 +162,7 @@ define(
                  */
                 var up = r.link(this.toCompute());
                 if (typeof up != 'undefined') {
-                    this.helper.debug(up);
+                    //this.helper.debug(up);
                     this.toUpdate(up);
                 };
             };
@@ -195,7 +195,7 @@ define(
                 }
             };
 
-            this.helper.debug("[link]NEW : " + this.toString());
+            //this.helper.debug("[link]NEW : " + this.toString());
             if (this.transport!=null && !this.transport.isMulticast() && this.epSource!=null && this.epTarget!=null) {
                 this.epSource.pushLink(this);
                 this.epTarget.pushLink(this);
