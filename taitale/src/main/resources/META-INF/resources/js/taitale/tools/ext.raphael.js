@@ -317,14 +317,14 @@ define(
         Raphael.fn.getHTMLOffsets = function () {
             /*
              * mainCenter div contains the mappyLayout div
-             * mappyLayout div contains the mappyCanvas div
+             * mappingCanvas div contains the mappyCanvas div
              * => referentials for mouse event positioning offset
              */
-            var mappyLayoutDiv       = document.getElementById("mainCenter"),
-                mainCenterDiv        = document.getElementById("mappingLayout");
+            var mainCenterDiv       = document.getElementById("mainCenter"),
+                mappingCanvasDiv      = document.getElementById("mappingCanvas");
 
-            var divOffsetTop  = ((mappyLayoutDiv!=null) ? mappyLayoutDiv.offsetTop : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetTop : 0),
-                divOffsetLeft = ((mappyLayoutDiv!=null) ? mappyLayoutDiv.offsetLeft : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetLeft : 0);
+            var divOffsetTop  = ((mappingCanvasDiv!=null) ? mappingCanvasDiv.offsetTop : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetTop : 0),
+                divOffsetLeft = ((mappingCanvasDiv!=null) ? mappingCanvasDiv.offsetLeft : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetLeft : 0);
 
             return {
                 top: divOffsetTop,
