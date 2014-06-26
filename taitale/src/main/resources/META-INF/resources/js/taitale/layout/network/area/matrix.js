@@ -551,6 +551,10 @@ define(
                 return rows[x][y].obj;
             };
 
+            this.getObjTypeFromMtx = function(x,y) {
+                return rows[x][y].type;
+            }
+
             this.getObjSizeFromMtx = function(x,y) {
                 var block=rows[x][y];
                 if (block!=null && block!==FREE && block!==LOCKED) {
@@ -650,66 +654,66 @@ define(
             };
 
             this.addContainerLanAndBus = function(container) {
-                var curlan          = container.getLayoutData().lan,
-                    alreadyInserted = curlan.isInserted();
+                var curlan          = container.layoutData.lan,
+                    alreadyInserted = curlan.isInserted;
 
 
                 if (!alreadyInserted){
                     // if not inserted create lan and insert it in the area mtx
-                    if (curlan.getLayoutData().isConnectedInsideArea) {
+                    if (curlan.layoutData.isConnectedInsideArea) {
 
                         var linkedBus = container.getLinkedBus();
                         for (var i = 0, ii = linkedBus.length; i < ii; i++) {
                             var lBus = linkedBus[i];
-                            if (!lBus.isInserted()) {
+                            if (!lBus.isInserted) {
                                 var newBusCoord = getMulticastBusCoord();
                                 rows[newBusCoord.column][newBusCoord.line] = {obj:lBus,type:BUS};
-                                lBus.setInserted();
+                                lBus.isInserted=true;
                             }
                         }
 
-                        if (curlan.getLayoutData().isConnectedToUpArea && curlan.getLayoutData().isConnectedToDownArea) {
+                        if (curlan.layoutData.isConnectedToUpArea && curlan.layoutData.isConnectedToDownArea) {
                             var newInternalUDC = getNewInternalUpDownColumn();
                             rows[newInternalUDC][0] = {obj:curlan,type:LAN};
-                            curlan.setInserted();
-                        } else if (curlan.getLayoutData().isConnectedToUpArea) {
+                            curlan.isInserted = true;
+                        } else if (curlan.layoutData.isConnectedToUpArea) {
                             var upColumn = getInternalUpColumn();
                             rows[upColumn][upInternalLine] = {obj:curlan,type:LAN};
                             rows[upColumn][upLine]=LOCKED;
-                            curlan.setInserted();
-                        } else if (curlan.getLayoutData().isConnectedToDownArea) {
+                            curlan.isInserted = true;
+                        } else if (curlan.layoutData.isConnectedToDownArea) {
                             var downColumn = getInternalDownColumn();
                             rows[downColumn][downInternalLine] = {obj:curlan,type:LAN};
                             rows[downColumn][downLine]=LOCKED;
-                            curlan.setInserted();
+                            curlan.isInserted = true;
                         } else  {
                             var newInternalCoord = getInternalCoord();
                             rows[newInternalCoord.column][newInternalCoord.line] = {obj:curlan,type:LAN};
-                            curlan.setInserted();
+                            curlan.isInserted = true;
                         }
                     } else {
-                        if (curlan.getLayoutData().isConnectedToUpArea && curlan.getLayoutData().isConnectedToDownArea) {
+                        if (curlan.layoutData.isConnectedToUpArea && curlan.layoutData.isConnectedToDownArea) {
                             var newUDC = getNewUpDownColumn();
                             rows[newUDC][0] = {obj:curlan,type:LAN};
-                            curlan.setInserted();
-                        } else if (curlan.getLayoutData().isConnectedToUpArea) {
+                            curlan.isInserted = true;
+                        } else if (curlan.layoutData.isConnectedToUpArea) {
                             var upColumn = getUpColumn();
                             rows[upColumn][upLine] = {obj:curlan,type:LAN};
-                            curlan.setInserted();
-                        } else if (curlan.getLayoutData().isConnectedToDownArea) {
+                            curlan.isInserted = true;
+                        } else if (curlan.layoutData.isConnectedToDownArea) {
                             var downColumn = getDownColumn();
                             rows[downColumn][downLine] = {obj:curlan,type:LAN};
-                            curlan.setInserted();
+                            curlan.isInserted = true;
                         }
                     }
                 } else {
                     var linkedBus = container.getLinkedBus();
                     for (var i = 0, ii = linkedBus.length; i < ii; i++) {
                         var lBus = linkedBus[i];
-                        if (!lBus.isInserted()) {
+                        if (!lBus.isInserted) {
                             var newBusCoord = getMulticastBusCoord();
                             rows[newBusCoord.column][newBusCoord.line] = {obj:lBus,type:BUS};
-                            lBus.setInserted();
+                            lBus.isInserted=true;
                         }
                     }
                 }

@@ -29,214 +29,205 @@ define(
         function node(JSONNodeDesc, container_) {
             var helper_       = new helper();
 
-            var	ID            = JSONNodeDesc.nodeID,
-                name          = JSONNodeDesc.nodeName,
-                cID           = JSONNodeDesc.nodeContainerID,
-                properties    = JSONNodeDesc.nodeProperties;
+            this.ID            = JSONNodeDesc.nodeID;
+            this.name          = JSONNodeDesc.nodeName;
+            this.cID           = JSONNodeDesc.nodeContainerID;
+            this.properties    = JSONNodeDesc.nodeProperties;
 
-            var r             = null,
-                nodeContainer = container_,
-                color         = ((properties != null && properties.primaryApplication != null && properties.primaryApplication.color != null) ?
-                                            "#"+properties.primaryApplication.color :
-                                            (nodeContainer!=null) ? nodeContainer.getColor() : Raphael.getColor()),
-                nodeName      = null,
-                nodeDesc      = null,
-                nodeR         = null,
-                rect          = null,
-                rectPath      = null,
-                rectPathLen   = null,
-                rectPathOrg   = null,
-                isMoving      = false;
+            this.r             = null;
+            this.nodeContainer = container_;
+            this.color         = ((this.properties != null && this.properties.primaryApplication != null && this.properties.primaryApplication.color != null) ?
+                                            "#"+this.properties.primaryApplication.color :
+                                            (this.nodeContainer!=null) ? this.nodeContainer.color : Raphael.getColor());
+            this.nodeName      = null;
+            this.nodeDesc      = null;
+            this.nodeR         = null;
+            this.rect          = null;
+            this.rectPath      = null;
+            this.rectPathLen   = null;
+            this.rectPathOrg   = null;
 
-            var	nodeEndpoints   = [],
+            this.isMoving       = false;
+            this.rightClick     = false;
+
+            this.nodeEndpoints   = [];
             // ordered list of epAvgLinksTeta (Teta is the angle as : T = Y/sqrt(X*X+Y*Y))
-                nodeEpAvgLinksT = [];
+            this.nodeEpAvgLinksT = [];
 
-            var linkedBus         = [],
-                linkedNodes       = [];
+            this.linkedBus         = [];
+            this.linkedNodes       = [];
 
-            var titleHeight   = params.node_titleHeight,
-                txtTitleFont  = params.node_txtTitle,
-                txtDescFont   = params.node_txtDesc;
+            this.titleHeight   = params.node_titleHeight;
+            this.txtTitleFont  = params.node_txtTitle;
+            this.txtDescFont   = params.node_txtDesc;
 
-            var rectWidth  = params.node_minWidth,
-                rectHeight = params.node_minHeight;
+            this.rectWidth  = params.node_minWidth;
+            this.rectHeight = params.node_minHeight;
 
-            var menu              = null,
-                menuSet           = null,
-                menuFillColor     = params.node_menuFillColor,
-                menuStrokeColor   = params.node_menuStrokeColor,
-                menuOpacity       = params.node_menuOpacity,
-                menuStrokeWidth   = params.node_menuStrokeWidth,
-                menuMainTitleTXT  = params.node_menuMainTitle,
-                menuFieldTXT      = params.node_menuFields,
-                menuHided         = true;
+            this.menu              = null;
+            this.menuSet           = null;
+            this.menuFillColor     = params.node_menuFillColor;
+            this.menuStrokeColor   = params.node_menuStrokeColor;
+            this.menuOpacity       = params.node_menuOpacity;
+            this.menuStrokeWidth   = params.node_menuStrokeWidth;
+            this.menuMainTitleTXT  = params.node_menuMainTitle;
+            this.menuFieldTXT      = params.node_menuFields;
+            this.menuHided         = true;
 
-            var oUnselected = params.node_opacUnselec,
-                oSelected   = params.node_opacSelec,
-                cornerRad   = params.node_cornerRad,
-                strokeWidth = params.node_strokeWidth;
+            this.oUnselected = params.node_opacUnselec,
+            this.oSelected   = params.node_opacSelec,
+            this.cornerRad   = params.node_cornerRad,
+            this.strokeWidth = params.node_strokeWidth;
 
             // coord top left point
-            var	rectTopLeftX  = 0,
-                rectTopLeftY  = 0,
+            this.rectTopLeftX  = 0;
+            this.rectTopLeftY  = 0;
             // coord top top left rad point
-                rectTopTopLeftRadX = 0,
-                rectTopTopLeftRadY = 0,
+            this.rectTopTopLeftRadX = 0;
+            this.rectTopTopLeftRadY = 0;
             // coord top bottom left rad point
-                rectTopBottomLeftRadX = 0,
-                rectTopBottomLeftRadY = 0,
+            this.rectTopBottomLeftRadX = 0;
+            this.rectTopBottomLeftRadY = 0;
             // coord top left circle center point
-                rectTopLeftRadX = 0,
-                rectTopLeftRadY = 0,
+            this.rectTopLeftRadX = 0;
+            this.rectTopLeftRadY = 0;
             // coord top middle point
-                rectTopMiddleX = 0,
-                rectTopMiddleY = 0,
+            this.rectTopMiddleX = 0;
+            this.rectTopMiddleY = 0;
             // coord top right point
-                rectTopRightX = 0,
-                rectTopRightY = 0,
+            this.rectTopRightX = 0;
+            this.rectTopRightY = 0;
             // coord top top right rad point
-                rectTopTopRightRadX = 0,
-                rectTopTopRightRadY = 0,
+            this.rectTopTopRightRadX = 0;
+            this.rectTopTopRightRadY = 0;
             // coord top bottom right rad point
-                rectTopBottomRightRadX = 0,
-                rectTopBottomRightRadY = 0,
+            this.rectTopBottomRightRadX = 0;
+            this.rectTopBottomRightRadY = 0;
             // coord top right circle center point
-                rectTopRightRadX = 0,
-                rectTopRightRadY = 0,
+            this.rectTopRightRadX = 0;
+            this.rectTopRightRadY = 0;
             // coord middle left point
-                rectMiddleLeftX = 0,
-                rectMiddleLeftY = 0,
+            this.rectMiddleLeftX = 0;
+            this.rectMiddleLeftY = 0;
             // coord rect middle point
-                rectMiddleX = 0,
-                rectMiddleY = 0,
+            this.rectMiddleX = 0;
+            this.rectMiddleY = 0;
             // coord middle right point
-                rectMiddleRightX = 0,
-                rectMiddleRightY = 0,
+            this.rectMiddleRightX = 0;
+            this.rectMiddleRightY = 0;
             //coord bottom left point
-                rectBottomLeftX = 0,
-                rectBottomLeftY = 0,
+            this.rectBottomLeftX = 0;
+            this.rectBottomLeftY = 0;
             //coord bottom bottom left rad point
-                rectBottomBottomLeftRadX = 0,
-                rectBottomBottomLeftRadY = 0,
+            this.rectBottomBottomLeftRadX = 0;
+            this.rectBottomBottomLeftRadY = 0;
             //coord bottom top left rad point
-                rectBottomTopLeftRadX = 0,
-                rectBottomTopLeftRadY = 0,
+            this.rectBottomTopLeftRadX = 0;
+            this.rectBottomTopLeftRadY = 0;
             // coord bottome left circle center point
-                rectBottomLeftRadX = 0,
-                rectBottomLeftRadY = 0,
+            this.rectBottomLeftRadX = 0;
+            this.rectBottomLeftRadY = 0;
             //coord bottom middle point,
-                rectBottomMiddleX = 0,
-                rectBottomMiddleY = 0,
+            this.rectBottomMiddleX = 0;
+            this.rectBottomMiddleY = 0;
             //coord bottom right point,
-                rectBottomRightX = 0,
-                rectBottomRightY = 0,
+            this.rectBottomRightX = 0;
+            this.rectBottomRightY = 0;
             //coord bottom bottom right rad point,
-                rectBottomBottomRightRadX = 0,
-                rectBottomBottomRightRadY = 0,
+            this.rectBottomBottomRightRadX = 0;
+            this.rectBottomBottomRightRadY = 0;
             //coord bottom top right rad point
-                rectBottomTopRightRadX = 0,
-                rectBottomTopRightRadY = 0,
+            this.rectBottomTopRightRadX = 0;
+            this.rectBottomTopRightRadY = 0;
             // coord bottome right circle center point
-                rectBottomRightRadX = 0,
-                rectBottomRightRadY = 0;
+            this.rectBottomRightRadX = 0;
+            this.rectBottomRightRadY = 0;
+
+            this.mvx = 0;
+            this.mvy = 0;
+
+            var nodeRef = this;
 
             /**
              * x = abs of nodeR[0], y = ord of nodeR[0]
              */
             var defineRectPoints = function(x,y) {
 
-                rectTopLeftX     = x;
-                rectTopLeftY     = y;
+                nodeRef.rectTopLeftX     = x;
+                nodeRef.rectTopLeftY     = y;
 
-                rectTopTopLeftRadX = rectTopLeftX + cornerRad;
-                rectTopTopLeftRadY = rectTopLeftY;
+                nodeRef.rectTopTopLeftRadX = nodeRef.rectTopLeftX + nodeRef.cornerRad;
+                nodeRef.rectTopTopLeftRadY = nodeRef.rectTopLeftY;
 
-                rectTopBottomLeftRadX = rectTopLeftX;
-                rectTopBottomLeftRadY = rectTopLeftY + cornerRad;
+                nodeRef.rectTopBottomLeftRadX = nodeRef.rectTopLeftX;
+                nodeRef.rectTopBottomLeftRadY = nodeRef.rectTopLeftY + nodeRef.cornerRad;
 
-                rectTopLeftRadX = rectTopTopLeftRadX;
-                rectTopLeftRadY = rectTopBottomLeftRadY
+                nodeRef.rectTopLeftRadX = nodeRef.rectTopTopLeftRadX;
+                nodeRef.rectTopLeftRadY = nodeRef.rectTopBottomLeftRadY;
 
-                rectTopMiddleX   = rectTopLeftX + rectWidth/2;
-                rectTopMiddleY   = rectTopLeftY;
+                nodeRef.rectTopMiddleX   = nodeRef.rectTopLeftX + nodeRef.rectWidth/2;
+                nodeRef.rectTopMiddleY   = nodeRef.rectTopLeftY;
 
-                rectTopRightX    = rectTopLeftX + rectWidth;
-                rectTopRightY    = rectTopLeftY;
+                nodeRef.rectTopRightX    = nodeRef.rectTopLeftX + nodeRef.rectWidth;
+                nodeRef.rectTopRightY    = nodeRef.rectTopLeftY;
 
-                rectTopTopRightRadX = rectTopRightX - cornerRad;
-                rectTopTopRightRadY = rectTopRightY;
+                nodeRef.rectTopTopRightRadX = nodeRef.rectTopRightX - nodeRef.cornerRad;
+                nodeRef.rectTopTopRightRadY = nodeRef.rectTopRightY;
 
-                rectTopBottomRightRadX = rectTopRightX;
-                rectTopBottomRightRadY = rectTopRightY + cornerRad;
+                nodeRef.rectTopBottomRightRadX = nodeRef.rectTopRightX;
+                nodeRef.rectTopBottomRightRadY = nodeRef.rectTopRightY + nodeRef.cornerRad;
 
-                rectTopRightRadX = rectTopTopRightRadX;
-                rectTopRightRadY = rectTopBottomRightRadY;
+                nodeRef.rectTopRightRadX = nodeRef.rectTopTopRightRadX;
+                nodeRef.rectTopRightRadY = nodeRef.rectTopBottomRightRadY;
 
-                rectMiddleLeftX  = rectTopLeftX;
-                rectMiddleLeftY  = rectTopLeftY + rectHeight/2;
+                nodeRef.rectMiddleLeftX  = nodeRef.rectTopLeftX;
+                nodeRef.rectMiddleLeftY  = nodeRef.rectTopLeftY + nodeRef.rectHeight/2;
 
-                rectMiddleRightX = rectTopRightX;
-                rectMiddleRightY = rectMiddleLeftY;
+                nodeRef.rectMiddleRightX = nodeRef.rectTopRightX;
+                nodeRef.rectMiddleRightY = nodeRef.rectMiddleLeftY;
 
-                rectBottomLeftX  = rectTopLeftX;
-                rectBottomLeftY  = rectTopLeftY + rectHeight;
+                nodeRef.rectBottomLeftX  = nodeRef.rectTopLeftX;
+                nodeRef.rectBottomLeftY  = nodeRef.rectTopLeftY + nodeRef.rectHeight;
 
-                rectBottomTopLeftRadX = rectBottomLeftX;
-                rectBottomTopLeftRadY = rectBottomLeftY - cornerRad;
+                nodeRef.rectBottomTopLeftRadX = nodeRef.rectBottomLeftX;
+                nodeRef.rectBottomTopLeftRadY = nodeRef.rectBottomLeftY - nodeRef.cornerRad;
 
-                rectBottomBottomLeftRadX = rectBottomLeftX + cornerRad;
-                rectBottomBottomLeftRadY = rectBottomLeftY;
+                nodeRef.rectBottomBottomLeftRadX = nodeRef.rectBottomLeftX + nodeRef.cornerRad;
+                nodeRef.rectBottomBottomLeftRadY = nodeRef.rectBottomLeftY;
 
-                rectBottomLeftRadX = rectBottomBottomLeftRadX;
-                rectBottomLeftRadY = rectBottomTopLeftRadY;
+                nodeRef.rectBottomLeftRadX = nodeRef.rectBottomBottomLeftRadX;
+                nodeRef.rectBottomLeftRadY = nodeRef.rectBottomTopLeftRadY;
 
-                rectBottomMiddleX = rectTopMiddleX;
-                rectBottomMiddleY = rectBottomLeftY;
+                nodeRef.rectBottomMiddleX = nodeRef.rectTopMiddleX;
+                nodeRef.rectBottomMiddleY = nodeRef.rectBottomLeftY;
 
-                rectBottomRightX = rectTopRightX;
-                rectBottomRightY = rectBottomLeftY;
+                nodeRef.rectBottomRightX = nodeRef.rectTopRightX;
+                nodeRef.rectBottomRightY = nodeRef.rectBottomLeftY;
 
-                rectBottomTopRightRadX = rectBottomRightX;
-                rectBottomTopRightRadY = rectBottomRightY - cornerRad;
+                nodeRef.rectBottomTopRightRadX = nodeRef.rectBottomRightX;
+                nodeRef.rectBottomTopRightRadY = nodeRef.rectBottomRightY - nodeRef.cornerRad;
 
-                rectBottomBottomRightRadX = rectBottomRightX - cornerRad;
-                rectBottomBottomRightRadY = rectBottomRightY;
+                nodeRef.rectBottomBottomRightRadX = nodeRef.rectBottomRightX - nodeRef.cornerRad;
+                nodeRef.rectBottomBottomRightRadY = nodeRef.rectBottomRightY;
 
-                rectBottomRightRadX = rectBottomBottomRightRadX;
-                rectBottomRightRadY = rectBottomTopRightRadY;
+                nodeRef.rectBottomRightRadX = nodeRef.rectBottomBottomRightRadX;
+                nodeRef.rectBottomRightRadY = nodeRef.rectBottomTopRightRadY;
 
-                rectMiddleX = rectTopMiddleX;
-                rectMiddleY = rectMiddleLeftY;
+                nodeRef.rectMiddleX = nodeRef.rectTopMiddleX;
+                nodeRef.rectMiddleY = nodeRef.rectMiddleLeftY;
             };
 
-            var nDragg = function () {
-                    if (!menuHided) {
-                        menu.remove();
-                        menuSet.remove();
-                        menuHided=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
-                    }
+            var nMove = function (dx, dy) {
+                    var rx = nodeRef.extrx,
+                        ry = nodeRef.extry;
 
-                    for (var i = 0, ii = nodeEndpoints.length; i < ii; i++) {
-                        nodeEndpoints[i].dragger();
-                    }
-
-                    rect.animate({"fill-opacity": oSelected}, 500);
-
-                    isMoving = true;
-                },
-                nMove = function (rx, ry, t0x, t0y, t1x, t1y, dx, dy) {
-
-                    if (nodeContainer!=null && !nodeContainer.isMoving()) {
-                        var minX = nodeContainer.getRectCornerPoints().topLeftX;
-                        minY = nodeContainer.getRectCornerPoints().topLeftY +
-                            nodeContainer.getName().height(params.container_txtTitle["font-size"]) +
-                            nodeContainer.getHat().height +
-                            params.container_interSpan;
-                        maxX = nodeContainer.getRectCornerPoints().bottomRightX - rectWidth,
-                            maxY = nodeContainer.getRectCornerPoints().bottomRightY - rectHeight;
+                    if (nodeRef.nodeContainer!=null && !nodeRef.nodeContainer.isMoving) {
+                        var minX = nodeRef.nodeContainer.getRectCornerPoints().topLeftX,
+                            minY = nodeRef.nodeContainer.getRectCornerPoints().topLeftY +
+                                   nodeRef.nodeContainer.name.height(params.container_txtTitle["font-size"]) +
+                                   nodeRef.nodeContainer.containerHat_.height + params.container_interSpan,
+                            maxX = nodeRef.nodeContainer.getRectCornerPoints().bottomRightX - nodeRef.rectWidth,
+                            maxY = nodeRef.nodeContainer.getRectCornerPoints().bottomRightY - nodeRef.rectHeight;
 
                         if (minX > rx + dx)
                             dx = minX - rx;
@@ -248,255 +239,182 @@ define(
                             dy = maxY - ry;
                     }
 
-                    var attrect = {x: rx + dx, y: ry + dy},
-                        attrtxt1 = {x: t0x + dx, y: t0y + dy},
-                        attrtxt2 = {x: t1x + dx, y: t1y + dy};
-
-                    rect.attr(attrect);
-                    nodeR[0].attr(attrtxt1);
-                    nodeR[1].attr(attrtxt2);
-
-                    for (var i = 0, ii = nodeEndpoints.length; i < ii; i++) {
-                        nodeEndpoints[i].mover(dx,dy);
-                    }
-
-                    defineRectPoints(nodeR[0].attr("x")-(rectWidth/2),nodeR[0].attr("y")-(titleHeight/2));
-                    rectPath = r.rectPath(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, cornerRad);
-                    r.safari();
-                },
-                nUP = function () {
-                    rect.animate({"fill-opacity": oUnselected}, 500);
-
-                    for (var i = 0, ii = nodeEndpoints.length; i < ii; i++) {
-                        nodeEndpoints[i].uper();
-                    }
-
-                    isMoving = false;
+                    nodeRef.mvx=dx; nodeRef.mvy=dy;
+                    nodeRef.r.move(nodeRef.mvx, nodeRef.mvy);
+                    nodeRef.r.safari();
                 },
                 mouseDown = function(e){
                     if (e.which == 3) {
-                        if (menuHided) {
-                            menuSet = r.getNodeMenuSet();
-                            menuSet.mousedown(menuMouseDown);
-                            for (var i = 0, ii = menuSet.length ; i < ii ; i++) {
+                        if (nodeRef.menuHided) {
+                            nodeRef.menuSet = nodeRef.r.getNodeMenuSet();
+                            nodeRef.menuSet.mousedown(menuMouseDown);
+                            for (var i = 0, ii = nodeRef.menuSet.length ; i < ii ; i++) {
                                 if (i==0)
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY +10, fill: color});
+                                    nodeRef.menuSet[i].attr({"x": nodeRef.rectTopMiddleX, "y": nodeRef.rectTopMiddleY +10, fill: nodeRef.color});
                                 else if (i==1)
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY+30});
+                                    nodeRef.menuSet[i].attr({"x": nodeRef.rectTopMiddleX, "y": nodeRef.rectTopMiddleY+30});
                                 else
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY+30+(i-1)*15});
+                                    nodeRef.menuSet[i].attr({"x": nodeRef.rectTopMiddleX, "y": nodeRef.rectTopMiddleY+30+(i-1)*15});
                             }
-                            menu = r.menu(rectTopMiddleX,rectTopMiddleY+10,menuSet).attr({fill: menuFillColor, stroke: menuStrokeColor, "stroke-width": menuStrokeWidth, "fill-opacity": menuOpacity});
-                            menu.mousedown(menuMouseDown);
-                            menu.toFront();
-                            menuSet.toFront();
-                            menuSet.show();
-                            menuHided=false;
+                            nodeRef.menu = nodeRef.r.menu(nodeRef.rectTopMiddleX,nodeRef.rectTopMiddleY+10,nodeRef.menuSet).
+                                attr({fill: nodeRef.menuFillColor, stroke: nodeRef.menuStrokeColor, "stroke-width": nodeRef.menuStrokeWidth, "fill-opacity": nodeRef.menuOpacity});
+                            nodeRef.menu.mousedown(menuMouseDown);
+                            nodeRef.menu.toFront();
+                            nodeRef.menuSet.toFront();
+                            nodeRef.menuSet.show();
+                            nodeRef.menuHided=false;
                         } else {
-                            menu.remove();
-                            menuSet.remove();
-                            menuHided=true;
+                            nodeRef.menu.remove();
+                            nodeRef.menuSet.remove();
+                            nodeRef.menuHided=true;
                         }
-                        rightClick=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
+                        nodeRef.rightClick=true;
+                        if (nodeRef.r.getDisplayMainMenu())
+                            nodeRef.r.setDisplayMainMenu(false);
                     } else if (e.which == 1) {
-                        rightClick=false;
+                        nodeRef.rightClick=false;
                     }
                 },
                 menuMouseDown = function(e) {
                     if (e.which == 3) {
-                        menu.remove();
-                        menuSet.remove();
-                        menuHided=true;
-                        rightClick=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
+                        nodeRef.menu.remove();
+                        nodeRef.menuSet.remove();
+                        nodeRef.menuHided=true;
+                        nodeRef.rightClick=true;
+                        if (nodeRef.r.getDisplayMainMenu())
+                            nodeRef.r.setDisplayMainMenu(false);
                     } else if (e.which == 1) {
-                        rightClick=false;
+                        nodeRef.rightClick=false;
                     }
                 };
 
             var nodeDragger = function () {
-                    if (!rightClick) {
-                        this.rx = rect.attr("x");
-                        this.ry = rect.attr("y");
-                        this.t0x = nodeR[0].attr("x");
-                        this.t0y = nodeR[0].attr("y");
-                        this.t1x = nodeR[1].attr("x");
-                        this.t1y = nodeR[1].attr("y");
-                        nDragg();
-                    }
+                    if (!nodeRef.rightClick)
+                        nodeRef.r.drag(nodeRef,"node");
                 },
                 nodeMove = function (dx, dy) {
-                    if (!rightClick)
-                        nMove(this.rx,this.ry,this.t0x,this.t0y,this.t1x,this.t1y,dx,dy);
+                    if (!nodeRef.rightClick)
+                        nMove(dx,dy);
                 },
                 nodeUP = function () {
-                    if (!rightClick)
-                        nUP();
+                    if (!nodeRef.rightClick)
+                        nodeRef.r.up()
                 };
 
-            this.dragger = function() {
-                this.extrx = rect.attr("x");
-                this.extry = rect.attr("y");
-                this.extt0x = nodeR[0].attr("x");
-                this.extt0y = nodeR[0].attr("y");
-                this.extt1x = nodeR[1].attr("x");
-                this.extt1y = nodeR[1].attr("y");
-                nDragg();
-            };
-
-            this.mover = function(dx,dy) {
-                nMove(this.extrx,this.extry,this.extt0x,this.extt0y,this.extt1x,this.extt1y,dx,dy);
-            };
-
-            this.uper = function() {
-                nUP();
-            };
-
             var defineEndpointsPoz = function(endpoint) {
-                nodeEpAvgLinksT.push(endpoint);
-                nodeEpAvgLinksT.sort(function(a,b){
-                    at = a.getLinkAvgPoz().t;
-                    bt = b.getLinkAvgPoz().t;
+                nodeRef.nodeEpAvgLinksT.push(endpoint);
+                nodeRef.nodeEpAvgLinksT.sort(function(a,b){
+                    var at = a.getLinkAvgPoz().t,
+                        bt = b.getLinkAvgPoz().t;
                     return at-bt;
                 });
 
-                for (var i = 0, ii = nodeEpAvgLinksT.length; i < ii; i++) {
+                for (var i = 0, ii = nodeRef.nodeEpAvgLinksT.length; i < ii; i++) {
                     var epX=0,epY=0;
-                    //helper_.debug("EP : " + nodeEpAvgLinksT[i].toString());
-                    var avgTeta = nodeEpAvgLinksT[i].getLinkAvgPoz().t;
+                    //helper_.debug("EP : " + nodeRef.nodeEpAvgLinksT[i].toString());
+                    var avgTeta = nodeRef.nodeEpAvgLinksT[i].getLinkAvgPoz().t;
 
                     if (avgTeta >= 0 && avgTeta <(Math.PI/4)) {
-                        epX = rectTopRightX;
-                        epY = rectMiddleY - ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
+                        epX = nodeRef.rectTopRightX;
+                        epY = nodeRef.rectMiddleY - ((epX-nodeRef.rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI/4) && avgTeta < (Math.PI/2)) {
-                        epY = rectTopRightY;
-                        epX = rectMiddleX + ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
+                        epY = nodeRef.rectTopRightY;
+                        epX = nodeRef.rectMiddleX + ((epY-nodeRef.rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI/2) && avgTeta < (3*Math.PI/4)) {
-                        epY = rectTopRightY;
-                        epX = rectMiddleX - ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
+                        epY = nodeRef.rectTopRightY;
+                        epX = nodeRef.rectMiddleX - ((epY-nodeRef.rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (3*Math.PI/4) && avgTeta < (Math.PI)) {
-                        epX = rectBottomLeftX;
-                        epY = rectMiddleY - ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
+                        epX = nodeRef.rectBottomLeftX;
+                        epY = nodeRef.rectMiddleY - ((epX-nodeRef.rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (Math.PI) && avgTeta < (5*Math.PI/4)) {
-                        epX = rectBottomLeftX;
-                        epY = rectMiddleY + ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
+                        epX = nodeRef.rectBottomLeftX;
+                        epY = nodeRef.rectMiddleY + ((epX-nodeRef.rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (5*Math.PI/4) && avgTeta < (3*Math.PI/2)) {
-                        epY = rectBottomLeftY;
-                        epX = rectMiddleX - ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
+                        epY = nodeRef.rectBottomLeftY;
+                        epX = nodeRef.rectMiddleX - ((epY-nodeRef.rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (3*Math.PI/2) && avgTeta < (7*Math.PI/4)) {
-                        epY = rectBottomLeftY;
-                        epX = rectMiddleX + ((epY-rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
+                        epY = nodeRef.rectBottomLeftY;
+                        epX = nodeRef.rectMiddleX + ((epY-nodeRef.rectMiddleY)/Math.sin(avgTeta))*Math.sqrt(1-Math.sin(avgTeta)*Math.sin(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     } else if (avgTeta >= (7*Math.PI/4) && avgTeta <= (2*Math.PI)) {
-                        epX = rectBottomRightX;
-                        epY = rectMiddleY + ((epX-rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
+                        epX = nodeRef.rectBottomRightX;
+                        epY = nodeRef.rectMiddleY + ((epX-nodeRef.rectMiddleX)/Math.cos(avgTeta))*Math.sqrt(1-Math.cos(avgTeta)*Math.cos(avgTeta));
                         //helper_.debug(epX+","+epY+","+avgTeta);
 
                     }
-                    nodeEpAvgLinksT[i].setPoz(epX,epY);
+                    nodeRef.nodeEpAvgLinksT[i].setPoz(epX,epY);
                 }
             };
 
             this.toString = function() {
-                return "{\n Node " + name + " : ("+rectTopLeftX+","+rectTopLeftY+")\n}";
+                return "{\n Node " + this.name + " : ("+nodeRef.rectTopLeftX+","+nodeRef.rectTopLeftY+")\n}";
             };
 
             this.popEndpoint = function(endpoint) {
-                var index = nodeEndpoints.indexOf(endpoint);
-                nodeEndpoints.splice(index,1)
-            }
+                var index = nodeRef.nodeEndpoints.indexOf(endpoint);
+                nodeRef.nodeEndpoints.splice(index,1)
+            };
 
             this.pushEndpoint = function(endpoint) {
-                nodeEndpoints.push(endpoint);
+                this.nodeEndpoints.push(endpoint);
                 defineEndpointsPoz(endpoint);
-            };
-
-            this.isMoving = function() {
-                return isMoving;
-            };
-
-            this.getColor = function() {
-                return color;
-            };
-
-            this.getName = function() {
-                return name;
-            };
-
-            this.getID = function() {
-                return ID;
-            };
-
-            this.getContainer = function() {
-                return nodeContainer;
-            };
-
-            this.getCornerRad = function() {
-                return cornerRad;
             };
 
             this.getRectMiddlePoint = function() {
                 return {
-                    x: rectMiddleX,
-                    y: rectMiddleY
+                    x: nodeRef.rectMiddleX,
+                    y: nodeRef.rectMiddleY
                 };
             };
 
             this.getRectCornerPoints = function() {
                 return {
-                    topLeftX: rectTopLeftX,
-                    topLeftY: rectTopLeftY,
-                    bottomLeftX: rectBottomLeftX,
-                    bottomLeftY: rectBottomLeftY,
-                    topRightX: rectTopRightX,
-                    topRightY: rectTopRightY,
-                    bottomRightX: rectBottomRightX,
-                    bottomRightY: rectBottomRightY,
-                    TopTopLeftRadX: rectTopTopLeftRadX,
-                    TopTopLeftRadY: rectTopTopLeftRadY,
-                    TopBottomLeftRadX: rectTopBottomLeftRadX,
-                    TopBottomLeftRadY: rectTopBottomLeftRadY,
-                    TopLeftRadX: rectTopLeftRadX,
-                    TopLeftRadY: rectTopLeftRadY,
-                    TopTopRightRadX: rectTopTopRightRadX,
-                    TopTopRightRadY: rectTopTopRightRadY,
-                    TopBottomRightRadX: rectTopBottomRightRadX,
-                    TopBottomRightRadY: rectTopBottomRightRadY,
-                    TopRightRadX: rectTopRightRadX,
-                    TopRightRadY: rectTopRightRadY,
-                    BottomTopLeftRadX: rectBottomTopLeftRadX,
-                    BottomTopLeftRadY: rectBottomTopLeftRadY,
-                    BottomBottomLeftRadX: rectBottomBottomLeftRadX,
-                    BottomBottomLeftRadY: rectBottomBottomLeftRadY,
-                    BottomLeftRadX: rectBottomLeftRadX,
-                    BottomLeftRadY: rectBottomLeftRadY,
-                    BottomTopRightRadX: rectBottomTopRightRadX,
-                    BottomTopRightRadY: rectBottomTopRightRadY,
-                    BottomBottomRightRadX: rectBottomBottomRightRadX,
-                    BottomBottomRightRadY: rectBottomBottomRightRadY,
-                    BottomRightRadX: rectBottomRightRadX,
-                    BottomRightRadY: rectBottomRightRadY
+                    topLeftX: this.rectTopLeftX,
+                    topLeftY: this.rectTopLeftY,
+                    bottomLeftX: this.rectBottomLeftX,
+                    bottomLeftY: this.rectBottomLeftY,
+                    topRightX: this.rectTopRightX,
+                    topRightY: this.rectTopRightY,
+                    bottomRightX: this.rectBottomRightX,
+                    bottomRightY: this.rectBottomRightY,
+                    TopTopLeftRadX: this.rectTopTopLeftRadX,
+                    TopTopLeftRadY: this.rectTopTopLeftRadY,
+                    TopBottomLeftRadX: this.rectTopBottomLeftRadX,
+                    TopBottomLeftRadY: this.rectTopBottomLeftRadY,
+                    TopLeftRadX: this.rectTopLeftRadX,
+                    TopLeftRadY: this.rectTopLeftRadY,
+                    TopTopRightRadX: this.rectTopTopRightRadX,
+                    TopTopRightRadY: this.rectTopTopRightRadY,
+                    TopBottomRightRadX: this.rectTopBottomRightRadX,
+                    TopBottomRightRadY: this.rectTopBottomRightRadY,
+                    TopRightRadX: this.rectTopRightRadX,
+                    TopRightRadY: this.rectTopRightRadY,
+                    BottomTopLeftRadX: this.rectBottomTopLeftRadX,
+                    BottomTopLeftRadY: this.rectBottomTopLeftRadY,
+                    BottomBottomLeftRadX: this.rectBottomBottomLeftRadX,
+                    BottomBottomLeftRadY: this.rectBottomBottomLeftRadY,
+                    BottomLeftRadX: this.rectBottomLeftRadX,
+                    BottomLeftRadY: this.rectBottomLeftRadY,
+                    BottomTopRightRadX: this.rectBottomTopRightRadX,
+                    BottomTopRightRadY: this.rectBottomTopRightRadY,
+                    BottomBottomRightRadX: this.rectBottomBottomRightRadX,
+                    BottomBottomRightRadY: this.rectBottomBottomRightRadY,
+                    BottomRightRadX: this.rectBottomRightRadX,
+                    BottomRightRadY: this.rectBottomRightRadY
                 };
-            };
-
-            this.getRectPath = function() {
-                return rectPath;
             };
 
             this.setPoz = function(x,y) {
@@ -504,20 +422,20 @@ define(
             };
 
             this.placeInContainer = function() {
-                nodeContainer.pushNode(this);
+                this.nodeContainer.pushNode(this);
             };
 
             this.pushLinkedNode = function(node) {
                 var isAlreadyPushed = this.isLinkedToNode(node);
                 if (!isAlreadyPushed) {
-                    linkedNodes.push(node);
-                    this.getContainer().pushLinkedContainer(node.getContainer());
+                    this.linkedNodes.push(node);
+                    this.nodeContainer.pushLinkedContainer(node.nodeContainer);
                 }
             };
 
             this.isLinkedToNode = function(node) {
-                for (var i = 0, ii = linkedNodes.length; i < ii; i++) {
-                    if (linkedNodes[i].getID()==node.getID())
+                for (var i = 0, ii = this.linkedNodes.length; i < ii; i++) {
+                    if (this.linkedNodes[i].ID==node.ID)
                         return true;
                 }
                 return false;
@@ -526,52 +444,46 @@ define(
             this.pushLinkedBus = function(bus) {
                 var isAlreadyPushed = this.isLinkedToBus(bus);
                 if (!isAlreadyPushed) {
-                    linkedBus.push(bus);
-                    this.getContainer().pushLinkedBus(bus);
+                    this.linkedBus.push(bus);
+                    this.nodeContainer.pushLinkedBus(bus);
                 }
-            }
+            };
 
             this.isLinkedToBus = function(bus) {
-                for (var i = 0, ii = linkedBus.length; i < ii; i++) {
-                    if (linkedBus[i].equal(bus))
+                for (var i = 0, ii = this.linkedBus.length; i < ii; i++) {
+                    if (this.linkedBus[i].equal(bus))
                         return true;
                 }
                 return false;
-            }
+            };
 
             this.print = function(r_) {
-                r             = r_;
+                this.r        = r_;
 
-                nodeR         = r.set();
-
-                nodeName      = r.text(0, 0, name).attr(txtTitleFont);
-                r.FitText(nodeName, rectWidth-1, 1);
-                nodeName.attr({x: rectTopLeftX + (rectWidth/2), y: rectTopLeftY + (titleHeight/2)});
-                nodeR.push(nodeName);
+                this.nodeName = this.r.text(0, 0, this.name).attr(this.txtTitleFont);
+                this.r.FitText(this.nodeName, this.rectWidth-1, 1);
+                this.nodeName.attr({x: this.rectTopLeftX + (this.rectWidth/2), y: this.rectTopLeftY + (this.titleHeight/2)});
 
                 /*
                  *
-                 * rectPath = r.path(r.rectPath(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, cornerRad));
+                 * rectPath = r.path(r.rectPath(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, this.cornerRad));
                  * rectPathLen = rectPath.getTotalLength();
                  * rectPathOrg = rectPath.getPointAtLength(10);
                  *
                  *
                  */
 
-                rect = r.rect(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, cornerRad);
-                rect.attr({fill: color, stroke: color, "fill-opacity": oUnselected, "stroke-width": strokeWidth});
-                rect.mousedown(mouseDown);
-                rect.drag(nodeMove, nodeDragger, nodeUP);
-
-                //nodeR.dblclick(nrClick);
-                nodeR.push(rect);
+                this.rect = this.r.rect(this.rectTopLeftX, this.rectTopLeftY, this.rectWidth, this.rectHeight, this.cornerRad);
+                this.rect.attr({fill: this.color, stroke: this.color, "fill-opacity": this.oUnselected, "stroke-width": this.strokeWidth});
+                this.rect.mousedown(mouseDown);
+                this.rect.drag(nodeMove, nodeDragger, nodeUP);
             };
 
             this.toFront = function() {
-                nodeR[0].toFront();
-                nodeR[1].toFront();
+                this.rect.toFront();
+                this.nodeName.toFront();
             };
-        };
+        }
 
         return node;
     });

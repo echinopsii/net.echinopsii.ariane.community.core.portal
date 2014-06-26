@@ -25,194 +25,200 @@ define(
         'raphael.free_transform'
     ],
     function (Raphael,helper) {
-        function cylinder(centerX,centerY,d,h,title,color_) {
-            var r       = null,
-                ctrX    = centerX,
-                ctrY    = centerY,
-                x       = ctrX - h/ 2,
-                y       = ctrY - d/ 2,
-                title_  = title,
-                color   = color_,
-                vcpath  =
+        function cylinder(parent,centerX,centerY,d,h,title,color_) {
+            this.r         = null;
+            this.ctrX      = centerX;
+            this.ctrY      = centerY;
+            this.diameter  = d;
+            this.height    = h;
+            this.x         = this.ctrX - h/ 2;
+            this.y         = this.ctrY - d/ 2;
+            this.title_    = title;
+            this.color     = color_;
+            this.vcpath    =
                     [
-                        ["M", x, y],
-                        ["C", x+d/8, y, x+d/5, y-d/4, x+d/5, y-d/2],
-                        ["C", x+d/5, y-3*d/4, x+d/8, y-d, x, y-d],
-                        ["C", x-d/8, y-d, x-d/5, y-3*d/4, x-d/5, y-d/2],
-                        ["C", x-d/5, y-d/5, x-d/8, y, x, y],
+                        ["M", this.x, this.y],
+                        ["C", this.x+this.diameter/8, this.y, this.x+this.diameter/5, this.y-this.diameter/4, this.x+this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x+this.diameter/5, this.y-3*this.diameter/4, this.x+this.diameter/8, this.y-this.diameter, this.x, this.y-this.diameter],
+                        ["C", this.x-this.diameter/8, this.y-this.diameter, this.x-this.diameter/5, this.y-3*this.diameter/4, this.x-this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x-this.diameter/5, this.y-this.diameter/5, this.x-this.diameter/8, this.y, this.x, this.y],
                         ["Z"],
-                        ["M", x, y],
-                        ["L", x+h, y],
-                        ["C", x+h+d/8, y, x+h+d/5, y-d/4, x+h+d/5, y-d/2],
-                        ["C", x+h+d/5, y-3*d/4, x+h+d/8, y-d, x+h, y-d],
-                        ["L", x,y-d]
-                    ],
-                translateForm="",
-                helper_ = new helper();
+                        ["M", this.x, this.y],
+                        ["L", this.x+this.height, this.y],
+                        ["C", this.x+this.height+this.diameter/8, this.y, this.x+this.height+this.diameter/5, this.y-this.diameter/4, this.x+this.height+this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x+this.height+this.diameter/5, this.y-3*this.diameter/4, this.x+this.height+this.diameter/8, this.y-this.diameter, this.x+this.height, this.y-this.diameter],
+                        ["L", this.x, this.y-this.diameter]
+                    ];
+            this.translateForm="";
+            this.helper_ = new helper();
 
-            var cylinder   = null,
-                titleTxt   = null,
-                cylinderR  = null,
-                ft         = null,
-                boundary   = null;
+            this.cylinder   = null;
+            this.titleTxt   = null;
+            this.cylinderR  = null;
+            this.ft         = null;
+            this.boundary   = null;
 
-            var bindedLinks = [];
+            this.bindedLinks = [];
 
-            var bindingPt1 = null,
-                bindingPt1X = x,
-                bindingPt1Y = y,
-                bindingPt2 = null,
-                bindingPt2X = x+h,
-                bindingPt2Y = y,
-                bindingPt3 = null,
-                bindingPt3X = x+h,
-                bindingPt3Y = y-d,
-                bindingPt4 = null,
-                bindingPt4X = x,
-                bindingPt4Y = y-d,
-                bindingPt5 = null,
-                bindingPt5X = x+h/2,
-                bindingPt5Y = y,
-                bindingPt6 = null,
-                bindingPt6X = x+h/2,
-                bindingPt6Y = y-d;
+            this.bindingPt1 = null;
+            this.bindingPt1X = this.x;
+            this.bindingPt1Y = this.y;
+            this.bindingPt2 = null;
+            this.bindingPt2X = this.x+this.height;
+            this.bindingPt2Y = this.y;
+            this.bindingPt3 = null;
+            this.bindingPt3X = this.x+this.height;
+            this.bindingPt3Y = this.y-d;
+            this.bindingPt4 = null;
+            this.bindingPt4X = this.x;
+            this.bindingPt4Y = this.y-d;
+            this.bindingPt5 = null;
+            this.bindingPt5X = this.x+this.height/2;
+            this.bindingPt5Y = this.y;
+            this.bindingPt6 = null;
+            this.bindingPt6X = this.x+this.height/2;
+            this.bindingPt6Y = this.y-d;
 
-            var isMoving = false,
-                isJailed = false;
+            this.root          = parent;
+            this.root.isMoving = false;
+            this.isMoving = false;
+
+            this.mvx = 0;
+            this.mvy = 0;
+
+            var isJailed  = false;
+
+            var cylinderRef = this;
 
             var dragger = function() {
-                    isMoving=true;
+                    cylinderRef.exttX  = cylinderRef.cylinder.attr("transform").toString();
+                    cylinderRef.extox1 = cylinderRef.bindingPt1.attr("cx");
+                    cylinderRef.extoy1 = cylinderRef.bindingPt1.attr("cy");
+                    cylinderRef.extox2 = cylinderRef.bindingPt2.attr("cx");
+                    cylinderRef.extoy2 = cylinderRef.bindingPt2.attr("cy");
+                    cylinderRef.extox3 = cylinderRef.bindingPt3.attr("cx");
+                    cylinderRef.extoy3 = cylinderRef.bindingPt3.attr("cy");
+                    cylinderRef.extox4 = cylinderRef.bindingPt4.attr("cx");
+                    cylinderRef.extoy4 = cylinderRef.bindingPt4.attr("cy");
+                    cylinderRef.extox5 = cylinderRef.bindingPt5.attr("cx");
+                    cylinderRef.extoy5 = cylinderRef.bindingPt5.attr("cy");
+                    cylinderRef.extox6 = cylinderRef.bindingPt6.attr("cx");
+                    cylinderRef.extoy6 = cylinderRef.bindingPt6.attr("cy");
+                    cylinderRef.isMoving=true;
+                    cylinderRef.root.isMoving=true;
                 },
-                mover = function(tx,ox1,oy1,ox2,oy2,ox3,oy3,ox4,oy4,ox5,oy5,ox6,oy6,dx,dy) {
+                mover = function(dx,dy) {
+                    var tx  = cylinderRef.exttX,
+                        ox1 = cylinderRef.extox1,
+                        oy1 = cylinderRef.extoy1,
+                        ox2 = cylinderRef.extox2,
+                        oy2 = cylinderRef.extoy2,
+                        ox3 = cylinderRef.extox3,
+                        oy3 = cylinderRef.extoy3,
+                        ox4 = cylinderRef.extox4,
+                        oy4 = cylinderRef.extoy4,
+                        ox5 = cylinderRef.extox5,
+                        oy5 = cylinderRef.extoy5,
+                        ox6 = cylinderRef.extox6,
+                        oy6 = cylinderRef.extoy6;
+
                     if (isJailed) {
-                        if (ox1+dx<boundary.minX)
-                            dx=boundary.minX-ox1;
-                        else if (ox3+dx>boundary.maxX)
-                            dx=boundary.maxX-ox3;
-                        if (oy1+dy>boundary.maxY)
-                            dy=boundary.maxY-oy1;
-                        else if (oy3+dy<boundary.minY)
-                            dy=boundary.minY-oy3;
+                        if (ox1+dx<cylinderRef.boundary.minX)
+                            dx=cylinderRef.boundary.minX-ox1;
+                        else if (ox3+dx>cylinderRef.boundary.maxX)
+                            dx=cylinderRef.boundary.maxX-ox3;
+                        if (oy1+dy>cylinderRef.boundary.maxY)
+                            dy=cylinderRef.boundary.maxY-oy1;
+                        else if (oy3+dy<cylinderRef.boundary.minY)
+                            dy=cylinderRef.boundary.minY-oy3;
                     }
 
-                    translateForm = tx+"T"+dx+","+dy;
-                    ctrX +=dx; ctrY+=dy; x=ctrX - h/ 2; y=ctrY - d/ 2;
-                    bindingPt1X = ox1+dx; bindingPt1Y = oy1+dy;
-                    bindingPt2X = ox2+dx; bindingPt2Y = oy2+dy;
-                    bindingPt3X = ox3+dx; bindingPt3Y = oy3+dy;
-                    bindingPt4X = ox4+dx; bindingPt4Y = oy4+dy;
-                    bindingPt5X = ox5+dx; bindingPt5Y = oy5+dy;
-                    bindingPt6X = ox6+dx; bindingPt6Y = oy6+dy;
+                    cylinderRef.translateForm = tx+"T"+dx+","+dy;
+                    cylinderRef.ctrX +=dx; cylinderRef.ctrY+=dy; cylinderRef.x=cylinderRef.ctrX - this.height/ 2; cylinderRef.y=cylinderRef.ctrY - this.diameter/ 2;
+                    cylinderRef.bindingPt1X = ox1+dx; cylinderRef.bindingPt1Y = oy1+dy;
+                    cylinderRef.bindingPt2X = ox2+dx; cylinderRef.bindingPt2Y = oy2+dy;
+                    cylinderRef.bindingPt3X = ox3+dx; cylinderRef.bindingPt3Y = oy3+dy;
+                    cylinderRef.bindingPt4X = ox4+dx; cylinderRef.bindingPt4Y = oy4+dy;
+                    cylinderRef.bindingPt5X = ox5+dx; cylinderRef.bindingPt5Y = oy5+dy;
+                    cylinderRef.bindingPt6X = ox6+dx; cylinderRef.bindingPt6Y = oy6+dy;
 
-                    cylinder.transform(translateForm);
-                    titleTxt.transform(translateForm);
-                    bindingPt1.attr({cx:bindingPt1X,cy:bindingPt1Y});
-                    bindingPt2.attr({cx:bindingPt2X,cy:bindingPt2Y});
-                    bindingPt3.attr({cx:bindingPt3X,cy:bindingPt3Y});
-                    bindingPt4.attr({cx:bindingPt4X,cy:bindingPt4Y});
-                    bindingPt5.attr({cx:bindingPt5X,cy:bindingPt5Y});
-                    bindingPt6.attr({cx:bindingPt6X,cy:bindingPt6Y});
+                    cylinderRef.cylinder.transform(cylinderRef.translateForm);
+                    cylinderRef.titleTxt.transform(cylinderRef.translateForm);
+                    cylinderRef.bindingPt1.attr({cx:cylinderRef.bindingPt1X,cy:cylinderRef.bindingPt1Y});
+                    cylinderRef.bindingPt2.attr({cx:cylinderRef.bindingPt2X,cy:cylinderRef.bindingPt2Y});
+                    cylinderRef.bindingPt3.attr({cx:cylinderRef.bindingPt3X,cy:cylinderRef.bindingPt3Y});
+                    cylinderRef.bindingPt4.attr({cx:cylinderRef.bindingPt4X,cy:cylinderRef.bindingPt4Y});
+                    cylinderRef.bindingPt5.attr({cx:cylinderRef.bindingPt5X,cy:cylinderRef.bindingPt5Y});
+                    cylinderRef.bindingPt6.attr({cx:cylinderRef.bindingPt6X,cy:cylinderRef.bindingPt6Y});
 
-                    for (var i = bindedLinks.length; i--;) {
-                        bindedLinks[i].getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(bindedLinks[i]);
-                        var up = r.link(bindedLinks[i].toCompute());
+                    for (var i = cylinderRef.bindedLinks.length; i--;) {
+                        cylinderRef.bindedLinks[i].getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(cylinderRef.bindedLinks[i]);
+                        var up = cylinderRef.r.link(cylinderRef.bindedLinks[i].toCompute());
                         if (typeof up != 'undefined')
-                            bindedLinks[i].toUpdate(up);
-                    };
+                            cylinderRef.bindedLinks[i].toUpdate(up);
+                    }
                 },
                 upper = function() {
-                    isMoving=false;
+                    cylinderRef.root.isMoving=false;
+                    cylinderRef.isMoving=false;
                 };
 
             var cyDragger = function() {
-                    this.tX  = cylinder.attr("transform").toString();
-                    this.ox1 = bindingPt1.attr("cx");
-                    this.oy1 = bindingPt1.attr("cy");
-                    this.ox2 = bindingPt2.attr("cx");
-                    this.oy2 = bindingPt2.attr("cy");
-                    this.ox3 = bindingPt3.attr("cx");
-                    this.oy3 = bindingPt3.attr("cy");
-                    this.ox4 = bindingPt4.attr("cx");
-                    this.oy4 = bindingPt4.attr("cy");
-                    this.ox5 = bindingPt5.attr("cx");
-                    this.oy5 = bindingPt5.attr("cy");
-                    this.ox6 = bindingPt6.attr("cx");
-                    this.oy6 = bindingPt6.attr("cy");
-                    dragger();
+                    cylinderRef.r.drag(cylinderRef, "bus");
                 },
                 cyMove = function(dx,dy) {
-                    mover(this.tX,this.ox1,this.oy1,this.ox2,this.oy2,this.ox3,this.oy3,
-                        this.ox4,this.oy4,this.ox5,this.oy5,this.ox6,this.oy6,dx,dy);
+                    cylinderRef.r.move(dx,dy);
                 },
                 cyUP   = function() {
-                    upper();
+                    cylinderRef.r.up();
                 };
 
             this.dragger = function() {
-                this.exttX  = cylinder.attr("transform").toString();
-                this.extox1 = bindingPt1.attr("cx");
-                this.extoy1 = bindingPt1.attr("cy");
-                this.extox2 = bindingPt2.attr("cx");
-                this.extoy2 = bindingPt2.attr("cy");
-                this.extox3 = bindingPt3.attr("cx");
-                this.extoy3 = bindingPt3.attr("cy");
-                this.extox4 = bindingPt4.attr("cx");
-                this.extoy4 = bindingPt4.attr("cy");
-                this.extox5 = bindingPt5.attr("cx");
-                this.extoy5 = bindingPt5.attr("cy");
-                this.extox6 = bindingPt6.attr("cx");
-                this.extoy6 = bindingPt6.attr("cy");
-                dragger();
+                this.r.drag(cylinderRef, "bus");
             };
 
             this.mover = function(dx,dy) {
-                mover(this.exttX,this.extox1,this.extoy1,this.extox2,this.extoy2,this.extox3,this.extoy3,
-                    this.extox4,this.extoy4,this.extox5,this.extoy5,this.extox6,this.extoy6,dx,dy);
+                this.r.move(dx,dy);
             };
 
             this.uper = function() {
-                upper();
+                this.r.up();
             };
 
             this.pushBindedLink = function(link) {
-                bindedLinks.push(link);
+                cylinderRef.bindedLinks.push(link);
             };
 
             this.setMoveJail = function(minX, minY, maxX, maxY) {
-                boundary = {minX:minX,minY:minY,maxX:maxX,maxY:maxY}
+                this.boundary = {minX:minX,minY:minY,maxX:maxX,maxY:maxY};
                 isJailed=true;
             };
 
-            this.isMoving = function() {
-                return isMoving;
-            };
-
             this.getBindingPoints = function() {
-                var ret =
+                return (
                     [
-                        {circle:bindingPt1,x:bindingPt1X,y:bindingPt1Y},
-                        {circle:bindingPt2,x:bindingPt2X,y:bindingPt2Y},
-                        {circle:bindingPt3,x:bindingPt3X,y:bindingPt3Y},
-                        {circle:bindingPt4,x:bindingPt4X,y:bindingPt4Y},
-                        {circle:bindingPt5,x:bindingPt5X,y:bindingPt5Y},
-                        {circle:bindingPt6,x:bindingPt6X,y:bindingPt6Y}
-                    ];
-                return ret;
+                        {circle:this.bindingPt1,x:this.bindingPt1X,y:this.bindingPt1Y},
+                        {circle:this.bindingPt2,x:this.bindingPt2X,y:this.bindingPt2Y},
+                        {circle:this.bindingPt3,x:this.bindingPt3X,y:this.bindingPt3Y},
+                        {circle:this.bindingPt4,x:this.bindingPt4X,y:this.bindingPt4Y},
+                        {circle:this.bindingPt5,x:this.bindingPt5X,y:this.bindingPt5Y},
+                        {circle:this.bindingPt6,x:this.bindingPt6X,y:this.bindingPt6Y}
+                    ]);
             };
 
             this.getBindedCircle = function (coord) {
-                if (bindingPt1X==coord.x && bindingPt1Y==coord.y)
-                    return bindingPt1;
-                else if (bindingPt2X==coord.x && bindingPt2Y==coord.y)
-                    return bindingPt2;
-                else if (bindingPt3X==coord.x && bindingPt3Y==coord.y)
-                    return bindingPt3;
-                else if (bindingPt4X==coord.x && bindingPt4Y==coord.y)
-                    return bindingPt4;
-                else if (bindingPt5X==coord.x && bindingPt5Y==coord.y)
-                    return bindingPt5;
-                else if (bindingPt6X==coord.x && bindingPt6Y==coord.y)
-                    return bindingPt6;
+                if (this.bindingPt1X==coord.x && this.bindingPt1Y==coord.y)
+                    return this.bindingPt1;
+                else if (this.bindingPt2X==coord.x && this.bindingPt2Y==coord.y)
+                    return this.bindingPt2;
+                else if (this.bindingPt3X==coord.x && this.bindingPt3Y==coord.y)
+                    return this.bindingPt3;
+                else if (this.bindingPt4X==coord.x && this.bindingPt4Y==coord.y)
+                    return this.bindingPt4;
+                else if (this.bindingPt5X==coord.x && this.bindingPt5Y==coord.y)
+                    return this.bindingPt5;
+                else if (this.bindingPt6X==coord.x && this.bindingPt6Y==coord.y)
+                    return this.bindingPt6;
                 else
                     return null;
             };
@@ -239,12 +245,8 @@ define(
              */
 
             this.getTopLeftCoords = function() {
-                return {x:bindingPt4X,y:bindingPt4Y};
+                return {x:this.bindingPt4X,y:this.bindingPt4Y};
             };
-
-            this.isPrinted  = function() {
-                return (cylinder!=null);
-            }
 
             function delHexColor(c1, c2) {
                 var hexStr = (parseInt(c1, 16) - parseInt(c2, 16)).toString(16);
@@ -252,28 +254,60 @@ define(
                 return hexStr;
             }
 
+            this.updateCylinder = function() {
+                this.vcpath    =
+                    [
+                        ["M", this.x, this.y],
+                        ["C", this.x+this.diameter/8, this.y, this.x+this.diameter/5, this.y-this.diameter/4, this.x+this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x+this.diameter/5, this.y-3*this.diameter/4, this.x+this.diameter/8, this.y-this.diameter, this.x, this.y-this.diameter],
+                        ["C", this.x-this.diameter/8, this.y-this.diameter, this.x-this.diameter/5, this.y-3*this.diameter/4, this.x-this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x-this.diameter/5, this.y-this.diameter/5, this.x-this.diameter/8, this.y, this.x, this.y],
+                        ["Z"],
+                        ["M", this.x, this.y],
+                        ["L", this.x+this.height, this.y],
+                        ["C", this.x+this.height+this.diameter/8, this.y, this.x+this.height+this.diameter/5, this.y-this.diameter/4, this.x+this.height+this.diameter/5, this.y-this.diameter/2],
+                        ["C", this.x+this.height+this.diameter/5, this.y-3*this.diameter/4, this.x+this.height+this.diameter/8, this.y-this.diameter, this.x+this.height, this.y-this.diameter],
+                        ["L", this.x, this.y-this.diameter]
+                    ];
+
+                var fillColor   = "#"+this.color,
+                    strokeColor = "#" + delHexColor("fff000", this.color);
+
+                this.cylinder = this.r.path(this.vcpath).attr(
+                    {
+                        fill: fillColor,"fill-opacity": '0.7',"fill-rule": 'evenodd',stroke:strokeColor,"stroke-width": '2',"stroke-linecap": 'butt',
+                        "stroke-linejoin": 'round',"stroke-miterlimit": '4',"stroke-dashoffset": '0',"stroke-opacity": '1'
+                    });
+                this.titleTxt   = this.r.text(this.ctrX, this.ctrY-this.diameter, this.title_).attr({'font-size': '14px', 'font-weight': 'bold', 'font-family': 'Arial', fill: strokeColor});
+
+                this.cylinderR.remove();
+                this.cylinderR  = this.r.set().push(this.titleTxt).push(this.cylinder).push(this.bindingPt1).push(this.bindingPt2).
+                    push(this.bindingPt3).push(this.bindingPt4).push(this.bindingPt5).push(this.bindingPt6);
+                this.cylinderR.drag(cyMove, cyDragger, cyUP);
+            };
+
             this.print = function(r_) {
-                if (r == null || (r != null && r_!=r)) {
-                    r = r_;
-                    var fillColor   = "#"+color,
-                        strokeColor = "#" + delHexColor("fff000", color);
-                    cylinder  = r.path(vcpath).attr(
+                if (this.r == null || (this.r != null && r_!=this.r)) {
+                    this.r = r_;
+                    var fillColor   = "#"+this.color,
+                        strokeColor = "#" + delHexColor("fff000", this.color);
+                    this.cylinder  = this.r.path(this.vcpath).attr(
                         {
                             fill: fillColor,"fill-opacity": '0.7',"fill-rule": 'evenodd',stroke:strokeColor,"stroke-width": '2',"stroke-linecap": 'butt',
                             "stroke-linejoin": 'round',"stroke-miterlimit": '4',"stroke-dashoffset": '0',"stroke-opacity": '1'
                         });
-                    cylinder.transform(translateForm);
-                    titleTxt   = r.text(centerX, centerY-d, title_).attr({'font-size': '14px', 'font-weight': 'bold', 'font-family': 'Arial', fill: strokeColor});
-                    titleTxt.transform(translateForm);
-                    bindingPt1 = r.circle(bindingPt1X,bindingPt1Y,0);
-                    bindingPt2 = r.circle(bindingPt2X,bindingPt2Y,0);
-                    bindingPt3 = r.circle(bindingPt3X,bindingPt3Y,0);
-                    bindingPt4 = r.circle(bindingPt4X,bindingPt4Y,0);
-                    bindingPt5 = r.circle(bindingPt5X,bindingPt5Y,0);
-                    bindingPt6 = r.circle(bindingPt6X,bindingPt6Y,0);
-                    cylinderR  = r.set().push(titleTxt).push(cylinder).push(bindingPt1).push(bindingPt2).
-                        push(bindingPt3).push(bindingPt4).push(bindingPt5).push(bindingPt6);
-                    cylinderR.drag(cyMove, cyDragger, cyUP);
+                    this.cylinder.transform(this.translateForm);
+                    this.titleTxt   = this.r.text(this.ctrX, this.ctrY-this.diameter, this.title_).attr({'font-size': '14px', 'font-weight': 'bold', 'font-family': 'Arial', fill: strokeColor});
+                    this.titleTxt.transform(this.translateForm);
+                    this.bindingPt1 = this.r.circle(this.bindingPt1X,this.bindingPt1Y,0);
+                    this.bindingPt2 = this.r.circle(this.bindingPt2X,this.bindingPt2Y,0);
+                    this.bindingPt3 = this.r.circle(this.bindingPt3X,this.bindingPt3Y,0);
+                    this.bindingPt4 = this.r.circle(this.bindingPt4X,this.bindingPt4Y,0);
+                    this.bindingPt5 = this.r.circle(this.bindingPt5X,this.bindingPt5Y,0);
+                    this.bindingPt6 = this.r.circle(this.bindingPt6X,this.bindingPt6Y,0);
+                    this.cylinderR  = this.r.set().push(this.titleTxt).push(this.cylinder).push(this.bindingPt1).push(this.bindingPt2).
+                        push(this.bindingPt3).push(this.bindingPt4).push(this.bindingPt5).push(this.bindingPt6);
+                    this.cylinderR.drag(cyMove, cyDragger, cyUP);
                     //this.plugFreeTransform();
                 }
             };

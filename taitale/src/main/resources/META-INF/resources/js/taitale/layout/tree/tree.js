@@ -44,24 +44,24 @@ define(
 
             this.addVertex = function(treeObject) {
                 var rvertex;
-                if (!treeObject.isInserted()) {
+                if (!treeObject.isInserted) {
                     rvertex = new vertex(treeObject);
                     rvertex.setFloor(0);
                     rvertex.incrementRepulsionFactor(treeObject.getLinkedTreeObjects().length);
                     vertexRegistry.push(rvertex);
-                    treeObject.setInserted();
+                    treeObject.isInserted=true;
                     //helper_.debug("[tree.addVertex] New root vertex " + rvertex.getVertexID() + " added (" + treeObject.getName() + "). Floor =  " + 0 );
                 } else {
-                    rvertex = this.findVertexByID(treeObject.getID());
+                    rvertex = this.findVertexByID(treeObject.ID);
                     //helper_.debug("[tree.addVertex] Parent vertex " + rvertex.getVertexID() + " retrieved (" + treeObject.getName() + "). Floor =  " + rvertex.getFloor() );
                 }
 
-                var linkedContainers  = ((treeObject instanceof container) ? treeObject.getLinkedContainers():treeObject.getLinkedTreeObjects()),
+                var linkedContainers  = ((treeObject instanceof container) ? treeObject.getLinkedContainers():treeObject.linkedTreeObjects),
                     idFromRoot        = 0,
                     childMulticastBus = ((linkedContainers.length == 0 && rvertex.getFloor()==0) ? ((treeObject instanceof container) ? treeObject.getLinkedBus() : []):[]);
                 for (var i = 0, ii = linkedContainers.length; i<ii; i++) {
                     var linkedContainer = linkedContainers[i];
-                    if (!linkedContainer.isInserted()) {
+                    if (!linkedContainer.isInserted) {
                         var linkedVertex = new vertex(linkedContainer);
                         linkedVertex.setRootV(rvertex);
                         linkedVertex.setIdFromRoot(idFromRoot++);
@@ -69,7 +69,7 @@ define(
                         linkedVertex.incrementRepulsionFactor(linkedContainer.getLinkedTreeObjectsCount())
                         vertexRegistry.push(linkedVertex);
                         rvertex.pushLinkedVertex(linkedVertex);
-                        linkedContainer.setInserted();
+                        linkedContainer.isInserted = true;
                         //helper_.debug(
                         //    "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
                         //    " added (" + linkedContainer.getName() + "). Floor =  " + linkedVertex.getFloor() +
@@ -81,19 +81,19 @@ define(
 
                 for (var i = 0, ii = childMulticastBus.length; i<ii; i++) {
                     var childBus = childMulticastBus[i];
-                    if (!childBus.isInserted()) {
+                    if (!childBus.isInserted) {
                         var busVertex     = new vertex(childBus),
-                            linkedObjects = childBus.getLinkedTreeObjects();
+                            linkedObjects = childBus.linkedTreeObjects;
                         for (var j= 0, jj = linkedObjects.length; j<jj; j++) {
-                            var linkedVertex = this.findVertexByID(childBus.getLinkedTreeObjects()[j].getID())
+                            var linkedVertex = this.findVertexByID(childBus.linkedTreeObjects[j].ID)
                             if (linkedVertex!=null) {
-                                if (!childBus.isInserted()) {
+                                if (!childBus.isInserted) {
                                     busVertex.setRootV(linkedVertex);
                                     busVertex.setIdFromRoot(linkedVertex.getLinkedVertex().length);
                                     busVertex.setFloor(linkedVertex.getFloor()+1);
                                     busVertex.incrementRepulsionFactor(childBus.getLinkedTreeObjectsCount());
                                     vertexRegistry.push(busVertex);
-                                    childBus.setInserted();
+                                    childBus.isInserted = true;
                                     //helper_.debug(
                                     //    "[tree.addVertex] New vertex " + linkedVertex.getVertexID() +
                                     //    " added (" + childBus.toString + "). Floor =  " + linkedVertex.getFloor() +
@@ -155,7 +155,7 @@ define(
 
             this.reloadTree = function(treeRoot) {
                 for (var i = 0, ii = vertexRegistry.length; i < ii ; i++) {
-                    vertexRegistry[i].getObject().unsetInserted();
+                    vertexRegistry[i].getObject().isInserted = false;
                 }
                 vertexRegistry = [];
                 this.loadTree(treeRoot);

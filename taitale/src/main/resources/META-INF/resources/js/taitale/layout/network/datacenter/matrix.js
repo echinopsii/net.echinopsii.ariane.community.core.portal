@@ -265,8 +265,8 @@ define(
                     nbLines = 3;
                 }
 
-                var curarea         = container.getLayoutData().area,
-                    alreadyInserted = curarea.isInserted(),
+                var curarea         = container.layoutData.area,
+                    alreadyInserted = curarea.isInserted,
                     networkType     = curarea.getAreaDef().type;
 
                 var wanColCount     = rows[3][0];
@@ -278,21 +278,21 @@ define(
                     switch(networkType) {
                         case dic.networkType.WAN:
                             rows[0][wanColCount] = curarea;
-                            curarea.setInserted();
+                            curarea.isInserted=true;
                             rows[3][0]           = ++wanColCount;
                             if (nbColumns < rows[3][0])
                                 nbColumns = rows[3][0];
                             break;
                         case dic.networkType.MAN:
                             rows[1][manColCount] = curarea;
-                            curarea.setInserted();
+                            curarea.isInserted=true;
                             rows[3][1]           = ++manColCount;
                             if (nbColumns < rows[3][1])
                                 nbColumns = rows[3][1];
                             break;
                         case dic.networkType.LAN:
                             rows[2][lanColCount] = curarea;
-                            curarea.setInserted();
+                            curarea.isInserted=true;
                             rows[3][2]           = ++lanColCount;
                             if (nbColumns < rows[3][2])
                                 nbColumns = rows[3][2];

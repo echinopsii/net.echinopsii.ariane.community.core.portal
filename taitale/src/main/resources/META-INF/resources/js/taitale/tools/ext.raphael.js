@@ -65,13 +65,13 @@ define(
                     right: "M{x},{y}h{w4},{w4},{w4},{w4}a{r},{r},0,0,1,{r},{r}v{h4},{h4},{h4},{h4}a{r},{r},0,0,1,-{r},{r}h-{w4}-{w4}-{w4}-{w4}a{r},{r},0,0,1-{r}-{r}l0-{bottom}-{gap}-{gap},{gap}-{gap},0-{top}a{r},{r},0,0,1,{r}-{r}z",
                     left: "M{x},{y}h{w4},{w4},{w4},{w4}a{r},{r},0,0,1,{r},{r}l0,{top},{gap},{gap}-{gap},{gap},0,{bottom}a{r},{r},0,0,1,-{r},{r}h-{w4}-{w4}-{w4}-{w4}a{r},{r},0,0,1-{r}-{r}v-{h4}-{h4}-{h4}-{h4}a{r},{r},0,0,1,{r}-{r}z"
                 },
-                offset = {
-                    hx0: X - (x + r + w - gap * 2),
-                    hx1: X - (x + r + w / 2 - gap),
-                    hx2: X - (x + r + gap),
-                    vhy: Y - (y + r + h + r + gap),
-                    "^hy": Y - (y - gap)
-                },
+                //offset = {
+                //    hx0: X - (x + r + w - gap * 2),
+                //    hx1: X - (x + r + w / 2 - gap),
+                //    hx2: X - (x + r + gap),
+                //    vhy: Y - (y + r + h + r + gap),
+                //    "^hy": Y - (y - gap)
+                //},
                 mask = [{
                     x: x + r,
                     y: y,
@@ -156,13 +156,13 @@ define(
                 y = bb.y - r,
                 gap = Math.min(h / 2, w / 2, 10),
                 shape = "M{x},{y}h{w4},{w4},{w4},{w4}a{r},{r},0,0,1,{r},{r}v{h4},{h4},{h4},{h4}a{r},{r},0,0,1,-{r},{r}h-{w4},-{w4},-{w4},-{w4}a{r},{r},0,0,1-{r}-{r}v-{h4}-{h4}-{h4}-{h4}a{r},{r},0,0,1,{r}-{r}z",
-                offset = {
-                    hx0: X - (x + r + w - gap * 2),
-                    hx1: X - (x + r + w / 2 - gap),
-                    hx2: X - (x + r + gap),
-                    vhy: Y - (y + r + h + r + gap),
-                    "^hy": Y - (y - gap)
-                },
+                //offset = {
+                //    hx0: X - (x + r + w - gap * 2),
+                //    hx1: X - (x + r + w / 2 - gap),
+                //    hx2: X - (x + r + gap),
+                //    vhy: Y - (y + r + h + r + gap),
+                //    "^hy": Y - (y - gap)
+                //},
                 mask = [{
                     x: x + r,
                     y: y,
@@ -203,11 +203,11 @@ define(
                     h: h,
                     gap: gap
                 }][1];
-            var dx  = 0,
-                dy  = 0,
+            var //dx  = 0,
+                //dy  = 0,
                 out = this.path(fill(shape, mask)).insertBefore(set);
-            dx = X - (x + r + mask.left + gap);
-            dy = Y - (y + r + h + r + gap);
+            //dx = X - (x + r + mask.left + gap);
+            //dy = Y - (y + r + h + r + gap);
             //out.translate(dx, dy);
             return out;
         };
@@ -225,11 +225,11 @@ define(
             menuFieldTXT      = params.map_menuFields;
         Raphael.fn.setMainMenuSet = function() {
             mainMenuSet = this.set();
-            mainMenuSet.push(this.text(0,0+10,"Taitale menu").attr(menuMainTitleTXT));
-            mainMenuSet.push(this.text(0,0+30,"submenu1").attr(menuFieldTXT));
-            mainMenuSet.push(this.text(0,0+45,"submenu2").attr(menuFieldTXT));
-            mainMenuSet.push(this.text(0,0+60,"submenu3").attr(menuFieldTXT));
-            mainMenuSet.push(this.text(0,0+75,"submenu4").attr(menuFieldTXT));
+            mainMenuSet.push(this.text(0,10,"Taitale menu").attr(menuMainTitleTXT));
+            mainMenuSet.push(this.text(0,30,"submenu1").attr(menuFieldTXT));
+            mainMenuSet.push(this.text(0,45,"submenu2").attr(menuFieldTXT));
+            mainMenuSet.push(this.text(0,60,"submenu3").attr(menuFieldTXT));
+            mainMenuSet.push(this.text(0,75,"submenu4").attr(menuFieldTXT));
             mainMenuSet.toBack();
             mainMenuSet.hide();
         };
@@ -242,11 +242,11 @@ define(
             containerFieldTXT      = params.container_menuFields;
         Raphael.fn.setContainerMenuSet = function() {
             containerMenuSet = this.set();
-            containerMenuSet.push(this.text(0,0+10,"Container menu").attr(containerMainTitleTXT));
-            containerMenuSet.push(this.text(0,0+10,"Display all properties").attr(containerFieldTXT));
-            containerMenuSet.push(this.text(0,0+30,"Highlight cluster").attr(containerFieldTXT));
-            containerMenuSet.push(this.text(0,0+45,"Show gates").attr(containerFieldTXT));
-            containerMenuSet.push(this.text(0,0+60,"Hide gates").attr(containerFieldTXT));
+            containerMenuSet.push(this.text(0,10,"Container menu").attr(containerMainTitleTXT));
+            containerMenuSet.push(this.text(0,10,"Display all properties").attr(containerFieldTXT));
+            containerMenuSet.push(this.text(0,30,"Highlight cluster").attr(containerFieldTXT));
+            containerMenuSet.push(this.text(0,45,"Show gates").attr(containerFieldTXT));
+            containerMenuSet.push(this.text(0,60,"Hide gates").attr(containerFieldTXT));
             containerMenuSet.toBack();
             containerMenuSet.hide();
         };
@@ -257,13 +257,13 @@ define(
             return clonedMenuSet ;
         };
 
-        var nodeMenuSet,
-            nodeMainTitleTXT  = params.node_menuMainTitle,
-            nodeFieldTXT      = params.node_menuFields;
+        var nodeMenuSet;
+            //nodeMainTitleTXT  = params.node_menuMainTitle,
+            //nodeFieldTXT      = params.node_menuFields;
         Raphael.fn.setNodeMenuSet = function() {
             nodeMenuSet = this.set();
-            nodeMenuSet.push(this.text(0,0+10,"Node menu").attr(containerMainTitleTXT));
-            nodeMenuSet.push(this.text(0,0+10,"Display all properties").attr(containerFieldTXT));
+            nodeMenuSet.push(this.text(0,10,"Node menu").attr(containerMainTitleTXT));
+            nodeMenuSet.push(this.text(0,10,"Display all properties").attr(containerFieldTXT));
             nodeMenuSet.toBack();
             nodeMenuSet.hide();
         };
@@ -274,13 +274,14 @@ define(
             return clonedMenuSet ;
         };
 
-        var endpointMenuSet,
-            endpointMainTitleTXT  = params.node_menuMainTitle,
-            endpointFieldTXT      = params.node_menuFields;
+        var endpointMenuSet;
+            //endpointMainTitleTXT  = params.node_menuMainTitle,
+            //endpointFieldTXT      = params.node_menuFields;
+
         Raphael.fn.setEndpointMenuSet = function() {
             endpointMenuSet = this.set();
-            endpointMenuSet.push(this.text(0,0+10,"Endpoint menu").attr(containerMainTitleTXT));
-            endpointMenuSet.push(this.text(0,0+10,"Display all properties").attr(containerFieldTXT));
+            endpointMenuSet.push(this.text(0,10,"Endpoint menu").attr(containerMainTitleTXT));
+            endpointMenuSet.push(this.text(0,10,"Display all properties").attr(containerFieldTXT));
             endpointMenuSet.toBack();
             endpointMenuSet.hide();
         };
@@ -305,7 +306,7 @@ define(
 
         Raphael.fn.debugPoint = function (x, y, color) {
             if (typeof console != "undefined") {
-                circle = this.circle(x,y);
+                var circle = this.circle(x,y);
                 circle.attr({fill: color, stroke: color, "fill-opacity": 0, "r": 2,"stroke-width": 2});
             }
         };
@@ -320,8 +321,8 @@ define(
              * mappingCanvas div contains the mappyCanvas div
              * => referentials for mouse event positioning offset
              */
-            var mainCenterDiv       = document.getElementById("mainCenter"),
-                mappingCanvasDiv      = document.getElementById("mappingCanvas");
+            var mainCenterDiv    = document.getElementById("mainCenter"),
+                mappingCanvasDiv = document.getElementById("mappingCanvas");
 
             var divOffsetTop  = ((mappingCanvasDiv!=null) ? mappingCanvasDiv.offsetTop : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetTop : 0),
                 divOffsetLeft = ((mappingCanvasDiv!=null) ? mappingCanvasDiv.offsetLeft : 0) + ((mainCenterDiv!=null) ? mainCenterDiv.offsetLeft : 0);
@@ -441,8 +442,8 @@ define(
             } else {
                 var color = typeof line == "string" ? line : "#000",
                     from = obj1,
-                    to  = obj2,
-                    line =  this.path(path).attr({stroke: color, fill: "none", }),
+                    to  = obj2;
+                    line =  this.path(path).attr({stroke: color, fill: "none"});
                     bg = bg && bg.split && this.path(path).attr({stroke: bg.split("|")[0], fill: "none", "stroke-width": bg.split("|")[1] || 3});
                 return {
                     from: from,
@@ -452,4 +453,569 @@ define(
                 };
             }
         };
+
+
+        // MOVE WITH SET
+        var bussOnMove = null,
+            linksOnMove      = null,
+            endpointsOnMove  = null,
+            nodesOnMove      = null,
+            containersOnMove = null,
+            lansOnMove       = null,
+            areasOnMove      = null,
+            dcsOnMove        = null;
+
+        var dragOnLan  = false,
+            dragOnArea = false,
+            dragOnDC   = false;
+
+        var moveSet = null;
+
+        Raphael.fn.drag = function(object, type) {
+            var i = 0, ii = 0, j = 0, jj = 0;
+            var mtxX, mtxY, mtxS;
+            switch (type) {
+                case "link":
+                    break;
+
+
+                case "endpoint":
+                    if (endpointsOnMove == null)
+                        endpointsOnMove = [];
+                    if (linksOnMove == null)
+                        linksOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    endpointsOnMove.push(object);
+                    for (i = 0, ii = object.epLinks.length; i < ii; i++)
+                        linksOnMove.push(object.epLinks[i])
+                    moveSet.push(object.circle);
+
+                    object.cx = object.circle.attr("cx");
+                    object.cy = object.circle.attr("cy");
+
+                    if (!object.menuHided) {
+                        object.menu.remove();
+                        object.menuSet.remove();
+                        object.menuHided=true;
+                        if (object.r.getDisplayMainMenu())
+                            object.r.setDisplayMainMenu(false);
+                    }
+                    if (object.labelHided==false) {
+                        object.label.hide();
+                        object.circle.attr("r",object.rUnselected);
+                        object.labelHided=true;
+                    }
+                    if (object.frameHided==false) {
+                        object.frame.hide();
+                        object.frameHided = true;
+                    }
+                    object.isMoving = true;
+
+                    object.circle.animate({"fill-opacity": object.oSelected}, 500);
+
+                    break;
+
+
+                case "node":
+                    if (nodesOnMove == null)
+                        nodesOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    nodesOnMove.push(object);
+                    for (i = 0, ii = object.nodeEndpoints.length; i < ii; i++)
+                        object.nodeEndpoints[i].r.drag(object.nodeEndpoints[i],"endpoint");
+                    moveSet.push(object.nodeName);
+                    moveSet.push(object.rect);
+
+                    object.extrx  = object.rect.attr("x");
+                    object.extry  = object.rect.attr("y");
+                    object.extt0x = object.nodeName.attr("x");
+                    object.extt0y = object.nodeName.attr("y");
+
+                    if (!object.menuHided) {
+                        object.menu.remove();
+                        object.menuSet.remove();
+                        object.menuHided=true;
+                        if (object.r.getDisplayMainMenu())
+                            object.r.setDisplayMainMenu(false);
+                    }
+
+                    object.isMoving = true;
+
+                    object.rect.animate({"fill-opacity": object.oSelected}, 500);
+
+                    break;
+
+
+                case "container":
+                    if (containersOnMove == null)
+                        containersOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    containersOnMove.push(object);
+                    mtxX        = object.containerNodes.getMtxSize().x;
+                    mtxY        = object.containerNodes.getMtxSize().y;
+                    for (i = 0, ii = mtxX; i < ii; i++)
+                        for (j = 0, jj = mtxY; j < jj; j++) {
+                            var node = object.containerNodes.getNodeFromMtx(i, j);
+                            node.r.drag(node,"node");
+                        }
+                    moveSet.push(object.containerName);
+                    moveSet.push(object.rect);
+
+                    object.extrx = object.rect.attr("x");
+                    object.extry = object.rect.attr("y");
+                    object.extt0x = object.containerName.attr("x");
+                    object.extt0y = object.containerName.attr("y");
+
+                    if (!object.menuHided) {
+                        object.menu.remove();
+                        object.menuSet.remove();
+                        object.menuHided=true;
+                        if (object.r.getDisplayMainMenu())
+                            object.r.setDisplayMainMenu(false);
+                    }
+
+                    object.isMoving = true;
+                    object.rect.animate({"fill-opacity": object.oSelected}, 500);
+
+                    break;
+
+                case "bus":
+                    if (bussOnMove == null)
+                        bussOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    bussOnMove.push(object);
+                    moveSet.push(object.bindingPt1);
+                    moveSet.push(object.bindingPt2);
+                    moveSet.push(object.bindingPt3);
+                    moveSet.push(object.bindingPt4);
+                    moveSet.push(object.bindingPt5);
+                    moveSet.push(object.bindingPt6);
+
+                    object.exttX  = object.cylinder.attr("transform").toString();
+                    object.extox1 = object.bindingPt1.attr("cx");
+                    object.extoy1 = object.bindingPt1.attr("cy");
+                    object.extox2 = object.bindingPt2.attr("cx");
+                    object.extoy2 = object.bindingPt2.attr("cy");
+                    object.extox3 = object.bindingPt3.attr("cx");
+                    object.extoy3 = object.bindingPt3.attr("cy");
+                    object.extox4 = object.bindingPt4.attr("cx");
+                    object.extoy4 = object.bindingPt4.attr("cy");
+                    object.extox5 = object.bindingPt5.attr("cx");
+                    object.extoy5 = object.bindingPt5.attr("cy");
+                    object.extox6 = object.bindingPt6.attr("cx");
+                    object.extoy6 = object.bindingPt6.attr("cy");
+
+                    object.isMoving=true;
+                    object.root.isMoving=true;
+
+                    break;
+
+                case "lan":
+                    if (!dragOnDC && !dragOnArea)
+                        dragOnLan = true;
+                    if (lansOnMove == null)
+                        lansOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    lansOnMove.push(object);
+                    mtxX = object.lanmatrix.getMtxSize().x;
+                    mtxY = object.lanmatrix.getMtxSize().y;
+                    for (i = 0, ii =  mtxX; i < ii; i++)
+                        for (j = 0, jj =  mtxY; j < jj; j++) {
+                            var container = object.lanmatrix.getContainerFromMtx(i, j);
+                            container.r.drag(container, "container");
+                        }
+                    moveSet.push(object.lanName);
+                    moveSet.push(object.rect);
+
+                    object.extrx  = object.rect.attr("x");
+                    object.extry  = object.rect.attr("y");
+                    object.extrw  = object.rect.attr("width");
+                    object.extrh  = object.rect.attr("height");
+                    object.extt0x = object.lanR[0].attr("x");
+                    object.extt0y = object.lanR[0].attr("y");
+                    object.minTopLeftX = object.minJailX;
+                    object.minTopLeftY = object.minJailY;
+                    object.maxTopLeftX = object.maxJailX - object.lanwidth;
+                    object.maxTopLeftY = object.maxJailY - object.lanheight;
+
+                    object.isMoving = true;
+
+                    if (dragOnLan)
+                        object.rect.animate({"fill-opacity": object.oSelected}, 500);
+
+                    break;
+
+                case "area":
+                    if (!dragOnDC)
+                        dragOnArea = true;
+
+                    if (areasOnMove == null)
+                        areasOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    areasOnMove.push(object);
+                    mtxX = object.armatrix.getMtxSize().x;
+                    mtxY = object.armatrix.getMtxSize().y;
+                    for (i = 0, ii =  mtxX; i < ii; i++)
+                        for (j = 0, jj =  mtxY; j < jj; j++) {
+                            var areaObj = object.armatrix.getObjFromMtx(i,j);
+                            var areaObjType = object.armatrix.getObjTypeFromMtx(i,j);
+                            if (areaObjType==="LAN") {
+                                areaObj.r.drag(areaObj,"lan");
+                            } else if (areaObjType==="BUS") {
+                                areaObj.r.drag(areaObj.mbus,"bus");
+                            }
+                        }
+                    moveSet.push(object.areaName);
+                    moveSet.push(object.rect);
+
+                    object.extrx  = object.rect.attr("x");
+                    object.extry  = object.rect.attr("y");
+                    object.extrw  = object.rect.attr("width");
+                    object.extrh  = object.rect.attr("height");
+                    object.extt0x = object.areaName.attr("x");
+                    object.extt0y = object.areaName.attr("y");
+                    object.minTopLeftX = object.minJailX;
+                    object.minTopLeftY = object.minJailY;
+                    object.maxTopLeftX = object.maxJailX - object.areawidth;
+                    object.maxTopLeftY = object.maxJailY - object.areaheight;
+
+                    object.isMoving = true;
+
+                    if (dragOnArea)
+                        object.rect.animate({"fill-opacity": object.oSelected}, 500);
+
+                    break;
+
+                case "dc":
+                    dragOnDC = true;
+
+                    if (dcsOnMove == null)
+                        dcsOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
+                    dcsOnMove.push(object);
+
+                    mtxS = object.dcmatrix.getWanMtxSize();
+                    var area;
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        area = object.dcmatrix.getAreaFromWanMtx(i);
+                        area.r.drag(area, "area");
+                    }
+                    mtxS = object.dcmatrix.getManMtxSize();
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        area = object.dcmatrix.getAreaFromManMtx(i);
+                        area.r.drag(area, "area");
+                    }
+                    mtxS = object.dcmatrix.getLanMtxSize();
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        area = object.dcmatrix.getAreaFromLanMtx(i);
+                        area.r.drag(area, "area");
+                    }
+                    moveSet.push(object.dcName);
+                    moveSet.push(object.dcTown);
+                    moveSet.push(object.rect);
+
+                    object.extrx = object.rect.attr("x");
+                    object.extry = object.rect.attr("y");
+                    object.extrw = object.rect.attr("width");
+                    object.extrh = object.rect.attr("height");
+                    object.extt0x = object.dcName.attr("x");
+                    object.extt0y = object.dcName.attr("y");
+                    object.extt1x = object.dcTown.attr("x");
+                    object.extt1y = object.dcTown.attr("y");
+
+                    object.isMoving = true;
+                    object.rect.animate({"fill-opacity": object.oSelected}, 500);
+                    object.dcsplitter.hide();
+
+                    break;
+
+                default:
+                    break;
+            }
+        };
+
+        Raphael.fn.move = function(dx, dy) {
+            var transform = "t" + dx + "," + dy;
+            //helper_.debug(transform)
+
+            var j = 0, jj = 0, i = 0;
+
+            moveSet.transform(transform);
+
+            if (dcsOnMove!=null) {
+                for (j = 0, jj = dcsOnMove.length; j < jj; j++) {
+                    var dc = dcsOnMove[j];
+                    dc.mvx = dx; dc.mvy = dy;
+                }
+            }
+            if (areasOnMove!=null) {
+                for (j = 0, jj = areasOnMove.length; j < jj; j++) {
+                    var area = areasOnMove[j];
+                    area.mvx = dx; area.mvy = dy;
+                }
+            }
+            if (lansOnMove!=null) {
+                for (j = 0, jj = lansOnMove.length; j < jj; j++) {
+                    var lan = lansOnMove[j];
+                    lan.mvx = dx; lan.mvy = dy;
+                }
+            }
+            if (bussOnMove!=null) {
+                for (j = 0, jj = bussOnMove.length; j < jj; j++) {
+                    var bus = bussOnMove[j];
+                    bus.mvx=dx; bus.mvy=dy;
+
+                    bus.cylinder.transform(transform+bus.translateForm);
+                    bus.titleTxt.transform(transform+bus.translateForm);
+
+                    for (i = bus.bindedLinks.length; i--;) {
+                        bus.bindedLinks[i].getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(bus.bindedLinks[i]);
+                        var up = bus.r.link(bus.bindedLinks[i].toCompute());
+                        if (typeof up != 'undefined')
+                            bus.bindedLinks[i].toUpdate(up);
+                    }
+                }
+            }
+            if (containersOnMove!=null) {
+                for (j = 0, jj = containersOnMove.length; j < jj; j++) {
+                    var container = containersOnMove[j];
+                    container.mvx = dx; container.mvy = dy;
+                    container.containerHat_.move(this, container.extrx + (container.rectWidth/2) + dx, container.extry + dy);
+                }
+            }
+            if (nodesOnMove!=null) {
+                for (j = 0, jj = nodesOnMove.length; j < jj; j++) {
+                    var node = nodesOnMove[j];
+                    node.mvx = dx; node.mvy = dy;
+                }
+            }
+            if (endpointsOnMove!=null) {
+                for (j = 0, jj = endpointsOnMove.length; j < jj; j++) {
+                    var endpoint = endpointsOnMove[j];
+                    endpoint.mvx = dx; endpoint.mvy = dy;
+                    for (i = endpoint.epLinks.length; i--;) {
+                        if (endpoint.epLinks[i].getMulticastBus()!=null) {
+                            endpoint.chooseMulticastTargetBindingPointAndCalcPoz(endpoint.epLinks[i]);
+                        }
+                        var up = endpoint.r.link(endpoint.epLinks[i].toCompute());
+                        if (typeof up != 'undefined') {
+                            //helper_.debug(up);
+                            endpoint.epLinks[i].toUpdate(up);
+                        }
+                    }
+                }
+            }
+        };
+
+        Raphael.fn.up = function() {
+            var i, ii, j, jj, k, kk;
+            var attrect, attrtxt0, attrtxt1;
+            if (moveSet!=null) {
+                moveSet.transform("");
+                moveSet = null;
+            }
+            if (dcsOnMove!=null) {
+                for (i = 0, ii = dcsOnMove.length; i < ii; i++) {
+                    var dc = dcsOnMove[i];
+                    attrect  = {x: dc.extrx + dc.mvx, y: dc.extry + dc.mvy};
+                    attrtxt0 = {x: dc.extt0x + dc.mvx, y: dc.extt0y + dc.mvy};
+                    attrtxt1 = {x: dc.extt1x + dc.mvx, y: dc.extt1y + dc.mvy};
+
+                    dc.mvx = 0; dc.mvy = 0;
+
+                    dc.rect.attr(attrect);
+                    dc.dcName.attr(attrtxt0);
+                    dc.dcTown.attr(attrtxt1);
+
+                    dc.setTopLeftCoord(dc.rect.attr("x"),dc.rect.attr("y"));
+                    if (dc.dcmatrix.getWanMtxSize()!=0) {
+                        dc.dcsplitter.wanLineTopY = dc.topLeftY+dc.dbrdSpan;
+                        dc.dcsplitter.manLineTopY = dc.dcsplitter.wanLineTopY+dc.dcsplitter.wanLineHeight;
+                        dc.dcsplitter.lanLineTopY = dc.dcsplitter.manLineTopY+dc.dcsplitter.manLineHeight;
+                    } else if (dc.dcmatrix.getManMtxSize()!=0) {
+                        dc.dcsplitter.manLineTopY = dc.topLeftY+dc.dbrdSpan;
+                        dc.dcsplitter.lanLineTopY = dc.dcsplitter.manLineTopY+dc.dcsplitter.manLineHeight;
+                    } else
+                        dc.dcsplitter.lanLineTopY = dc.topLeftY+dc.dbrdSpan;
+                    dc.dcsplitter.lanLineBdrY = dc.topLeftY+dc.dcheight-dc.dbrdSpan;
+
+                    dc.dcsplitter.move(dc.r);
+                    dc.dcsplitter.show();
+
+                    var mtxS = dc.dcmatrix.getWanMtxSize();
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        dc.dcmatrix.getAreaFromWanMtx(i).setMoveJail(dc.topLeftX+dc.dbrdSpan,dc.dcsplitter.wanLineTopY,
+                            dc.topLeftX+dc.dcwidth-dc.dbrdSpan,dc.dcsplitter.manLineTopY);
+                    }
+
+                    mtxS = dc.dcmatrix.getManMtxSize();
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        dc.dcmatrix.getAreaFromManMtx(i).setMoveJail(dc.topLeftX+dc.dbrdSpan,dc.dcsplitter.manLineTopY,
+                            dc.topLeftX+dc.dcwidth-dc.dbrdSpan,dc.dcsplitter.lanLineTopY);
+                    }
+
+                    mtxS = dc.dcmatrix.getLanMtxSize();
+                    for (i = 0, ii =  mtxS; i < ii; i++) {
+                        dc.dcmatrix.getAreaFromLanMtx(i).setMoveJail(dc.topLeftX+dc.dbrdSpan,dc.dcsplitter.lanLineTopY,
+                            dc.topLeftX+dc.dcwidth-dc.dbrdSpan,dc.dcsplitter.lanLineBdrY);
+                    }
+
+                    dc.rect.animate({"fill-opacity": dc.oUnselected}, 500);
+                    dc.isMoving = false;
+                }
+                dcsOnMove = null;
+            }
+            if (areasOnMove!=null) {
+                for (i = 0, ii = areasOnMove.length; i < ii; i++) {
+                    var area = areasOnMove[i];
+                    attrect = {x: area.extrx + area.mvx, y: area.extry + area.mvy};
+                    attrtxt0 = {x: area.extt0x + area.mvx, y: area.extt0y + area.mvy};
+
+                    area.mvx=0; area.mvy=0;
+                    area.rect.attr(attrect);
+                    area.areaName.attr(attrtxt0);
+
+                    mtxX        = area.armatrix.getMtxSize().x;
+                    mtxY        = area.armatrix.getMtxSize().y;
+                    area.setTopLeftCoord(area.rect.attr("x"),area.rect.attr("y"));
+                    for (j = 0, jj = mtxX; j < jj; j++) {
+                        for (k = 0, kk = mtxY; k < kk; k++) {
+                            var obj = area.armatrix.getObjFromMtx(j,k);
+                            if (obj!=null)
+                                obj.setMoveJail(
+                                    area.topLeftX+area.abrdSpan,
+                                    area.topLeftY + area.abrdSpan,
+                                    area.topLeftX+area.areawidth - area.abrdSpan,
+                                    area.topLeftY+area.areaheight-area.abrdSpan
+                                );
+                        }
+                    }
+
+                    if (dragOnArea)
+                        area.rect.animate({"fill-opacity": area.oUnselected}, 500);
+                    area.isMoving = false;
+                }
+                dragOnArea = false;
+                areasOnMove = null;
+            }
+            if (lansOnMove!=null) {
+                for (i = 0, ii = lansOnMove.length; i < ii; i++) {
+                    var lan = lansOnMove[i];
+                    attrect  = {x: lan.extrx + lan.mvx, y: lan.extry + lan.mvy};
+                    attrtxt0 = {x: lan.extt0x + lan.mvx, y: lan.extt0y + lan.mvy};
+
+                    lan.mvx=0; lan.mvy=0;
+                    lan.rect.attr(attrect);
+                    lan.lanName.attr(attrtxt0);
+
+                    var mtxX = lan.lanmatrix.getMtxSize().x,
+                        mtxY = lan.lanmatrix.getMtxSize().y;
+                    lan.setTopLeftCoord(lan.rect.attr("x"),lan.rect.attr("y"));
+                    for (j = 0, jj = mtxX; j < jj; j++)
+                        for (k = 0, kk = mtxY; k < kk; k++) {
+                            lan.lanmatrix.getContainerFromMtx(j, k).setMoveJail(
+                                lan.topLeftX,
+                                lan.topLeftY+lan.lbrdSpan,
+                                lan.topLeftX+lan.lanwidth,
+                                lan.topLeftY+lan.lanheight
+                            );
+                        }
+
+                    if (dragOnLan)
+                        lan.rect.animate({"fill-opacity": lan.oUnselected}, 500);
+                    lan.isMoving = false;
+                }
+                dragOnLan = false;
+                lansOnMove = null;
+            }
+            if (bussOnMove!=null) {
+                for (i = 0, ii = bussOnMove.length; i < ii; i++) {
+                    var bus = bussOnMove[i];
+
+                    bus.ctrX += bus.mvx; bus.ctrY+=bus.mvy; bus.x=bus.ctrX - bus.height/ 2; bus.y=bus.ctrY - bus.diameter/ 2;
+                    bus.translateForm = bus.exttX+"T"+bus.mvx+","+bus.mvy;
+                    bus.bindingPt1X = bus.extox1+bus.mvx; bus.bindingPt1Y = bus.extoy1+bus.mvy;
+                    bus.bindingPt2X = bus.extox2+bus.mvx; bus.bindingPt2Y = bus.extoy2+bus.mvy;
+                    bus.bindingPt3X = bus.extox3+bus.mvx; bus.bindingPt3Y = bus.extoy3+bus.mvy;
+                    bus.bindingPt4X = bus.extox4+bus.mvx; bus.bindingPt4Y = bus.extoy4+bus.mvy;
+                    bus.bindingPt5X = bus.extox5+bus.mvx; bus.bindingPt5Y = bus.extoy5+bus.mvy;
+                    bus.bindingPt6X = bus.extox6+bus.mvx; bus.bindingPt6Y = bus.extoy6+bus.mvy;
+
+                    bus.mvx=0; bus.mvy=0;
+                    bus.cylinder.transform(bus.translateForm);
+                    bus.titleTxt.transform(bus.translateForm);
+                    bus.bindingPt1.attr({cx:bus.bindingPt1X,cy:bus.bindingPt1Y});
+                    bus.bindingPt2.attr({cx:bus.bindingPt2X,cy:bus.bindingPt2Y});
+                    bus.bindingPt3.attr({cx:bus.bindingPt3X,cy:bus.bindingPt3Y});
+                    bus.bindingPt4.attr({cx:bus.bindingPt4X,cy:bus.bindingPt4Y});
+                    bus.bindingPt5.attr({cx:bus.bindingPt5X,cy:bus.bindingPt5Y});
+                    bus.bindingPt6.attr({cx:bus.bindingPt6X,cy:bus.bindingPt6Y});
+
+                    bus.root.isMoving=false;
+                    bus.isMoving=false;
+                }
+                bussOnMove = null;
+            }
+            if (containersOnMove!=null) {
+                for (i = 0, ii = containersOnMove.length; i < ii; i++) {
+                    var container = containersOnMove[i];
+                    attrect  = {x: container.extrx + container.mvx, y: container.extry + container.mvy};
+                    attrtxt0 = {x: container.extt0x + container.mvx, y: container.extt0y + container.mvy};
+
+                    container.mvx=0; container.mvy=0;
+                    container.rect.attr(attrect);
+                    container.containerName.attr(attrtxt0);
+
+                    container.setTopLeftCoord(container.rect.attr("x"),container.rect.attr("y"));
+                    container.rect.animate({"fill-opacity": container.oUnselected}, 500);
+                    container.isMoving = false;
+                }
+                containersOnMove = null;
+            }
+            if (nodesOnMove!=null) {
+                for (i = 0, ii = nodesOnMove.length; i < ii; i++) {
+                    var node = nodesOnMove[i];
+                    attrect  = {x: node.extrx + node.mvx, y: node.extry + node.mvy};
+                    attrtxt0 = {x: node.extt0x + node.mvx, y: node.extt0y + node.mvy};
+
+                    node.mvx=0; node.mvy=0;
+                    node.rect.attr(attrect);
+                    node.nodeName.attr(attrtxt0);
+
+                    node.setPoz(node.nodeName.attr("x")-(node.rectWidth/2), node.nodeName.attr("y")-(node.titleHeight/2));
+                    node.rectPath = node.r.rectPath(node.rectTopLeftX, node.rectTopLeftY, node.rectWidth, node.rectHeight, node.cornerRad);
+                    node.rect.animate({"fill-opacity": node.oUnselected}, 500);
+                    node.isMoving = false;
+                }
+                nodesOnMove = null;
+            }
+            if (endpointsOnMove!=null) {
+                for (i = 0, ii = endpointsOnMove.length; i < ii; i++) {
+                    var endpoint = endpointsOnMove[i];
+                    var att = {cx: endpoint.circle.attr("cx") + endpoint.mvx, cy: endpoint.circle.attr("cy") + endpoint.mvy};
+                    endpoint.mvx = 0 ; endpoint.mvy = 0;
+                    endpoint.circle.attr(att);
+                    endpoint.circle.animate({"fill-opacity": endpoint.oUnselected}, 500);
+                    endpoint.x = endpoint.circle.attr("cx");
+                    endpoint.y = endpoint.circle.attr("cy");
+                    endpoint.isMoving = false;
+                }
+                endpointsOnMove = null;
+            }
+            if (linksOnMove!=null) linksOnMove = null;
+        }
     });

@@ -61,7 +61,7 @@ define(
             this.isMoving = function() {
                 for (var i = 0, ii = nbColumns; i < ii ; i++) {
                     for (var j = 0, jj = nbLines; j < jj ; j++ ) {
-                        if (rows[j][i].isMoving())
+                        if (rows[j][i].isMoving)
                             return true;
                     }
                 }
@@ -131,7 +131,7 @@ define(
                         if (ldatacenterSplitter==null)
                             ldatacenterSplitter = new mapSplitter();
 
-                        var location = container.getLocalisation();
+                        var location = container.localisation;
                         if (!location) {
                             throw   {
                                 severity: 'error',
@@ -163,7 +163,7 @@ define(
 
                         var linkedContainers = container.getLinkedContainers();
                         for (var i = 0, ii = linkedContainers.length; i < ii; i++) {
-                            var linkedLocation      = linkedContainers[i].getLocalisation();
+                            var linkedLocation      = linkedContainers[i].localisation;
                             if (!location) {
                                 throw   {
                                     severity: 'error',
@@ -230,7 +230,7 @@ define(
                         var area = layoutNtwRegistries.pushAreaIntoRegistry(areaDef, options);
                         var lan  = layoutNtwRegistries.pushLanIntoRegistry(lanDef, options);
 
-                        container.setLayoutData(
+                        container.layoutData =
                             {
                                 dc: dc, area: area, lan: lan,
                                 isConnectedToLeftDC: isConnectedToLeftDC, isConnectedToRightDC: isConnectedToRightDC,
@@ -239,7 +239,7 @@ define(
                                 isConnectedToUpArea: isConnectedToUpArea, isConnectedToDownArea:isConnectedToDownArea,
                                 isConnectedToUpLan: isConnectedToUpLan, isConnectedToDownLan:isConnectedToDownLan,
                                 isConnectedInsideArea: isConnectedInsideArea, isConnectedInsideLan:isConnectedInsideLan
-                            });
+                            };
 
                         lan.setLayoutData(
                             {
@@ -267,8 +267,8 @@ define(
                         }
 
                         // in that case zone is a dc which contains areas that contains lans which finally contains the containers
-                        var pivotDC         = container.getLayoutData().dc,
-                            alreadyInserted = pivotDC.isInserted();
+                        var pivotDC         = container.layoutData.dc,
+                            alreadyInserted = pivotDC.isInserted;
 
                         // if DC not inserted insert in the mtx
                         if (!alreadyInserted){
@@ -284,7 +284,7 @@ define(
                                         pvtLng = parseFloat(pivotDC.getGeoDCLoc().gpsLng);
                                     if (tmpLng > pvtLng) {
                                         rows[0][i]=pivotDC;
-                                        pivotDC.setInserted();
+                                        pivotDC.isInserted=true;
                                         pivotDC=tmpDC;
                                     }
                                     //DONT'T ASK : SOLVE A STRANGE BEHAVIOR ON FIREFOX
@@ -293,12 +293,12 @@ define(
                                     }
                                 } else {
                                     rows[0][i]=pivotDC;
-                                    pivotDC.setInserted();
+                                    pivotDC.isInserted=true;
                                 }
                             }
                         }
                         // finally push container area
-                        container.getLayoutData().dc.pushContainerArea(container);
+                        container.layoutData.dc.pushContainerArea(container);
                         break;
                 }
             };

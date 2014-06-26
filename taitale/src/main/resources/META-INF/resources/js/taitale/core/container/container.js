@@ -34,402 +34,314 @@ define(
             var helper_      = new helper(),
                 prototypes_  = new prototypes();
 
-            var ID       	 = JSONContainerDesc.containerID,
-                company      = JSONContainerDesc.containerCompany,
-                product      = JSONContainerDesc.containerProduct,
-                type         = JSONContainerDesc.containerType,
-                gateURI      = JSONContainerDesc.containerGateURI,
-                name         = JSONContainerDesc.containerGateURI,
-                properties   = JSONContainerDesc.containerProperties,
-                localisation = null;
+            this.ID       	  = JSONContainerDesc.containerID;
+            this.company      = JSONContainerDesc.containerCompany;
+            this.product      = JSONContainerDesc.containerProduct;
+            this.type         = JSONContainerDesc.containerType;
+            this.gateURI      = JSONContainerDesc.containerGateURI;
+            this.name         = JSONContainerDesc.containerGateURI;
+            this.properties   = JSONContainerDesc.containerProperties;
+            this.localisation = null;
 
-            var tmpDatacenter = properties.Datacenter,
-                tmpNetwork    = properties.Network;
+            var tmpDatacenter = this.properties.Datacenter,
+                tmpNetwork    = this.properties.Network;
             if (tmpDatacenter != null && tmpNetwork != null) {
-                localisation = prototypes_.create(prototypes_.ntprototype, {
-                    dcproto:    prototypes_.create(prototypes_.dcprototype, tmpDatacenter),
-                    type:       tmpNetwork.type,
-                    marea:      tmpNetwork.marea,
-                    lan:        tmpNetwork.lan,
-                    subnetip:   tmpNetwork.subnetip,
-                    subnetmask: tmpNetwork.subnetmask
+                this.localisation = prototypes_.create(prototypes_.ntprototype, {
+                        dcproto:    prototypes_.create(prototypes_.dcprototype, tmpDatacenter),
+                        type:       tmpNetwork.type,
+                        marea:      tmpNetwork.marea,
+                        lan:        tmpNetwork.lan,
+                        subnetip:   tmpNetwork.subnetip,
+                        subnetmask: tmpNetwork.subnetmask
                 });
             }
 
-            var layoutData        = null;
+            this.layoutData        = null;
 
-            var r                 = null,
-                color             = (properties.supportTeam!=null && properties.supportTeam.color!=null) ? "#"+properties.supportTeam.color : Raphael.getColor(),
-                txtFont           = params.container_txtTitle,
-                X                 = x_,
-                Y                 = y_,
-                containerName     = null,
-                containerR        = null,
-                rect              = null,
-                rightClick        = false,
-                isMoving          = false,
-                isInserted        = false;
+            this.r                 = null;
+            this.color             = (this.properties.supportTeam!=null && this.properties.supportTeam.color!=null) ? "#"+this.properties.supportTeam.color : Raphael.getColor();
+            this.txtFont           = params.container_txtTitle;
+            this.X                 = x_;
+            this.Y                 = y_;
+            this.containerName     = null;
+            this.rect              = null;
+            this.rightClick        = false;
+            this.isMoving          = false;
+            this.isInserted        = false;
 
-            var menu              = null,
-                menuSet           = null,
-                menuFillColor     = params.container_menuFillColor,
-                menuStrokeColor   = params.container_menuStrokeColor,
-                menuOpacity       = params.container_menuOpacity,
-                menuStrokeWidth   = params.container_menuStrokeWidth,
-                menuMainTitleTXT  = params.container_menuMainTitle,
-                menuFieldTXT      = params.container_menuFields,
-                menuHided         = true;
+            this.menu              = null;
+            this.menuSet           = null;
+            this.menuFillColor     = params.container_menuFillColor;
+            this.menuStrokeColor   = params.container_menuStrokeColor;
+            this.menuOpacity       = params.container_menuOpacity;
+            this.menuStrokeWidth   = params.container_menuStrokeWidth;
+            this.menuMainTitleTXT  = params.container_menuMainTitle;
+            this.menuFieldTXT      = params.container_menuFields;
+            this.menuHided         = true;
 
-            var containerNodes    = new containerMatrix(),
-                containerHat_     = new containerHat(company,product,type);
+            this.containerNodes    = new containerMatrix();
+            this.containerHat_     = new containerHat(this.company,this.product,this.type);
 
-            var linkedTreeObjects                  = [],
-                sortOrdering                       = 1,
-                minMaxLinkedTreedObjectsComparator = function(linkedObject1, linkedObject2) {
-                    return (linkedObject2.getLinkedTreeObjectsCount() - linkedObject1.getLinkedTreeObjectsCount())*sortOrdering;
+            this.linkedTreeObjects                  = [];
+            this.sortOrdering                       = 1;
+
+            var minMaxLinkedTreedObjectsComparator = function(linkedObject1, linkedObject2) {
+                    return (linkedObject2.getLinkedTreeObjectsCount() - linkedObject1.getLinkedTreeObjectsCount())*this.sortOrdering;
                 };
 
-            var linkedBus         = [],
-                linkedContainers  = [];
+            this.linkedBus         = [];
+            this.linkedContainers  = [];
 
-            var interSpan         = params.container_interSpan,
-                titleWidth        = null,
-                titleHeight       = null,
-                titleFont         = null,
-                fitTitleMinFont   = params.container_fitTxtTitleMinFont,
-                fitTextPadding    = params.container_fitTextPadding,
-                cornerRad         = params.container_cornerRad,
-                strokeWidth       = params.container_strokeWidth;
+            this.interSpan         = params.container_interSpan;
+            this.titleWidth        = null;
+            this.titleHeight       = null;
+            this.titleFont         = null;
+            this.fitTitleMinFont   = params.container_fitTxtTitleMinFont;
+            this.fitTextPadding    = params.container_fitTextPadding;
+            this.cornerRad         = params.container_cornerRad;
+            this.strokeWidth       = params.container_strokeWidth;
 
-            var rectWidth         = 0,
-                rectHeight        = 0,
-                maxRectWidth      = 0,
-                maxRectHeight     = 0;
+            this.rectWidth         = 0;
+            this.rectHeight        = 0;
+            this.maxRectWidth      = 0;
+            this.maxRectHeight     = 0;
 
-            var nodeRectWidth  = params.node_minWidth,
-                nodeRectHeight = params.node_minHeight ;
+            this.nodeRectWidth  = params.node_minWidth;
+            this.nodeRectHeight = params.node_minHeight;
 
-            var minTopLeftX       = 0,
-                minTopLeftY       = 0,
-                maxTopLeftX       = 0,
-                maxTopLeftY       = 0,
-                isJailed          = false;
+            this.minTopLeftX       = 0;
+            this.minTopLeftY       = 0;
+            this.maxTopLeftX       = 0;
+            this.maxTopLeftY       = 0;
+            this.isJailed          = false;
 
             // coord top left point
-            var	rectTopLeftX      = 0,
-                rectTopLeftY      = 0,
+            this.rectTopLeftX      = 0;
+            this.rectTopLeftY      = 0;
             // coord top middle point
-                rectTopMiddleX    = 0,
-                rectTopMiddleY    = 0,
+            this.rectTopMiddleX    = 0;
+            this.rectTopMiddleY    = 0;
             // coord top right point
-                rectTopRightX     = 0,
-                rectTopRightY     = 0,
+            this.rectTopRightX     = 0;
+            this.rectTopRightY     = 0;
             // coord middle left point
-                rectMiddleLeftX   = 0,
-                rectMiddleLeftY   = 0,
+            this.rectMiddleLeftX   = 0;
+            this.rectMiddleLeftY   = 0;
             // coord rect middle point
-                rectMiddleX       = 0,
-                rectMiddleY       = 0,
+            this.rectMiddleX       = 0;
+            this.rectMiddleY       = 0;
             // coord middle right point
-                rectMiddleRightX  = 0,
-                rectMiddleRightY  = 0,
+            this.rectMiddleRightX  = 0;
+            this.rectMiddleRightY  = 0;
             //coord bottom left point
-                rectBottomLeftX   = 0,
-                rectBottomLeftY   = 0,
+            this.rectBottomLeftX   = 0;
+            this.rectBottomLeftY   = 0;
             //coord bottom middle point
-                rectBottomMiddleX = 0,
-                rectBottomMiddleY = 0,
+            this.rectBottomMiddleX = 0;
+            this.rectBottomMiddleY = 0
             //coord bottom right point
-                rectBottomRightX  = 0,
-                rectBottomRightY  = 0;
+            this.rectBottomRightX  = 0;
+            this.rectBottomRightY  = 0;
 
-            var oUnselected = params.container_opacUnselec,
-                oSelected   = params.container_opacSelec;
+            this.oUnselected = params.container_opacUnselec;
+            this.oSelected   = params.container_opacSelec;
+
+            this.mvx = 0;
+            this.mvy = 0;
+
+            var containerRef = this;
 
             /**
              * x = abs of containerR[0], y = ord of containerR[0]
              */
             var defineRectPoints = function(x,y) {
-                rectTopLeftX     = x,
-                rectTopLeftY     = y;
+                containerRef.rectTopLeftX     = x;
+                containerRef.rectTopLeftY     = y;
 
-                rectTopMiddleX   = rectTopLeftX + rectWidth/2;
-                rectTopMiddleY   = rectTopLeftY;
+                containerRef.rectTopMiddleX   = containerRef.rectTopLeftX + containerRef.rectWidth/2;
+                containerRef.rectTopMiddleY   = containerRef.rectTopLeftY;
 
-                rectTopRightX    = rectTopLeftX + rectWidth;
-                rectTopRightY    = rectTopLeftY;
+                containerRef.rectTopRightX    = containerRef.rectTopLeftX + containerRef.rectWidth;
+                containerRef.rectTopRightY    = containerRef.rectTopLeftY;
 
-                rectMiddleLeftX  = rectTopLeftX;
-                rectMiddleLeftY  = rectTopLeftY + rectHeight/2;
+                containerRef.rectMiddleLeftX  = containerRef.rectTopLeftX;
+                containerRef.rectMiddleLeftY  = containerRef.rectTopLeftY + containerRef.rectHeight/2;
 
-                rectMiddleRightX = rectTopRightX;
-                rectMiddleRightY = rectMiddleLeftY;
+                containerRef.rectMiddleRightX = containerRef.rectTopRightX;
+                containerRef.rectMiddleRightY = containerRef.rectMiddleLeftY;
 
-                rectBottomLeftX  = rectTopLeftX;
-                rectBottomLeftY  = rectTopLeftY + rectHeight;
+                containerRef.rectBottomLeftX  = containerRef.rectTopLeftX;
+                containerRef.rectBottomLeftY  = containerRef.rectTopLeftY + containerRef.rectHeight;
 
-                rectBottomMiddleX = rectTopMiddleX;
-                rectBottomMiddleY = rectBottomLeftY;
+                containerRef.rectBottomMiddleX = containerRef.rectTopMiddleX;
+                containerRef.rectBottomMiddleY = containerRef.rectBottomLeftY;
 
-                rectBottomRightX = rectTopRightX;
-                rectBottomRightY = rectBottomLeftY;
+                containerRef.rectBottomRightX = containerRef.rectTopRightX;
+                containerRef.rectBottomRightY = containerRef.rectBottomLeftY;
 
-                rectMiddleX = rectTopMiddleX;
-                rectMiddleY = rectMiddleLeftY;
+                containerRef.rectMiddleX = containerRef.rectTopMiddleX;
+                containerRef.rectMiddleY = containerRef.rectMiddleLeftY;
             };
 
-            var cDragg = function () {
-                    var mtxX        = containerNodes.getMtxSize().x,
-                        mtxY        = containerNodes.getMtxSize().y;
+            var cMove = function (dx, dy) {
+                    var rx = containerRef.extrx,
+                        ry = containerRef.extry;
 
-                    if (!menuHided) {
-                        menu.remove();
-                        menuSet.remove();
-                        menuHided=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
-                    }
-
-                    for (var i = 0, ii =  mtxX; i < ii; i++) {
-                        for (var j = 0, jj =  mtxY; j < jj; j++) {
-                            containerNodes.getNodeFromMtx(i, j).dragger();
-                        }
-                    }
-
-                    rect.animate({"fill-opacity": oSelected}, 500);
-
-                    isMoving = true;
-                },
-                cMove = function (rx,ry,t0x,t0y,dx, dy) {
-                    if (!rightClick) {
-                        var mtxX        = containerNodes.getMtxSize().x,
-                            mtxY        = containerNodes.getMtxSize().y;
-
-                        if (isJailed) {
-                            if (minTopLeftX > rx + dx)
-                                dx = minTopLeftX - rx;
-                            if (minTopLeftY > ry + dy)
-                                dy = minTopLeftY - ry;
-                            if (maxTopLeftX < rx + dx)
-                                dx = maxTopLeftX - rx;
-                            if (maxTopLeftY < ry + dy)
-                                dy = maxTopLeftY - ry;
-                        };
-
-                        var attrect = {x: rx + dx, y: ry + dy},
-                            attrtxt1 = {x: t0x + dx, y: t0y + dy};
-
-                        containerHat_.move(r, rx + (rectWidth/2) + dx, ry + dy);
-
-                        rect.attr(attrect);
-                        containerR[0].attr(attrtxt1);
-
-                        for (var i = 0, ii = mtxX; i < ii; i++) {
-                            for (var j = 0, jj = mtxY; j < jj; j++) {
-                                containerNodes.getNodeFromMtx(i, j).mover(dx,dy);
-                            }
+                    if (!containerRef.rightClick) {
+                        if (containerRef.isJailed) {
+                            if (containerRef.minTopLeftX > rx + dx)
+                                dx = containerRef.minTopLeftX - rx;
+                            if (containerRef.minTopLeftY > ry + dy)
+                                dy = containerRef.minTopLeftY - ry;
+                            if (containerRef.maxTopLeftX < rx + dx)
+                                dx = containerRef.maxTopLeftX - rx;
+                            if (containerRef.maxTopLeftY < ry + dy)
+                                dy = containerRef.maxTopLeftY - ry;
                         }
 
-                        defineRectPoints(rect.attr("x"),rect.attr("y"));
-                        r.safari();
-                    }
-                },
-                cUP = function () {
-                    if (!rightClick) {
-                        var mtxX        = containerNodes.getMtxSize().x,
-                            mtxY        = containerNodes.getMtxSize().y;
-
-                        rect.animate({"fill-opacity": oUnselected}, 500);
-
-                        for (var i = 0, ii = mtxX; i < ii; i++) {
-                            for (var j = 0, jj = mtxY; j < jj; j++) {
-                                containerNodes.getNodeFromMtx(i, j).uper();
-                            }
-                        }
-
-                        isMoving = false;
+                        containerRef.r.move(dx, dy);
+                        containerRef.r.safari();
                     }
                 };
 
             var containerDragger = function() {
-                    if (!rightClick) {
-                        this.rx = this.attr("x");
-                        this.ry = this.attr("y");
-                        this.t0x = containerR[0].attr("x");
-                        this.t0y = containerR[0].attr("y");
-                        cDragg();
+                    if (!containerRef.rightClick) {
+                        containerRef.r.drag(containerRef,"container");
                     }
                 },
                 containerMove = function(dx,dy) {
-                    if (!rightClick)
-                        cMove(this.rx,this.ry,this.t0x,this.t0y,dx,dy);
+                    if (!containerRef.rightClick)
+                        cMove(dx,dy);
                 },
                 containerUP =  function() {
-                    if (!rightClick)
-                        cUP();
+                    if (!containerRef.rightClick)
+                        containerRef.r.up();
                 },
-                mouseDown = function(e){
+                mouseDown = function(e) {
                     if (e.which == 3) {
-                        if (menuHided) {
-                            menuSet = r.getContainerMenuSet();
-                            menuSet.mousedown(menuMouseDown);
-                            for (var i = 0, ii = menuSet.length ; i < ii ; i++) {
+                        if (containerRef.menuHided) {
+                            containerRef.menuSet = containerRef.r.getContainerMenuSet();
+                            containerRef.menuSet.mousedown(menuMouseDown);
+                            for (var i = 0, ii = containerRef.menuSet.length ; i < ii ; i++) {
                                 if (i==0)
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY +10, fill: color});
+                                    containerRef.menuSet[i].attr({"x": containerRef.rectTopMiddleX, "y": containerRef.rectTopMiddleY +10, fill: containerRef.color});
                                 else if (i==1)
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY+30});
+                                    containerRef.menuSet[i].attr({"x": containerRef.rectTopMiddleX, "y": containerRef.rectTopMiddleY+30});
                                 else
-                                    menuSet[i].attr({"x": rectTopMiddleX, "y": rectTopMiddleY+30+(i-1)*15});
+                                    containerRef.menuSet[i].attr({"x": containerRef.rectTopMiddleX, "y": containerRef.rectTopMiddleY+30+(i-1)*15});
                             }
-                            menu = r.menu(rectTopMiddleX,rectTopMiddleY+10,menuSet).attr({fill: menuFillColor, stroke: menuStrokeColor, "stroke-width": menuStrokeWidth, "fill-opacity": menuOpacity});
-                            menu.mousedown(menuMouseDown);
-                            menu.toFront();
-                            menuSet.toFront();
-                            menuSet.show();
-                            menuHided=false;
+                            containerRef.menu = containerRef.r.menu(containerRef.rectTopMiddleX,containerRef.rectTopMiddleY+10,containerRef.menuSet).
+                                attr({fill: containerRef.menuFillColor, stroke: containerRef.menuStrokeColor, "stroke-width": containerRef.menuStrokeWidth, "fill-opacity": containerRef.menuOpacity});
+                            containerRef.menu.mousedown(menuMouseDown);
+                            containerRef.menu.toFront();
+                            containerRef.menuSet.toFront();
+                            containerRef.menuSet.show();
+                            containerRef.menuHided=false;
                         } else {
-                            menu.remove();
-                            menuSet.remove();
-                            menuHided=true;
+                            containerRef.menu.remove();
+                            containerRef.menuSet.remove();
+                            containerRef.menuHided=true;
                         }
-                        rightClick=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
+                        containerRef.rightClick=true;
+                        if (containerRef.r.getDisplayMainMenu())
+                            containerRef.r.setDisplayMainMenu(false);
                     } else if (e.which == 1) {
-                        rightClick=false;
+                        containerRef.rightClick=false;
                     }
                 },
                 menuMouseDown = function(e) {
                     if (e.which == 3) {
-                        menu.remove();
-                        menuSet.remove();
-                        menuHided=true;
-                        rightClick=true;
-                        if (r.getDisplayMainMenu())
-                            r.setDisplayMainMenu(false);
+                        containerRef.menu.remove();
+                        containerRef.menuSet.remove();
+                        containerRef.menuHided=true;
+                        containerRef.rightClick=true;
+                        if (containerRef.r.getDisplayMainMenu())
+                            containerRef.r.setDisplayMainMenu(false);
                     } else if (e.which == 1) {
-                        rightClick=false;
+                        containerRef.rightClick=false;
                     }
                 };
 
-            this.dragger = function() {
-                this.extrx = rect.attr("x");
-                this.extry = rect.attr("y");
-                this.extt0x = containerR[0].attr("x");
-                this.extt0y = containerR[0].attr("y");
-                cDragg();
-            };
-            this.mover = function(dx,dy) {
-                cMove(this.extrx,this.extry,this.extt0x,this.extt0y,dx,dy);
-            };
-            this.uper =  function() {
-                cUP();
-            };
-
             this.toString = function() {
-                return "{\n Container " + containerName + " : ("+rectMiddleX+","+rectMiddleY+")\n}";
+                return "{\n Container " + this.containerName + " : ("+this.rectMiddleX+","+this.rectMiddleY+")\n}";
             };
 
             this.pushNode = function (node) {
-                containerNodes.addNode(node);
+                this.containerNodes.addNode(node);
             };
-
-            this.isMoving = function() {
-                return isMoving;
-            };
-
-            this.getColor = function() {
-                return color;
-            };
-
-            this.getName = function() {
-                return name;
-            };
-
-            this.getHat = function() {
-                return containerHat_;
-            }
-
-            this.getID = function() {
-                return ID;
-            }
 
             this.getRectMiddlePoint = function() {
                 return {
-                    x: rectMiddleX,
-                    y: rectMiddleY
+                    x: this.rectMiddleX,
+                    y: this.rectMiddleY
                 };
             };
 
             this.getRectSize = function() {
                 return {
-                    width  : rectWidth,
-                    height : rectHeight
+                    width  : this.rectWidth,
+                    height : this.rectHeight
                 };
             };
 
             this.getMaxRectSize = function() {
                 return {
-                    width  : maxRectWidth,
-                    height : maxRectHeight
+                    width  : this.maxRectWidth,
+                    height : this.maxRectHeight
                 };
             };
 
             this.getMaxBoxSize = function() {
                 return {
-                    width  : maxRectWidth,
-                    height : maxRectHeight
+                    width  : this.maxRectWidth,
+                    height : this.maxRectHeight
                 };
             };
 
             this.getRectCornerPoints = function() {
                 return {
-                    topLeftX: rectTopLeftX,
-                    topLeftY: rectTopLeftY,
-                    bottomLeftX: rectBottomLeftX,
-                    bottomLeftY: rectBottomLeftY,
-                    topRightX: rectTopRightX,
-                    topRightY: rectTopRightY,
-                    bottomRightX: rectBottomRightX,
-                    bottomRightY: rectBottomRightY
+                    topLeftX: this.rectTopLeftX,
+                    topLeftY: this.rectTopLeftY,
+                    bottomLeftX: this.rectBottomLeftX,
+                    bottomLeftY: this.rectBottomLeftY,
+                    topRightX: this.rectTopRightX,
+                    topRightY: this.rectTopRightY,
+                    bottomRightX: this.rectBottomRightX,
+                    bottomRightY: this.rectBottomRightY
                 };
             };
 
             this.getContainerCoords = function() {
                 return {
-                    x: rectTopLeftX,
-                    y: rectTopLeftY
+                    x: this.rectTopLeftX,
+                    y: this.rectTopLeftY
                 }
-            }
-
-            this.getLocalisation = function() {
-                return localisation;
             };
 
             var getMaxWidth = function(firstWidth) {
-                var fontSize = txtFont["font-size"];
-                fontSize = helper_.fitText(fontSize,rectWidth-fitTextPadding,1.5,fitTitleMinFont);
-                txtFont["font-size"]=fontSize;
-                titleWidth  = name.width(txtFont);
-                titleHeight = name.height(txtFont);
+                var fontSize = containerRef.txtFont["font-size"];
+                fontSize = helper_.fitText(fontSize,containerRef.rectWidth-containerRef.fitTextPadding,1.5,containerRef.fitTitleMinFont);
+                containerRef.txtFont["font-size"]=fontSize;
+                containerRef.titleWidth  = containerRef.name.width(containerRef.txtFont);
+                containerRef.titleHeight = containerRef.name.height(containerRef.txtFont);
 
-                return Math.max(firstWidth,titleWidth+fitTextPadding);
+                return Math.max(firstWidth,containerRef.titleWidth+containerRef.fitTextPadding);
             };
 
             this.setSize = function () {
-                var mtxX        = containerNodes.getMtxSize().x,
-                    mtxY        = containerNodes.getMtxSize().y;
+                var mtxX        = this.containerNodes.getMtxSize().x,
+                    mtxY        = this.containerNodes.getMtxSize().y;
 
-                rectWidth    = getMaxWidth(interSpan*(mtxX+1) + nodeRectWidth*mtxX);
-                rectHeight = containerHat_.height + titleHeight + interSpan*(mtxY+1) + nodeRectHeight*mtxY;
+                this.rectWidth  = getMaxWidth(this.interSpan*(mtxX+1) + this.nodeRectWidth*mtxX);
+                this.rectHeight = containerRef.containerHat_.height + this.titleHeight + this.interSpan*(mtxY+1) + this.nodeRectHeight*mtxY;
 
-                defineRectPoints(X,Y);
+                defineRectPoints(this.X,this.Y);
             };
 
             this.setMaxSize = function() {
-                var nodesCount = containerNodes.getMtxCount();
-                maxRectWidth = getMaxWidth(nodesCount*nodeRectWidth + (nodesCount+1)*interSpan);
-                maxRectHeight = containerHat_.height + titleHeight + interSpan*(nodesCount+1) + nodeRectHeight*nodesCount;
+                var nodesCount = this.containerNodes.getMtxCount();
+                this.maxRectWidth = getMaxWidth(nodesCount*this.nodeRectWidth + (nodesCount+1)*this.interSpan);
+                this.maxRectHeight = this.containerHat_.height + this.titleHeight + this.interSpan*(nodesCount+1) + this.nodeRectHeight*nodesCount;
             };
 
             this.setTopLeftCoord = function(x,y) {
@@ -437,130 +349,107 @@ define(
             };
 
             this.setMoveJail = function(minJailX, minJailY, maxJailX, maxJailY) {
-                minTopLeftX = minJailX;
-                minTopLeftY = minJailY;
-                maxTopLeftX = maxJailX - rectWidth;
-                maxTopLeftY = maxJailY - rectHeight;
-                isJailed    = true;
+                this.minTopLeftX = minJailX;
+                this.minTopLeftY = minJailY;
+                this.maxTopLeftX = maxJailX - this.rectWidth;
+                this.maxTopLeftY = maxJailY - this.rectHeight;
+                this.isJailed    = true;
             };
 
             this.definedNodesPoz = function() {
-                var mtxX        = containerNodes.getMtxSize().x,
-                    mtxY        = containerNodes.getMtxSize().y;
+                var mtxX        = this.containerNodes.getMtxSize().x,
+                    mtxY        = this.containerNodes.getMtxSize().y;
+                var i = 0, ii = 0, j = 0, jj = 0;
 
-                for (var i = 0, ii = mtxX; i < ii; i++) {
-                    for (var j = 0, jj = mtxY; j < jj; j++) {
-                        containerNodes.getNodeFromMtx(i, j).setPoz(
-                            rectTopLeftX + (interSpan+nodeRectWidth)*i + interSpan,
-                            rectTopLeftY + containerHat_.height + titleHeight + (interSpan+nodeRectHeight)*j + interSpan
+                for (i = 0, ii = mtxX; i < ii; i++) {
+                    for (j = 0, jj = mtxY; j < jj; j++) {
+                        this.containerNodes.getNodeFromMtx(i, j).setPoz(
+                            this.rectTopLeftX + (this.interSpan+this.nodeRectWidth)*i + this.interSpan,
+                            this.rectTopLeftY + this.containerHat_.height + this.titleHeight + (this.interSpan+this.nodeRectHeight)*j + this.interSpan
                         );
                     }
                 }
             };
 
-            this.getLayoutData = function() {
-                return layoutData;
-            };
-
-            this.setLayoutData = function(data) {
-                layoutData = data;
-            };
-
-            this.isInserted = function() {
-                return isInserted;
-            };
-
-            this.setInserted = function() {
-                isInserted = true;
-            };
-
-            this.unsetInserted = function() {
-                isInserted = false;
-            };
-
             this.getLinkedTreeObjectsCount = function() {
-                return linkedTreeObjects.length;
+                return this.linkedTreeObjects.length;
             };
 
             this.sortLinkedTreeObjects = function() {
-                linkedTreeObjects.sort(minMaxLinkedTreedObjectsComparator);
-                linkedContainers.sort(minMaxLinkedTreedObjectsComparator);
-                linkedBus.sort(minMaxLinkedTreedObjectsComparator);
+                this.linkedTreeObjects.sort(minMaxLinkedTreedObjectsComparator);
+                this.linkedContainers.sort(minMaxLinkedTreedObjectsComparator);
+                this.linkedBus.sort(minMaxLinkedTreedObjectsComparator);
             };
 
             this.setSortOrdering = function(sort) {
-                sortOrdering = sort;
+                this.sortOrdering = sort;
             };
 
             this.getLinkedTreeObjects = function() {
-                return linkedTreeObjects
+                return this.linkedTreeObjects
             };
 
             this.pushLinkedContainer = function(container) {
                 var isAlreadyPushed = this.isLinkedToContainer(container);
                 if (!isAlreadyPushed) {
-                    linkedContainers.push(container);
-                    linkedTreeObjects.push(container);
+                    this.linkedContainers.push(container);
+                    this.linkedTreeObjects.push(container);
                 }
             };
 
             this.isLinkedToContainer = function(container) {
-                for (var i = 0, ii = linkedContainers.length; i < ii; i++) {
-                    if (linkedContainers[i].getID()==container.getID())
+                for (var i = 0, ii = this.linkedContainers.length; i < ii; i++) {
+                    if (this.linkedContainers[i].ID==container.ID)
                         return true;
                 }
                 return false;
             };
 
             this.getLinkedContainers = function () {
-                return linkedContainers;
+                return this.linkedContainers;
             };
 
             this.pushLinkedBus = function(bus) {
                 var isAlreadyPushed = this.isLinkedToBus(bus);
                 if (!isAlreadyPushed) {
-                    linkedBus.push(bus);
-                    linkedTreeObjects.push(bus);
+                    this.linkedBus.push(bus);
+                    this.linkedTreeObjects.push(bus);
                 }
             };
 
             this.isLinkedToBus = function(bus) {
-                for (var i = 0, ii = linkedBus.length; i < ii; i++) {
-                    if (linkedBus[i].equal(bus))
+                for (var i = 0, ii = this.linkedBus.length; i < ii; i++) {
+                    if (this.linkedBus[i].equal(bus))
                         return true;
                 }
                 return false;
             };
 
             this.getLinkedBus = function() {
-                return linkedBus;
+                return this.linkedBus;
             };
 
             this.print = function(r_) {
-                r                 = r_;
-                containerR        = r.set();
-                containerHat_.print(r,rectTopLeftX + (rectWidth/2),rectTopLeftY,color)
-                containerName     = r.text(0, 0, name).attr(txtFont).attr({'fill':color});
-                containerName.attr({x: rectTopLeftX + (rectWidth/2), y: rectTopLeftY + containerHat_.height + titleHeight});
-                containerR.push(containerName);
-                containerR[0].attr({cursor: "move"});
+                this.r = r_;
+                this.containerHat_.print(this.r,this.rectTopLeftX + (this.rectWidth/2),this.rectTopLeftY,this.color);
+                this.containerName = this.r.text(0, 0, this.name).attr(this.txtFont).attr({'fill':this.color});
+                this.containerName.attr({x: this.rectTopLeftX + (this.rectWidth/2), y: this.rectTopLeftY + this.containerHat_.height + this.titleHeight});
 
-                rect = r.rect(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, cornerRad);
-                rect.attr({fill: color, stroke: color, "fill-opacity": oUnselected, "stroke-width": strokeWidth});
-                rect.mousedown(mouseDown);
-                rect.drag(containerMove, containerDragger, containerUP);
-                containerR.push(rect);
+                this.rect = this.r.rect(this.rectTopLeftX, this.rectTopLeftY, this.rectWidth, this.rectHeight, this.cornerRad);
+                this.rect.attr({fill: this.color, stroke: this.color, "fill-opacity": containerRef.oUnselected, "stroke-width": this.strokeWidth});
+                this.rect.mousedown(mouseDown);
+                this.rect.drag(containerMove, containerDragger, containerUP);
             };
 
             this.toFront = function() {
-                containerR[0].toFront();
-                containerR[1].toFront();
+                this.containerName.toFront();
+                this.rect.toFront();
             };
 
-            name  = name.split("://")[1].split(":")[0];
-            var tmp1 = name.split(".")[0], tmp2 = name.split(".")[1].split(".")[0];
-            name = tmp1 + "." +tmp2;
-        };
+            this.name  = this.name.split("://")[1].split(":")[0];
+            var tmp1 = this.name.split(".")[0], tmp2 = this.name.split(".")[1].split(".")[0];
+            this.name = tmp1 + "." +tmp2;
+        }
 
         return container;
     });

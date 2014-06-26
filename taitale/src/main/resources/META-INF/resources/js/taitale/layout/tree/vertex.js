@@ -23,7 +23,7 @@ define(
     function() {
         function vertex(/*vertexid_*/object_) {
             var object         = object_,
-                vertexid       = object.getID(),
+                vertexid       = object.ID,
                 rootV          = null,
                 floor          = 0;
 
@@ -89,12 +89,12 @@ define(
             };
 
             this.getRelFirstChT = function() {
-                var name = object.getName();
+                var name = object.name;
                 return relFirstChT ;
             };
 
             this.getOrientStep = function() {
-                var name = object.getName();
+                var name = object.name;
                 return orientStep;
             };
 
@@ -189,7 +189,7 @@ define(
             };
 
             this.defineRelativePoz = function() {
-                var name = object.getName();
+                var name = object.name;
                 if (!isPlaced) {
                     if (rootV!=null && floor!=0) {
                         orientStep  = rootV.getOrientStep()*2/linkedVertexx.length;

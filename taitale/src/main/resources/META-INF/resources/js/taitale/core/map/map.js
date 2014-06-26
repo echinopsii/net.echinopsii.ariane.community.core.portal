@@ -79,7 +79,7 @@ define(
                 var container = null;
                 for (var i = 0, ii = containerRegistry.length; i < ii; i++ ) {
                     var tmpContainer = containerRegistry[i];
-                    if (tmpContainer.getID() === JSONNodeDesc.nodeContainerID) {
+                    if (tmpContainer.ID === JSONNodeDesc.nodeContainerID) {
                         container = tmpContainer;
                         break;
                     }
@@ -101,7 +101,7 @@ define(
                 var node = null;
                 for (var i = 0, ii = nodeRegistry.length; i < ii; i++ ) {
                     var tmpNode = nodeRegistry[i];
-                    if (tmpNode.getID() === JSONEndpointDesc.endpointParentNodeID) {
+                    if (tmpNode.ID === JSONEndpointDesc.endpointParentNodeID) {
                         node = tmpNode;
                         break;
                     }
@@ -127,9 +127,9 @@ define(
                 var sEP = null, dEP = null, TR = null;
                 for (var i = 0, ii = endpointRegistry.length; i < ii ; i++) {
                     var tmpEP = endpointRegistry[i];
-                    if (tmpEP.getID() === JSONLinkDesc.linkSEPID)
+                    if (tmpEP.epID === JSONLinkDesc.linkSEPID)
                         sEP = tmpEP;
-                    else if (tmpEP.getID() === JSONLinkDesc.linkTEPID)
+                    else if (tmpEP.epID === JSONLinkDesc.linkTEPID)
                         dEP = tmpEP;
 
                     if (sEP!=null && dEP!=null)
@@ -284,20 +284,20 @@ define(
 
             this.isMapElementMoving = function () {
                 for (var i = 0, ii = containerRegistry.length; i < ii; i++) {
-                    if (containerRegistry[i].isMoving())
+                    if (containerRegistry[i].isMoving)
                         return true;
                     var linkedBus = containerRegistry[i].getLinkedBus();
                     for (var j = 0, jj = linkedBus.length; j<jj; j++) {
-                        if (linkedBus[j].isMoving())
+                        if (linkedBus[j].isMoving)
                             return true;
                     }
                 }
                 for (var i = 0, ii = nodeRegistry.length; i < ii; i++) {
-                    if (nodeRegistry[i].isMoving())
+                    if (nodeRegistry[i].isMoving)
                         return true;
                 }
                 for (var i = 0, ii = endpointRegistry.length; i < ii; i++) {
-                    if (endpointRegistry[i].isMoving())
+                    if (endpointRegistry[i].isMoving)
                         return true;
                 }
                 return mapmatrix.isMoving();

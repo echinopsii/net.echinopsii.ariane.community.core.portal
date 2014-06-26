@@ -87,20 +87,20 @@ define(
             this.toCompute = function() {
                 if (this.transport!=null && !this.transport.isMulticast() && this.epSource!=null && this.epTarget!=null) {
                     return {
-                        from: this.epSource.getCircle(),
-                        to: this.epTarget.getCircle(),
+                        from: this.epSource.circle,
+                        to: this.epTarget.circle,
                         line: this.line,
                         bg: this.bg
                     };
                 } else if (this.transport!=null && this.transport.isMulticast() && this.epSource!=null) {
                     if (this.bpMulticast!=null && this.bpMulticast.x!=null && this.bpMulticast.y!=null)
-                        this.bpMulticast = this.multicastBus.getMBus().getBindedCircle(this.bpMulticast);
+                        this.bpMulticast = this.multicastBus.mbus.getBindedCircle(this.bpMulticast);
                     if (this.bpMulticast!=null) {
                         //this.helper.debug("[link.toCompute] New bpMulticast - coord: {" +
                         //    this.bpMulticast.attr("cx") + "," +
                         //    this.bpMulticast.attr("cy") + "} - transform:" + this.bpMulticast.attr("transform").toString());
                         return {
-                            from: this.epSource.getCircle(),
+                            from: this.epSource.circle,
                             to: this.bpMulticast,
                             line: this.line,
                             bg: this.bg
@@ -127,12 +127,12 @@ define(
 
             this.toUpdate = function(up) {
                 if (this.transport!=null && !this.transport.isMulticast() && this.epSource!=null && this.epTarget!=null) {
-                    this.epSource.setCircle(up.from);
-                    this.epTarget.setCircle(up.to);
+                    this.epSource.circle = up.from;
+                    this.epTarget.circle = up.to;
                     this.setLine(up.line);
                     this.setBg(up.bg);
                 } else if (this.transport!=null && this.transport.isMulticast() && this.epSource!=null && this.bpMulticast!=null) {
-                    this.epSource.setCircle(up.from);
+                    this.epSource.circle = up.from;
                     this.bpMulticast = up.to;
                     this.setLine(up.line);
                     this.setBg(up.bg);
@@ -147,7 +147,7 @@ define(
                         detail: 'Link description is invalid',
                         sticky: true
                     };
-                };
+                }
             };
 
             this.print = function(r) {
@@ -164,7 +164,7 @@ define(
                 if (typeof up != 'undefined') {
                     //this.helper.debug(up);
                     this.toUpdate(up);
-                };
+                }
             };
 
             this.toString = function () {
@@ -199,13 +199,13 @@ define(
             if (this.transport!=null && !this.transport.isMulticast() && this.epSource!=null && this.epTarget!=null) {
                 this.epSource.pushLink(this);
                 this.epTarget.pushLink(this);
-                this.epSource.getNode().pushLinkedNode(this.epTarget.getNode());
-                this.epTarget.getNode().pushLinkedNode(this.epSource.getNode());
+                this.epSource.epNode.pushLinkedNode(this.epTarget.epNode);
+                this.epTarget.epNode.pushLinkedNode(this.epSource.epNode);
             } else if (this.transport!=null && this.transport.isMulticast() && this.epSource!= null) {
                 this.epSource.pushLink(this);
-                this.multicastBus = this.transport.defineMulticastBus(this.epSource.getNode().getContainer().getLocalisation());
-                this.multicastBus.pushLinkedTreeObject(this.epSource.getNode().getContainer());
-                this.epSource.getNode().pushLinkedBus(this.multicastBus);
+                this.multicastBus = this.transport.defineMulticastBus(this.epSource.epNode.nodeContainer.localisation);
+                this.multicastBus.pushLinkedTreeObject(this.epSource.epNode.nodeContainer);
+                this.epSource.epNode.pushLinkedBus(this.multicastBus);
             } else {
                 throw {
                     stack: new Error("Link error - description invalid").stack,
@@ -214,8 +214,8 @@ define(
                     detail: 'Link description is invalid',
                     sticky: true
                 };
-            };
-        };
+            }
+        }
 
         return link;
     });

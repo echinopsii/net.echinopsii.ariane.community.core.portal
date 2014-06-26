@@ -24,149 +24,111 @@ define(
         'taitale-helper'
     ],
     function (cylinder, helper) {
-        function multicastBus(tid, ridx, localisation, multicastAddr, properties_) {
-            var id            = tid*1000+ridx,
-                dcName        = localisation.getDatacenter().dc,
-                areaName      = localisation.getArea().marea,
-                multicastAddr = multicastAddr,
-                properties    = properties_,
-                helper_       = new helper(),
-                isInserted    = false;
+        function multicastBus(tid, ridx, localisation, multicastAddr_, properties_) {
+            this.ID            = tid*1000+ridx;
 
-            var diameter      = 30,
-                long          = 400;
+            this.dcName        = localisation.getDatacenter().dc;
+            this.areaName      = localisation.getArea().marea;
+            this.multicastAddr = multicastAddr_;
+            this.properties    = properties_;
+            this.isInserted    = false;
+            this.isMoving      = false;
 
-            var mbus = null;
+            this.diameter      = 30;
+            this.longg         = 400;
 
-            var linkedTreeObjects         = [],
-                sortOrdering              = 1;
-                maxLinkedTreeObjectsCount = function(linkedObject1, linkedObject2) {
-                    return (linkedObject2.getLinkedTreeObjectsCount() - linkedObject1.getLinkedTreeObjectsCount())*sortOrdering;
-                };
+            this.mbus = null;
 
-            this.getID = function() {
-                return id;
+            this.linkedTreeObjects         = [];
+            this.sortOrdering              = 1;
+
+            this.r = null;
+
+            var helper_       = new helper();
+
+            this.maxLinkedTreeObjectsCount = function(linkedObject1, linkedObject2) {
+                return (linkedObject2.getLinkedTreeObjectsCount() - linkedObject1.getLinkedTreeObjectsCount())*this.sortOrdering;
             };
 
             this.getMaxBoxSize = function() {
                 return {
-                    width  : long,
-                    height : diameter
+                    width  : this.longg,
+                    height : this.diameter
                 };
             };
 
             this.getName = function() {
-                return "Multicast Bus " + multicastAddr + " ({" + dcName + "," + areaName + "})"
-            }
-
-            this.getLinkedTreeObjectsCount = function() {
-                return linkedTreeObjects.length;
+                return "Multicast Bus " + this.multicastAddr + " ({" + this.dcName + "," + this.areaName + "})"
             };
 
-            this.getLinkedTreeObjects = function() {
-                return linkedTreeObjects
+            this.getLinkedTreeObjectsCount = function() {
+                return this.linkedTreeObjects.length;
             };
 
             this.sortLinkedTreeObjects = function() {
-                linkedTreeObjects.sort(maxLinkedTreeObjectsCount);
-            };
-
-            this.setSortOrdering = function(sort) {
-                sortOrdering = sort;
+                this.linkedTreeObjects.sort(maxLinkedTreeObjectsCount);
             };
 
             this.pushLinkedTreeObject = function(object) {
-                linkedTreeObjects.push(object);
+                this.linkedTreeObjects.push(object);
             };
 
             this.pushBindedLink = function(link){
-                mbus.pushBindedLink(link);
-            };
-
-            this.getDCName = function() {
-                return dcName;
-            };
-
-            this.getAreaName = function() {
-                return areaName;
-            };
-
-            this.getMulticastAddr = function() {
-                return multicastAddr;
+                this.mbus.pushBindedLink(link);
             };
 
             this.equal = function(multicastBus) {
-                return (dcName        === multicastBus.getDCName() &&
-                        areaName      === multicastBus.getAreaName() &&
-                        multicastAddr === multicastBus.getMulticastAddr())
-            };
-
-            this.isInserted = function() {
-                return isInserted;
-            };
-
-            this.setInserted = function() {
-                isInserted = true;
-            };
-
-            this.unsetInserted = function() {
-                isInserted = false;
+                return (this.dcName        === multicastBus.dcName &&
+                        this.areaName      === multicastBus.areaName &&
+                        this.multicastAddr === multicastBus.multicastAddr)
             };
 
             this.setTopLeftCoord = function(x,y) {
-                var centerX = x + long/ 2, centerY = y + diameter/2,
-                    title = (properties != null && properties.busDescription != null) ? properties.busDescription + " " + multicastAddr : multicastAddr,
-                    color = (properties != null && properties.primaryApplication != null) ? properties.primaryApplication.color : "000000";
-                mbus = new cylinder(centerX,centerY,diameter,long,title,color);
+                var centerX = x + this.longg/ 2, centerY = y + this.diameter/2,
+                    title = (this.properties != null && this.properties.busDescription != null) ? this.properties.busDescription + " " + this.multicastAddr : this.multicastAddr,
+                    color = (this.properties != null && this.properties.primaryApplication != null) ? this.properties.primaryApplication.color : "000000";
+                this.mbus = new cylinder(this,centerX,centerY,this.diameter,this.longg,title,color);
             };
 
             this.definedNodesPoz = function() {
-                ;
             };
 
             this.setCylinder = function(centerX,centerY) {
-                var title = (properties != null && properties.busDescription     != null) ? properties.busDescription + " " + multicastAddr : multicastAddr,
-                    color = (properties != null && properties.primaryApplication != null) ? properties.primaryApplication.color : "000000";
-                mbus = new cylinder(centerX,centerY,diameter,long,title,color);
+                var title = (this.properties != null && this.properties.busDescription     != null) ? this.properties.busDescription + " " + this.multicastAddr : this.multicastAddr,
+                    color = (this.properties != null && this.properties.primaryApplication != null) ? this.properties.primaryApplication.color : "000000";
+                this.mbus = new cylinder(this,centerX,centerY,this.diameter,this.longg,title,color);
             };
 
             this.setMoveJail = function(minX, minY, maxX, maxY){
-                mbus.setMoveJail(minX,minY,maxX,maxY);
-            }
+                this.mbus.setMoveJail(minX,minY,maxX,maxY);
+            };
 
             this.getBusSize = function() {
                 return {
-                    width:long,
-                    height:diameter
+                    width:this.longg,
+                    height:this.diameter
                 }
             };
 
             this.getBusCoords = function() {
-                return mbus.getTopLeftCoords();
-            }
-
-            this.getMBus = function() {
-                return mbus;
-            };
-
-            this.isMoving = function() {
-                return mbus.isMoving();
+                return this.mbus.getTopLeftCoords();
             };
 
             this.dragger = function() {
-                mbus.dragger();
+                this.mbus.dragger();
             };
 
             this.uper = function() {
-                mbus.uper();
+                this.mbus.uper();
             };
 
             this.mover = function(dx,dy) {
-                mbus.mover(dx,dy);
+                this.mbus.mover(dx,dy);
             };
 
             this.print = function(r) {
-                mbus.print(r);
+                this.r = r;
+                this.mbus.print(r);
             };
         }
         return multicastBus;
