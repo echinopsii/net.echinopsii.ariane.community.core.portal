@@ -48,8 +48,6 @@ define(
             this.frame      = null;
             this.x          = 0;
             this.y          = 0;
-            this.mvx        = 0;
-            this.mvy        = 0;
 
             this.labelHided   = true;
             this.frameHided   = true;
@@ -73,6 +71,11 @@ define(
             this.menuMainTitleTXT  = params.endpoint_menuMainTitle;
             this.menuFieldTXT      = params.endpoint_menuFields;
             this.menuHided         = true;
+
+            this.mvx        = 0;
+            this.mvy        = 0;
+            this.lmvx       = 0;
+            this.lmvy       = 0;
 
             var epRef = this;
 

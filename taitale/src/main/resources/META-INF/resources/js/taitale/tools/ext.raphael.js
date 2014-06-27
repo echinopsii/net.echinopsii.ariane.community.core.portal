@@ -750,7 +750,7 @@ define(
 
         Raphael.fn.move = function(dx, dy) {
             var transform = "t" + dx + "," + dy;
-            //helper_.debug(transform)
+            //helper_.debug(transform);
 
             var j = 0, jj = 0, i = 0;
 
@@ -806,15 +806,18 @@ define(
             if (endpointsOnMove!=null) {
                 for (j = 0, jj = endpointsOnMove.length; j < jj; j++) {
                     var endpoint = endpointsOnMove[j];
+                    endpoint.lmvx = endpoint.mvx; endpoint.lmvy = endpoint.mvy;
                     endpoint.mvx = dx; endpoint.mvy = dy;
-                    for (i = endpoint.epLinks.length; i--;) {
-                        if (endpoint.epLinks[i].getMulticastBus()!=null) {
-                            endpoint.chooseMulticastTargetBindingPointAndCalcPoz(endpoint.epLinks[i]);
-                        }
-                        var up = endpoint.r.link(endpoint.epLinks[i].toCompute());
-                        if (typeof up != 'undefined') {
-                            //helper_.debug(up);
-                            endpoint.epLinks[i].toUpdate(up);
+                    if ((endpoint.mvx!=endpoint.lmvx) || (endpoint.mvy!=endpoint.lmvy)) {
+                        for (i = endpoint.epLinks.length; i--;) {
+                            if (endpoint.epLinks[i].getMulticastBus()!=null) {
+                                endpoint.chooseMulticastTargetBindingPointAndCalcPoz(endpoint.epLinks[i]);
+                            }
+                            var up = endpoint.r.link(endpoint.epLinks[i].toCompute());
+                            if (typeof up != 'undefined') {
+                                //helper_.debug(up);
+                                endpoint.epLinks[i].toUpdate(up);
+                            }
                         }
                     }
                 }
