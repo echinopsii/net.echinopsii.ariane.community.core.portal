@@ -43,9 +43,6 @@ define(
             this.nodeDesc      = null;
             this.nodeR         = null;
             this.rect          = null;
-            this.rectPath      = null;
-            this.rectPathLen   = null;
-            this.rectPathOrg   = null;
 
             this.isMoving       = false;
             this.rightClick     = false;
@@ -463,15 +460,6 @@ define(
                 this.nodeName = this.r.text(0, 0, this.name).attr(this.txtTitleFont);
                 this.r.FitText(this.nodeName, this.rectWidth-1, 1);
                 this.nodeName.attr({x: this.rectTopLeftX + (this.rectWidth/2), y: this.rectTopLeftY + (this.titleHeight/2)});
-
-                /*
-                 *
-                 * rectPath = r.path(r.rectPath(rectTopLeftX, rectTopLeftY, rectWidth, rectHeight, this.cornerRad));
-                 * rectPathLen = rectPath.getTotalLength();
-                 * rectPathOrg = rectPath.getPointAtLength(10);
-                 *
-                 *
-                 */
 
                 this.rect = this.r.rect(this.rectTopLeftX, this.rectTopLeftY, this.rectWidth, this.rectHeight, this.cornerRad);
                 this.rect.attr({fill: this.color, stroke: this.color, "fill-opacity": this.oUnselected, "stroke-width": this.strokeWidth});

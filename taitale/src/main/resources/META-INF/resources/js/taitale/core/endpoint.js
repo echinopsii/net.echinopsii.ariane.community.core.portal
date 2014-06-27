@@ -123,86 +123,83 @@ define(
                             middleY = epRef.epNode.getRectMiddlePoint().y,
                             cornerRad = epRef.epNode.cornerRad;
 
-                        if (!Raphael.isPointInsidePath(epRef.epNode.rectPath,att.cx,att.cy)) {
-                            //helper_.debug("Not more on the path ! cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
+                        /*
+                         * is in the node
+                         */
+                        if ((att.cx > topLeftX) && (att.cx < bottomRightX ) && (att.cy > topLeftY) && (att.cy < bottomRightY)) {
+                            var teta=null;
+                            if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > topLeftY && att.cy <= middleY) {
+                                att.cy = topLeftY;
+                                helper_.debug("01 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > middleY && att.cy < bottomRightY) {
+                                att.cy = bottomRightY;
+                                helper_.debug("02 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx < topLeftRadX && att.cy < topLeftRadY) {
+                                teta = Math.atan((topLeftRadX-att.cx)/(topLeftRadY-att.cy));
+                                att.cx = topLeftRadX - cornerRad*Math.sin(teta);
+                                att.cy = topLeftRadY - cornerRad*Math.cos(teta);
+                                helper_.debug("03 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx < topLeftRadX && att.cy > bottomRightRadY) {
+                                teta = Math.atan((att.cy-bottomRightRadY)/(topLeftRadX-att.cx));
+                                att.cx = topLeftRadX - cornerRad*Math.cos(teta);
+                                att.cy = bottomRightRadY + cornerRad*Math.sin(teta);
+                                helper_.debug("04 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx > bottomRightRadX && att.cy < topLeftRadY) {
+                                teta = Math.atan((topLeftRadY-att.cy)/(att.cx - bottomRightRadX));
+                                att.cx = bottomRightRadX + cornerRad*Math.cos(teta);
+                                att.cy = topLeftRadY - cornerRad*Math.sin(teta);
+                                helper_.debug("05 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx > bottomRightRadX && att.cy > bottomRightRadY) {
+                                teta = Math.atan((att.cy-bottomRightRadY)/(att.cx - bottomRightRadX));
+                                att.cx = bottomRightRadX + cornerRad*Math.cos(teta);
+                                att.cy = bottomRightRadY + cornerRad*Math.sin(teta);
+                                helper_.debug("06 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx < topLeftRadX && att.cy > topLeftRadY && att.cy < bottomRightRadY) {
+                                att.cx = topLeftX;
+                                att.cy = middleY;
+                                helper_.debug("07 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx > bottomRightRadX && att.cy > topLeftRadY && att.cy < bottomRightRadY) {
+                                att.cx = bottomRightX;
+                                att.cy = middleY;
+                                helper_.debug("08 cx:"+ att.cx + "; cy:" + att.cy);
+                            }  else {
+                                helper_.debug("09 I'm lost !");
+                            }
+                        } else {
                             /*
-                             * is in the node
+                             * is outside the node
                              */
-                            if ((att.cx > topLeftX) && (att.cx < bottomRightX ) && (att.cy > topLeftY) && (att.cy < bottomRightY)) {
-                                var teta=null;
-                                if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > topLeftY && att.cy <= middleY) {
-                                    att.cy = topLeftY;
-                                    //helper_.debug("01 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > middleY && att.cy < bottomRightY) {
-                                    att.cy = bottomRightY;
-                                    //helper_.debug("02 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx < topLeftRadX && att.cy < topLeftRadY) {
-                                    teta = Math.atan((topLeftRadX-att.cx)/(topLeftRadY-att.cy));
-                                    att.cx = topLeftRadX - cornerRad*Math.sin(teta);
-                                    att.cy = topLeftRadY - cornerRad*Math.cos(teta);
-                                    //helper_.debug("03 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx < topLeftRadX && att.cy > bottomRightRadY) {
-                                    teta = Math.atan((att.cy-bottomRightRadY)/(topLeftRadX-att.cx));
-                                    att.cx = topLeftRadX - cornerRad*Math.cos(teta);
-                                    att.cy = bottomRightRadY + cornerRad*Math.sin(teta);
-                                    //helper_.debug("04 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx > bottomRightRadX && att.cy < topLeftRadY) {
-                                    teta = Math.atan((topLeftRadY-att.cy)/(att.cx - bottomRightRadX));
-                                    att.cx = bottomRightRadX + cornerRad*Math.cos(teta);
-                                    att.cy = topLeftRadY - cornerRad*Math.sin(teta);
-                                    //helper_.debug("05 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx > bottomRightRadX && att.cy > bottomRightRadY) {
-                                    teta = Math.atan((att.cy-bottomRightRadY)/(att.cx - bottomRightRadX));
-                                    att.cx = bottomRightRadX + cornerRad*Math.cos(teta);
-                                    att.cy = bottomRightRadY + cornerRad*Math.sin(teta);
-                                    //helper_.debug("06 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx < topLeftRadX && att.cy > topLeftRadY && att.cy < bottomRightRadY) {
-                                    att.cx = topLeftX;
-                                    att.cy = middleY;
-                                    //helper_.debug("07 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx > bottomRightRadX && att.cy > topLeftRadY && att.cy < bottomRightRadY) {
-                                    att.cx = bottomRightX;
-                                    att.cy = middleY;
-                                    //helper_.debug("08 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                }  else {
-                                    //helper_.debug("09 I'm lost !");
-                                }
+                            var dist = null;
+                            if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy < topLeftY) {
+                                att.cy = topLeftY;
+                                helper_.debug("10 bis cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > bottomRightY) {
+                                att.cy = bottomRightY;
+                                helper_.debug("10 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx < topLeftRadX && att.cy < topLeftRadY) {
+                                dist = Math.sqrt((att.cx-topLeftRadX)*(att.cx-topLeftRadX) + (att.cy-topLeftRadY)*(att.cy-topLeftRadY));
+                                att.cx=(att.cx-topLeftRadX)*cornerRad/dist + topLeftRadX;
+                                att.cy=(att.cy-topLeftRadY)*cornerRad/dist + topLeftRadY;
+                                helper_.debug("11 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx < topLeftRadX && att.cy > bottomRightRadY) {
+                                dist = Math.sqrt((att.cx-topLeftRadX)*(att.cx-topLeftRadX) + (att.cy-bottomRightRadY)*(att.cy-bottomRightRadY));
+                                att.cx=(att.cx-topLeftRadX)*cornerRad/dist + topLeftRadX;
+                                att.cy=(att.cy-bottomRightRadY)*cornerRad/dist + bottomRightRadY;
+                                helper_.debug("12 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx >= bottomRightRadX && att.cy <= topLeftRadY) {
+                                dist = Math.sqrt((att.cx-bottomRightRadX)*(att.cx-bottomRightRadX)+(att.cy-topLeftRadY)*(att.cy-topLeftRadY));
+                                helper_.debug("dist:" + dist + "; " + " rad:" + cornerRad);
+                                att.cx=(att.cx-bottomRightRadX)*cornerRad/dist + bottomRightRadX;
+                                att.cy=topLeftRadY - (-att.cy+topLeftRadY)*cornerRad/dist;
+                                helper_.debug("13 cx:"+ att.cx + "; cy:" + att.cy);
+                            } else if (att.cx >= bottomRightRadX && att.cy >= bottomRightRadY){
+                                helper_.debug("14 cx:"+ att.cx + "; cy:" + att.cy);
+                                dist = Math.sqrt((att.cx-bottomRightRadX)*(att.cx-bottomRightRadX) + (att.cy-bottomRightRadY)*(att.cy-bottomRightRadY));
+                                att.cx=(att.cx-bottomRightRadX)*cornerRad/dist + bottomRightRadX;
+                                att.cy=(att.cy-bottomRightRadY)*cornerRad/dist + bottomRightRadY;
+                                helper_.debug("11 cx:"+ att.cx + "; cy:" + att.cy);
                             } else {
-                                /*
-                                 * is outside the node
-                                 */
-                                var dist = null;
-                                if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy < topLeftY) {
-                                    att.cy = topLeftY;
-                                    //helper_.debug("10 bis cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx > topLeftRadX && att.cx < bottomRightRadX && att.cy > bottomRightY) {
-                                    att.cy = bottomRightY;
-                                    //helper_.debug("10 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx < topLeftRadX && att.cy < topLeftRadY) {
-                                    dist = Math.sqrt((att.cx-topLeftRadX)*(att.cx-topLeftRadX) + (att.cy-topLeftRadY)*(att.cy-topLeftRadY));
-                                    att.cx=(att.cx-topLeftRadX)*cornerRad/dist + topLeftRadX;
-                                    att.cy=(att.cy-topLeftRadY)*cornerRad/dist + topLeftRadY;
-                                    //helper_.debug("11 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx < topLeftRadX && att.cy > bottomRightRadY) {
-                                    dist = Math.sqrt((att.cx-topLeftRadX)*(att.cx-topLeftRadX) + (att.cy-bottomRightRadY)*(att.cy-bottomRightRadY));
-                                    att.cx=(att.cx-topLeftRadX)*cornerRad/dist + topLeftRadX;
-                                    att.cy=(att.cy-bottomRightRadY)*cornerRad/dist + bottomRightRadY;
-                                    //helper_.debug("12 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx >= bottomRightRadX && att.cy <= topLeftRadY) {
-                                    dist = Math.sqrt((att.cx-bottomRightRadX)*(att.cx-bottomRightRadX)+(att.cy-topLeftRadY)*(att.cy-topLeftRadY));
-                                    //helper_.debug("dist:" + dist + "; " + " rad:" + cornerRad);
-                                    att.cx=(att.cx-bottomRightRadX)*cornerRad/dist + bottomRightRadX;
-                                    att.cy=topLeftRadY - (-att.cy+topLeftRadY)*cornerRad/dist;
-                                    //helper_.debug("13 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else if (att.cx >= bottomRightRadX && att.cy >= bottomRightRadY){
-                                    //helper_.debug("14 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                    dist = Math.sqrt((att.cx-bottomRightRadX)*(att.cx-bottomRightRadX) + (att.cy-bottomRightRadY)*(att.cy-bottomRightRadY));
-                                    att.cx=(att.cx-bottomRightRadX)*cornerRad/dist + bottomRightRadX;
-                                    att.cy=(att.cy-bottomRightRadY)*cornerRad/dist + bottomRightRadY;
-                                    //helper_.debug("11 cx:"+ att.cx + "; cy:" + att.cy + "; r:" + ray);
-                                } else {
-                                    //helper_.debug("12 I'm lost !");
-                                }
+                                helper_.debug("12 I'm lost !");
                             }
                         }
                     }

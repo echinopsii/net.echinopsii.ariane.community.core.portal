@@ -997,7 +997,6 @@ define(
                     node.nodeName.attr(attrtxt0);
 
                     node.setPoz(node.nodeName.attr("x")-(node.rectWidth/2), node.nodeName.attr("y")-(node.titleHeight/2));
-                    node.rectPath = node.r.rectPath(node.rectTopLeftX, node.rectTopLeftY, node.rectWidth, node.rectHeight, node.cornerRad);
                     node.rect.animate({"fill-opacity": node.oUnselected}, 500);
                     node.isMoving = false;
                 }
