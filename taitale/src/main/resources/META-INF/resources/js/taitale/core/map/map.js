@@ -145,9 +145,9 @@ define(
                 }
 
                 if (sEP!=null && dEP!=null /*UP JSON TESTS FIRST - && TR!=null*/) {
-                    linkRegistry.push(new link(sEP, dEP, TR, linkColor, linkBckg));
+                    linkRegistry.push(new link(JSONLinkDesc.linkID, sEP, dEP, TR, linkColor, linkBckg));
                 } else if (sEP!=null && TR!=null && TR.isMulticast()){
-                    linkRegistry.push(new link(sEP, null, TR, linkColor, linkBckg));
+                    linkRegistry.push(new link(JSONLinkDesc.linkID, sEP, null, TR, linkColor, linkBckg));
                 } else {
                     if (TR==null) {
                         helper_.addMsgToGrowl(

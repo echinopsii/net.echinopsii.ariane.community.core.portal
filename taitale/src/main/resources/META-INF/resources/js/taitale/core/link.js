@@ -25,8 +25,9 @@ define(
     ],
     function(helper){
 
-        function link(epS_, epT_, transport_, line_, bg_) {
+        function link(id_, epS_, epT_, transport_, line_, bg_) {
             this.helper       = new helper();
+            this.id           = id_;
             this.epSource     = epS_;
             this.epTarget     = epT_;
             this.line         = line_;

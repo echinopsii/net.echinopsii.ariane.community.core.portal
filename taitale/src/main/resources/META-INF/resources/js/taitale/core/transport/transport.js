@@ -31,8 +31,8 @@ define(
                 name          = JSONTransportDesc.transportName,
                 properties    = JSONTransportDesc.transportProperties,
                 isMoulticast  = name.contains("multicast"),
-                multicastAddr = (isMoulticast ? name.split("://")[1] : ""),
-                helper_       = new helper();
+                multicastAddr = (isMoulticast ? name.split("://")[1] : "");//,
+                //helper_       = new helper();
 
             var multicastBusRegistry = [];
 
@@ -82,10 +82,10 @@ define(
 
             this.getMulticastBusRegistry = function() {
                 return multicastBusRegistry;
-            }
+            };
 
             this.sortLinkedTreeObjects = function() {
-                if (localisation != null && isMoulticast) {
+                if (isMoulticast) {
                     for (var i = 0, ii = multicastBusRegistry.length; i < ii; i++) {
                         multicastBusRegistry[i].sortLinkedTreeObjects();
                     }

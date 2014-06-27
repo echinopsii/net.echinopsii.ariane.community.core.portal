@@ -456,8 +456,9 @@ define(
 
 
         // MOVE WITH SET
-        var bussOnMove = null,
+        var bussOnMove       = null,
             linksOnMove      = null,
+            linksToUp        = null,
             endpointsOnMove  = null,
             nodesOnMove      = null,
             containersOnMove = null,
@@ -472,24 +473,85 @@ define(
         var moveSet = null;
 
         Raphael.fn.drag = function(object, type) {
-            var i = 0, ii = 0, j = 0, jj = 0;
+            var i, ii, j, jj, area;
             var mtxX, mtxY, mtxS;
             switch (type) {
                 case "link":
-                    break;
-
-
-                case "endpoint":
-                    if (endpointsOnMove == null)
-                        endpointsOnMove = [];
+                    if (linksToUp == null)
+                        linksToUp = [];
                     if (linksOnMove == null)
                         linksOnMove = [];
                     if (moveSet == null)
                         moveSet = this.set();
 
+                    if (dragOnLan || dragOnArea || dragOnDC) {
+
+                        var sourceLan  = object.getEpSource().epNode.nodeContainer.localisation.lan,
+                            sourceArea = object.getEpSource().epNode.nodeContainer.localisation.marea,
+                            sourceDC   = object.getEpSource().epNode.nodeContainer.localisation.dcproto.dc;
+
+                        var targetLan, targetArea, targetDC;
+                        if (object.getEpTarget()!=null) {
+                            targetLan = object.getEpTarget().epNode.nodeContainer.localisation.lan;
+                            targetArea = object.getEpTarget().epNode.nodeContainer.localisation.marea;
+                            targetDC = object.getEpTarget().epNode.nodeContainer.localisation.dcproto.dc;
+                        } else {
+                            targetLan = null;
+                            targetArea = object.getMulticastBus().areaName;
+                            targetDC = object.getMulticastBus().dcName;
+                        }
+
+                        var isOnMove = false;
+
+                        if (dragOnDC) {
+                            for (i = 0, ii = dcsOnMove.length; i < ii; i++) {
+                                var dc = dcsOnMove[i];
+                                if (sourceDC === dc.dcName && targetDC === dc.dcName) {
+                                    linksOnMove.push(object);
+                                    moveSet.push(object.line);
+                                    isOnMove=true;
+                                }
+                            }
+                            if (!isOnMove)
+                                linksToUp.push(object);
+                        } else if (dragOnArea) {
+                            for (i = 0, ii = areasOnMove.length; i < ii; i++) {
+                                area = areasOnMove[i];
+                                if (sourceArea === area.areaName && targetArea === area.areaName) {
+                                    linksOnMove.push(object);
+                                    moveSet.push(object.line);
+                                    isOnMove=true;
+                                }
+                            }
+                            if (!isOnMove)
+                                linksToUp.push(object);
+                        } else if (dragOnLan) {
+                            for (i = 0, ii = lansOnMove.length; i < ii; i++) {
+                                var lan = lansOnMove[i];
+                                if (sourceLan === lan.lanName && targetLan === lan.lanName) {
+                                    moveSet.push(object.line);
+                                    linksOnMove.push(object);
+                                    isOnMove=true;
+                                }
+                            }
+                            if (!isOnMove)
+                                linksToUp.push(object);
+                        }
+                    } else {
+                        linksToUp.push(object);
+                    }
+
+                    break;
+
+                case "endpoint":
+                    if (endpointsOnMove == null)
+                        endpointsOnMove = [];
+                    if (moveSet == null)
+                        moveSet = this.set();
+
                     endpointsOnMove.push(object);
                     for (i = 0, ii = object.epLinks.length; i < ii; i++)
-                        linksOnMove.push(object.epLinks[i])
+                        object.r.drag(object.epLinks[i], "link");
                     moveSet.push(object.circle);
 
                     object.cx = object.circle.attr("cx");
@@ -592,6 +654,8 @@ define(
                         moveSet = this.set();
 
                     bussOnMove.push(object);
+                    for (i = object.bindedLinks.length; i--;)
+                        object.r.drag(object.bindedLinks[i], "link");
                     moveSet.push(object.bindingPt1);
                     moveSet.push(object.bindingPt2);
                     moveSet.push(object.bindingPt3);
@@ -752,7 +816,7 @@ define(
             var transform = "t" + dx + "," + dy;
             //helper_.debug(transform);
 
-            var j = 0, jj = 0, i = 0;
+            var j, jj, i, k, kk, link, toUp;
 
             moveSet.transform(transform);
 
@@ -783,10 +847,29 @@ define(
                     bus.titleTxt.transform(transform+bus.translateForm);
 
                     for (i = bus.bindedLinks.length; i--;) {
-                        bus.bindedLinks[i].getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(bus.bindedLinks[i]);
-                        var up = bus.r.link(bus.bindedLinks[i].toCompute());
-                        if (typeof up != 'undefined')
-                            bus.bindedLinks[i].toUpdate(up);
+                        link = bus.bindedLinks[i];
+                        toUp = false;
+                        if (linksToUp.length <= linksOnMove.length) {
+                            toUp = false;
+                            for (k = 0, kk = linksToUp.length; k < kk; k++)
+                                if (linksToUp[k].id === link.id) {
+                                    toUp = true;
+                                    break;
+                                }
+                        } else {
+                            toUp = true;
+                            for (k = 0, kk = linksOnMove.length; k < kk; k++)
+                                if (linksOnMove[k].id === link.id) {
+                                    toUp = false;
+                                    break;
+                                }
+                        }
+                        if (toUp) {
+                            link.getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(bus.bindedLinks[i]);
+                            var up = bus.r.link(link.toCompute());
+                            if (typeof up != 'undefined')
+                                link.toUpdate(up);
+                        }
                     }
                 }
             }
@@ -810,13 +893,34 @@ define(
                     endpoint.mvx = dx; endpoint.mvy = dy;
                     if ((endpoint.mvx!=endpoint.lmvx) || (endpoint.mvy!=endpoint.lmvy)) {
                         for (i = endpoint.epLinks.length; i--;) {
-                            if (endpoint.epLinks[i].getMulticastBus()!=null) {
-                                endpoint.chooseMulticastTargetBindingPointAndCalcPoz(endpoint.epLinks[i]);
+                            link = endpoint.epLinks[i];
+                            toUp = false;
+
+                            if (linksToUp.length <= linksOnMove.length) {
+                                toUp = false;
+                                for (k = 0, kk = linksToUp.length; k < kk; k++)
+                                    if (linksToUp[k].id === link.id) {
+                                        toUp = true;
+                                        break;
+                                    }
+                            } else {
+                                toUp = true;
+                                for (k = 0, kk = linksOnMove.length; k < kk; k++)
+                                    if (linksOnMove[k].id === link.id) {
+                                        toUp = false;
+                                        break;
+                                    }
                             }
-                            var up = endpoint.r.link(endpoint.epLinks[i].toCompute());
-                            if (typeof up != 'undefined') {
-                                //helper_.debug(up);
-                                endpoint.epLinks[i].toUpdate(up);
+
+                            if (toUp) {
+                                if (link.getMulticastBus()!=null) {
+                                    endpoint.chooseMulticastTargetBindingPointAndCalcPoz(link);
+                                }
+                                var up = endpoint.r.link(link.toCompute());
+                                if (typeof up != 'undefined') {
+                                    //helper_.debug(up);
+                                    link.toUpdate(up);
+                                }
                             }
                         }
                     }
@@ -1019,5 +1123,8 @@ define(
                 endpointsOnMove = null;
             }
             if (linksOnMove!=null) linksOnMove = null;
+            if (linksToUp!=null) linksToUp = null;
+
+            dragOnLan  = false, dragOnArea = false, dragOnDC   = false;
         }
     });
