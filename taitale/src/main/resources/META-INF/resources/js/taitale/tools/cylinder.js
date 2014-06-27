@@ -90,79 +90,6 @@ define(
 
             var cylinderRef = this;
 
-            var dragger = function() {
-                    cylinderRef.exttX  = cylinderRef.cylinder.attr("transform").toString();
-                    cylinderRef.extox1 = cylinderRef.bindingPt1.attr("cx");
-                    cylinderRef.extoy1 = cylinderRef.bindingPt1.attr("cy");
-                    cylinderRef.extox2 = cylinderRef.bindingPt2.attr("cx");
-                    cylinderRef.extoy2 = cylinderRef.bindingPt2.attr("cy");
-                    cylinderRef.extox3 = cylinderRef.bindingPt3.attr("cx");
-                    cylinderRef.extoy3 = cylinderRef.bindingPt3.attr("cy");
-                    cylinderRef.extox4 = cylinderRef.bindingPt4.attr("cx");
-                    cylinderRef.extoy4 = cylinderRef.bindingPt4.attr("cy");
-                    cylinderRef.extox5 = cylinderRef.bindingPt5.attr("cx");
-                    cylinderRef.extoy5 = cylinderRef.bindingPt5.attr("cy");
-                    cylinderRef.extox6 = cylinderRef.bindingPt6.attr("cx");
-                    cylinderRef.extoy6 = cylinderRef.bindingPt6.attr("cy");
-                    cylinderRef.isMoving=true;
-                    cylinderRef.root.isMoving=true;
-                },
-                mover = function(dx,dy) {
-                    var tx  = cylinderRef.exttX,
-                        ox1 = cylinderRef.extox1,
-                        oy1 = cylinderRef.extoy1,
-                        ox2 = cylinderRef.extox2,
-                        oy2 = cylinderRef.extoy2,
-                        ox3 = cylinderRef.extox3,
-                        oy3 = cylinderRef.extoy3,
-                        ox4 = cylinderRef.extox4,
-                        oy4 = cylinderRef.extoy4,
-                        ox5 = cylinderRef.extox5,
-                        oy5 = cylinderRef.extoy5,
-                        ox6 = cylinderRef.extox6,
-                        oy6 = cylinderRef.extoy6;
-
-                    if (isJailed) {
-                        if (ox1+dx<cylinderRef.boundary.minX)
-                            dx=cylinderRef.boundary.minX-ox1;
-                        else if (ox3+dx>cylinderRef.boundary.maxX)
-                            dx=cylinderRef.boundary.maxX-ox3;
-                        if (oy1+dy>cylinderRef.boundary.maxY)
-                            dy=cylinderRef.boundary.maxY-oy1;
-                        else if (oy3+dy<cylinderRef.boundary.minY)
-                            dy=cylinderRef.boundary.minY-oy3;
-                    }
-
-                    cylinderRef.translateForm = tx+"T"+dx+","+dy;
-                    cylinderRef.ctrX +=dx; cylinderRef.ctrY+=dy; cylinderRef.x=cylinderRef.ctrX - this.height/ 2; cylinderRef.y=cylinderRef.ctrY - this.diameter/ 2;
-                    cylinderRef.bindingPt1X = ox1+dx; cylinderRef.bindingPt1Y = oy1+dy;
-                    cylinderRef.bindingPt2X = ox2+dx; cylinderRef.bindingPt2Y = oy2+dy;
-                    cylinderRef.bindingPt3X = ox3+dx; cylinderRef.bindingPt3Y = oy3+dy;
-                    cylinderRef.bindingPt4X = ox4+dx; cylinderRef.bindingPt4Y = oy4+dy;
-                    cylinderRef.bindingPt5X = ox5+dx; cylinderRef.bindingPt5Y = oy5+dy;
-                    cylinderRef.bindingPt6X = ox6+dx; cylinderRef.bindingPt6Y = oy6+dy;
-
-                    cylinderRef.cylinder.transform(cylinderRef.translateForm);
-                    cylinderRef.titleTxt.transform(cylinderRef.translateForm);
-                    cylinderRef.bindingPt1.attr({cx:cylinderRef.bindingPt1X,cy:cylinderRef.bindingPt1Y});
-                    cylinderRef.bindingPt2.attr({cx:cylinderRef.bindingPt2X,cy:cylinderRef.bindingPt2Y});
-                    cylinderRef.bindingPt3.attr({cx:cylinderRef.bindingPt3X,cy:cylinderRef.bindingPt3Y});
-                    cylinderRef.bindingPt4.attr({cx:cylinderRef.bindingPt4X,cy:cylinderRef.bindingPt4Y});
-                    cylinderRef.bindingPt5.attr({cx:cylinderRef.bindingPt5X,cy:cylinderRef.bindingPt5Y});
-                    cylinderRef.bindingPt6.attr({cx:cylinderRef.bindingPt6X,cy:cylinderRef.bindingPt6Y});
-
-                    for (var i = cylinderRef.bindedLinks.length; i--;) {
-                        cylinderRef.bindedLinks[i].getEpSource().chooseMulticastTargetBindingPointAndCalcPoz(cylinderRef.bindedLinks[i]);
-                        var up = cylinderRef.r.link(cylinderRef.bindedLinks[i].toCompute());
-                        if (typeof up != 'undefined')
-                            cylinderRef.bindedLinks[i].toUpdate(up);
-                    }
-                },
-                upper = function() {
-                    cylinderRef.root.isMoving=false;
-                    cylinderRef.isMoving=false;
-                };
-
             var cyDragger = function() {
                     cylinderRef.r.drag(cylinderRef, "bus");
                 },
@@ -172,18 +99,6 @@ define(
                 cyUP   = function() {
                     cylinderRef.r.up();
                 };
-
-            this.dragger = function() {
-                this.r.drag(cylinderRef, "bus");
-            };
-
-            this.mover = function(dx,dy) {
-                this.r.move(dx,dy);
-            };
-
-            this.uper = function() {
-                this.r.up();
-            };
 
             this.pushBindedLink = function(link) {
                 cylinderRef.bindedLinks.push(link);

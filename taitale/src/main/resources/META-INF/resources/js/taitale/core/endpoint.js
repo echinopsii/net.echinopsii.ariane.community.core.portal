@@ -355,12 +355,14 @@ define(
             this.chooseMulticastTargetBindingPointAndCalcPoz = function(link_) {
                 if (link_.getMulticastBus().isInserted) {
                     var bpList = link_.getMulticastBus().mbus.getBindingPoints(),
-                        bp     = null;
+                        bp     = null,
+                        busmvx = link_.getMulticastBus().mbus.mvx,
+                        busmvy = link_.getMulticastBus().mbus.mvy;
 
                     var minDist   = -1;
                     for (var i = 0, ii=bpList.length; i<ii; i++) {
-                        var tmpLinkAvgX = bpList[i].x - epRef.epNode.getRectMiddlePoint().x,//left -> right => x>0
-                            tmpLinkAvgY = epRef.epNode.getRectMiddlePoint().y-bpList[i].y,  //bottom -> top => y>0
+                        var tmpLinkAvgX = (bpList[i].x+busmvx) - (epRef.epNode.getRectMiddlePoint().x+epRef.epNode.mvx),//left -> right => x>0
+                            tmpLinkAvgY = (epRef.epNode.getRectMiddlePoint().y+epRef.epNode.mvy)-(bpList[i].y+busmvy),  //bottom -> top => y>0
                             tmpDist = Math.sqrt(tmpLinkAvgX*tmpLinkAvgX + tmpLinkAvgY*tmpLinkAvgY);
                         if (minDist==-1) {
                             minDist=tmpDist;

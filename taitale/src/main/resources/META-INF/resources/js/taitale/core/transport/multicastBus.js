@@ -44,7 +44,7 @@ define(
 
             this.r = null;
 
-            var helper_       = new helper();
+            //var helper_       = new helper();
 
             this.maxLinkedTreeObjectsCount = function(linkedObject1, linkedObject2) {
                 return (linkedObject2.getLinkedTreeObjectsCount() - linkedObject1.getLinkedTreeObjectsCount())*this.sortOrdering;
@@ -66,7 +66,7 @@ define(
             };
 
             this.sortLinkedTreeObjects = function() {
-                this.linkedTreeObjects.sort(maxLinkedTreeObjectsCount);
+                this.linkedTreeObjects.sort(this.maxLinkedTreeObjectsCount);
             };
 
             this.pushLinkedTreeObject = function(object) {
@@ -112,18 +112,6 @@ define(
 
             this.getBusCoords = function() {
                 return this.mbus.getTopLeftCoords();
-            };
-
-            this.dragger = function() {
-                this.mbus.dragger();
-            };
-
-            this.uper = function() {
-                this.mbus.uper();
-            };
-
-            this.mover = function(dx,dy) {
-                this.mbus.mover(dx,dy);
             };
 
             this.print = function(r) {
