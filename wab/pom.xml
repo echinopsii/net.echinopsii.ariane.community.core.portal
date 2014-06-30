@@ -36,18 +36,6 @@
 
         <!-- Dependencies packaged with the war -->
         <dependency>
-            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.community.core.portal.wresources</artifactId>
-            <version>${project.version}</version>
-            <scope>runtime</scope>
-        </dependency>
-        <dependency>
-            <groupId>net.echinopsii.ariane.community.core.portal</groupId>
-            <artifactId>net.echinopsii.ariane.community.core.portal.taitale</artifactId>
-            <scope>runtime</scope>
-            <version>${project.version}</version>
-        </dependency>
-        <dependency>
             <groupId>org.primefaces.extensions</groupId>
             <artifactId>primefaces-extensions</artifactId>
             <scope>runtime</scope>
