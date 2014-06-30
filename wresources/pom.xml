@@ -13,32 +13,5 @@
     <groupId>net.echinopsii.ariane.community.core.portal</groupId>
     <artifactId>net.echinopsii.ariane.community.core.portal.wresources</artifactId>
     <name>Ariane Community Core Portal Web Resources</name>
-    <packaging>bundle</packaging>
 
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>${version.java.source}</source>
-                    <target>${version.java.target}</target>
-                    <showDeprecation>true</showDeprecation>
-                    <showWarnings>true</showWarnings>
-                    <optimize>true</optimize>
-                </configuration>
-            </plugin>
-            <plugin>
-                <!-- This plugin takes care of packaging the artifact as an OSGi Bundle -->
-                <groupId>org.apache.felix</groupId>
-                <artifactId>maven-bundle-plugin</artifactId>
-                <configuration>
-                    <instructions>
-                        <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
-                        <Embed-Transitive>true</Embed-Transitive>
-                    </instructions>
-                </configuration>
-            </plugin>
-        </plugins>
-    </build>
 </project>
