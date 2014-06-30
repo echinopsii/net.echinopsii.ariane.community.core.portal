@@ -10,7 +10,6 @@
     <packaging>pom</packaging>
 
     <modules>
-        <module>taitale</module>
         <module>wresources</module>
         <module>base</module>
 	    <module>idmwat</module>
