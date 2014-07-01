@@ -26,9 +26,9 @@ import java.net.URL;
  */
 public interface FaceletsResourceResolverService {
     /**
-     * resolve facelets resource from portal main war or portal commons-jsf jar
+     * resolve facelets resource from portal wab or bundles implementing this service
      *
-     * @param path path of the resource
+     * @param path path of the resource from implementing bundle
      *
      * @return the resource URL (null if not found)
      */

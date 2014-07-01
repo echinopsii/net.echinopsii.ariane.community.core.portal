@@ -24,7 +24,7 @@ import java.util.TreeSet;
 
 /**
  * This registry contains all Arian main menu entity. <br/>
- * This is used by any Arian component which needs to register its main menu entities and by the main menu controller which reads the registry and forward it to the main menu view.
+ * This is used by any Ariane component which needs to register its main menu entities and by the main menu controller which reads the registry and forward it to the main menu view.
  */
 public interface MainMenuEntityRegistry {
 

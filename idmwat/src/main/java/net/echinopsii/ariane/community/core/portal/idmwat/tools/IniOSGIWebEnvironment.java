@@ -60,7 +60,7 @@ import java.util.Map;
  *  <!-- SHIRO CONFIGURATION -->
  *  <context-param>
  *      <param-name>shiroEnvironmentClass</param-name>
- *      <param-value>cnet.echinopsii.ariane.core.portal.idm.tools.IniOSGIWebEnvironment</param-value>
+ *      <param-value>net.echinopsii.ariane.core.portal.idm.tools.IniOSGIWebEnvironment</param-value>
  *  </context-param>
  *  <listener>
  *      <listener-class>org.apache.shiro.web.env.EnvironmentLoaderListener</listener-class>
