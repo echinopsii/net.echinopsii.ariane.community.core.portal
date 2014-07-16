@@ -51,7 +51,7 @@ public class UserProfileController implements Serializable {
     private Subject subject ;
     private User    user ;
 
-    private String theme = "rocket"; //default
+    private String theme = "ariane"; //default
 
     private String firstname ;
     private String lastname ;
@@ -114,7 +114,7 @@ public class UserProfileController implements Serializable {
                 }
             }
             if (themePreference==null) {
-                themePreference = new UserPreference().setUserR(user).setPkeyR("cctheme").setPvalueR("rocket");
+                themePreference = new UserPreference().setUserR(user).setPkeyR("cctheme").setPvalueR("ariane");
                 em.persist(themePreference);
                 user.getPreferences().add(themePreference);
             }
