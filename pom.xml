@@ -97,8 +97,10 @@
         <version.org.primefaces.themes.all-themes>1.0.10</version.org.primefaces.themes.all-themes>
         <version.rome.rome>1.0</version.rome.rome>
 
-        <!-- CC module dependencies -->
-        <version.net.echinopsii.ariane.core.idm>0.4.1-SNAPSHOT</version.net.echinopsii.ariane.core.idm>
+        <!-- Ariane module dependencies -->
+        <version.net.echinopsii.ariane.core.idm>0.4.0</version.net.echinopsii.ariane.core.idm>
+        <version.net.echinopsii.ariane.core.idm.min>0.4.0</version.net.echinopsii.ariane.core.idm.min>
+        <version.net.echinopsii.ariane.core.idm.max>0.5.0</version.net.echinopsii.ariane.core.idm.max>
 
         <!-- Technical stuff -->
         <version.commons.beanutils>1.8.3</version.commons.beanutils>
