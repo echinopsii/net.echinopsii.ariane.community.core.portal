@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/font-awesome.css" />
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/main.css" />
+    <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/login.css" />
     <script type="text/javascript" src="#{request.contextPath}/ajs/modernizr/modernizr.js"></script>
     <script type="text/javascript">
         function handleLoginRequest(xhr, status, args) {
@@ -23,26 +24,26 @@
         }
     </script>
 </h:head>
-<h:body>
-    <h:form id="form">
-        <p:growl id="growl" sticky="true" showDetail="true" life="3000" />
-        <p:dialog id="dialog" header="Login" widgetVar="dlg" resizable="false" visible="true">
-            <h:panelGrid columns="2" cellpadding="5">
-                <h:outputLabel for="username" value="Username:" />
-                <p:inputText value="#{loginController.username}"
-                             id="username" required="true" label="username" />
-
-                <h:outputLabel for="password" value="Password:" />
-                <p:password value="#{loginController.password}"
-                            id="password" required="true" label="password" />
-
-                <f:facet name="footer">
-                    <p:commandButton id="loginButton" value="Login" update="growl"
+<h:body>    
+   <h:form id="login">
+   		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+        <div id="loginBox">
+            <span class="arianeLogo">Ariane</span>
+          			
+			<div class="wrapper wrapperloginboxUser">
+				<p:inputText id="loginboxUser" placeholder="Username" 
+				value="#{loginController.username}" label="username" />
+			</div>
+                             
+            <div class="wrapper wrapperloginboxPassword">
+				<p:password value="#{loginController.password}"
+                            id="loginboxPassword" placeholder="password" required="true" label="password" />	         
+	        </div>
+                        
+            <p:commandButton id="loginboxSubmit" value="Login" update="growl"
                                      actionListener="#{loginController.login}"
                                      oncomplete="handleLoginRequest(xhr, status, args)"/>
-                </f:facet>
-            </h:panelGrid>
-        </p:dialog>
+        </div>
     </h:form>
 </h:body>
 </html>
