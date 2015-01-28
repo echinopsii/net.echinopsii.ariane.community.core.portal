@@ -124,4 +124,48 @@ requirejs (
         $('#loginboxUser').puiinputtext(); 
         $('#loginboxPassword').puipassword();  
 		$('#loginboxSubmit').puibutton();  
+		
+		//test notify                 
+       
+        $('#t-btn-show').puibutton({  
+            click: function() {  
+                $('#notifytop').puinotify('show', '<h1>PrimeUI Notify Widget</h1> <p>Notify is a notification bar that can be positioned at the top or bottom of screen.</p>');  
+            }  
+        });  
+  
+        $('#b-btn-show').puibutton({  
+            click: function() {  
+                $('#notifybottom').puinotify('show', '<h1>PrimeUI Notify Widget</h1> <p>Notify is a notification bar that can be positioned at the top or bottom of screen.</p>');  
+            }  
+        });  
+  
+        $('#notifytop').puinotify({  
+            easing: 'easeInOutCirc'  
+        });  
+  
+        $('#notifybottom').puinotify({  
+            easing: 'easeInOutCirc',  
+            position: 'bottom'  
+        });
+        
+        //growl
+        $('#growlDiv').puigrowl();                  
+  
+        $('#btn-info').click(function() {  
+            addMessage([{severity: 'info', summary: '', detail: 'Pierre sort le chien', sticky: 'true'}]);  
+        });
+        $('#btn-warn').click(function() {  
+            addMessage([{severity: 'warn', summary: 'Message Title', detail: 'Message Detail here.', sticky: 'true'}]);  
+        });
+        $('#btn-error').click(function() {  
+            addMessage([{severity: 'error', summary: 'Message Title', detail: 'Message Detail here.', sticky: 'true'}]);  
+        });    
+  
+        addMessage = function(msg) {  
+            $('#growlDiv').puigrowl('show', msg);  
+        }  
+          $('#content button').puibutton();
+       
+       //end
+
     });

@@ -24,10 +24,13 @@
             font-size: 12px !important;
         }
     </style>
+    
     <script data-main="ajs/require-primeui.js" src="./ajs/require/require.js"></script>
     <title>PrimeUI</title>
 </head>
 <body>
+<div id="notifytop"></div>  
+<div id="growlDiv"></div>
 <div id="primeUI">
     <div id ="little things">
         <button id="btn-show" type="button">Show</button>
@@ -194,6 +197,12 @@
             </div>
         </div>
     </div>
+    
+    <button id="t-btn-show" type="button">Notify</button> 
+    <button id="btn-info" type="button">Growl INFO</button>
+    <button id="btn-warn" type="button">Growl WARN</button>
+    <button id="btn-error" type="button">Growl ERROR</button> 
+    
 </div>
 </body>
 </html>
