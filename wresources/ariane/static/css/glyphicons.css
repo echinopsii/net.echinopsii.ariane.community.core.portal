@@ -7,8 +7,8 @@
  */
 @font-face {
     font-family: 'Glyphicons Regular';
-    src: url('../afonts/glyphicons-regular.eot');
-    src: url('../afonts/glyphicons-regular.eot?#iefix') format('embedded-opentype'), url('../afonts/glyphicons-regular.woff') format('woff'), url('../afonts/glyphicons-regular.ttf') format('truetype'), url('../afonts/glyphicons-regular.svg#glyphiconsregular') format('svg');
+    src: url('/afonts/glyphicons-regular.eot');
+    src: url('/afonts/glyphicons-regular.eot?#iefix') format('embedded-opentype'), url('../afonts/glyphicons-regular.woff') format('woff'), url('../afonts/glyphicons-regular.ttf') format('truetype'), url('../afonts/glyphicons-regular.svg#glyphiconsregular') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -1933,7 +1933,7 @@
     margin: 0 8px 0 0;
     line-height: 14px;
     vertical-align: text-top;
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons.svg);
+    background-image: url("/aimages/glyphicons/glyphicons.svg");
     background-position: 0 0;
     background-repeat: no-repeat;
     vertical-align: top;
@@ -1944,24 +1944,24 @@
 
 .glyphicons-icon :-o-prefocus,
 .glyphicons-icon {
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons.png);
+    background-image: url("/aimages/glyphicons/glyphicons.png");
 }
 
 .no-inlinesvg .glyphicons-icon {
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons.png);
+    background-image: url("/aimages/glyphicons/glyphicons.png");
 }
 
 .glyphicons-icon.white {
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons-white.svg);
+    background-image: url("/aimages/glyphicons/glyphicons-white.svg");
 }
 
 .glyphicons-icon.white :-o-prefocus,
 .glyphicons-icon.white {
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons-white.png);
+    background-image: url("/aimages/glyphicons/glyphicons-white.png");
 }
 
 .no-inlinesvg .glyphicons-icon.white {
-    background-image: url(#{request.contextPath}/resources/images/glyphicons/glyphicons-white.png);
+    background-image: url("/aimages/glyphicons/glyphicons-white.png");
 }
 
 .glyphicons-icon.glass {
