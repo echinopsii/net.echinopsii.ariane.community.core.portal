@@ -21,10 +21,12 @@
                 <p:menubar model="#{mainMenuController.model}" style="border:0;margin:0;padding:0"/>
             </h:form>
         </p:layoutUnit>
+        <!--
         <p:layoutUnit id="mainBottom" position="south" size="40" styleClass="main-layout-unit" gutter="0">
             <i class="icon-rotate-left icon-large"></i> echinopsii 2014 <br></br>
             “Nothing great in the world has ever been accomplished without passion.” Georg Wilhelm Friedrich Hegel
         </p:layoutUnit>
+        -->
         <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit" gutter="0">
             <p:idleMonitor timeout="600000"
                            onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
