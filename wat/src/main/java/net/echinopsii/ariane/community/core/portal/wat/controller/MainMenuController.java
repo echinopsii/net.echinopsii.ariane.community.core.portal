@@ -86,10 +86,15 @@ public class MainMenuController implements Serializable{
         MenuItem item = new MenuItem();
         item.setId(entity.getId());
         if (entity.getActionListener()==null || entity.getActionListener().equals("")) {
-            item.setUrl(context.getExternalContext().getRequestScheme() + "://" +
-                        context.getExternalContext().getRequestServerName() + ":" +
-                        context.getExternalContext().getRequestServerPort() +
-                        entity.getContextAddress());
+            if (entity.isExternal()) {
+                item.setUrl(entity.getContextAddress());
+                item.setTarget(entity.getTarget());
+            } else {
+                item.setUrl(context.getExternalContext().getRequestScheme() + "://" +
+                                    context.getExternalContext().getRequestServerName() + ":" +
+                                    context.getExternalContext().getRequestServerPort() +
+                                    entity.getContextAddress());
+            }
         }
         item.setIcon(entity.getIcon());
         item.setValue(entity.getValue());

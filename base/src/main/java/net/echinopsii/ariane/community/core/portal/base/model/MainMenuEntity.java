@@ -35,6 +35,8 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     private String id;
     private String value;
     private String contextAddress;
+    private String target;
+    private boolean isExternal = false;
     private int type;
     private int rank = 0; //LEFT to RIGHT. Must be > 0.
     private MainMenuEntity parent;
@@ -171,6 +173,24 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
             default:
                 return false;
         }
+    }
+
+    public String getTarget() {
+        return target;
+    }
+
+    public MainMenuEntity setTarget(String target) {
+        this.target = target;
+        return this;
+    }
+
+    public boolean isExternal() {
+        return isExternal;
+    }
+
+    public MainMenuEntity setExternal(boolean isExternal) {
+        this.isExternal = isExternal;
+        return this;
     }
 
     @Override

@@ -71,7 +71,8 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(helpSB);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(helpSB);
 
-            entity = new MainMenuEntity("bookMItem", "Help book",  MAIN_MENU_PORTAL_CONTEXT + "views/help/helpBook.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(helpSB);
+            entity = new MainMenuEntity("bookMItem", "Help book",  "https://confluence.echinopsii.net/confluence/display/AD/Ariane+Documentation+Home",
+                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-beer icon-large").setTarget("_blank").setExternal(true).setParent(helpSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
@@ -89,7 +90,8 @@ public class Registrator implements Runnable {
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
             */
 
-            entity = new MainMenuEntity("bugMItem", "Report problem", MAIN_MENU_PORTAL_CONTEXT + "views/help/reportProblem.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-bug icon-large").setParent(helpSB);
+            entity = new MainMenuEntity("bugMItem", "Report problem", "https://jira.echinopsii.net/secure/BrowseProjects.jspa#all",
+                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-bug icon-large").setTarget("_blank").setExternal(true).setParent(helpSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
