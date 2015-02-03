@@ -6,13 +6,13 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui"
-      xmlns:ccidm="http://spectral.com/cc/idm">
+      xmlns:arianeidm="http://echinopsii.net/ariane/idm">
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <ui:fragment rendered="#{ccidm:isAuthenticated()}">
+            <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <p:tabView id="securityTabView" orientation="top">
-                    <p:tab rendered="#{ccidm:hasPermission('secUser:display')}">
+                    <p:tab rendered="#{arianeidm:hasPermission('secUser:display')}">
                         <f:facet name="title">
                             <i class="icon-user icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Users"/>
@@ -57,53 +57,53 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Username : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="username" value="#{user.userName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.userName}" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
+                                        <h:outputText value="#{user.userName}" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="First name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.firstName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
+                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Last name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.lastName}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
+                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Email : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.email}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
+                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Phone : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secUser:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{user.phone}"/>
                                                 <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(ccidm:hasPermission('secUser:update'))}"/>
+                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                            <p:dataTable value="#{arianeidm:asList(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
                                                          rows="5" paginator="true" selection="#{usersListController.removedRoles[user.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
                                                     <h:outputText value="#{role.name}"/>
@@ -111,7 +111,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secUser:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secUser:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
@@ -131,7 +131,7 @@
 
                                         <h:outputText value="Groups : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                            <p:dataTable value="#{arianeidm:asList(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
                                                          rows="5" paginator="true" selection="#{usersListController.removedGroups[user.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
                                                     <h:outputText value="#{group.name}"/>
@@ -139,7 +139,7 @@
                                                 <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
                                                     <h:outputText value="#{group.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secUser:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secUser:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
@@ -161,10 +161,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('secUser:create')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secUser:create')}"/>
                                     <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
                                                      update=":removeUserDialogForm:usrdisplay"
-                                                     rendered="#{ccidm:hasPermission('secUser:remove')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secUser:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                                      :securityTabView:groupTableForm:groupTable,
@@ -176,7 +176,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('secGroup:display')}">
+                    <p:tab rendered="#{arianeidm:hasPermission('secGroup:display')}">
                         <f:facet name="title">
                             <i class="icon-group icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Groups"/>
@@ -209,26 +209,26 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secGroup:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{group.name}"/>
                                                 <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{group.name}" rendered="#{!(ccidm:hasPermission('secGroup:update'))}"/>
+                                        <h:outputText value="#{group.name}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secGroup:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{group.description}"/>
                                                 <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{group.description}" rendered="#{!(ccidm:hasPermission('secGroup:update'))}"/>
+                                        <h:outputText value="#{group.description}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                            <p:dataTable value="#{arianeidm:asList(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
                                                          rows="5" paginator="true" selection="#{groupsListController.removedRoles[group.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
                                                     <h:outputText value="#{role.name}"/>
@@ -236,7 +236,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secGroup:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
@@ -256,7 +256,7 @@
 
                                         <h:outputText value="Users : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                            <p:dataTable value="#{arianeidm:asList(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
                                                          rows="5" paginator="true" selection="#{groupsListController.removedUsers[group.id]}" selectionMode="multiple">
                                                 <p:column headerText="User name" sortBy="#{user.userName}" filterBy="#{user.userName}">
                                                     <h:outputText value="#{user.userName}"/>
@@ -264,7 +264,7 @@
                                                 <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
                                                     <h:outputText value="#{user.email}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secGroup:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
@@ -287,10 +287,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('secGroup:create')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secGroup:create')}"/>
                                     <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
                                                      update=":removeGroupDialogForm:grpdisplay"
-                                                     rendered="#{ccidm:hasPermission('secGroup:remove')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secGroup:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                              :securityTabView:groupTableForm:groupTable,
@@ -303,7 +303,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('secRole:display')}">
+                    <p:tab rendered="#{arianeidm:hasPermission('secRole:display')}">
                         <f:facet name="title">
                             <i class="icon-star icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Roles"/>
@@ -336,26 +336,26 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secRole:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{role.name}"/>
                                                 <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{role.name}" rendered="#{!(ccidm:hasPermission('secRole:update'))}"/>
+                                        <h:outputText value="#{role.name}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secRole:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
                                             <p:inplace editor="true">
                                                 <p:inputText required="true" label="text" value="#{role.description}"/>
                                                 <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{role.description}" rendered="#{!(ccidm:hasPermission('secRole:update'))}"/>
+                                        <h:outputText value="#{role.description}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
 
                                         <h:outputText value="Permissions : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                            <p:dataTable value="#{arianeidm:asList(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
                                                          rows="5" paginator="true" selection="#{rolesListController.removedPermissions[role.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
                                                     <h:outputText value="#{perm.name}"/>
@@ -363,7 +363,7 @@
                                                 <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
                                                     <h:outputText value="#{perm.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
@@ -383,7 +383,7 @@
 
                                         <h:outputText value="Groups : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                            <p:dataTable value="#{arianeidm:asList(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
                                                          rows="5" paginator="true" selection="#{rolesListController.removedGroups[role.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
                                                     <h:outputText value="#{group.name}"/>
@@ -391,7 +391,7 @@
                                                 <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
                                                     <h:outputText value="#{group.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
@@ -411,7 +411,7 @@
 
                                         <h:outputText value="Users : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                            <p:dataTable value="#{arianeidm:asList(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
                                                          rows="5" paginator="true" selection="#{rolesListController.removedUsers[role.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{user.userName}" filterBy="#{user.userName}">
                                                     <h:outputText value="#{user.userName}"/>
@@ -419,7 +419,7 @@
                                                 <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
                                                     <h:outputText value="#{user.email}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secRole:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
@@ -442,10 +442,10 @@
 
                                 <f:facet name="footer">
                                     <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('secRole:create')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secRole:create')}"/>
                                     <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
                                                      update=":removeRoleDialogForm:roledisplay"
-                                                     rendered="#{ccidm:hasPermission('secRole:remove')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secRole:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:roleTableForm:roleTable,
                                                              :securityTabView:permissionTableForm:permissionTable,
@@ -459,7 +459,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('secPermission:display')}">
+                    <p:tab rendered="#{arianeidm:hasPermission('secPermission:display')}">
                         <f:facet name="title">
                             <i class="icon-legal icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Permissions"/>
@@ -496,25 +496,25 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{permission.name}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.name}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
+                                        <h:outputText value="#{permission.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{permission.description}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.description}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
+                                        <h:outputText value="#{permission.description}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Resource : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secPermission:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
                                             <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
                                                 <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
                                                     <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
@@ -523,11 +523,11 @@
                                                 <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(ccidm:hasPermission('secPermission:update'))}"/>
+                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
 
                                         <h:outputText value="Roles : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                            <p:dataTable value="#{arianeidm:asList(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
                                                          rows="5" paginator="true" selection="#{permissionsListController.removedRoles[permission.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
                                                     <h:outputText value="#{role.name}"/>
@@ -535,7 +535,7 @@
                                                 <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
                                                     <h:outputText value="#{role.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secPermission:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
@@ -557,10 +557,10 @@
                                 </p:rowExpansion>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('secPermission:create')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secPermission:create')}"/>
                                     <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
                                                      update=":removePermissionDialogForm:permdisplay"
-                                                     rendered="#{ccidm:hasPermission('secPermission:remove')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secPermission:remove')}"/>
                                     <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
                                                      update=":securityTabView:resourceTableForm:resourceTable,
                                                              :securityTabView:permissionTableForm:permissionTable,
@@ -574,7 +574,7 @@
 
 
 
-                    <p:tab rendered="#{ccidm:hasPermission('secResource:display')}">
+                    <p:tab rendered="#{arianeidm:hasPermission('secResource:display')}">
                         <f:facet name="title">
                             <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
                             <h:outputText value="Resources"/>
@@ -607,26 +607,26 @@
                                 <p:rowExpansion>
                                     <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
                                         <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secResource:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{res.name}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('secResource:update'))}"/>
+                                        <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
 
                                         <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{ccidm:hasPermission('secResource:update')}">
+                                        <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
                                             <p:inplace editor="true">
                                                 <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
                                                 <p:inputText required="true" label="text" value="#{res.description}"/>
                                             </p:inplace>
                                         </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(ccidm:hasPermission('secResource:update'))}"/>
+                                        <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
 
                                         <h:outputText value="Permissions : " styleClass="inputTitle"/>
                                         <h:form>
-                                            <p:dataTable value="#{ccidm:asList(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                            <p:dataTable value="#{arianeidm:asList(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
                                                          rows="5" paginator="true" selection="#{resourcesListController.removedPermissions[res.id]}" selectionMode="multiple">
                                                 <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
                                                     <h:outputText value="#{perm.name}"/>
@@ -634,7 +634,7 @@
                                                 <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
                                                     <h:outputText value="#{perm.description}"/>
                                                 </p:column>
-                                                <c:if test="#{ccidm:hasPermission('secPermission:update')}">
+                                                <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
                                                     <f:facet name="footer">
                                                         <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
                                                             <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
@@ -655,10 +655,10 @@
                                 </p:rowExpansion>
                                 <f:facet name="footer">
                                     <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"
-                                                     rendered="#{ccidm:hasPermission('secResource:create')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secResource:create')}"/>
                                     <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
                                                      update=":removeResourceDialogForm:resdisplay"
-                                                     rendered="#{ccidm:hasPermission('secResource:remove')}"/>
+                                                     rendered="#{arianeidm:hasPermission('secResource:remove')}"/>
                                     <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
                                                      update=":securityTabView:resourceTableForm:resourceTable,
                                                              :securityTabView:permissionTableForm:permissionTable" />
@@ -691,7 +691,7 @@
                                 <h:outputText value="#{selectedUser.userName}"/>
 
                                 <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedUser,'roles')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedUser,'roles')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -702,7 +702,7 @@
                                 </p:dataTable>
 
                                 <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedUser,'groups')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedUser,'groups')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -738,7 +738,7 @@
                                 <h:outputText value="#{selectedGroup.name}"/>
 
                                 <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedGroup, 'roles')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedGroup, 'roles')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -749,7 +749,7 @@
                                 </p:dataTable>
 
                                 <h:outputText value="Users : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedGroup, 'users')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedGroup, 'users')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Username">
                                         <h:outputText value="#{_item.userName}"/>
@@ -787,7 +787,7 @@
                                 <h:outputText value="#{selectedRole.name}"/>
 
                                 <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedRole,'permissions')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedRole,'permissions')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -801,7 +801,7 @@
                                 </p:dataTable>
 
                                 <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedRole,'groups')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedRole,'groups')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -812,7 +812,7 @@
                                 </p:dataTable>
 
                                 <h:outputText value="Users : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedRole,'users')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedRole,'users')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.userName}"/>
@@ -848,7 +848,7 @@
                                 <h:outputText value="#{selectedPermission.name}"/>
 
                                 <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedPermission,'roles')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedPermission,'roles')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>
@@ -883,7 +883,7 @@
                                 <h:outputText value="#{selectedResource.name}"/>
 
                                 <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                <p:dataTable  value="#{ccidm:asList(selectedResource, 'permissions')}" var="_item"
+                                <p:dataTable  value="#{arianeidm:asList(selectedResource, 'permissions')}" var="_item"
                                               rows="5" paginator="true">
                                     <p:column headerText="Name">
                                         <h:outputText value="#{_item.name}"/>

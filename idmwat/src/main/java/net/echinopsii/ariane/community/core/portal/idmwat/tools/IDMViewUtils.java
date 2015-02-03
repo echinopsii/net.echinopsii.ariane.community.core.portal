@@ -32,7 +32,7 @@ import java.util.Collection;
 import java.util.List;
 
 /**
- * Utilities for working with Java Server Faces views. Taglib defined in ccidm.taglib.xml.
+ * Utilities for working with Java Server Faces views. Taglib defined in arianeidm.taglib.xml.
  */
 public final class IDMViewUtils {
     private static final Logger log = LoggerFactory.getLogger(IDMViewUtils.class);
