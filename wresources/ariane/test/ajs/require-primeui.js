@@ -164,8 +164,15 @@ requirejs (
         addMessage = function(msg) {  
             $('#growlDiv').puigrowl('show', msg);  
         }  
-          $('#content button').puibutton();
-       
-       //end
+        $('#content button').puibutton();
+          
+        //menubar, test  
+		$('#menuLeft').puimenubar({
+			autoDisplay: true 
+		});
+		$('#menuRight').puimenubar({
+			autoDisplay: true 
+		});  		         
+        //end
 
     });

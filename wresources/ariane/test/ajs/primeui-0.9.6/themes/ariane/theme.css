@@ -330,7 +330,6 @@
 }
 /*Redefine elements*/
 body .pui-notify, body .ui-shadow{box-shadow: none !important;}
-
 body .pui-growl-item-container, body .ui-growl-item-container{background: #f85b37; border: 1px solid rgba(0, 0, 0, 0.7);}
 body .pui-growl-item, body .ui-growl-item{background: rgba(0, 0, 0, 0.5); color: #fff; box-shadow: none !important;}
 body .pui-growl-image-info, body .ui-growl-image-info, body .pui-growl-image-error, body .ui-growl-image-error, body .pui-growl-image-warn, body .ui-growl-image-warn, body .ui-state-highlight .ui-icon {background: transparent !important; text-indent: 0 !important;}
@@ -338,3 +337,36 @@ body .pui-growl-image-info::before, body .ui-growl-image-info::before{content:"\
 body .pui-growl-image-warn::before, body .ui-growl-image-warn::before{content:"\F06A"; font-family: 'FontAwesome';font-size: 2.5em;}
 body .pui-growl-image-error::before, body .ui-growl-image-error::before{content:"\F057"; font-family: 'FontAwesome';font-size: 2.5em;}
 body .ui-state-highlight .ui-icon::before{content:"\F05C" !important; font-family: 'FontAwesome' !important;font-size: 1.5em; color: #fff !important;}
+
+/*MENU TOP*/
+body{padding: 0; margin: 0;}
+#header{background: #333;}
+#header{float: left; width: 100%;}
+a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(/aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;}
+body #menutop #ui-id-1{width: auto; float: left;}
+body #menutop #ui-id-2{width: auto; float: right;}
+body #menutop ul{ width: auto;}
+body #menutop .pui-menu{border: none; width: 50%; border: none; margin: 0; padding: 0; clear: none; background: transparent;}
+/*--first level*/
+body #menutop .pui-menu li{border-radius: 0; padding: 0px 10px 5px 0; border-right: 1px solid #4b4b4b}
+body #menutop .pui-menu li:first-child{border-left: 1px solid #4b4b4b;}
+body #menutop .pui-menu li a{padding: 10px 2px 3px 0;border-radius: 0; margin: 0 10px; color: #fff;}
+body #menutop .pui-menu li:hover{border-bottom: 5px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
+body #menutop .pui-menu li:hover a, body #menutop .pui-menu li a:hover, body #menutop .pui-menu li a:visited, body #menutop .pui-menu li a:focus, body #menutop .pui-menu:hover{background: transparent;}
+.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background: transparent !important;}
+body #menutop .pui-menu li a:hover, body #menutop .pui-menu li:hover a{color: #fff;}
+body #menutop .pui-menu li a .ui-icon{font-size: 13px; font-weight: bold;margin-right: 3px}
+body #menutop .pui-menu li a .ui-menuitem-text{font-size: 14px; font-weight: normal}	
+/*----submenu*/
+body #menutop .pui-menu li:hover ul li a{color: #fff;}
+body #menutop .pui-menu li ul li:first-child{border: none;}
+body #menutop .pui-menu li ul{border-radius: 0; box-shadow: none;}
+body #menutop .pui-menu ul li li{border: none; padding: 0;}
+body #menutop .pui-menu ul li li:hover{border: none; padding: 0;}
+body #menutop .pui-menu li ul{width: auto; background: #333; border: none;}
+body #menutop .pui-menu li ul li{width: auto; clear: both; min-width: 180px;}
+
+
+
+body #menutop .pui-menu::before, body #menutop .pui-menu::after{clear: none;}
+body #menutop #ui-id-2, body #menutop #ui-id-2 ul{float: right;}
