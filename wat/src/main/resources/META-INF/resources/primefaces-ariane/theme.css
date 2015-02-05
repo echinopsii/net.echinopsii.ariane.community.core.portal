@@ -411,17 +411,13 @@ body .pui-growl-image-error::before, body .ui-growl-image-error::before{content:
 body .ui-state-highlight .ui-icon::before{content:"\F05C" !important; font-family: 'FontAwesome' !important;font-size: 1.5em; color: #fff !important;}
 
 /*MENU TOP*/
-body{padding: 0; margin: 0;}
 #header{background: #333;}
 
-body #menutop ul{ width: auto;}
-body #menutop .pui-menu, body #menutop .ui-menu{border: none; width: 50%; border: none; margin: 0; padding: 0; clear: none; background: transparent;}
 /*--first level*/
-
-body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 10px 5px 0; border-right: 1px solid #4b4b4b}
+body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 0px 2px 0; border-right: 1px solid #4b4b4b}
 body #menutop .pui-menu li:first-child, body #menutop .ui-menu li:first-child{border-left: 1px solid #4b4b4b;}
-body #menutop .pui-menu li a, body #menutop .ui-menu li a{padding: 10px 2px 3px 0;border-radius: 0; margin: 0 10px; color: #fff;}
-body #menutop .pui-menu li:hover, body #menutop .ui-menu li:hover{border-bottom: 5px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
+body #menutop .pui-menu li a, body #menutop .ui-menu li a{padding: 7px 2px 2px 0;border-radius: 0; margin: 0 10px; color: #fff;}
+body #menutop .pui-menu li:hover, body #menutop .ui-menu li:hover{border-bottom: 2px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
 
 body #menutop .pui-menu li:hover a, body #menutop .pui-menu li a:hover,
 body #menutop .pui-menu li a:visited, body #menutop .pui-menu li a:focus, body #menutop .pui-menu:hover,
@@ -436,8 +432,6 @@ body #menutop .pui-menu li a:hover, body #menutop .pui-menu li:hover a,
 body #menutop .ui-menu li a:hover, body #menutop .ui-menu li:hover a
 {color: #fff;}
 
-body #menutop .pui-menu li a .ui-icon, body #menutop .ui-menu li a .ui-icon{font-size: 13px; font-weight: bold;margin-right: 3px}
-body #menutop .pui-menu li a .ui-menuitem-text, body #menutop .ui-menu li a .ui-menuitem-text{font-size: 14px; font-weight: normal}
 /*----submenu*/
 body #menutop .pui-menu li:hover ul li a, body #menutop .ui-menu li:hover ul li a{color: #fff;}
 body #menutop .pui-menu li ul li:first-child, body #menutop .ui-menu li ul li:first-child{border: none;}
