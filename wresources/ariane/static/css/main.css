@@ -52,6 +52,9 @@ button,
     padding-left:  0 !important;
 }
 
+#header{float: left; width: 100%;}
+a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(/aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 8px 20px 0 20px;}
+
 .main-layout-unit.ui-layout-unit {
     border-radius:0;
     border: 0;

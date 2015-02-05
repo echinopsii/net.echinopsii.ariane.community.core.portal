@@ -342,7 +342,7 @@ body .ui-state-highlight .ui-icon::before{content:"\F05C" !important; font-famil
 body{padding: 0; margin: 0;}
 #header{background: #333;}
 #header{float: left; width: 100%;}
-a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(/portal/aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;}
+a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(/aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;}
 body #menutop #ui-id-1{width: auto; float: left;}
 body #menutop #ui-id-2{width: auto; float: right;}
 body #menutop ul{ width: auto;}
@@ -359,8 +359,9 @@ body #menutop .ui-menu li:hover a, body #menutop .ui-menu li a:hover,
 body #menutop .ui-menu li a:visited, body #menutop .ui-menu li a:focus, body #menutop .ui-menu:hover
 {background: transparent;}
 
-
-.ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus{background: transparent !important;}
+body #menutop .ui-state-hover, body #menutop .ui-widget-content .ui-state-hover, body #menutop .ui-widget-header .ui-state-hover,
+body #menutop .ui-state-focus, body #menutop .ui-widget-content .ui-state-focus, body #menutop .ui-widget-header .ui-state-focus
+{background: transparent !important;}
 
 body #menutop .pui-menu li a:hover, body #menutop .pui-menu li:hover a,
 body #menutop .ui-menu li a:hover, body #menutop .ui-menu li:hover a
@@ -376,8 +377,6 @@ body #menutop .pui-menu ul li li, body #menutop .ui-menu ul li li{border: none; 
 body #menutop .pui-menu ul li li:hover, body #menutop .ui-menu ul li li:hover{border: none; padding: 0;}
 body #menutop .pui-menu li ul, body #menutop .ui-menu li ul{width: auto; background: #333; border: none;}
 body #menutop .pui-menu li ul li, body #menutop .ui-menu li ul li{width: auto; clear: both; min-width: 180px;}
-
-
 
 body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .ui-menu::before, body #menutop .pui-menu::after{clear: none;}
 body #menutop #ui-id-2, body #menutop #ui-id-2 ul{float: right;}
