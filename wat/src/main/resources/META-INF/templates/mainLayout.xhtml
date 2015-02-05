@@ -16,10 +16,15 @@
 <h:body>
     <p:growl id="growl" showDetail="true" life="3000" />
     <p:layout id="mainLayout" fullPage="true">
-        <p:layoutUnit id="mainTop" size="40" position="north" styleClass="main-layout-unit " gutter="0">
-            <h:form id="mainMenuForm">
-                <p:menubar model="#{mainMenuController.model}" style="border:0;margin:0;padding:0"/>
-            </h:form>
+        <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
+            <div id="header">
+                <a id="arianeLogo" href="#">Ariane</a>
+                <div id="menutop">
+                    <h:form id="mainMenuForm" styleClass="mainMenuFC">
+                        <p:menubar model="#{mainMenuController.model}" style="border:0;margin:0;padding:0"/>
+                    </h:form>
+                </div>
+            </div>
         </p:layoutUnit>
         <!--
         <p:layoutUnit id="mainBottom" position="south" size="40" styleClass="main-layout-unit" gutter="0">
