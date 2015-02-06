@@ -67,6 +67,9 @@ body #menutop .pui-menu li a .ui-menuitem-text, body #menutop .ui-menu li a .ui-
 
 body #menutop .pui-menu li ul li, body #menutop .ui-menu li ul li{width: auto; clear: both; min-width: 180px;}
 
+body #mainCenter {top: 38px !important;}
+body #mainTop-resizer {display: none !important}
+
 .main-layout-unit.ui-layout-unit {
     border-radius:0;
     border: 0;

@@ -446,5 +446,3 @@ body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .
 body #menutop #ui-id-2, body #menutop #ui-id-2 ul{float: right;}
 
 body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margin: 0 !important}
-
-body #mainTop-resizer {display: none !important}
