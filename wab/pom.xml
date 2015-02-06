@@ -108,7 +108,7 @@
                     </supportedProjectTypes>
                     <instructions>
                         <Bundle-Activator>net.echinopsii.ariane.community.core.portal.wab.bootstrap.OsgiActivator</Bundle-Activator>
-                        <Web-ContextPath>Ariane</Web-ContextPath>
+                        <Web-ContextPath>ariane</Web-ContextPath>
                         <Bundle-ClassPath>.,WEB-INF/,WEB-INF/lib/,WEB-INF/classes/</Bundle-ClassPath>
                         <Embed-Directory>WEB-INF/lib</Embed-Directory>
                         <Embed-Dependency>*;scope=compile|runtime</Embed-Dependency>
