@@ -14,19 +14,13 @@
     <script type="text/javascript" src="#{request.contextPath}/ajs/modernizr/modernizr.js"></script>
     <script type="text/javascript">
         function handleLoginRequest(xhr, status, args) {
-            if(args.validationFailed || !args.loggedIn) {
-                $(dlg.jqId).effect("shake", { times:5 }, 100);
-            }
-            else {
-                //$(dlg.jqId).hide();
-                window.location = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split('/')[1]
-            }
+            if(args.loggedIn) window.location = window.location.protocol + "//" + window.location.host + "/" + window.location.pathname.split('/')[1]
         }
     </script>
 </h:head>
 <h:body>    
    <h:form id="login">
-   		<p:growl id="growl" sticky="true" showDetail="true" life="3000" />
+   		<p:growl id="growl" sticky="false" showDetail="true" life="5000" />
         <div id="loginBox">
             <span class="arianeLogo">Ariane</span>
           			
