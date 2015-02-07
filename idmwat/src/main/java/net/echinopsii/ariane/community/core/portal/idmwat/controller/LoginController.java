@@ -124,6 +124,6 @@ public class LoginController implements Serializable{
             subject.logout();
             log.debug("{} is out ... ({})", new Object[]{principal, subject.isAuthenticated()});
         }
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/Ariane");
+        FacesContext.getCurrentInstance().getExternalContext().redirect("/ariane");
     }
 }
