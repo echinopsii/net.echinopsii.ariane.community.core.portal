@@ -138,6 +138,16 @@
         <url-pattern>*.jsf</url-pattern>
     </filter-mapping>
 
+    <!-- Portal No Cache Filter -->
+    <filter>
+        <filter-name>ArianePortalNoCacheFilter</filter-name>
+        <filter-class>net.echinopsii.ariane.community.core.portal.wat.tools.NoCacheFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>ArianePortalNoCacheFilter</filter-name>
+        <url-pattern>*.jsf</url-pattern>
+    </filter-mapping>
+
     <!-- Portal Rest Resource Registry Filter -->
     <filter>
         <filter-name>ArianePortalRestResourceRegistryFilter</filter-name>
@@ -159,6 +169,12 @@
         <filter-name>PrimeFaces FileUpload Filter</filter-name>
         <servlet-name>Portal Faces Servlet</servlet-name>
     </filter-mapping>
+
+    <!-- Handle ViewExperiedException-->
+    <error-page>
+        <exception-type>javax.faces.application.ViewExpiredException</exception-type>
+        <location>/views/login.xhtml</location>
+    </error-page>
 
     <servlet>
         <servlet-name>Portal Faces Servlet</servlet-name>
