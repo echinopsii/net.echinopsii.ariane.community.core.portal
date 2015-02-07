@@ -124,6 +124,7 @@
                             javax.annotation;version="${version.javax.annotations.jsr250-api}",
                             javax.el;version="${version.javax.el}",
                             javax.servlet;version="${version.javax.servlet.servlet-api}",
+                            javax.servlet.http;version="${version.javax.servlet.servlet-api}",
                             javax.faces;version="${version.javax.faces.api}",
                             javax.faces.application;version="${version.javax.faces.api}",
                             javax.faces.bean;version="${version.javax.faces.api}",
