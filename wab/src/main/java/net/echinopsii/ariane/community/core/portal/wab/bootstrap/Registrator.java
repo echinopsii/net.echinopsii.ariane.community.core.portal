@@ -32,7 +32,7 @@ public class Registrator implements Runnable {
 
     private static final Logger log = LoggerFactory.getLogger(Registrator.class);
 
-    private static String MAIN_MENU_PORTAL_CONTEXT = "/Ariane/";
+    private static String MAIN_MENU_PORTAL_CONTEXT = "/ariane/";
     //private static int    MAIN_MENU_DASH_RANK = 1;
     //private static int    MAIN_MENU_SPREAD_RANK = 5;
     private static int    MAIN_MENU_HELP_RANK = 6;
@@ -94,8 +94,6 @@ public class Registrator implements Runnable {
                                         MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-bug icon-large").setTarget("_blank").setExternal(true).setParent(helpSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
-
-
 
             submenuCount = 0;
             MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-cog icon-large");
