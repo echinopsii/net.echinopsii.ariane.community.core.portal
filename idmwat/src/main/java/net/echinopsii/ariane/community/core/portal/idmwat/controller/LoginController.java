@@ -26,6 +26,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.faces.application.FacesMessage;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import java.io.IOException;
 import java.io.Serializable;
@@ -124,6 +125,7 @@ public class LoginController implements Serializable{
             subject.logout();
             log.debug("{} is out ... ({})", new Object[]{principal, subject.isAuthenticated()});
         }
-        FacesContext.getCurrentInstance().getExternalContext().redirect("/ariane");
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect("/ariane/views/login.jsf");
     }
 }

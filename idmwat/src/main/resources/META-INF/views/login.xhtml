@@ -2,7 +2,6 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <h:head>
     <title>..: login to ariane :..</title>
@@ -39,5 +38,10 @@
                              oncomplete="handleLoginRequest(xhr, status, args)"/>
         </div>
     </h:form>
+    <script type="application/javascript">
+        var reloadBeforeSessionTimeout = setInterval(function(){
+            location.reload()
+        }, 5700000);
+    </script>
 </h:body>
 </html>
