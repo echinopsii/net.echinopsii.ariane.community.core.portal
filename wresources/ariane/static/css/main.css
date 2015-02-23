@@ -157,3 +157,95 @@ img.right {
     float: right;
     margin: 0 0 0 20px;
 }
+/*OLD ICONS*/
+/*@font-face {
+		font-family: 'arianeicons';
+	src:url('../a../afonts/arianeicons.eot?-ctkolz');
+	src:url('../a../afonts/arianeicons.eot?#iefix-ctkolz') format('embedded-opentype'),
+		url('../a../afonts/arianeicons.woff?-ctkolz') format('woff'),
+		url('../a../afonts/arianeicons.ttf?-ctkolz') format('truetype'),
+		url('../a../afonts/arianeicons.svg?-ctkolz#arianeicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.icon-help-ico-ariane-ariane:before {
+    font-family: 'arianeicons';
+    content: "\e600";
+}
+.icon-mapping-ico-ariane-ariane:before {
+	font-family: 'arianeicons';
+    content: "\e601";
+}
+.icon-logout:before {
+	font-family: 'arianeicons';
+    content: "\e602";
+}
+.icon-admin-ico:before {
+    content: "\e603";
+}
+.icon-inject-ico-ariane:before {
+    content: "\e604";
+}*/
+
+@font-face {
+	font-family: 'arianeicons';
+	src:url('../afonts/arianeicons.eot?nszrjq');
+	src:url('../afonts/arianeicons.eot?#iefixnszrjq') format('embedded-opentype'),
+		url('../afonts/arianeicons.woff?nszrjq') format('woff'),
+		url('../afonts/arianeicons.ttf?nszrjq') format('truetype'),
+		url('../afonts/arianeicons.svg?nszrjq#arianeicons') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.icon-admin-ariane:before {
+	font-family: 'arianeicons';
+	content: "\e605";
+	font-size: 1.5em;
+}
+
+.icon-inject-ariane:before {
+	font-family: 'arianeicons';
+	content: "\e604";
+	font-size: 1.4em;
+}
+
+.icon-help-ariane:before {
+	font-family: 'arianeicons';
+	content: "\e600";
+}
+
+.icon-mapping-ariane:before {
+	font-family: 'arianeicons';
+	content: "\e601";
+}
+
+.icon-logout-ariane:before {
+	font-family: 'arianeicons';
+	content: "\e602";
+}
+.icon-directories-ariane:before{
+	font-family: 'arianeicons';
+	content: "\e603";	
+	font-size: 1.2em
+}
+
+.arianeico-datacenter-ariane:before {
+    content: "\e613";
+    font-family: 'arianeicons';
+}
+.arianeico-subnet-ariane:before {
+    content: "\e612";
+    font-family: 'arianeicons';
+}
+.arianeico-routingarea-ariane:before {
+    content: "\e611";
+    font-family: 'arianeicons';
+}
+.arianeico-os-instances-ariane:before {
+    content: "\e607";
+    font-family: 'arianeicons';
+}
+.arianeico-appplications-ariane:before {
+    content: "\e606";
+    font-family: 'arianeicons';
+}

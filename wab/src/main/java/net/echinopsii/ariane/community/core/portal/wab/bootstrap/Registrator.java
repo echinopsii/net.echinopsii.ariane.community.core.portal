@@ -72,7 +72,7 @@ public class Registrator implements Runnable {
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(helpSB);
 
             entity = new MainMenuEntity("bookMItem", "Help book",  "https://confluence.echinopsii.net/confluence/display/AD/Ariane+Documentation+Home",
-                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-beer icon-large").setTarget("_blank").setExternal(true).setParent(helpSB);
+                                        MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-help-ariane").setTarget("_blank").setExternal(true).setParent(helpSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
@@ -96,7 +96,7 @@ public class Registrator implements Runnable {
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
             submenuCount = 0;
-            MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-cog icon-large");
+            MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-admin-ariane");
             adminSB.getDisplayRoles().add("secadmin");
             adminSB.getDisplayRoles().add("secreviewer");
             adminSB.getDisplayPermissions().add("secResource:display");
@@ -205,7 +205,7 @@ public class Registrator implements Runnable {
                                                "logoutMItem", "Logout",
                                                MAIN_MENU_PORTAL_CONTEXT,
                                                MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HOME_RANK * 10 + submenuCount++,
-                                               "icon-beer icon-large").setParent(homeEntity).setActionListener("#{loginController.logout}");
+                                               "icon-logout-ariane").setParent(homeEntity).setActionListener("#{loginController.logout}");
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
