@@ -199,53 +199,53 @@ img.right {
 }
 .icon-admin-ariane:before {
 	font-family: 'arianeicons';
-	content: "\e605";
+	content: "\e607";
 	font-size: 1.5em;
 }
 
 .icon-inject-ariane:before {
 	font-family: 'arianeicons';
-	content: "\e604";
+	content: "\e600";
 	font-size: 1.4em;
 }
 
 .icon-help-ariane:before {
 	font-family: 'arianeicons';
-	content: "\e600";
+	content: "\e608";
 }
 
 .icon-mapping-ariane:before {
 	font-family: 'arianeicons';
-	content: "\e601";
+	content: "\e609";
 }
 
 .icon-logout-ariane:before {
 	font-family: 'arianeicons';
-	content: "\e602";
+	content: "\e60a";
 }
 .icon-directories-ariane:before{
 	font-family: 'arianeicons';
-	content: "\e603";	
+	content: "\e606";	
 	font-size: 1.2em
 }
 
 .arianeico-datacenter-ariane:before {
-    content: "\e613";
+    content: "\e605";
     font-family: 'arianeicons';
 }
 .arianeico-subnet-ariane:before {
-    content: "\e612";
+    content: "\e602";
     font-family: 'arianeicons';
 }
 .arianeico-routingarea-ariane:before {
-    content: "\e611";
-    font-family: 'arianeicons';
-}
-.arianeico-os-instances-ariane:before {
-    content: "\e607";
+    content: "\e604";
     font-family: 'arianeicons';
 }
 .arianeico-appplications-ariane:before {
-    content: "\e606";
+    content: "\e603";
+    font-family: 'arianeicons';
+}
+.arianeico-os-instances-ariane:before {
+    content: "\e601";
     font-family: 'arianeicons';
 }

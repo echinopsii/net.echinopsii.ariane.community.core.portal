@@ -80,7 +80,7 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
-            entity = new MainMenuEntity("aboutMItem", "About", MAIN_MENU_PORTAL_CONTEXT + "views/help/about.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-beer icon-large").setParent(helpSB);
+            entity = new MainMenuEntity("aboutMItem", "About", MAIN_MENU_PORTAL_CONTEXT + "views/help/about.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_HELP_RANK * 10 + submenuCount++, "icon-info-sign icon-large").setParent(helpSB);
             OsgiActivator.mainPortalMainMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainMenuEntity(entity);
 
