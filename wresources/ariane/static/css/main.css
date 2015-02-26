@@ -212,6 +212,7 @@ img.right {
 .icon-help-ariane:before {
 	font-family: 'arianeicons';
 	content: "\e608";
+	font-size: 1.5em;
 }
 
 .icon-mapping-ariane:before {
@@ -228,7 +229,6 @@ img.right {
 	content: "\e606";	
 	font-size: 1.2em
 }
-
 .arianeico-datacenter-ariane:before {
     content: "\e605";
     font-family: 'arianeicons';
