@@ -374,4 +374,3 @@ body #menutop .pui-menu ul li li:hover, body #menutop .ui-menu ul li li:hover{bo
 body #menutop .pui-menu li ul, body #menutop .ui-menu li ul{width: auto; background: #333; border: none;}
 
 body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .ui-menu::before, body #menutop .pui-menu::after{clear: none;}
-body #menutop #ui-id-2, body #menutop #ui-id-2 ul{float: right;}

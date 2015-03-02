@@ -20,9 +20,16 @@
             <div id="header">
                 <a id="arianeLogo" href="#">Ariane</a>
                 <div id="menutop">
-                    <h:form id="mainMenuForm" styleClass="mainMenuFC">
-                        <p:menubar model="#{mainMenuController.model}" style="border:0;margin:0;padding:0"/>
-                    </h:form>
+                    <div id="menuDivLeft">
+                        <h:form id="mainMenuFormLeft" styleClass="mainMenuFC">
+                            <p:menubar model="#{mainMenuController.modelLeft}" style="border:0;margin:0;padding:0" id="menuLeft"/>
+                        </h:form>
+                    </div>
+                    <div id="menuDivRight">
+                        <h:form id="mainMenuFormRight" styleClass="mainMenuFC">
+                            <p:menubar model="#{mainMenuController.modelRight}" style="border:0;margin:0;padding:0" id="menuRight"/>
+                        </h:form>
+                    </div>
                 </div>
             </div>
         </p:layoutUnit>
@@ -44,6 +51,8 @@
             if (document.readyState === "complete") {
                 $("#mainCenter").height($("#mainCenter").height()+5);
                 clearInterval(readyStateCheckInterval);
+                $("#mainMenuFormLeft").children(".ui-menu").width($("#mainMenuFormLeftt").width())
+                $("#mainMenuFormRight").children(".ui-menu").width($("#mainMenuFormRight").width())
             }
         }, 100);
     </script>

@@ -29,36 +29,70 @@ import java.util.TreeSet;
 public interface MainMenuEntityRegistry {
 
     /**
-     * Register a menu entity to the main menu registry
+     * Register a left menu entity to the main menu registry
      *
      * @param mainMenuEntity the menu entity to register
      * @return the registered menu entity
      * @throws Exception if the menu entity is not valid
      */
-    public MainMenuEntity registerMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
+    public MainMenuEntity registerMainLeftMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
 
     /**
-     * Unregister a menu entity from the main menu registry
+     * Unregister a left menu entity from the main menu registry
      *
      * @param mainMenuEntity the menu entity to unregister
      * @return the unregistered menu entity
      * @throws Exception if the menu entity is not valid
      */
-    public MainMenuEntity unregisterMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
+    public MainMenuEntity unregisterMainLeftMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
 
     /**
-     * Get sorted main menu entities
+     * Get sorted main left menu entities
      *
-     * @return sorted main menu entities
+     * @return sorted main left menu entities
      */
-    public TreeSet<MainMenuEntity> getMainMenuEntities();
+    public TreeSet<MainMenuEntity> getMainLeftMenuEntities();
 
     /**
-     * Get sorted main menu entities from a parent
+     * Get sorted main left menu entities from a parent
      *
      * @param parent the parent entity start point
      *
-     * @return sorte main menu entities from the parent
+     * @return sorte main left menu entities from the parent
      */
-    public TreeSet<MainMenuEntity> getMainMenuEntitiesFromParent(MainMenuEntity parent);
+    public TreeSet<MainMenuEntity> getMainLeftMenuEntitiesFromParent(MainMenuEntity parent);
+
+    /**
+     * Register a right menu entity to the main menu registry
+     *
+     * @param mainMenuEntity the menu entity to register
+     * @return the registered menu entity
+     * @throws Exception if the menu entity is not valid
+     */
+    public MainMenuEntity registerMainRightMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
+
+    /**
+     * Unregister a right menu entity from the main menu registry
+     *
+     * @param mainMenuEntity the menu entity to unregister
+     * @return the unregistered menu entity
+     * @throws Exception if the menu entity is not valid
+     */
+    public MainMenuEntity unregisterMainRightMenuEntity(MainMenuEntity mainMenuEntity) throws Exception;
+
+    /**
+     * Get sorted main right menu entities
+     *
+     * @return sorted main right menu entities
+     */
+    public TreeSet<MainMenuEntity> getMainRightMenuEntities();
+
+    /**
+     * Get sorted main leftt menu entities from a parent
+     *
+     * @param parent the parent entity start point
+     *
+     * @return sorte main leftt menu entities from the parent
+     */
+    public TreeSet<MainMenuEntity> getMainRightMenuEntitiesFromParent(MainMenuEntity parent);
 }
