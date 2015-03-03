@@ -50,6 +50,7 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
 
     @Invalidate
     public void invalidate(){
+        rightRegistry.clear();
         leftRegistry.clear();
         log.info("{} is stopped", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
     }
