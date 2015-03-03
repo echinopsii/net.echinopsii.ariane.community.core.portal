@@ -27,8 +27,8 @@ import org.slf4j.LoggerFactory;
 import java.util.TreeSet;
 
 /**
- * This registry contains all Ariane main menu entity. <br/>
- * This is used by any Ariane components which needs to register its main menu entities and by the main menu controller which reads the registry and forward it to the main menu view.<br/><br/>
+ * This leftRegistry contains all Ariane main menu entity. <br/>
+ * This is used by any Ariane components which needs to register its main menu entities and by the main menu controller which reads the leftRegistry and forward it to the main menu view.<br/><br/>
  *
  * This is the iPojo implementation of {@link MainMenuEntityRegistry}. The component is instantiated at commons-services bundle startup. It provides the {@link MainMenuEntityRegistry} service.
  */
@@ -40,7 +40,8 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
     private static final String MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME = "Ariane Portal Main Menu Item Registry";
     private static final Logger log = LoggerFactory.getLogger(MainMenuEntityRegistryImpl.class);
 
-    private TreeSet<MainMenuEntity> registry = new TreeSet<MainMenuEntity>();
+    private TreeSet<MainMenuEntity> leftRegistry = new TreeSet<MainMenuEntity>();
+    private TreeSet<MainMenuEntity> rightRegistry = new TreeSet<MainMenuEntity>();
 
     @Validate
     public void validate() throws Exception {
@@ -49,15 +50,15 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
 
     @Invalidate
     public void invalidate(){
-        registry.clear();
+        leftRegistry.clear();
         log.info("{} is stopped", new Object[]{MAIN_MENU_ITEM_REGISTRY_SERVICE_NAME});
     }
 
     @Override
-    public MainMenuEntity registerMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
+    public MainMenuEntity registerMainLeftMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
         if (mainMenuEntity!=null) {
             if (mainMenuEntity.isValid()) {
-                registry.add(mainMenuEntity);
+                leftRegistry.add(mainMenuEntity);
             } else {
                 throw new Exception("Invalid main menu entity : { id:" + mainMenuEntity.getId() + ", value:" + mainMenuEntity.getValue() + ", contextAddress:" + mainMenuEntity.getContextAddress() +
                                             ", icon:" + mainMenuEntity.getIcon() + ", type:" + mainMenuEntity.getType() + " }");
@@ -69,10 +70,10 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
     }
 
     @Override
-    public MainMenuEntity unregisterMainMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
+    public MainMenuEntity unregisterMainLeftMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
         if (mainMenuEntity!=null) {
             if (mainMenuEntity.isValid()) {
-                registry.remove(mainMenuEntity);
+                leftRegistry.remove(mainMenuEntity);
             } else {
                 throw new Exception("Invalid main menu entity : { id:" + mainMenuEntity.getId() + ", value:" + mainMenuEntity.getValue() + ", contextAddress:" + mainMenuEntity.getContextAddress() +
                                             ", icon:" + mainMenuEntity.getIcon() + ", type:" + mainMenuEntity.getType() + " }");
@@ -84,14 +85,59 @@ public class MainMenuEntityRegistryImpl implements MainMenuEntityRegistry {
     }
 
     @Override
-    public TreeSet<MainMenuEntity> getMainMenuEntities() {
-        return this.registry;
+    public TreeSet<MainMenuEntity> getMainLeftMenuEntities() {
+        return this.leftRegistry;
     }
 
     @Override
-    public TreeSet<MainMenuEntity> getMainMenuEntitiesFromParent(MainMenuEntity parent) {
+    public TreeSet<MainMenuEntity> getMainLeftMenuEntitiesFromParent(MainMenuEntity parent) {
         TreeSet<MainMenuEntity> ret = new TreeSet<MainMenuEntity>();
-        for (MainMenuEntity entity : registry) {
+        for (MainMenuEntity entity : leftRegistry) {
+            if (entity.getParent()!=null && entity.getParent().equals(parent))
+                ret.add(entity);
+        }
+        return ret;
+    }
+
+    @Override
+    public MainMenuEntity registerMainRightMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
+        if (mainMenuEntity!=null) {
+            if (mainMenuEntity.isValid()) {
+                rightRegistry.add(mainMenuEntity);
+            } else {
+                throw new Exception("Invalid main menu entity : { id:" + mainMenuEntity.getId() + ", value:" + mainMenuEntity.getValue() + ", contextAddress:" + mainMenuEntity.getContextAddress() +
+                                            ", icon:" + mainMenuEntity.getIcon() + ", type:" + mainMenuEntity.getType() + " }");
+            }
+        } else {
+            throw new NullPointerException();
+        }
+        return mainMenuEntity;
+    }
+
+    @Override
+    public MainMenuEntity unregisterMainRightMenuEntity(MainMenuEntity mainMenuEntity) throws Exception {
+        if (mainMenuEntity!=null) {
+            if (mainMenuEntity.isValid()) {
+                rightRegistry.remove(mainMenuEntity);
+            } else {
+                throw new Exception("Invalid main menu entity : { id:" + mainMenuEntity.getId() + ", value:" + mainMenuEntity.getValue() + ", contextAddress:" + mainMenuEntity.getContextAddress() +
+                                            ", icon:" + mainMenuEntity.getIcon() + ", type:" + mainMenuEntity.getType() + " }");
+            }
+        } else {
+            throw new NullPointerException();
+        }
+        return mainMenuEntity;
+    }
+
+    @Override
+    public TreeSet<MainMenuEntity> getMainRightMenuEntities() {
+        return rightRegistry;
+    }
+
+    @Override
+    public TreeSet<MainMenuEntity> getMainRightMenuEntitiesFromParent(MainMenuEntity parent) {
+        TreeSet<MainMenuEntity> ret = new TreeSet<MainMenuEntity>();
+        for (MainMenuEntity entity : rightRegistry) {
             if (entity.getParent()!=null && entity.getParent().equals(parent))
                 ret.add(entity);
         }

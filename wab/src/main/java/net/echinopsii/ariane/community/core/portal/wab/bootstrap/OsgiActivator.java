@@ -38,7 +38,8 @@ public class OsgiActivator implements BundleActivator {
     protected static final String PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME = "Ariane Portal WAB";
     private static final Logger log = LoggerFactory.getLogger(OsgiActivator.class);
 
-    protected static ArrayList<MainMenuEntity> mainPortalMainMenuEntityList = new ArrayList<MainMenuEntity>() ;
+    protected static ArrayList<MainMenuEntity> mainPortalMainLeftMenuEntityList = new ArrayList<MainMenuEntity>() ;
+    protected static ArrayList<MainMenuEntity> mainPortalMainRightMenuEntityList = new ArrayList<MainMenuEntity>() ;
 
     @Override
     public void start(BundleContext context) {
@@ -49,11 +50,11 @@ public class OsgiActivator implements BundleActivator {
     @Override
     public void stop(BundleContext context) throws Exception {
         if (MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry()!=null) {
-            for(MainMenuEntity entity : mainPortalMainMenuEntityList) {
-                MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().unregisterMainMenuEntity(entity);
-            }
+            for(MainMenuEntity entity : mainPortalMainLeftMenuEntityList) MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().unregisterMainLeftMenuEntity(entity);
+            for(MainMenuEntity entity : mainPortalMainRightMenuEntityList) MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().unregisterMainRightMenuEntity(entity);
         }
-        mainPortalMainMenuEntityList.clear();
+        mainPortalMainLeftMenuEntityList.clear();
+        mainPortalMainRightMenuEntityList.clear();
         log.info("{} is stopped", new Object[]{PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
     }
 }

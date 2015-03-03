@@ -44,18 +44,18 @@ public class MainMenuEntityRegistryTest extends TestCase {
     @Test
     public void testRegisteringUnregisteringEntity() throws Exception {
         MainMenuEntity mmEntity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, 1, "icon-dashboard icon-large");
-        mainMenuEntityRegistry.registerMainMenuEntity(mmEntity);
-        assertTrue(mainMenuEntityRegistry.getMainMenuEntities().contains(mmEntity));
-        mainMenuEntityRegistry.unregisterMainMenuEntity(mmEntity);
-        assertFalse(mainMenuEntityRegistry.getMainMenuEntities().contains(mmEntity));
+        mainMenuEntityRegistry.registerMainLeftMenuEntity(mmEntity);
+        assertTrue(mainMenuEntityRegistry.getMainLeftMenuEntities().contains(mmEntity));
+        mainMenuEntityRegistry.unregisterMainLeftMenuEntity(mmEntity);
+        assertFalse(mainMenuEntityRegistry.getMainLeftMenuEntities().contains(mmEntity));
     }
 
     @Test
     public void testGetEntityFromParent() throws Exception {
         MainMenuEntity mmParentEntity = new MainMenuEntity("helpSButton", "Help", null, MenuEntityType.TYPE_MENU_SUBMENU, 6, "icon-question-sign icon-large");
-        mainMenuEntityRegistry.registerMainMenuEntity(mmParentEntity);
+        mainMenuEntityRegistry.registerMainLeftMenuEntity(mmParentEntity);
         MainMenuEntity mmChildEntity = new MainMenuEntity("bookMItem", "Help book", "#", MenuEntityType.TYPE_MENU_ITEM, 61, "icon-beer icon-large").setParent(mmParentEntity);
-        mainMenuEntityRegistry.registerMainMenuEntity(mmChildEntity);
-        assertTrue(mainMenuEntityRegistry.getMainMenuEntitiesFromParent(mmParentEntity).contains(mmChildEntity));
+        mainMenuEntityRegistry.registerMainLeftMenuEntity(mmChildEntity);
+        assertTrue(mainMenuEntityRegistry.getMainLeftMenuEntitiesFromParent(mmParentEntity).contains(mmChildEntity));
     }
 }

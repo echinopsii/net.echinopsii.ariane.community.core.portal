@@ -56,9 +56,6 @@ button,
 a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(/aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;
              position: absolute; left: 0; top: 0; z-index: 1111;}
 
-body #menutop #ui-id-1{width: auto; float: left;}
-body #menutop #ui-id-2{width: auto; float: right;}
-
 body #menutop ul{ width: auto;}
 body #menutop .pui-menu, body #menutop .ui-menu{border: none; width: 50%; border: none; margin: 0; padding: 0; clear: none; background: transparent;}
 
@@ -66,6 +63,16 @@ body #menutop .pui-menu li a .ui-icon, body #menutop .ui-menu li a .ui-icon{font
 body #menutop .pui-menu li a .ui-menuitem-text, body #menutop .ui-menu li a .ui-menuitem-text{font-size: 13px; font-weight: bold}
 
 body #menutop .pui-menu li ul li, body #menutop .ui-menu li ul li{width: auto; clear: both; min-width: 180px;}
+
+body #menuDivLeft {width: 400px ; float: left;}
+body #menuDivLeft .pui-menu,body #menuDivLeft .ui_menu {float: left;}
+body #menuDivLeft ul {float: left; width: 400px }
+body #menuDivLeft ul .ui-menu-child {float: right; width: 180px }
+
+body #menuDivRight {width: 400px; float: right;}
+body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 400px}
+body #menuDivRight ul {float: right; width: 400px}
+body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 
 body #mainCenter {top: 38px !important;}
 body #mainTop-resizer {display: none !important}

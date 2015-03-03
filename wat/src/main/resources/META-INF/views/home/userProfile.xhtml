@@ -79,37 +79,58 @@
                             </p:tab>
                             <p:tab title="Reset your password">
                                 <h:form>
-                                    <h:panelGrid columns="2" id="matchGrid">
-                                        <h:outputLabel for="pwd1" value="Password : " />
-                                        <p:password id="pwd1" value="#{userProfileController.pwd1}" label="Password" match="pwd2" required="true" feedback="true"/>
+                                    <h:panelGrid columns="2" id="pwdGrid">
+                                        <h:panelGroup>
+                                            <h:panelGrid columns="2" id="matchGrid">
+                                                <h:outputLabel for="pwd1" value="Password : " />
+                                                <p:password id="pwd1" value="#{userProfileController.pwd1}" label="Password" match="pwd2" required="true" feedback="true"/>
 
-                                        <h:outputLabel for="pwd2" value="Password (again): " />
-                                        <p:password id="pwd2" value="#{userProfileController.pwd2}" label="Password (again)" required="true"/>
+                                                <h:outputLabel for="pwd2" value="Password (again): " />
+                                                <p:password id="pwd2" value="#{userProfileController.pwd2}" label="Password (again)" required="true"/>
+                                            </h:panelGrid>
+                                        </h:panelGroup>
+                                        <h:panelGroup>
+                                            <p:commandButton id="saveButton" update="@form,:userProfileGrowl" value="Save new password !" icon="ui-icon-disk"
+                                                             actionListener="#{userProfileController.resetPassword}"/>
+                                        </h:panelGroup>
                                     </h:panelGrid>
-                                    <p:commandButton id="saveButton" update="@form,:userProfileGrowl" value="Save new password !" icon="ui-icon-disk"
-                                                     actionListener="#{userProfileController.resetPassword}"/>
                                 </h:form>
                             </p:tab>
                             <p:tab title="Your groups">
-                                <p:dataList var="group" value="#{userProfileController.groups}" id="groups" paginator="true" rows="5"
-                                            paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
-                                            rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
-                                    <h:outputText value="#{group.name} - #{group.description}" style="margin-left:10px" /><br />
-                                </p:dataList>
+                                <p:dataTable var="group" value="#{userProfileController.groups}" id="groups" paginator="true" rows="10"
+                                                paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
+                                                rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
+                                    <p:column headerText="Group Name">
+                                        <h:outputText value="#{group.name}" style="margin-left:10px" />
+                                    </p:column>
+                                    <p:column headerText="Group Description">
+                                        <h:outputText value="#{group.description}" style="margin-left:10px" /><br/>
+                                    </p:column>
+                                </p:dataTable>
                             </p:tab>
                             <p:tab title="Your roles">
-                                <p:dataList var="role" value="#{userProfileController.roles}" id="roles" paginator="true" rows="5"
+                                <p:dataTable var="role" value="#{userProfileController.roles}" id="roles" paginator="true" rows="10"
                                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
                                             rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
-                                    <h:outputText value="#{role.name} - #{role.description}" style="margin-left:10px" /><br />
-                                </p:dataList>
+                                    <p:column headerText="Role Name">
+                                        <h:outputText value="#{role.name}" style="margin-left:10px" />
+                                    </p:column>
+                                    <p:column headerText="Role Description">
+                                        <h:outputText value="#{role.description}" style="margin-left:10px" /><br/>
+                                    </p:column>
+                                </p:dataTable>
                             </p:tab>
                             <p:tab title="Your permissions">
-                                <p:dataList var="permission" value="#{userProfileController.permissions}" id="permissions" paginator="true" rows="15"
+                                <p:dataTable var="permission" value="#{userProfileController.permissions}" id="permissions" paginator="true" rows="10"
                                             paginatorTemplate="{PreviousPageLink} {CurrentPageReport} {NextPageLink} {RowsPerPageDropdown}"
                                             rowsPerPageTemplate="5,10,15" type="none" paginatorPosition="top">
-                                    <h:outputText value="#{permission.name} - #{permission.description}" style="margin-left:10px" /><br />
-                                </p:dataList>
+                                    <p:column headerText="Permission Name">
+                                        <h:outputText value="#{permission.name}" style="margin-left:10px" />
+                                    </p:column>
+                                    <p:column headerText="Permission Description">
+                                        <h:outputText value="#{permission.description}" style="margin-left:10px" /><br/>
+                                    </p:column>
+                                </p:dataTable>
                             </p:tab>
                         </p:accordionPanel>
                         <p:accordionPanel id="componentPreferencesOnLeft" multiple="true" value="#{userHomeController.preferencesSectionsOnLeft}"
