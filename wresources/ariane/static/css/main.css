@@ -249,3 +249,15 @@ img.right {
     content: "\e601";
     font-family: 'arianeicons';
 }
+.arianeico-file-png:before {
+    content: "\e60b";
+    font-family: 'arianeicons';
+}
+.arianeico-file-jpg:before {
+    content: "\e60c";
+    font-family: 'arianeicons';
+}
+.arianeico-file-svg:before {
+    content: "\e60d";
+    font-family: 'arianeicons';
+}
