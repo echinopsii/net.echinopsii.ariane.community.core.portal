@@ -69,9 +69,9 @@ body #menuDivLeft .pui-menu,body #menuDivLeft .ui_menu {float: left;}
 body #menuDivLeft ul {float: left; width: 400px }
 body #menuDivLeft ul .ui-menu-child {float: right; width: 180px }
 
-body #menuDivRight {width: 400px; float: right;}
-body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 400px}
-body #menuDivRight ul {float: right; width: 400px}
+body #menuDivRight {width: 420px; float: right;}
+body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 420px}
+body #menuDivRight ul {float: right; width: 420px}
 body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 
 body #mainCenter {top: 38px !important;}
