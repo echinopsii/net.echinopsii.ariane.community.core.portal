@@ -124,6 +124,12 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
 
+            entity = new MainMenuEntity("systemMItem", "System",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/system.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-cog icon-large").setParent(adminSB);
+            entity.getDisplayRoles().add("secadmin");
+            entity.getDisplayRoles().add("secreviewer");
+            OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
+            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
+
             entity = new MainMenuEntity("dbSeparator", null, null, MenuEntityType.TYPE_MENU_SEPARATOR, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, null).setParent(adminSB);
             entity.getDisplayRoles().add("dbadmin");
             entity.getDisplayPermissions().add("SQLConsole:display");

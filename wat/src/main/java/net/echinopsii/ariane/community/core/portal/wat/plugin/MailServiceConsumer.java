@@ -1,7 +1,7 @@
 /**
  * Portal wat bundle
- * Main Menu Registry consumer singleton
- * Copyright (C) 2013 Mathilde Ffrench
+ * Mail Service Consumer
+ * Copyright (C) 2015 Mathilde Ffrench
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -16,54 +16,55 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 package net.echinopsii.ariane.community.core.portal.wat.plugin;
 
-import net.echinopsii.ariane.community.core.portal.base.plugin.MainMenuEntityRegistry;
+import net.echinopsii.ariane.community.core.portal.base.plugin.MailService;
 import org.apache.felix.ipojo.annotations.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * iPojo singleton which consume the portal main menu entity registry service. Instantiated during portal wat bundle startup. FactoryMethod : getInstance
+ * iPojo singleton which consume the portal mail service. Instantiated during portal wat bundle startup. FactoryMethod : getInstance
  */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate
-public class MainMenuRegistryConsumer {
+public class MailServiceConsumer {
     private static final Logger log = LoggerFactory.getLogger(MainMenuRegistryConsumer.class);
-    private static MainMenuRegistryConsumer INSTANCE;
+    private static MailServiceConsumer INSTANCE;
 
     @Requires
-    private MainMenuEntityRegistry mainMenuEntityRegistry = null;
+    private MailService mailService = null;
 
     @Bind
-    public void bindMainMenuEntityRegistry(MainMenuEntityRegistry r) {
+    public void bindMainMenuEntityRegistry(MailService r) {
         log.debug("Bound to main menu item registry...");
-        mainMenuEntityRegistry = r;
+        mailService = r;
     }
 
     @Unbind
     public void unbindMainMenuEntityRegistry() {
         log.debug("Unbound from main menu item registry...");
-        mainMenuEntityRegistry = null;
+        mailService = null;
     }
 
     /**
-     * Get main menu entity registry binded to this consumer...
+     * Get mail service binded to this consumer...
      *
-     * @return main menu entity registry binded by this consumer. If null the registry is still not binded or has been unbinded...
+     * @return mail service binded by this consumer. If null the registry is still not binded or has been unbinded...
      */
-    public MainMenuEntityRegistry getMainMenuEntityRegistry() {
-        return mainMenuEntityRegistry;
+    public MailService getMailService() {
+        return mailService;
     }
 
     /**
      * Factory method for this singleton.
      *
-     * @return instantiated main menu entity registry consumer
+     * @return instantiated mail service consumer
      */
-    public synchronized static MainMenuRegistryConsumer getInstance() {
+    public synchronized static MailServiceConsumer getInstance() {
         if (INSTANCE == null) {
-            INSTANCE = new MainMenuRegistryConsumer();
+            INSTANCE = new MailServiceConsumer();
         }
         return INSTANCE;
     }

@@ -24,7 +24,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * iPojo singleton which consume the portal user preference registry service. Instantiated during portal commons-jsf bundle startup. FactoryMethod : getInstance.
+ * iPojo singleton which consume the portal user preference registry service. Instantiated during portal wat bundle startup. FactoryMethod : getInstance.
  */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate

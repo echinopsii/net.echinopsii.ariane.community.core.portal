@@ -33,4 +33,9 @@
         <managed-bean-class>net.echinopsii.ariane.community.core.portal.wat.controller.UserPreferenceSectionTypeController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>mailServiceController</managed-bean-name>
+        <managed-bean-class>net.echinopsii.ariane.community.core.portal.wat.controller.MailServiceController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
 </faces-config>

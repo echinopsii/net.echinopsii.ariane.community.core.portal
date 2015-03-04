@@ -28,7 +28,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * iPojo singleton which consume the facelets resource resolver service with filter targetArianeComponent=Portal.
- * Instantiated during portal commons-jsf bundle startup. FactoryMethod : getInstance
+ * Instantiated during portal wat bundle startup. FactoryMethod : getInstance
  */
 @Component(publicFactory = false, factoryMethod = "getInstance")
 @Instantiate

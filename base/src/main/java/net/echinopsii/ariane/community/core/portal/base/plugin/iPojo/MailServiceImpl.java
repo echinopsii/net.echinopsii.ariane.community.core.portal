@@ -30,7 +30,6 @@ import java.util.*;
 
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.activation.*;
 
 @Component(managedservice="net.echinopsii.ariane.community.core.PortalMailService")
 @Provides
@@ -53,7 +52,7 @@ public class MailServiceImpl implements MailService {
     public void invalidate(){ log.info("{} is stopped", new Object[]{MAIL_SERVICE_NAME}); }
 
     @Updated
-    public synchronized void updated(final Dictionary properties) throws IOException {
+    public synchronized void updated(final Dictionary properties) {
         log.debug("{} is being updated by {}", new Object[]{MAIL_SERVICE_NAME, Thread.currentThread().toString()});
         smtpConf = new MailSenderEntity();
         smtpConf.setSubjectPrefix("");
@@ -63,7 +62,6 @@ public class MailServiceImpl implements MailService {
         smtpConf.setSmtpSSL(false);
         smtpConf.setSmtpTLS(false);
 
-        Properties propsToSave = new Properties();
         Enumeration<String> dicEnum = properties.keys();
         boolean validProperties = false;
 
@@ -79,8 +77,6 @@ public class MailServiceImpl implements MailService {
             while (dicEnum.hasMoreElements()) {
                 String key = (String) dicEnum.nextElement();
                 String value = (String) properties.get(key);
-
-                propsToSave.setProperty(key,value);
 
                 if (key.equals("net.echinopsii.ariane.community.core.PortalMailService.path")) {
                     this.smtpConfPath = value;
@@ -119,21 +115,12 @@ public class MailServiceImpl implements MailService {
                             smtpConf.setSmtpSSL(new Boolean(value));
                             break;
                         case "component":
-                            propsToSave.remove(key);
                             break;
                         default:
                             log.error("({}:{}) incorrect key", new Object[]{key, value});
                             break;
                     }
                 }
-            }
-
-            if (smtpConfFile!=null) {
-                log.debug("save loaded props");
-                OutputStream out = ((OutputStream) new FileOutputStream(smtpConfFile));
-                propsToSave.store(out, "");
-                out.flush();
-                out.close();
             }
         }
     }
@@ -150,6 +137,9 @@ public class MailServiceImpl implements MailService {
             properties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
             properties.put("mail.smtp.socketFactory.fallback", "false");
         }
+
+        log.error("{}/{}", new Object[]{smtpConf.getSmtpUser(), smtpConf.getSmtpPassword()});
+        log.error(properties.toString());
 
         Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
@@ -178,5 +168,27 @@ public class MailServiceImpl implements MailService {
     @Override
     public void setSmtpConf(MailSenderEntity smtpConf) {
         this.smtpConf = smtpConf;
+    }
+
+    @Override
+    public void storeSmtpConf() throws IOException {
+        if (smtpConfFile!=null && smtpConf!=null) {
+            Properties propsToSave = new Properties();
+            propsToSave.setProperty("net.echinopsii.ariane.community.core.PortalMailService.path", smtpConfPath);
+            propsToSave.setProperty("mail.user", smtpConf.getSmtpUser());
+            propsToSave.setProperty("mail.password", smtpConf.getSmtpPassword());
+            propsToSave.setProperty("mail.subject.prefix", smtpConf.getSubjectPrefix());
+            propsToSave.setProperty("mail.smtp.host", smtpConf.getSmtpHost());
+            propsToSave.setProperty("mail.smtp.port", smtpConf.getSmtpPort());
+            propsToSave.setProperty("mail.smtp.auth", (smtpConf.isSmtpAUTH()) ? "true" : "false");
+            propsToSave.setProperty("mail.smtp.tls", (smtpConf.isSmtpTLS()) ? "true" : "false");
+            propsToSave.setProperty("mail.smtp.ssl", (smtpConf.isSmtpSSL()) ? "true" : "false");
+
+            log.debug("save loaded props");
+            OutputStream out = ((OutputStream) new FileOutputStream(smtpConfFile));
+            propsToSave.store(out, "");
+            out.flush();
+            out.close();
+        }
     }
 }

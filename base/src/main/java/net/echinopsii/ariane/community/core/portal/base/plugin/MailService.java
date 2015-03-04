@@ -23,10 +23,13 @@ import net.echinopsii.ariane.community.core.portal.base.model.MailSenderEntity;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
 public interface MailService {
     public void send(List<String> to, String subject, String body) throws MessagingException;
     public MailSenderEntity getSmtpConf();
     public void setSmtpConf(MailSenderEntity smtpConf);
+    public void storeSmtpConf() throws IOException;
 }
