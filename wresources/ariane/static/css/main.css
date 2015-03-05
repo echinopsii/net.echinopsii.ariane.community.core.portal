@@ -164,35 +164,6 @@ img.right {
     float: right;
     margin: 0 0 0 20px;
 }
-/*OLD ICONS*/
-/*@font-face {
-		font-family: 'arianeicons';
-	src:url('../a../afonts/arianeicons.eot?-ctkolz');
-	src:url('../a../afonts/arianeicons.eot?#iefix-ctkolz') format('embedded-opentype'),
-		url('../a../afonts/arianeicons.woff?-ctkolz') format('woff'),
-		url('../a../afonts/arianeicons.ttf?-ctkolz') format('truetype'),
-		url('../a../afonts/arianeicons.svg?-ctkolz#arianeicons') format('svg');
-	font-weight: normal;
-	font-style: normal;
-}
-.icon-help-ico-ariane-ariane:before {
-    font-family: 'arianeicons';
-    content: "\e600";
-}
-.icon-mapping-ico-ariane-ariane:before {
-	font-family: 'arianeicons';
-    content: "\e601";
-}
-.icon-logout:before {
-	font-family: 'arianeicons';
-    content: "\e602";
-}
-.icon-admin-ico:before {
-    content: "\e603";
-}
-.icon-inject-ico-ariane:before {
-    content: "\e604";
-}*/
 
 @font-face {
 	font-family: 'arianeicons';
@@ -268,3 +239,20 @@ img.right {
     content: "\e60d";
     font-family: 'arianeicons';
 }
+
+/***** BACKGROUNDS *****/
+.backgroundDirectory{
+	background: url(/aimages/ariane/bg-ariane-directory.jpg) center center no-repeat;
+	background-size: cover;
+	height: 100%;
+	
+}
+.backgroundInjector{
+	background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
+	background-size: cover;
+	height: 100%;
+}
+.sectionMenu .ui-widget-content{
+	background: rgba(255,255,255,0.5) !important;
+}
+
