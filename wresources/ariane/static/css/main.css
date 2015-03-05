@@ -240,19 +240,27 @@ img.right {
     font-family: 'arianeicons';
 }
 
-/***** BACKGROUNDS *****/
-.backgroundDirectory{
-	background: url(/aimages/ariane/bg-ariane-directory.jpg) center center no-repeat;
-	background-size: cover;
-	height: 100%;
-	
+.dirPanelMenu {
+    border:0;
+    margin:0;
+    padding:0;
 }
-.backgroundInjector{
-	background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
-	background-size: cover;
-	height: 100%;
+
+.dirBreadCrumb {
+    border:0;
+    margin:0;
+    padding:0;
 }
-.sectionMenu .ui-widget-content{
-	background: rgba(255,255,255,0.5) !important;
+
+.injPanelMenu {
+    border:0;
+    margin:0;
+    padding:0;
+}
+
+.injBreadCrumb {
+    border:0;
+    margin:0;
+    padding:0;
 }
 

@@ -374,3 +374,85 @@ body #menutop .pui-menu ul li li:hover, body #menutop .ui-menu ul li li:hover{bo
 body #menutop .pui-menu li ul, body #menutop .ui-menu li ul{width: auto; background: #333; border: none;}
 
 body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .ui-menu::before, body #menutop .pui-menu::after{clear: none;}
+
+/***** BACKGROUNDS *****/
+.backgroundDirectory{
+    background: url(images/ariane/bg-ariane-directory.jpg) center center no-repeat;
+    background-size: cover;
+}
+.backgroundInjector{
+    background: url(images/ariane/bg-ariane-injector.jpg) center center no-repeat;
+    background-size: cover;
+}
+
+.sectionMenu .ui-widget-content{
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#directoriesMenu,
+#directoriesMenu .ui-layout-unit-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#directoryContent,
+#directoryContent .ui-layout-unit-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#applicationTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#companyTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#datacenterTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#environmentTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#osInstanceTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#osTypeTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#routingAreaTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#rareaTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#subnetTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#teamTableForm .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+.dirPanelMenu .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#injectorsMenu,
+#injectorsMenu .ui-layout-unit-content{
+    background: rgba(255,255,255,0.3) !important;
+}
+
+#injectorContent,
+#injectorContent .ui-layout-unit-content{
+    background: rgba(255,255,255,0.3) !important;
+}
+
+.injPanelMenu .ui-widget-content {
+    background: rgba(255,255,255,0.3) !important;
+}
