@@ -52,6 +52,11 @@
                             net.echinopsii.ariane.community.core.portal.base.plugin;version=${project.version},
                             net.echinopsii.ariane.community.core.portal.base.model;version=${project.version}
                         </Export-Package>
+                        <Import-Package>
+                            javax.mail;version="${version.osgi.javax.mail}",
+                            javax.mail.internet;version="${version.osgi.javax.mail}",
+                            *
+                        </Import-Package>
                     </instructions>
                 </configuration>
             </plugin>

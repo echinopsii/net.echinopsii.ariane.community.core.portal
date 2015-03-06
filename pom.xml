@@ -116,6 +116,7 @@
         <version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>1.0.0.Final</version.org.hibernate.javax.persistence.hibernate-jpa-2.1-api>
 
         <!-- OSGI Min/Max versions -->
+        <version.osgi.javax.mail>1.4.0.sun</version.osgi.javax.mail>
         <version.osgimin.org.osgi.framework>1.5</version.osgimin.org.osgi.framework>
         <version.osgimax.org.osgi.framework>2</version.osgimax.org.osgi.framework>
 
