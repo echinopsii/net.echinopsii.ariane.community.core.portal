@@ -17,7 +17,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-package net.echinopsii.ariane.community.core.portal.wat.plugin;
+package net.echinopsii.ariane.community.core.portal.idmwat.plugin;
 
 import net.echinopsii.ariane.community.core.portal.base.plugin.MailService;
 import org.apache.felix.ipojo.annotations.*;

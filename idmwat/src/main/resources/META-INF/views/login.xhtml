@@ -17,27 +17,47 @@
         }
     </script>
 </h:head>
-<h:body>    
-   <h:form id="login">
-   		<p:growl id="growl" sticky="false" showDetail="true" life="5000" />
+<h:body>
+    <p:growl id="growl" sticky="false" showDetail="true" life="5000" />
+    <h:form id="login">
         <div id="loginBox">
             <span class="arianeLogo">Ariane</span>
-          			
-			<div class="wrapper wrapperloginboxUser">
-				<p:inputText id="loginboxUser" placeholder="Username" 
-				value="#{loginController.username}" label="username" />
-			</div>
-                             
+
+            <div class="wrapper wrapperloginboxUser">
+                <p:inputText id="loginboxUser" placeholder="Username"
+                             value="#{loginController.username}" label="username" />
+            </div>
+
             <div class="wrapper wrapperloginboxPassword">
-				<p:password value="#{loginController.password}"
-                            id="loginboxPassword" placeholder="password" required="true" label="password" />	         
-	        </div>
-                        
-            <p:commandButton id="loginboxSubmit" value="Login" update="growl"
+                <p:password value="#{loginController.password}"
+                            id="loginboxPassword" placeholder="password" required="true" label="password" />
+            </div>
+
+            <p:commandButton id="loginboxSubmit" value="Login" update=":growl"
                              actionListener="#{loginController.login}"
                              oncomplete="handleLoginRequest(xhr, status, args)"/>
+            <br/>
+
+            <p:commandLink id="resetLink" onclick="resetDialog.show()">
+                <h:outputText value="Forget your password ?"/>
+            </p:commandLink>
         </div>
     </h:form>
+
+    <p:dialog header="Password reset" widgetVar="resetDialog"
+              width="300" showEffect="fade" hideEffect="explode">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="Username : " styleClass="inputTitle"/>
+                <p:inputText id="userReset" label="user" required="true" value="#{loginController.username}"/>
+            </h:panelGrid>
+            <br/>
+            <p:commandButton value="reset my password !" id="resetPassword" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                             actionListener="#{loginController.resetPassword}" oncomplete="resetDialog.hide();"
+                             update=":growl"/>
+        </h:form>
+    </p:dialog>
+
     <script type="application/javascript">
         var reloadBeforeSessionTimeout = setInterval(function(){
             location.reload()

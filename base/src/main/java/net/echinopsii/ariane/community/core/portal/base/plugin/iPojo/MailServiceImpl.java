@@ -138,25 +138,17 @@ public class MailServiceImpl implements MailService {
             properties.put("mail.smtp.socketFactory.fallback", "false");
         }
 
-        log.error("{}/{}", new Object[]{smtpConf.getSmtpUser(), smtpConf.getSmtpPassword()});
-        log.error(properties.toString());
-
         Session session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
             protected PasswordAuthentication getPasswordAuthentication() {
                 return new PasswordAuthentication(smtpConf.getSmtpUser(),smtpConf.getSmtpPassword());
             }
         });
-
         MimeMessage message = new MimeMessage(session);
         message.setFrom(new InternetAddress(smtpConf.getFrom()));
         for (String toMail : to)
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(toMail));
-        message.setSubject("[" + smtpConf.getSubjectPrefix() + "]" + subject);
-        BodyPart messageBodyPart = new MimeBodyPart();
-        messageBodyPart.setText(body);
-        Multipart multipart = new MimeMultipart();
-        multipart.addBodyPart(messageBodyPart);
-        message.setContent(multipart);
+        message.setSubject("[" + smtpConf.getSubjectPrefix() + "] " + subject);
+        message.setText(body);
         Transport.send(message);
     }
 

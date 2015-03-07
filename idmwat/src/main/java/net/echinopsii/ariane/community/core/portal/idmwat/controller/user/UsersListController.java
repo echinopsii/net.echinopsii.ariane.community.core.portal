@@ -304,6 +304,23 @@ public class UsersListController implements Serializable {
         }
     }
 
+    public static void passwordReset(User user, String  newPasswd) {
+        EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+        try {
+            em.getTransaction().begin();
+            user = em.find(user.getClass(), user.getId()).setPasswordR(newPasswd);
+            em.flush();
+            em.getTransaction().commit();
+        } catch (Throwable t) {
+            log.debug("Throwable catched !");
+            t.printStackTrace();
+            if(em.getTransaction().isActive())
+                em.getTransaction().rollback();
+        } finally {
+            em.close();
+        }
+    }
+
     /**
      * Remove selected users
      */
@@ -381,6 +398,17 @@ public class UsersListController implements Serializable {
         Root<User> root = criteria.from(User.class);
         criteria.select(root).where(builder.equal(root.<String>get("userName"),username));
         User ret = em.createQuery(criteria).getSingleResult();
+        return ret;
+    }
+
+    public static User getUserByUserName(String username) {
+        EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<User> criteria = builder.createQuery(User.class);
+        Root<User> root = criteria.from(User.class);
+        criteria.select(root).where(builder.equal(root.<String>get("userName"),username));
+        User ret = em.createQuery(criteria).getSingleResult();
+        em.close();
         return ret;
     }
 }

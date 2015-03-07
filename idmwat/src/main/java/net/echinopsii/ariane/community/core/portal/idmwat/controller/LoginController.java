@@ -18,6 +18,9 @@
  */
 package net.echinopsii.ariane.community.core.portal.idmwat.controller;
 
+import net.echinopsii.ariane.community.core.idm.base.model.jpa.User;
+import net.echinopsii.ariane.community.core.portal.idmwat.controller.user.UsersListController;
+import net.echinopsii.ariane.community.core.portal.idmwat.plugin.MailServiceConsumer;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -28,8 +31,11 @@ import org.slf4j.LoggerFactory;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.mail.MessagingException;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.UUID;
 
 /**
  * Provide Shiro login to Ariane web applications. Called by login view.<br/>
@@ -127,5 +133,30 @@ public class LoginController implements Serializable{
         }
         ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
         ec.redirect("/ariane/views/login.jsf");
+    }
+
+    /**
+     *
+     */
+    public void resetPassword() {
+        User user = UsersListController.getUserByUserName(username);
+        ArrayList<String> to = new ArrayList<>(); to.add(user.getEmail());
+        String newPassword = UUID.randomUUID().toString();
+        UsersListController.passwordReset(user,newPassword);
+
+        FacesMessage msg = null;
+        try {
+            MailServiceConsumer.getInstance().getMailService().send(to, "password reset", "Hello !\n"+
+                                                                                          "\nYour password has been reset. New password is : "+ newPassword +" .\n"+
+                                                                                          "\nTake time to change this password again once connected to Ariane !\n"+
+                                                                                          "\nCheers,\n" +
+                                                                                          "\nYour Ariane system");
+            msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Password reset", "A mail has been sent with your new credentials !");
+        } catch (MessagingException e) {
+            msg = new FacesMessage(FacesMessage.SEVERITY_ERROR, "Password reset", e.getMessage());
+            e.printStackTrace();
+        }
+
+        FacesContext.getCurrentInstance().addMessage(null, msg);
     }
 }
