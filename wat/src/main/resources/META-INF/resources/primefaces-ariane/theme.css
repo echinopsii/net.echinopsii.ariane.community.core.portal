@@ -461,6 +461,23 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
     background-size: cover;
 }
+.backgroundMapping{
+    background: url(/aimages/ariane/bg-ariane-mapping.jpg) center center no-repeat;
+    background-size: cover;
+}
+.backgroundAdmSec{
+    background: url(/aimages/ariane/bg-ariane-security.jpg) center center no-repeat;
+    background-size: cover;
+}
+.backgroundAdmSys{
+    background: url(/aimages/ariane/bg-ariane-system.jpg) center center no-repeat;
+    background-size: cover;
+}
+.backgroundUsrAcc{
+    background: url(/aimages/ariane/bg-ariane-manage-account.jpg) center center no-repeat;
+    background-size: cover;
+}
+
 
 .sectionMenu .ui-widget-content{
     background: rgba(255,255,255,0.3) !important;
@@ -532,5 +549,21 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 
 .injPanelMenu .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
+}
+
+#mappingLayout,
+#mappingCanvas,
+#mappingTools {
+    background: rgba(255, 255, 255, 0);
+}
+
+#mappingToolsView,
+#mappingToolsView .ui-widget-content {
+    background: rgba(255, 255, 255, 0) !important;
+}
+
+#mappingCanvas .ui-widget-content,
+#mappingTools .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3);
 }
 
