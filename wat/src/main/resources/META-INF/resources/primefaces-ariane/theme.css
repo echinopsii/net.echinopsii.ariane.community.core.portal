@@ -456,26 +456,38 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .backgroundDirectory{
     background: url(/aimages/ariane/bg-ariane-directory.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundInjector{
     background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundMapping{
     background: url(/aimages/ariane/bg-ariane-mapping.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundAdmSec{
     background: url(/aimages/ariane/bg-ariane-security.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundAdmSys{
     background: url(/aimages/ariane/bg-ariane-system.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundUsrAcc{
     background: url(/aimages/ariane/bg-ariane-manage-account.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
 
@@ -567,3 +579,42 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255, 255, 255, 0.3);
 }
 
+#useraccContent,
+#useraccContent .ui-layout-unit-content {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+#portalPreferencesOnLeft,
+#portalPreferencesOnLeft .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#componentPreferencesOnLeft,
+#componentPreferencesOnLeft .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#portalPreferencesOnRight,
+#portalPreferencesOnRight .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#componentPreferencesOnRight,
+#componentPreferencesOnRight .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#securityTabView,
+#securityTabView .ui-widget-content {
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#systemTabView,
+#systemTabView  .ui-widget-content {
+    border: 0px;
+    background: rgba(255, 255, 255, 0.3) !important;
+}
+
+#systemTabView .ui-tabs-panels .ui-widget-content {
+    background: rgba(255, 255, 255, 0) !important;
+}

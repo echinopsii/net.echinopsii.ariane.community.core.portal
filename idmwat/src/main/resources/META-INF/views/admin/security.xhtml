@@ -11,665 +11,685 @@
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
             <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
-                <p:tabView id="securityTabView" orientation="top">
-                    <p:tab rendered="#{arianeidm:hasPermission('secUser:display')}">
-                        <f:facet name="title">
-                            <i class="icon-user icon-large"/>&nbsp;&nbsp;
-                            <h:outputText value="Users"/>
-                        </f:facet>
+                <div id="admsecBg" class="backgroundAdmSec">
+                    <p:tabView id="securityTabView" orientation="top">
+                        <p:tab rendered="#{arianeidm:hasPermission('secUser:display')}">
+                            <f:facet name="title">
+                                <i class="icon-user icon-large"/>&nbsp;&nbsp;
+                                <h:outputText value="Users"/>
+                            </f:facet>
 
-                        <h:form id="userTableForm">
-                            <p:growl id="userTableMessages" showDetail="true" />
-                            <p:dataTable id="userTable" var="user" value="#{usersListController.lazyModel}"
-                                         selectionMode="multiple" selection="#{usersListController.selectedUserList}" rowKey="#{user.id}"
-                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                                <f:facet name="header">
-                                    Users
-                                </f:facet>
+                            <h:form id="userTableForm">
+                                <p:growl id="userTableMessages" showDetail="true" />
+                                <p:dataTable id="userTable" var="user" value="#{usersListController.lazyModel}"
+                                             selectionMode="multiple" selection="#{usersListController.selectedUserList}" rowKey="#{user.id}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                    <f:facet name="header">
+                                        Users
+                                    </f:facet>
 
-                                <p:ajax event="rowToggle" listener="#{usersListController.onRowToggle}" />
+                                    <p:ajax event="rowToggle" listener="#{usersListController.onRowToggle}" />
 
-                                <p:column style="width:2%">
-                                    <p:rowToggler/>
-                                </p:column>
+                                    <p:column style="width:2%">
+                                        <p:rowToggler/>
+                                    </p:column>
 
-                                <p:column headerText="Username" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                    <h:outputText value="#{user.userName}" />
-                                </p:column>
+                                    <p:column headerText="Username" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                        <h:outputText value="#{user.userName}" />
+                                    </p:column>
 
-                                <p:column headerText="First name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
-                                    <h:outputText value="#{user.firstName}" />
-                                </p:column>
+                                    <p:column headerText="First name" sortBy="#{user.firstName}" filterBy="#{user.firstName}">
+                                        <h:outputText value="#{user.firstName}" />
+                                    </p:column>
 
-                                <p:column headerText="Last name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
-                                    <h:outputText value="#{user.lastName}" />
-                                </p:column>
+                                    <p:column headerText="Last name" sortBy="#{user.lastName}" filterBy="#{user.lastName}">
+                                        <h:outputText value="#{user.lastName}" />
+                                    </p:column>
 
-                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                    <h:outputText value="#{user.email}" />
-                                </p:column>
+                                    <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                        <h:outputText value="#{user.email}" />
+                                    </p:column>
 
-                                <p:column headerText="Phone" sortBy="#{user.phone}" filterBy="#{user.phone}">
-                                    <h:outputText value="#{user.phone}" />
-                                </p:column>
+                                    <p:column headerText="Phone" sortBy="#{user.phone}" filterBy="#{user.phone}">
+                                        <h:outputText value="#{user.phone}" />
+                                    </p:column>
 
-                                <p:rowExpansion>
-                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                        <h:outputText value="Username : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="username" value="#{user.userName}"/>
-                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{user.userName}" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
+                                    <p:rowExpansion>
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                            <h:outputText value="Username : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="username" value="#{user.userName}"/>
+                                                    <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{user.userName}" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
-                                        <h:outputText value="First name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{user.firstName}"/>
-                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
+                                            <h:outputText value="First name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{user.firstName}"/>
+                                                    <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{user.firstName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
-                                        <h:outputText value="Last name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{user.lastName}"/>
-                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
+                                            <h:outputText value="Last name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{user.lastName}"/>
+                                                    <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{user.lastName}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
-                                        <h:outputText value="Email : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{user.email}"/>
-                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{user.email}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
+                                            <h:outputText value="Email : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{user.email}"/>
+                                                    <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{user.email}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
-                                        <h:outputText value="Phone : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{user.phone}"/>
-                                                <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
+                                            <h:outputText value="Phone : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{user.phone}"/>
+                                                    <p:ajax event="save" listener="#{usersListController.update(user)}" update="@form,:securityTabView:userTableForm:userTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{user.phone}" label="firstname" rendered="#{!(arianeidm:hasPermission('secUser:update'))}"/>
 
-                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                         rows="5" paginator="true" selection="#{usersListController.removedRoles[user.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                    <h:outputText value="#{role.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                    <h:outputText value="#{role.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secUser:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
-                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{usersListController.syncAddedRole(user)}"
-                                                                    update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{usersListController.syncRemovedRoles(user)}"
-                                                                         update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
+                                            <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(user,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                             rows="5" paginator="true" selection="#{usersListController.removedRoles[user.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                        <h:outputText value="#{role.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                        <h:outputText value="#{role.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secUser:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{usersListController.addedRole[user.id]}">
+                                                                    <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                                   itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{usersListController.syncAddedRole(user)}"
+                                                                        update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{usersListController.syncRemovedRoles(user)}"
+                                                                             update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
 
-                                        <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
-                                                         rows="5" paginator="true" selection="#{usersListController.removedGroups[user.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                                    <h:outputText value="#{group.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                                    <h:outputText value="#{group.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secUser:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
-                                                                <f:selectItems value="#{groupsListController.getAll()}" var="group_"
-                                                                               itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{usersListController.syncAddedGroup(user)}"
-                                                                    update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{usersListController.syncRemovedGroups(user)}"
-                                                                         update="@form,:securityTabView:userTableForm:userTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
-                                    </h:panelGrid>
-                                </p:rowExpansion>
+                                            <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(user,'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                                             rows="5" paginator="true" selection="#{usersListController.removedGroups[user.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                                        <h:outputText value="#{group.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                                        <h:outputText value="#{group.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secUser:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{usersListController.addedGroup[user.id]}">
+                                                                    <f:selectItems value="#{groupsListController.getAll()}" var="group_"
+                                                                                   itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{usersListController.syncAddedGroup(user)}"
+                                                                        update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{usersListController.syncRemovedGroups(user)}"
+                                                                             update="@form,:securityTabView:userTableForm:userTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
+                                        </h:panelGrid>
+                                    </p:rowExpansion>
 
-                                <f:facet name="footer">
-                                    <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"
-                                                     rendered="#{arianeidm:hasPermission('secUser:create')}"/>
-                                    <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
-                                                     update=":removeUserDialogForm:usrdisplay"
-                                                     rendered="#{arianeidm:hasPermission('secUser:remove')}"/>
-                                    <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                     update=":securityTabView:roleTableForm:roleTable,
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Create user" icon="ui-icon-disk" onclick="userCreateDialog.show()"
+                                                         rendered="#{arianeidm:hasPermission('secUser:create')}"/>
+                                        <p:commandButton value="Remove selected users" icon="ui-icon-closethick" onclick="userRemoveDialog.show()"
+                                                         update=":removeUserDialogForm:usrdisplay"
+                                                         rendered="#{arianeidm:hasPermission('secUser:remove')}"/>
+                                        <p:commandButton value="Refresh tables" id="userUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                         update=":securityTabView:roleTableForm:roleTable,
+                                                                             :securityTabView:groupTableForm:groupTable,
+                                                                             :securityTabView:userTableForm:userTable"/>
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
+
+
+
+                        <p:tab rendered="#{arianeidm:hasPermission('secGroup:display')}">
+                            <f:facet name="title">
+                                <i class="icon-group icon-large"/>&nbsp;&nbsp;
+                                <h:outputText value="Groups"/>
+                            </f:facet>
+
+                            <h:form id="groupTableForm">
+                                <p:growl id="groupTableMessages" showDetail="true" />
+                                <p:dataTable id="groupTable" var="group" value="#{groupsListController.lazyModel}"
+                                             selectionMode="multiple" selection="#{groupsListController.selectedGroupList}" rowKey="#{group.id}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                    <f:facet name="header">
+                                        Groups
+                                    </f:facet>
+
+                                    <p:ajax event="rowToggle" listener="#{groupsListController.onRowToggle}" />
+
+                                    <p:column style="width:2%">
+                                        <p:rowToggler/>
+                                    </p:column>
+
+                                    <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                        <h:outputText value="#{group.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                        <h:outputText value="#{group.description}" />
+                                    </p:column>
+
+                                    <p:rowExpansion>
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                            <h:outputText value="Name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{group.name}"/>
+                                                    <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{group.name}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
+
+                                            <h:outputText value="Description : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{group.description}"/>
+                                                    <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{group.description}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
+
+                                            <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                             rows="5" paginator="true" selection="#{groupsListController.removedRoles[group.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                        <h:outputText value="#{role.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                        <h:outputText value="#{role.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
+                                                                    <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                                   itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{groupsListController.syncAddedRole(group)}"
+                                                                        update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{groupsListController.syncRemovedRoles(group)}"
+                                                                             update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
+
+                                            <h:outputText value="Users : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                                             rows="5" paginator="true" selection="#{groupsListController.removedUsers[group.id]}" selectionMode="multiple">
+                                                    <p:column headerText="User name" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                                        <h:outputText value="#{user.userName}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                                        <h:outputText value="#{user.email}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
+                                                                    <f:selectItems value="#{usersListController.getAll()}" var="user_"
+                                                                                   itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{groupsListController.syncAddedUser(group)}"
+                                                                        update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{groupsListController.syncRemovedUsers(group)}"
+                                                                             update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
+                                        </h:panelGrid>
+
+                                    </p:rowExpansion>
+
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"
+                                                         rendered="#{arianeidm:hasPermission('secGroup:create')}"/>
+                                        <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
+                                                         update=":removeGroupDialogForm:grpdisplay"
+                                                         rendered="#{arianeidm:hasPermission('secGroup:remove')}"/>
+                                        <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                         update=":securityTabView:roleTableForm:roleTable,
                                                                      :securityTabView:groupTableForm:groupTable,
                                                                      :securityTabView:userTableForm:userTable"/>
-                                </f:facet>
-                            </p:dataTable>
-                        </h:form>
-                    </p:tab>
-
-
-
-                    <p:tab rendered="#{arianeidm:hasPermission('secGroup:display')}">
-                        <f:facet name="title">
-                            <i class="icon-group icon-large"/>&nbsp;&nbsp;
-                            <h:outputText value="Groups"/>
-                        </f:facet>
-
-                        <h:form id="groupTableForm">
-                            <p:growl id="groupTableMessages" showDetail="true" />
-                            <p:dataTable id="groupTable" var="group" value="#{groupsListController.lazyModel}"
-                                         selectionMode="multiple" selection="#{groupsListController.selectedGroupList}" rowKey="#{group.id}"
-                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                                <f:facet name="header">
-                                    Groups
-                                </f:facet>
-
-                                <p:ajax event="rowToggle" listener="#{groupsListController.onRowToggle}" />
-
-                                <p:column style="width:2%">
-                                    <p:rowToggler/>
-                                </p:column>
-
-                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                    <h:outputText value="#{group.name}" />
-                                </p:column>
-
-                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                    <h:outputText value="#{group.description}" />
-                                </p:column>
-
-                                <p:rowExpansion>
-                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                        <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{group.name}"/>
-                                                <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{group.name}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
-
-                                        <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{group.description}"/>
-                                                <p:ajax event="save" listener="#{groupsListController.update(group)}" update="@form,:securityTabView:groupTableForm:groupTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{group.description}" rendered="#{!(arianeidm:hasPermission('secGroup:update'))}"/>
-
-                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(group, 'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                         rows="5" paginator="true" selection="#{groupsListController.removedRoles[group.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                    <h:outputText value="#{role.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                    <h:outputText value="#{role.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{groupsListController.addedRole[group.id]}">
-                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{groupsListController.syncAddedRole(group)}"
-                                                                    update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{groupsListController.syncRemovedRoles(group)}"
-                                                                         update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
-
-                                        <h:outputText value="Users : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(group, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
-                                                         rows="5" paginator="true" selection="#{groupsListController.removedUsers[group.id]}" selectionMode="multiple">
-                                                <p:column headerText="User name" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                                    <h:outputText value="#{user.userName}"/>
-                                                </p:column>
-                                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                                    <h:outputText value="#{user.email}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secGroup:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{groupsListController.addedUser[group.id]}">
-                                                                <f:selectItems value="#{usersListController.getAll()}" var="user_"
-                                                                               itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{groupsListController.syncAddedUser(group)}"
-                                                                    update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{groupsListController.syncRemovedUsers(group)}"
-                                                                         update="@form,:securityTabView:groupTableForm:groupTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
-                                    </h:panelGrid>
-
-                                </p:rowExpansion>
-
-                                <f:facet name="footer">
-                                    <p:commandButton value="Create group" icon="ui-icon-disk" onclick="groupCreateDialog.show()"
-                                                     rendered="#{arianeidm:hasPermission('secGroup:create')}"/>
-                                    <p:commandButton value="Remove selected groups" icon="ui-icon-closethick" onclick="groupRemoveDialog.show()"
-                                                     update=":removeGroupDialogForm:grpdisplay"
-                                                     rendered="#{arianeidm:hasPermission('secGroup:remove')}"/>
-                                    <p:commandButton value="Refresh tables" id="groupUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                     update=":securityTabView:roleTableForm:roleTable,
-                                                             :securityTabView:groupTableForm:groupTable,
-                                                             :securityTabView:userTableForm:userTable"/>
-                                </f:facet>
-                            </p:dataTable>
-                        </h:form>
-                    </p:tab>
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
 
 
 
 
-                    <p:tab rendered="#{arianeidm:hasPermission('secRole:display')}">
-                        <f:facet name="title">
-                            <i class="icon-star icon-large"/>&nbsp;&nbsp;
-                            <h:outputText value="Roles"/>
-                        </f:facet>
+                        <p:tab rendered="#{arianeidm:hasPermission('secRole:display')}">
+                            <f:facet name="title">
+                                <i class="icon-star icon-large"/>&nbsp;&nbsp;
+                                <h:outputText value="Roles"/>
+                            </f:facet>
 
-                        <h:form id="roleTableForm">
-                            <p:growl id="roleTableMessages" showDetail="true" />
-                            <p:dataTable id="roleTable" var="role" value="#{rolesListController.lazyModel}"
-                                         selectionMode="multiple" selection="#{rolesListController.selectedRoleList}" rowKey="#{role.id}"
-                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                                <f:facet name="header">
-                                    Roles
-                                </f:facet>
+                            <h:form id="roleTableForm">
+                                <p:growl id="roleTableMessages" showDetail="true" />
+                                <p:dataTable id="roleTable" var="role" value="#{rolesListController.lazyModel}"
+                                             selectionMode="multiple" selection="#{rolesListController.selectedRoleList}" rowKey="#{role.id}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                    <f:facet name="header">
+                                        Roles
+                                    </f:facet>
 
-                                <p:ajax event="rowToggle" listener="#{rolesListController.onRowToggle}" />
+                                    <p:ajax event="rowToggle" listener="#{rolesListController.onRowToggle}" />
 
-                                <p:column style="width:2%">
-                                    <p:rowToggler/>
-                                </p:column>
+                                    <p:column style="width:2%">
+                                        <p:rowToggler/>
+                                    </p:column>
 
-                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                    <h:outputText value="#{role.name}" />
-                                </p:column>
+                                    <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                        <h:outputText value="#{role.name}" />
+                                    </p:column>
 
-                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                    <h:outputText value="#{role.description}" />
-                                </p:column>
+                                    <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                        <h:outputText value="#{role.description}" />
+                                    </p:column>
 
-                                <p:rowExpansion>
-                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                        <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{role.name}"/>
-                                                <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{role.name}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
+                                    <p:rowExpansion>
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                            <h:outputText value="Name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{role.name}"/>
+                                                    <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{role.name}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
 
-                                        <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
-                                            <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{role.description}"/>
-                                                <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{role.description}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
+                                            <h:outputText value="Description : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:inputText required="true" label="text" value="#{role.description}"/>
+                                                    <p:ajax event="save" listener="#{rolesListController.update(role)}" update="@form,:securityTabView:roleTableForm:roleTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{role.description}" rendered="#{!(arianeidm:hasPermission('secRole:update'))}"/>
 
-                                        <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
-                                                         rows="5" paginator="true" selection="#{rolesListController.removedPermissions[role.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
-                                                    <h:outputText value="#{perm.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
-                                                    <h:outputText value="#{perm.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
-                                                                <f:selectItems value="#{permissionsListController.getAll()}" var="res_"
-                                                                               itemLabel="#{res_.name}" itemValue="#{res_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedPermission(role)}"
-                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{rolesListController.syncRemovedPermissions(role)}"
-                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
+                                            <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(role, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                                             rows="5" paginator="true" selection="#{rolesListController.removedPermissions[role.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
+                                                        <h:outputText value="#{perm.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
+                                                        <h:outputText value="#{perm.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secRole:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{rolesListController.addedPermission[role.id]}">
+                                                                    <f:selectItems value="#{permissionsListController.getAll()}" var="res_"
+                                                                                   itemLabel="#{res_.name}" itemValue="#{res_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{rolesListController.syncAddedPermission(role)}"
+                                                                        update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{rolesListController.syncRemovedPermissions(role)}"
+                                                                             update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
 
-                                        <h:outputText value="Groups : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
-                                                         rows="5" paginator="true" selection="#{rolesListController.removedGroups[role.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
-                                                    <h:outputText value="#{group.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
-                                                    <h:outputText value="#{group.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
-                                                                <f:selectItems value="#{groupsListController.getAll()}" var="group_"
-                                                                               itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedGroup(role)}"
-                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{rolesListController.syncRemovedGroups(role)}"
-                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
+                                            <h:outputText value="Groups : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(role, 'groups')}" var="group" styleClass="ui-widget-content grid" rowKey="#{group.id}"
+                                                             rows="5" paginator="true" selection="#{rolesListController.removedGroups[role.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{group.name}" filterBy="#{group.name}">
+                                                        <h:outputText value="#{group.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{group.description}" filterBy="#{group.description}">
+                                                        <h:outputText value="#{group.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secRole:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select group to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{rolesListController.addedGroup[role.id]}">
+                                                                    <f:selectItems value="#{groupsListController.getAll()}" var="group_"
+                                                                                   itemLabel="#{group_.name}" itemValue="#{group_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{rolesListController.syncAddedGroup(role)}"
+                                                                        update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected groups" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{rolesListController.syncRemovedGroups(role)}"
+                                                                             update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
 
-                                        <h:outputText value="Users : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
-                                                         rows="5" paginator="true" selection="#{rolesListController.removedUsers[role.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{user.userName}" filterBy="#{user.userName}">
-                                                    <h:outputText value="#{user.userName}"/>
-                                                </p:column>
-                                                <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
-                                                    <h:outputText value="#{user.email}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secRole:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
-                                                                <f:selectItems value="#{usersListController.getAll()}" var="user_"
-                                                                               itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{rolesListController.syncAddedUser(role)}"
-                                                                    update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{rolesListController.syncRemovedUsers(role)}"
-                                                                         update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
+                                            <h:outputText value="Users : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(role, 'users')}" var="user" styleClass="ui-widget-content grid" rowKey="#{user.id}"
+                                                             rows="5" paginator="true" selection="#{rolesListController.removedUsers[role.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{user.userName}" filterBy="#{user.userName}">
+                                                        <h:outputText value="#{user.userName}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Email" sortBy="#{user.email}" filterBy="#{user.email}">
+                                                        <h:outputText value="#{user.email}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secRole:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select user to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{rolesListController.addedUser[role.id]}">
+                                                                    <f:selectItems value="#{usersListController.getAll()}" var="user_"
+                                                                                   itemLabel="#{user_.userName}" itemValue="#{user_.userName}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{rolesListController.syncAddedUser(role)}"
+                                                                        update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected users" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{rolesListController.syncRemovedUsers(role)}"
+                                                                             update="@form,:securityTabView:roleTableForm:roleTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
 
-                                    </h:panelGrid>
-                                </p:rowExpansion>
+                                        </h:panelGrid>
+                                    </p:rowExpansion>
 
-                                <f:facet name="footer">
-                                    <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"
-                                                     rendered="#{arianeidm:hasPermission('secRole:create')}"/>
-                                    <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
-                                                     update=":removeRoleDialogForm:roledisplay"
-                                                     rendered="#{arianeidm:hasPermission('secRole:remove')}"/>
-                                    <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                     update=":securityTabView:roleTableForm:roleTable,
-                                                             :securityTabView:permissionTableForm:permissionTable,
-                                                             :securityTabView:groupTableForm:groupTable,
-                                                             :securityTabView:userTableForm:userTable"/>
-                                </f:facet>
-                            </p:dataTable>
-                        </h:form>
-                    </p:tab>
-
-
-
-
-                    <p:tab rendered="#{arianeidm:hasPermission('secPermission:display')}">
-                        <f:facet name="title">
-                            <i class="icon-legal icon-large"/>&nbsp;&nbsp;
-                            <h:outputText value="Permissions"/>
-                        </f:facet>
-
-                        <h:form id="permissionTableForm">
-                            <p:growl id="permissionTableMessages" showDetail="true" />
-                            <p:dataTable id="permissionTable" var="permission" value="#{permissionsListController.lazyModel}"
-                                         selectionMode="multiple" selection="#{permissionsListController.selectedPermissionList}" rowKey="#{permission.id}"
-                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                                <f:facet name="header">
-                                    Permissions
-                                </f:facet>
-
-                                <p:ajax event="rowToggle" listener="#{permissionsListController.onRowToggle}" />
-
-                                <p:column style="width:2%">
-                                    <p:rowToggler/>
-                                </p:column>
-
-                                <p:column headerText="Name" sortBy="#{permission.name}" filterBy="#{permission.name}">
-                                    <h:outputText value="#{permission.name}" />
-                                </p:column>
-
-                                <p:column headerText="Description" sortBy="#{permission.description}" filterBy="#{permission.description}">
-                                    <h:outputText value="#{permission.description}" />
-                                </p:column>
-
-                                <p:column headerText="Resource">
-                                    <h:outputText value="#{permission.resource.name}" />
-                                </p:column>
-
-                                <p:rowExpansion>
-                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                        <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
-                                            <p:inplace editor="true">
-                                                <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
-                                                <p:inputText required="true" label="text" value="#{permission.name}"/>
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{permission.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
-
-                                        <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
-                                            <p:inplace editor="true">
-                                                <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
-                                                <p:inputText required="true" label="text" value="#{permission.description}"/>
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{permission.description}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
-
-                                        <h:outputText value="Resource : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
-                                            <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
-                                                <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
-                                                    <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
-                                                                   itemLabel="#{res.name}" itemValue="#{res.name}"/>
-                                                </h:selectOneMenu>
-                                                <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{permission.resource.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
-
-                                        <h:outputText value="Roles : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
-                                                         rows="5" paginator="true" selection="#{permissionsListController.removedRoles[permission.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
-                                                    <h:outputText value="#{role.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
-                                                    <h:outputText value="#{role.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
-                                                                <f:selectItems value="#{rolesListController.getAll()}" var="role_"
-                                                                               itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{permissionsListController.syncAddedRole(permission)}"
-                                                                    update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{permissionsListController.syncRemovedRoles(permission)}"
-                                                                         update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
-
-                                    </h:panelGrid>
-                                </p:rowExpansion>
-                                <f:facet name="footer">
-                                    <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"
-                                                     rendered="#{arianeidm:hasPermission('secPermission:create')}"/>
-                                    <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
-                                                     update=":removePermissionDialogForm:permdisplay"
-                                                     rendered="#{arianeidm:hasPermission('secPermission:remove')}"/>
-                                    <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
-                                                     update=":securityTabView:resourceTableForm:resourceTable,
-                                                             :securityTabView:permissionTableForm:permissionTable,
-                                                             :securityTabView:roleTableForm:roleTable"/>
-                                </f:facet>
-                            </p:dataTable>
-                        </h:form>
-
-                    </p:tab>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Create role" icon="ui-icon-disk" onclick="roleCreateDialog.show()"
+                                                         rendered="#{arianeidm:hasPermission('secRole:create')}"/>
+                                        <p:commandButton value="Remove selected roles" icon="ui-icon-closethick" onclick="roleRemoveDialog.show()"
+                                                         update=":removeRoleDialogForm:roledisplay"
+                                                         rendered="#{arianeidm:hasPermission('secRole:remove')}"/>
+                                        <p:commandButton value="Refresh tables" id="roleUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                         update=":securityTabView:roleTableForm:roleTable,
+                                                                     :securityTabView:permissionTableForm:permissionTable,
+                                                                     :securityTabView:groupTableForm:groupTable,
+                                                                     :securityTabView:userTableForm:userTable"/>
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
 
 
 
 
-                    <p:tab rendered="#{arianeidm:hasPermission('secResource:display')}">
-                        <f:facet name="title">
-                            <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
-                            <h:outputText value="Resources"/>
-                        </f:facet>
+                        <p:tab rendered="#{arianeidm:hasPermission('secPermission:display')}">
+                            <f:facet name="title">
+                                <i class="icon-legal icon-large"/>&nbsp;&nbsp;
+                                <h:outputText value="Permissions"/>
+                            </f:facet>
 
-                        <h:form id="resourceTableForm">
-                            <p:growl id="resourceTableMessages" showDetail="true" />
-                            <p:dataTable id="resourceTable" var="res" value="#{resourcesListController.lazyModel}"
-                                         selectionMode="multiple" selection="#{resourcesListController.selectedResourceList}" rowKey="#{res.id}"
-                                         paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
-                                         rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
-                                <f:facet name="header">
-                                    Resources
-                                </f:facet>
+                            <h:form id="permissionTableForm">
+                                <p:growl id="permissionTableMessages" showDetail="true" />
+                                <p:dataTable id="permissionTable" var="permission" value="#{permissionsListController.lazyModel}"
+                                             selectionMode="multiple" selection="#{permissionsListController.selectedPermissionList}" rowKey="#{permission.id}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                    <f:facet name="header">
+                                        Permissions
+                                    </f:facet>
 
-                                <p:ajax event="rowToggle" listener="#{resourcesListController.onRowToggle}" />
+                                    <p:ajax event="rowToggle" listener="#{permissionsListController.onRowToggle}" />
 
-                                <p:column style="width:2%">
-                                    <p:rowToggler/>
-                                </p:column>
+                                    <p:column style="width:2%">
+                                        <p:rowToggler/>
+                                    </p:column>
 
-                                <p:column headerText="Name" sortBy="#{res.name}" filterBy="#{res.name}">
-                                    <h:outputText value="#{res.name}" />
-                                </p:column>
+                                    <p:column headerText="Name" sortBy="#{permission.name}" filterBy="#{permission.name}">
+                                        <h:outputText value="#{permission.name}" />
+                                    </p:column>
 
-                                <p:column headerText="Description" sortBy="#{res.description}" filterBy="#{res.description}">
-                                    <h:outputText value="#{res.description}" />
-                                </p:column>
+                                    <p:column headerText="Description" sortBy="#{permission.description}" filterBy="#{permission.description}">
+                                        <h:outputText value="#{permission.description}" />
+                                    </p:column>
 
-                                <p:rowExpansion>
-                                    <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
-                                        <h:outputText value="Name : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
-                                            <p:inplace editor="true">
-                                                <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                                <p:inputText required="true" label="text" value="#{res.name}"/>
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
+                                    <p:column headerText="Resource">
+                                        <h:outputText value="#{permission.resource.name}" />
+                                    </p:column>
 
-                                        <h:outputText value="Description : " styleClass="inputTitle"/>
-                                        <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
-                                            <p:inplace editor="true">
-                                                <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
-                                                <p:inputText required="true" label="text" value="#{res.description}"/>
-                                            </p:inplace>
-                                        </h:form>
-                                        <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
+                                    <p:rowExpansion>
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                            <h:outputText value="Name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
+                                                    <p:inputText required="true" label="text" value="#{permission.name}"/>
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{permission.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
 
-                                        <h:outputText value="Permissions : " styleClass="inputTitle"/>
-                                        <h:form>
-                                            <p:dataTable value="#{arianeidm:asList(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
-                                                         rows="5" paginator="true" selection="#{resourcesListController.removedPermissions[res.id]}" selectionMode="multiple">
-                                                <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
-                                                    <h:outputText value="#{perm.name}"/>
-                                                </p:column>
-                                                <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
-                                                    <h:outputText value="#{perm.description}"/>
-                                                </p:column>
-                                                <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
-                                                    <f:facet name="footer">
-                                                        <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
-                                                            <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
-                                                                <f:selectItems value="#{permissionsListController.getAll()}" var="perm_"
-                                                                               itemLabel="#{perm_.name}" itemValue="#{perm_.name}"/>
-                                                            </h:selectOneMenu>
-                                                            <p:ajax event="save" listener="#{resourcesListController.syncAddedPermission(res)}"
-                                                                    update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
-                                                        </p:inplace>
-                                                        <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
-                                                                         process="@form" actionListener="#{resourcesListController.syncRemovedPermissions(res)}"
-                                                                         update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
-                                                    </f:facet>
-                                                </c:if>
-                                            </p:dataTable>
-                                        </h:form>
-                                    </h:panelGrid>
-                                </p:rowExpansion>
-                                <f:facet name="footer">
-                                    <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"
-                                                     rendered="#{arianeidm:hasPermission('secResource:create')}"/>
-                                    <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
-                                                     update=":removeResourceDialogForm:resdisplay"
-                                                     rendered="#{arianeidm:hasPermission('secResource:remove')}"/>
-                                    <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
-                                                     update=":securityTabView:resourceTableForm:resourceTable,
-                                                             :securityTabView:permissionTableForm:permissionTable" />
-                                </f:facet>
-                            </p:dataTable>
-                        </h:form>
-                    </p:tab>
-                </p:tabView>
+                                            <h:outputText value="Description : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:ajax event="save" listener="#{permissionsListController.update(permission)}" update="@form,:securityTabView:permissionTableForm:permissionTableMessages" />
+                                                    <p:inputText required="true" label="text" value="#{permission.description}"/>
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{permission.description}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
+
+                                            <h:outputText value="Resource : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
+                                                <p:inplace label="#{permission.resource.name}" effectSpeed="fast" editor="true">
+                                                    <h:selectOneMenu value="#{permissionsListController.changedResource[permission.id]}">
+                                                        <f:selectItems value="#{resourcesListController.getAll()}"  var="res"
+                                                                       itemLabel="#{res.name}" itemValue="#{res.name}"/>
+                                                    </h:selectOneMenu>
+                                                    <p:ajax event="save" process="@this" listener="#{permissionsListController.syncResource(permission)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{permission.resource.name}" rendered="#{!(arianeidm:hasPermission('secPermission:update'))}"/>
+
+                                            <h:outputText value="Roles : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(permission,'roles')}" var="role" styleClass="ui-widget-content grid" rowKey="#{role.id}"
+                                                             rows="5" paginator="true" selection="#{permissionsListController.removedRoles[permission.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{role.name}" filterBy="#{role.name}">
+                                                        <h:outputText value="#{role.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{role.description}" filterBy="#{role.description}">
+                                                        <h:outputText value="#{role.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select role to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{permissionsListController.addedRole[permission.id]}">
+                                                                    <f:selectItems value="#{rolesListController.getAll()}" var="role_"
+                                                                                   itemLabel="#{role_.name}" itemValue="#{role_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{permissionsListController.syncAddedRole(permission)}"
+                                                                        update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected roles" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{permissionsListController.syncRemovedRoles(permission)}"
+                                                                             update="@form,:securityTabView:permissionTableForm:permissionTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
+
+                                        </h:panelGrid>
+                                    </p:rowExpansion>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Create permission" icon="ui-icon-disk" onclick="permissionCreateDialog.show()"
+                                                         rendered="#{arianeidm:hasPermission('secPermission:create')}"/>
+                                        <p:commandButton value="Remove selected permissions" icon="ui-icon-closethick" onclick="permissionRemoveDialog.show()"
+                                                         update=":removePermissionDialogForm:permdisplay"
+                                                         rendered="#{arianeidm:hasPermission('secPermission:remove')}"/>
+                                        <p:commandButton value="Refresh tables" id="permissionUpdate" icon="icon-refresh" styleClass="ui-priority-primary icon-large"
+                                                         update=":securityTabView:resourceTableForm:resourceTable,
+                                                                     :securityTabView:permissionTableForm:permissionTable,
+                                                                     :securityTabView:roleTableForm:roleTable"/>
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+
+                        </p:tab>
 
 
 
+
+                        <p:tab rendered="#{arianeidm:hasPermission('secResource:display')}">
+                            <f:facet name="title">
+                                <i class="icon-leaf icon-large"/>&nbsp;&nbsp;
+                                <h:outputText value="Resources"/>
+                            </f:facet>
+
+                            <h:form id="resourceTableForm">
+                                <p:growl id="resourceTableMessages" showDetail="true" />
+                                <p:dataTable id="resourceTable" var="res" value="#{resourcesListController.lazyModel}"
+                                             selectionMode="multiple" selection="#{resourcesListController.selectedResourceList}" rowKey="#{res.id}"
+                                             paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
+                                             rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
+                                    <f:facet name="header">
+                                        Resources
+                                    </f:facet>
+
+                                    <p:ajax event="rowToggle" listener="#{resourcesListController.onRowToggle}" />
+
+                                    <p:column style="width:2%">
+                                        <p:rowToggler/>
+                                    </p:column>
+
+                                    <p:column headerText="Name" sortBy="#{res.name}" filterBy="#{res.name}">
+                                        <h:outputText value="#{res.name}" />
+                                    </p:column>
+
+                                    <p:column headerText="Description" sortBy="#{res.description}" filterBy="#{res.description}">
+                                        <h:outputText value="#{res.description}" />
+                                    </p:column>
+
+                                    <p:rowExpansion>
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                            <h:outputText value="Name : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                                    <p:inputText required="true" label="text" value="#{res.name}"/>
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
+
+                                            <h:outputText value="Description : " styleClass="inputTitle"/>
+                                            <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
+                                                <p:inplace editor="true">
+                                                    <p:ajax event="save" listener="#{resourcesListController.update(res)}" update="@form,:securityTabView:resourceTableForm:resourceTableMessages" />
+                                                    <p:inputText required="true" label="text" value="#{res.description}"/>
+                                                </p:inplace>
+                                            </h:form>
+                                            <h:outputText value="#{res.name}" rendered="#{!(arianeidm:hasPermission('secResource:update'))}"/>
+
+                                            <h:outputText value="Permissions : " styleClass="inputTitle"/>
+                                            <h:form>
+                                                <p:dataTable value="#{arianeidm:asList(res, 'permissions')}" var="perm" styleClass="ui-widget-content grid" rowKey="#{perm.id}"
+                                                             rows="5" paginator="true" selection="#{resourcesListController.removedPermissions[res.id]}" selectionMode="multiple">
+                                                    <p:column headerText="Name" sortBy="#{perm.name}" filterBy="#{perm.name}">
+                                                        <h:outputText value="#{perm.name}"/>
+                                                    </p:column>
+                                                    <p:column headerText="Description" sortBy="#{perm.description}" filterBy="#{perm.description}">
+                                                        <h:outputText value="#{perm.description}"/>
+                                                    </p:column>
+                                                    <c:if test="#{arianeidm:hasPermission('secPermission:update')}">
+                                                        <f:facet name="footer">
+                                                            <p:inplace label="Select permission to bind" effectSpeed="fast" editor="true">
+                                                                <h:selectOneMenu value="#{resourcesListController.addedPermission[res.id]}">
+                                                                    <f:selectItems value="#{permissionsListController.getAll()}" var="perm_"
+                                                                                   itemLabel="#{perm_.name}" itemValue="#{perm_.name}"/>
+                                                                </h:selectOneMenu>
+                                                                <p:ajax event="save" listener="#{resourcesListController.syncAddedPermission(res)}"
+                                                                        update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
+                                                            </p:inplace>
+                                                            <p:commandButton value="Unbind selected permissions" icon="ui-icon-closethick"
+                                                                             process="@form" actionListener="#{resourcesListController.syncRemovedPermissions(res)}"
+                                                                             update="@form,:securityTabView:resourceTableForm:resourceTableMessages"/>
+                                                        </f:facet>
+                                                    </c:if>
+                                                </p:dataTable>
+                                            </h:form>
+                                        </h:panelGrid>
+                                    </p:rowExpansion>
+                                    <f:facet name="footer">
+                                        <p:commandButton value="Create resource" icon="ui-icon-disk" onclick="resourceCreateDialog.show()"
+                                                         rendered="#{arianeidm:hasPermission('secResource:create')}"/>
+                                        <p:commandButton value="Remove selected resources" icon="ui-icon-closethick" onclick="resourceRemoveDialog.show()"
+                                                         update=":removeResourceDialogForm:resdisplay"
+                                                         rendered="#{arianeidm:hasPermission('secResource:remove')}"/>
+                                        <p:commandButton value="Refresh tables" styleClass="ui-priority-primary icon-large" id="resourceUpdate" icon="icon-refresh"
+                                                         update=":securityTabView:resourceTableForm:resourceTable,
+                                                                     :securityTabView:permissionTableForm:permissionTable" />
+                                    </f:facet>
+                                </p:dataTable>
+                            </h:form>
+                        </p:tab>
+                    </p:tabView>
+                </div>
+
+                <script type="application/javascript">
+                    var readyStateCheckIntervalDir = setInterval(function(){
+                        if (document.readyState === "complete") {
+                            clearInterval(readyStateCheckIntervalDir);
+                            var bg = $("#admsecBg").css("background");
+                            if (bg.indexOf("bg-ariane-security.jpg") > -1)
+                                $("#admsecBg").css({height: $(document).height() - 43});
+                            else
+                                $("#admsecBg").css({height: $(document).height() - 48});
+                        }
+                    }, 100);
+
+                    window.onresize = function(event) {
+                        var bg = $("#admsecBg").css("background");
+                        if (bg.indexOf("bg-ariane-security.jpg") > -1)
+                            $("#admsecBg").css({height: $(document).height() - 43});
+                        else
+                            $("#admsecBg").css({height: $(document).height() - 48});
+                    };
+                </script>
 
                 <p:dialog header="Confirm your remove order !" widgetVar="userRemoveDialog"
                           width="500" showEffect="fade" hideEffect="explode">

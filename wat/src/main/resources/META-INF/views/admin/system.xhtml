@@ -14,149 +14,173 @@
         <ui:define name="moduleContent">
             <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <p:growl id="systemGrowl" showDetail="true"/>
-                <p:tabView id="systemTabView" orientation="left">
-                    <p:tab rendered="#{arianeidm:hasPermission('asysMailService:display')}">
-                        <f:facet name="title">
-                            <i class="icon-envelope"/>&nbsp;&nbsp;
-                            <h:outputText value="Mail Service"/>
-                        </f:facet>
+                <div id="admsysBg" class="backgroundAdmSys">
+                    <p:tabView id="systemTabView" orientation="left">
+                        <p:tab rendered="#{arianeidm:hasPermission('asysMailService:display')}">
+                            <f:facet name="title">
+                                <i class="icon-envelope"/>&nbsp;&nbsp;
+                                <h:outputText value="Mail Service"/>
+                            </f:facet>
 
-                        <h1><i class="icon-envelope icon-large"/>&nbsp;&nbsp; Mail Service administration</h1>
-                        <br/>
-                        <h3>Outgoing mail server configuration : </h3>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <h:outputText value="From : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.from}"/>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.from}"/>
-                            </ui:fragment>
+                            <h1><i class="icon-envelope icon-large"/>&nbsp;&nbsp; Mail Service Administration</h1>
+                            <br/>
+                            <h3>Outgoing mail server configuration : </h3>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputText value="From : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.from}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.from}"/>
+                                </ui:fragment>
 
-                            <h:outputText value="Prefix : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.subjectPrefix}"/>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.subjectPrefix}"/>
-                            </ui:fragment>
+                                <h:outputText value="Prefix : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.subjectPrefix}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.subjectPrefix}"/>
+                                </ui:fragment>
 
-                            <h:outputText value="Username : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpUser}"/>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpUser}"/>
-                            </ui:fragment>
+                                <h:outputText value="Username : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpUser}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpUser}"/>
+                                </ui:fragment>
 
-                            <h:outputText value="Password : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <h:outputText value="defined - " rendered="#{mailServiceController.senderEntity.smtpPassword!=null and
+                                <h:outputText value="Password : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <h:outputText value="defined - " rendered="#{mailServiceController.senderEntity.smtpPassword!=null and
                                                                                  mailServiceController.senderEntity.smtpPassword!=''}"/>
-                                    <h:outputText value="none - " rendered="#{mailServiceController.senderEntity.smtpPassword==null or mailServiceController.senderEntity.smtpPassword==''}"/>
-                                    <p:inplace label="Change password" editor="true">
-                                        <h:inputSecret required="true" label="text" value="#{mailServiceController.senderEntity.smtpPassword}"/>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="-"/>
-                            </ui:fragment>
+                                        <h:outputText value="none - " rendered="#{mailServiceController.senderEntity.smtpPassword==null or mailServiceController.senderEntity.smtpPassword==''}"/>
+                                        <p:inplace label="Change password" editor="true">
+                                            <h:inputSecret required="true" label="text" value="#{mailServiceController.senderEntity.smtpPassword}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="-"/>
+                                </ui:fragment>
 
-                            <h:outputText value="SMTP Host : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                <h:outputText value="SMTP Host : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpHost}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpHost}"/>
+                                </ui:fragment>
+
+                                <h:outputText value="SMTP Port : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpPort}"/>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpPort}"/>
+                                </ui:fragment>
+
+                                <h:outputText value="SMTP authentication : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpAUTH}">
+                                                <f:selectItem itemLabel="true" itemValue="true" />
+                                                <f:selectItem itemLabel="false" itemValue="false" />
+                                            </h:selectOneMenu>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpAUTH}"/>
+                                </ui:fragment>
+
+                                <h:outputText value="SMTP TLS : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpTLS}">
+                                                <f:selectItem itemLabel="true" itemValue="true" />
+                                                <f:selectItem itemLabel="false" itemValue="false" />
+                                            </h:selectOneMenu>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpTLS}"/>
+                                </ui:fragment>
+
+                                <h:outputText value="SMTP SSL : " styleClass="inputTitle"/>
+                                <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:form>
+                                        <p:inplace editor="true">
+                                            <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpSSL}">
+                                                <f:selectItem itemLabel="true" itemValue="true" />
+                                                <f:selectItem itemLabel="false" itemValue="false" />
+                                            </h:selectOneMenu>
+                                        </p:inplace>
+                                    </h:form>
+                                </ui:fragment>
+                                <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
+                                    <h:outputText value="#{mailServiceController.senderEntity.smtpSSL}"/>
+                                </ui:fragment>
+                            </h:panelGrid>
+                            <br/><br/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <p:commandButton value="Test server" id="mailTest" styleClass="ui-priority-primary"
+                                                 onclick="mailTestDialog.show()" rendered="#{arianeidm:hasPermission('asysMailService:update')}"/>
+
                                 <h:form>
-                                    <p:inplace editor="true">
-                                        <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpHost}"/>
-                                    </p:inplace>
+                                    <p:commandButton value="Save configuration" id="mailSave" styleClass="ui-priority-primary"
+                                                     actionListener="#{mailServiceController.storeSenderEntity}" update=":systemGrowl"/>
                                 </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpHost}"/>
-                            </ui:fragment>
+                            </h:panelGrid>
+                        </p:tab>
+                    </p:tabView>
+                </div>
 
-                            <h:outputText value="SMTP Port : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <p:inputText required="true" label="text" value="#{mailServiceController.senderEntity.smtpPort}"/>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpPort}"/>
-                            </ui:fragment>
+                <script type="application/javascript">
+                    var readyStateCheckIntervalDir = setInterval(function(){
+                        if (document.readyState === "complete") {
+                            clearInterval(readyStateCheckIntervalDir);
+                            var bg = $("#admsysBg").css("background");
+                            if (bg.indexOf("bg-ariane-system.jpg") > -1)
+                                $("#admsysBg").css({height: $(document).height() - 43});
+                            else
+                                $("#admsysBg").css({height: $(document).height() - 48});
+                        }
+                    }, 100);
 
-                            <h:outputText value="SMTP authentication : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpAUTH}">
-                                            <f:selectItem itemLabel="true" itemValue="true" />
-                                            <f:selectItem itemLabel="false" itemValue="false" />
-                                        </h:selectOneMenu>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpAUTH}"/>
-                            </ui:fragment>
+                    window.onresize = function(event) {
+                        var bg = $("#admsysBg").css("background");
+                        if (bg.indexOf("bg-ariane-system.jpg") > -1)
+                            $("#admsysBg").css({height: $(document).height() - 43});
+                        else
+                            $("#admsysBg").css({height: $(document).height() - 48});
+                    };
+                </script>
 
-                            <h:outputText value="SMTP TLS : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpTLS}">
-                                            <f:selectItem itemLabel="true" itemValue="true" />
-                                            <f:selectItem itemLabel="false" itemValue="false" />
-                                        </h:selectOneMenu>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpTLS}"/>
-                            </ui:fragment>
-
-                            <h:outputText value="SMTP SSL : " styleClass="inputTitle"/>
-                            <ui:fragment rendered="#{arianeidm:hasPermission('asysMailService:update')}">
-                                <h:form>
-                                    <p:inplace editor="true">
-                                        <h:selectOneMenu value="#{mailServiceController.senderEntity.smtpSSL}">
-                                            <f:selectItem itemLabel="true" itemValue="true" />
-                                            <f:selectItem itemLabel="false" itemValue="false" />
-                                        </h:selectOneMenu>
-                                    </p:inplace>
-                                </h:form>
-                            </ui:fragment>
-                            <ui:fragment rendered="#{!arianeidm:hasPermission('asysMailService:update')}">
-                                <h:outputText value="#{mailServiceController.senderEntity.smtpSSL}"/>
-                            </ui:fragment>
-                        </h:panelGrid>
-                        <br/><br/>
-                        <h:panelGrid columns="2" cellpadding="5">
-                            <p:commandButton value="Test server" id="mailTest" styleClass="ui-priority-primary"
-                                             onclick="mailTestDialog.show()" rendered="#{arianeidm:hasPermission('asysMailService:update')}"/>
-
-                            <h:form>
-                                <p:commandButton value="Save configuration" id="mailSave" styleClass="ui-priority-primary"
-                                                 actionListener="#{mailServiceController.storeSenderEntity}" update=":systemGrowl"/>
-                            </h:form>
-                        </h:panelGrid>
-                    </p:tab>
-                </p:tabView>
 
                 <p:dialog header="Mail test" widgetVar="mailTestDialog"
                           width="500" showEffect="fade" hideEffect="explode">
