@@ -490,131 +490,24 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     overflow-y: auto;
 }
 
+/***** TRANSPARENT ARIANE CLASS *****/
+.arianeTransparentBg0-div,
+.arianeTransparentBg0-uitp-uiwc .ui-tabs-panels .ui-widget-content ,
+.arianeTransparentBg0-uiwc .ui-widget-content {
+    background: rgba(255,255,255,0) !important;
+}
 
-.sectionMenu .ui-widget-content{
+.arianeTransparentBg0-div-noi,
+.arianeTransparentBg0-uiwc-noi .ui-widget-content {
+    background: rgba(255,255,255,0);
+}
+
+.arianeTransparentBg3-div,
+.arianeTransparentBg3-uiwc .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
 }
 
-#directoriesMenu,
-#directoriesMenu .ui-layout-unit-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#directoryContent,
-#directoryContent .ui-layout-unit-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#applicationTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#companyTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#datacenterTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#environmentTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#osInstanceTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#osTypeTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#routingAreaTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#rareaTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#subnetTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#teamTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-.dirPanelMenu .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#injectorsMenu,
-#injectorsMenu .ui-layout-unit-content{
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#injectorContent,
-#injectorContent .ui-layout-unit-content{
-    background: rgba(255,255,255,0.3) !important;
-}
-
-.injPanelMenu .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#mappingLayout,
-#mappingCanvas,
-#mappingTools {
-    background: rgba(255, 255, 255, 0);
-}
-
-#mappingToolsView,
-#mappingToolsView .ui-widget-content {
-    background: rgba(255, 255, 255, 0) !important;
-}
-
-#mappingCanvas .ui-widget-content,
-#mappingTools .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-#useraccContent,
-#useraccContent .ui-layout-unit-content {
-    background: rgba(255, 255, 255, 0.3);
-}
-
-#portalPreferencesOnLeft,
-#portalPreferencesOnLeft .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#componentPreferencesOnLeft,
-#componentPreferencesOnLeft .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#portalPreferencesOnRight,
-#portalPreferencesOnRight .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#componentPreferencesOnRight,
-#componentPreferencesOnRight .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#securityTabView,
-#securityTabView .ui-widget-content {
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#systemTabView,
-#systemTabView  .ui-widget-content {
-    border: 0px;
-    background: rgba(255, 255, 255, 0.3) !important;
-}
-
-#systemTabView .ui-tabs-panels .ui-widget-content {
-    background: rgba(255, 255, 255, 0) !important;
+.arianeTransparentBg3-div-noi,
+.arianeTransparentBg3-uiwc-noi .ui-widget-content {
+    background: rgba(255,255,255,0.3);
 }

@@ -13,7 +13,7 @@
                 <p:growl id="userProfileGrowl" showDetail="true"/>
                 <div id="usraccBg" class="backgroundUsrAcc">
                     <div style="width:49%; float:left;">
-                        <p:accordionPanel id="portalPreferencesOnLeft" multiple="true">
+                        <p:accordionPanel id="portalPreferencesOnLeft" multiple="true" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
                             <p:tab title="Your profile">
                                 <h:panelGrid columns="2" cellpadding="5">
                                     <h:outputText value="Username : " styleClass="inputTitle"/>
@@ -134,7 +134,7 @@
                             </p:tab>
                         </p:accordionPanel>
                         <p:accordionPanel id="componentPreferencesOnLeft" multiple="true" value="#{userHomeController.preferencesSectionsOnLeft}"
-                                          var="section">
+                                          var="section" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
                             <p:tab title="#{section.description}">
                                 <ui:fragment rendered="#{section.type==userPreferenceSectionTypeController.userPreferenceSectionTypeUsrPrefSectionMap}">
                                     <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">
@@ -179,7 +179,7 @@
                         </p:accordionPanel>
                     </div>
                     <div style="width:49%; float:right;">
-                        <p:accordionPanel id="portalPreferencesOnRight" multiple="true">
+                        <p:accordionPanel id="portalPreferencesOnRight" multiple="true" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
                             <p:tab title="Your theme (current theme is #{userProfileController.theme})">
                                 <p:dataGrid var="atheme" value="#{themeSwitcherController.advancedThemes}" columns="3"
                                             rows="9" paginator="true"
@@ -197,7 +197,7 @@
                             </p:tab>
                         </p:accordionPanel>
                         <p:accordionPanel id="componentPreferencesOnRight" multiple="true" value="#{userHomeController.preferencesSectionsOnRight}"
-                                          var="section">
+                                          var="section" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
                             <p:tab title="#{section.description}">
                                 <ui:fragment rendered="#{section.type==userPreferenceSectionTypeController.userPreferenceSectionTypeUsrPrefSectionMap}">
                                     <ui:repeat value="#{userHomeController.getPreferencesEntitiesFromSection(section)}" var="entity">

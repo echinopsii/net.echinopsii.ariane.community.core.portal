@@ -379,80 +379,58 @@ body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .
 .backgroundDirectory{
     background: url(images/ariane/bg-ariane-directory.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 .backgroundInjector{
     background: url(images/ariane/bg-ariane-injector.jpg) center center no-repeat;
     background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.backgroundMapping{
+    background: url(images/ariane/bg-ariane-mapping.jpg) center center no-repeat;
+    background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.backgroundAdmSec{
+    background: url(images/ariane/bg-ariane-security.jpg) center center no-repeat;
+    background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.backgroundAdmSys{
+    background: url(images/ariane/bg-ariane-system.jpg) center center no-repeat;
+    background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
+}
+.backgroundUsrAcc{
+    background: url(images/ariane/bg-ariane-manage-account.jpg) center center no-repeat;
+    background-size: cover;
+    overflow-x: auto;
+    overflow-y: auto;
 }
 
-.sectionMenu .ui-widget-content{
+/***** TRANSPARENT ARIANE CLASS *****/
+.arianeTransparentBg0-div,
+.arianeTransparentBg0-uitp-uiwc .ui-tabs-panels .ui-widget-content ,
+.arianeTransparentBg0-uiwc .ui-widget-content {
+    background: rgba(255,255,255,0) !important;
+}
+
+.arianeTransparentBg0-div-noi,
+.arianeTransparentBg0-uiwc-noi .ui-widget-content {
+    background: rgba(255,255,255,0);
+}
+
+.arianeTransparentBg3-div,
+.arianeTransparentBg3-uiwc .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
 }
 
-#directoriesMenu,
-#directoriesMenu .ui-layout-unit-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#directoryContent,
-#directoryContent .ui-layout-unit-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#applicationTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#companyTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#datacenterTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#environmentTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#osInstanceTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#osTypeTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#routingAreaTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#rareaTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#subnetTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#teamTableForm .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-.dirPanelMenu .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#injectorsMenu,
-#injectorsMenu .ui-layout-unit-content{
-    background: rgba(255,255,255,0.3) !important;
-}
-
-#injectorContent,
-#injectorContent .ui-layout-unit-content{
-    background: rgba(255,255,255,0.3) !important;
-}
-
-.injPanelMenu .ui-widget-content {
-    background: rgba(255,255,255,0.3) !important;
+.arianeTransparentBg3-div-noi,
+.arianeTransparentBg3-uiwc-noi .ui-widget-content {
+    background: rgba(255,255,255,0.3);
 }
