@@ -153,12 +153,13 @@ body .inputTitle{
 }
 body .ui-dialog-content input[type=text]{
 	border: 1px solid #8c8c8c !important;
-	padding: 6px 10px !important;
+	padding: 5px 5px !important;
 	color: #404041 !important;
 	outline: none !important;
 	box-shadow: none !important;
 }
 body .ui-dialog-content button{
+    width: 272px;
 	background: #df513d !important;
 	background: -moz-radial-gradient(center, ellipse cover, #df513d 0%, #e3674e 100%) !important;
 	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#df513d), color-stop(100%,#e3674e)) !important;
@@ -169,7 +170,7 @@ body .ui-dialog-content button{
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#df513d', endColorstr='#e3674e',GradientType=1 ) !important;
 	border: none !important;
 	text-transform: uppercase;
-	padding: 3px 10px;
+	padding: 0px 0px;
 	font-size: 1.2em !important;
 	margin: 0 auto;
 }
