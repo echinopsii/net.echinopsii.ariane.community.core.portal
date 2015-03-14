@@ -44,7 +44,7 @@
         </div>
     </h:form>
 
-    <p:dialog header="Password reset" widgetVar="resetDialog"
+    <p:dialog id="pwdBox" modal="true" header="Password reset" widgetVar="resetDialog"
               width="300" showEffect="fade" hideEffect="explode">
         <h:form>
             <h:panelGrid columns="2" cellpadding="5">
@@ -57,7 +57,12 @@
                              update=":growl"/>
         </h:form>
     </p:dialog>
-
+	<div class="footer">
+		<ul>
+			<li><a id="arianeby" href="http://www.echinopsii.net">Ariane by Echinopsii</a></li>
+			<li><a id="cctext" href="http://www.echinopsii.net">2013-2015 echinopsii</a></li>
+		</ul>
+	</div>
     <script type="application/javascript">
         var reloadBeforeSessionTimeout = setInterval(function(){
             location.reload()

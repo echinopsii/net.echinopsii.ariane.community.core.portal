@@ -260,7 +260,7 @@
 .ui-corner-all { -moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px; }
 
 /* Overlays */
-.ui-widget-overlay { background: #f85b37 url("#{resource['primefaces-ariane:images/ui-bg_diagonals-thick_50_00a6dd_40x40.png']}") 50% 50% repeat;
+.ui-widget-overlay { background: rgba(0, 0, 0, 0.8);
     opacity: .30;filter:Alpha(Opacity=30); }
 .ui-widget-shadow { margin: -8px 0 0 -8px; padding: 8px; background: #aaaaaa url("#{resource['primefaces-ariane:images/ui-bg_flat_0_aaaaaa_40x100.png']}") 50% 50% repeat-x;
     opacity: .30;filter:Alpha(Opacity=30); -moz-border-radius: 8px; -webkit-border-radius: 8px; border-radius: 8px; }
