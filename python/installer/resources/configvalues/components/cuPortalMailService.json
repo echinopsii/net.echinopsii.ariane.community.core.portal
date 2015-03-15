@@ -1,0 +1,10 @@
+{
+    "##portalMailUser": "myname@gmail.com",
+    "##portalMailPassword": "mypassword",
+    "##portalMailFrom": "ARIANE",
+    "##portalMailSMTPHost": "smtp.gmail.com",
+    "##portalMailSMTPPort": 465,
+    "##portalMailSMTPAuth": true,
+    "##portalMailSMTPSSL": true,
+    "##portalMailSMTPTLS": true
+}

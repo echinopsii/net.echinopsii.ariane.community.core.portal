@@ -4,6 +4,7 @@
 				xsi:schemaLocation="
 				        http://www.eclipse.org/virgo/schema/plan 
 				        http://www.eclipse.org/virgo/schema/plan/eclipse-virgo-plan.xsd">
+	    <artifact type="configuration" name="net.echinopsii.ariane.community.core.PortalMailService"/>
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.base" version="[0.6.0,0.7.0)"/>
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.wat" version="[0.6.0,0.7.0)"/>
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.idmwat" version="[0.6.0,0.7.0)"/>
