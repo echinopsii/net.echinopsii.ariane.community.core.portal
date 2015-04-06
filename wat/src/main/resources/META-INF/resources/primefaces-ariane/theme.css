@@ -511,3 +511,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeTransparentBg3-uiwc-noi .ui-widget-content {
     background: rgba(255,255,255,0.3);
 }
+
+.arianeDialog,
+.ui-dialog-content .ui-widget-content{
+    background: rgba(255, 255, 255, 1) !important;
+}
