@@ -513,6 +513,6 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 }
 
 .arianeDialog,
-#dcNewDC .ui-dialog-content .ui-widget-content{
+.ui-dialog-content .ui-widget-content{
     background: rgba(255, 255, 255, 1) !important;
 }
