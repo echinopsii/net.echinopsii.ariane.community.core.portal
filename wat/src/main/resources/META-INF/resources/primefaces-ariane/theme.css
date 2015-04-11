@@ -497,8 +497,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255,255,255,0) !important;
 }
 
-.arianeTransparentBg0-uiwc-noi .ui-datatable-data .ui-widget-content{
-    background: rgba(255,255,255,1) ;
+.arianeTransparentBg0-uiwc-noi .ui-widget-content{
+    background: rgba(255,255,255,0) ;
 }
 
 .arianeTransparentBg0-div-noi,
@@ -521,12 +521,16 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255, 255, 255, 1) !important;
 }
 
-.arianeTableRow,
-.ui-state-highlight, .ui-widget-content .ui-state-highlight, .ui-widget-header .ui-state-highlight {
-    outline: 0px none;
+.arianeTableRow .ui-datatable-tablewrapper tbody .ui-state-highlight,
+.arianeTableRow .ui-datatable-tablewrapper tbody .ui-datatable-even .ui-widget-content .ui-state-highlight,
+.arianeTableRow .ui-datatable-tablewrapper tbody .ui-datatable-even .ui-widget-header {    outline: 0px none;
     border: 1px solid #FFF;
     box-shadow: 0px 0px 8px #FFF;
     color: #FFF;
-    background: linear-gradient(#242122, #242122) repeat scroll 0% 0% transparent !important;
-    text-shadow: 0px -1px 2px rgba(255, 255, 255, 0.5);
+    background: linear-gradient(#242122, #242122) repeat scroll 0% 0% transparent;
+}
+
+.arianeEmbeddedGrid .ui-widget-content .grid
+{
+    color: #FFF;
 }
