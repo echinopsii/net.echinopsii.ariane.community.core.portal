@@ -516,9 +516,34 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255,255,255,0.3);
 }
 
+
 .arianeDialog,
-.ui-dialog-content .ui-widget-content{
+.ui-dialog-content .ui-widget-content,
+.ui-dialog .ui-dialog-titlebar{
     background: rgba(255, 255, 255, 1) !important;
+    color: black;
+    border-radius: 0px;
+    box-shadow: none !important;
+}
+
+.arianeDialogCloseButton,
+.ui-dialog .ui-dialog-titlebar-close {
+    background: #f85b37;
+    border-radius: 0px;
+}
+
+.arianeDialogConfirmButton,
+.ui-confirmdialog-yes{
+    background: #f85b37 !important;
+    border-radius: 0px;
+}
+
+.arianeDialogInputTitle,
+.ui-dialog-content input[type=text]{
+    color: #404041 !important;
+    outline: medium none !important;
+    box-shadow: none !important;
+    border-radius: 0px;
 }
 
 .arianeTableRow .ui-datatable-tablewrapper tbody .ui-state-highlight,
