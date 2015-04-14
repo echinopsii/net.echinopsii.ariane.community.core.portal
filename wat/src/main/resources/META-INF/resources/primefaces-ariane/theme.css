@@ -533,7 +533,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 }
 
 .arianeDialogConfirmButton,
-.ui-confirmdialog-yes{
+.ui-confirmdialog-yes, .ui-confirmdialog-no{
     background: #f85b37 !important;
     border-radius: 0px;
 }
