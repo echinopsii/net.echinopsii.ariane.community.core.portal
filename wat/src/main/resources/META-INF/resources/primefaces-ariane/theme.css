@@ -532,7 +532,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border-radius: 0px;
 }
 
-.arianeDialogConfirmButton,
+.arianeDialogButtons,
 .ui-confirmdialog-yes, .ui-confirmdialog-no{
     background: #f85b37 !important;
     border-radius: 0px;
@@ -540,7 +540,6 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 
 .arianeDialogInputTitle,
 .ui-dialog-content input[type=text]{
-    color: #404041 !important;
     outline: medium none !important;
     box-shadow: none !important;
     border-radius: 0px;
