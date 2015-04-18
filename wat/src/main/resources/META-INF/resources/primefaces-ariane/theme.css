@@ -516,7 +516,6 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255,255,255,0.3);
 }
 
-
 .arianeDialog,
 .ui-dialog-content .ui-widget-content,
 .ui-dialog .ui-dialog-titlebar{
@@ -532,8 +531,15 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border-radius: 0px;
 }
 
-.arianeDialogButtons,
-.ui-confirmdialog-yes, .ui-confirmdialog-no{
+.arianeDialogButtonYes,
+.ui-confirmdialog-yes{
+    background: #f85b37 !important;
+    border-radius: 0px;
+    margin: 4% 35%;
+}
+
+.arianeDialogButtonNo,
+.ui-confirmdialog-no{
     background: #f85b37 !important;
     border-radius: 0px;
 }
@@ -543,6 +549,16 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     outline: medium none !important;
     box-shadow: none !important;
     border-radius: 0px;
+    width: 65%;
+}
+
+.arianeDialogGrid{
+    width: 80%;
+    margin: 0% 22%;
+}
+
+.text-marginForMessage{
+    margin:15%;
 }
 
 .arianeTableRow .ui-datatable-tablewrapper tbody .ui-state-highlight,
