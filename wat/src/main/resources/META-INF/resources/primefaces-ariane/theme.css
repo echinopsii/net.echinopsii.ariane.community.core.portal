@@ -547,6 +547,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border-radius: 0px;
     margin: 4% 35%;
     font-weight: bold !important;
+    border: none !important;
 }
 
 .arianeDialogButtonNo,
@@ -554,6 +555,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: #f85b37 !important;
     border-radius: 0px;
     font-weight: bold !important;
+    border: none !important;
 }
 
 .arianeDialogInputTitle,
