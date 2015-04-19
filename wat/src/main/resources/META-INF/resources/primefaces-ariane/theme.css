@@ -562,6 +562,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     box-shadow: none !important;
     border-radius: 0px;
     width: 65%;
+    color: #000 !important;
 }
 
 .arianeDialogGrid{
