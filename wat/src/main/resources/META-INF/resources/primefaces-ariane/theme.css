@@ -519,6 +519,62 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeDialog,
 .ui-dialog-content .ui-widget-content{
     background: rgba(255, 255, 255, 1) !important;
+    color: black;
+    border-radius: 0px;
+    box-shadow: none !important;
+
+}
+
+.arianeDialogTitleBar,
+.ui-dialog .ui-dialog-titlebar{
+    background: rgba(255, 255, 255, 1) !important;
+    color: black;
+    border-radius: 0px;
+    box-shadow: none !important;
+    border-top: 2px solid #DF513D;
+
+}
+
+.arianeDialogCloseButton,
+.ui-dialog .ui-dialog-titlebar-close {
+    background: #f85b37;
+    border-radius: 0px;
+}
+
+.arianeDialogButtonYes,
+.ui-confirmdialog-yes{
+    background: #f85b37 !important;
+    border-radius: 0px;
+    margin: 4% 35%;
+    font-weight: bold !important;
+    border: none !important;
+}
+
+.arianeDialogButtonNo,
+.ui-confirmdialog-no{
+    background: #f85b37 !important;
+    border-radius: 0px;
+    font-weight: bold !important;
+    border: none !important;
+}
+
+.arianeDialogInputTitle,
+.ui-dialog-content input[type=text]{
+    outline: medium none !important;
+    box-shadow: none !important;
+    border-radius: 0px;
+    width: 65%;
+    color: #000 !important;
+}
+
+.arianeDialogGrid{
+    width: 80%;
+    margin: 0% 22%;
+    border: none;
+}
+
+.text-marginForMessage{
+    margin:15%;
 }
 
 .arianeTableRow .ui-datatable-tablewrapper tbody .ui-state-highlight,
