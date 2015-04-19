@@ -569,7 +569,12 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 
 .arianeDialogGrid{
     width: 80%;
-    margin: 0% 22%;
+    margin:0% 22%;
+    border: none;
+}
+
+.arianeDialogGridOSInstance{
+    width: 100%;
     border: none;
 }
 
