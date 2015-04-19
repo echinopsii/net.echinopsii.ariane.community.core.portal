@@ -546,14 +546,14 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: #f85b37 !important;
     border-radius: 0px;
     margin: 4% 35%;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .arianeDialogButtonNo,
 .ui-confirmdialog-no{
     background: #f85b37 !important;
     border-radius: 0px;
-    font-weight: bold;
+    font-weight: bold !important;
 }
 
 .arianeDialogInputTitle,
