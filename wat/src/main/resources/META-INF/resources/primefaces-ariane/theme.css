@@ -566,17 +566,34 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border-radius: 0px;
     width: 65%;
     color: #000 !important;
+
 }
+
+.arianeDialogLabel{
+    outline: medium none !important;
+    box-shadow: none !important;
+    border-radius: 0px;
+    width: 65%;
+    color: #000 !important;
+    font-weight: bold;
+}
+
 
 .arianeDialogGrid{
     width: 80%;
-    margin:0% 22%;
+    margin: 0% 22%;
     border: none;
 }
 
 .arianeDialogGridOSInstance{
     width: 100%;
     border: none;
+}
+
+.arianeDialogTabs,
+.ui-tabs-nav{
+    border-radius: 0px;
+    background: none repeat scroll 0% 0% #242122;
 }
 
 .text-marginForMessage{
