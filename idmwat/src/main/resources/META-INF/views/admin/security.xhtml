@@ -12,16 +12,16 @@
         <ui:define name="moduleContent">
             <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <div id="admsecBg" class="backgroundAdmSec">
-                    <p:tabView id="securityTabView" orientation="top" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc" style="border: 0px">
+                    <p:tabView id="securityTabView" orientation="top" styleClass="arianeTransparentBg3-div-noi arianeTransparentBg3-uiwc-noi" style="border: 0px">
                         <p:tab rendered="#{arianeidm:hasPermission('secUser:display')}">
                             <f:facet name="title">
                                 <i class="icon-user icon-large"/>&nbsp;&nbsp;
                                 <h:outputText value="Users"/>
                             </f:facet>
 
-                            <h:form id="userTableForm">
+                            <h:form id="userTableForm" styleClass="arianeTransparentBg0-uiwc-noi">
                                 <p:growl id="userTableMessages" showDetail="true" />
-                                <p:dataTable id="userTable" var="user" value="#{usersListController.lazyModel}"
+                                <p:dataTable id="userTable" styleClass="arianeTableRow" var="user" value="#{usersListController.lazyModel}"
                                              selectionMode="multiple" selection="#{usersListController.selectedUserList}" rowKey="#{user.id}"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
@@ -56,7 +56,7 @@
                                     </p:column>
 
                                     <p:rowExpansion>
-                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="arianeEmbeddedGrid">
                                             <h:outputText value="Username : " styleClass="inputTitle"/>
                                             <h:form rendered="#{arianeidm:hasPermission('secUser:update')}">
                                                 <p:inplace editor="true">
@@ -183,9 +183,9 @@
                                 <h:outputText value="Groups"/>
                             </f:facet>
 
-                            <h:form id="groupTableForm">
+                            <h:form id="groupTableForm" styleClass="arianeTransparentBg0-uiwc-noi">
                                 <p:growl id="groupTableMessages" showDetail="true" />
-                                <p:dataTable id="groupTable" var="group" value="#{groupsListController.lazyModel}"
+                                <p:dataTable id="groupTable" styleClass="arianeTableRow" var="group" value="#{groupsListController.lazyModel}"
                                              selectionMode="multiple" selection="#{groupsListController.selectedGroupList}" rowKey="#{group.id}"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
@@ -208,7 +208,7 @@
                                     </p:column>
 
                                     <p:rowExpansion>
-                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="arianeEmbeddedGrid">
                                             <h:outputText value="Name : " styleClass="inputTitle"/>
                                             <h:form rendered="#{arianeidm:hasPermission('secGroup:update')}">
                                                 <p:inplace editor="true">
@@ -310,9 +310,9 @@
                                 <h:outputText value="Roles"/>
                             </f:facet>
 
-                            <h:form id="roleTableForm">
+                            <h:form id="roleTableForm" styleClass="arianeTransparentBg0-uiwc-noi">
                                 <p:growl id="roleTableMessages" showDetail="true" />
-                                <p:dataTable id="roleTable" var="role" value="#{rolesListController.lazyModel}"
+                                <p:dataTable id="roleTable" styleClass="arianeTableRow" var="role" value="#{rolesListController.lazyModel}"
                                              selectionMode="multiple" selection="#{rolesListController.selectedRoleList}" rowKey="#{role.id}"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
@@ -335,7 +335,7 @@
                                     </p:column>
 
                                     <p:rowExpansion>
-                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="arianeEmbeddedGrid">
                                             <h:outputText value="Name : " styleClass="inputTitle"/>
                                             <h:form rendered="#{arianeidm:hasPermission('secRole:update')}">
                                                 <p:inplace editor="true">
@@ -466,9 +466,9 @@
                                 <h:outputText value="Permissions"/>
                             </f:facet>
 
-                            <h:form id="permissionTableForm">
+                            <h:form id="permissionTableForm" styleClass="arianeTransparentBg0-uiwc-noi">
                                 <p:growl id="permissionTableMessages" showDetail="true" />
-                                <p:dataTable id="permissionTable" var="permission" value="#{permissionsListController.lazyModel}"
+                                <p:dataTable id="permissionTable" styleClass="arianeTableRow" var="permission" value="#{permissionsListController.lazyModel}"
                                              selectionMode="multiple" selection="#{permissionsListController.selectedPermissionList}" rowKey="#{permission.id}"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
@@ -495,7 +495,7 @@
                                     </p:column>
 
                                     <p:rowExpansion>
-                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="arianeEmbeddedGrid">
                                             <h:outputText value="Name : " styleClass="inputTitle"/>
                                             <h:form rendered="#{arianeidm:hasPermission('secPermission:update')}">
                                                 <p:inplace editor="true">
@@ -581,9 +581,9 @@
                                 <h:outputText value="Resources"/>
                             </f:facet>
 
-                            <h:form id="resourceTableForm">
+                            <h:form id="resourceTableForm" styleClass="arianeTransparentBg0-uiwc-noi">
                                 <p:growl id="resourceTableMessages" showDetail="true" />
-                                <p:dataTable id="resourceTable" var="res" value="#{resourcesListController.lazyModel}"
+                                <p:dataTable id="resourceTable" styleClass="arianeTableRow" var="res" value="#{resourcesListController.lazyModel}"
                                              selectionMode="multiple" selection="#{resourcesListController.selectedResourceList}" rowKey="#{res.id}"
                                              paginatorTemplate="{RowsPerPageDropdown} {FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink}"
                                              rowsPerPageTemplate="5,10,15,20,25" lazy="true" rows="25" paginator="true">
@@ -606,7 +606,7 @@
                                     </p:column>
 
                                     <p:rowExpansion>
-                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="ui-widget-content grid">
+                                        <h:panelGrid columns="2" columnClasses="colStyle10,colStyle90" cellpadding="5" styleClass="arianeEmbeddedGrid">
                                             <h:outputText value="Name : " styleClass="inputTitle"/>
                                             <h:form rendered="#{arianeidm:hasPermission('secResource:update')}">
                                                 <p:inplace editor="true">
@@ -691,8 +691,8 @@
                     };
                 </script>
 
-                <p:dialog header="Confirm your remove order !" widgetVar="userRemoveDialog"
-                          width="500" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="userRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removeUserDialogForm">
                         <h:outputText value="Are you sure you want delete following users ?" styleClass="inputTitle"/><br/>
                         <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
@@ -737,8 +737,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Confirm your remove order !" widgetVar="groupRemoveDialog"
-                          width="500" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="groupRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removeGroupDialogForm">
                         <h:outputText value="Are you sure you want delete following groups ?" styleClass="inputTitle"/><br/>
                         <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
@@ -784,8 +784,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Confirm your remove order !" widgetVar="roleRemoveDialog"
-                          width="500" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="roleRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removeRoleDialogForm">
                         <h:outputText value="Are you sure you want delete following roles ?" styleClass="inputTitle"/><br/>
                         <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
@@ -847,8 +847,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Confirm your remove order !" widgetVar="permissionRemoveDialog"
-                          width="500" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="permissionRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removePermissionDialogForm">
                         <h:outputText value="Are you sure you want delete following permissions ?" styleClass="inputTitle"/><br/>
                         <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
@@ -883,8 +883,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Confirm your remove order !" widgetVar="resourceRemoveDialog"
-                          width="500" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="resourceRemoveDialog"
+                          width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removeResourceDialogForm">
                         <h:outputText value="Are you sure you want delete following resources ?" styleClass="inputTitle"/><br/>
                         <p:commandButton value="Yes" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
@@ -922,8 +922,8 @@
 
 
 
-                <p:dialog header="Create a new user" widgetVar="userCreateDialog"
-                          width="450" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Create a new user" widgetVar="userCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="createUserDialogForm">
                         <ui:insert name="createUser" >
                             <ui:include src="/templates/userNewForm.xhtml" />
@@ -937,8 +937,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Create a new group" widgetVar="groupCreateDialog"
-                          width="450" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Create a new group" widgetVar="groupCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="createGroupDialogForm">
                         <ui:insert name="createGroup" >
                             <ui:include src="/templates/groupNewForm.xhtml" />
@@ -953,8 +953,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Create a new role" widgetVar="roleCreateDialog"
-                          width="450" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Create a new role" widgetVar="roleCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="createRoleDialogForm">
                         <ui:insert name="createRole" >
                             <ui:include src="/templates/roleNewForm.xhtml" />
@@ -971,8 +971,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Create a new permission" widgetVar="permissionCreateDialog"
-                          width="450" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Create a new permission" widgetVar="permissionCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="createPermissionDialogForm">
                         <ui:insert name="createPermission" >
                             <ui:include src="/templates/permissionNewForm.xhtml" />
@@ -987,8 +987,8 @@
                     </h:form>
                 </p:dialog>
 
-                <p:dialog header="Create a new resource" widgetVar="resourceCreateDialog"
-                          width="450" showEffect="fade" hideEffect="explode">
+                <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton"  header="Create a new resource" widgetVar="resourceCreateDialog"
+                          width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="createResourceDialogForm">
                         <ui:insert name="createResource" >
                             <ui:include src="/templates/resourceNewForm.xhtml" />
