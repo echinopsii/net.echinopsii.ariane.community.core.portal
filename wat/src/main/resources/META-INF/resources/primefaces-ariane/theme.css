@@ -559,7 +559,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 }
 
 .arianeDialogInputTitle,
-.ui-dialog-content input[type=text]{
+.ui-dialog-content input[type=text],
+.ui-dialog-content input[type=password]{
     outline: medium none !important;
     box-shadow: none !important;
     border-radius: 0px;
