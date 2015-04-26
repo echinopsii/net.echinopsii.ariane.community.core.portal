@@ -4,24 +4,24 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-    <h:panelGrid id="roleNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid arianeDialogGrid">
+    <h:panelGrid id="roleNewGrid" columns="1" cellpadding="3" styleClass="ui-widget-content grid arianeDialogGrid">
 
-        <h:outputText value="Name : " styleClass="inputTitle"/>
+        <h:outputText value="Name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Name" required="true" value="#{roleNewController.name}"/>
 
-        <h:outputText value="Permissions : " styleClass="inputTitle"/>
+        <h:outputText value="Permissions" styleClass="arianeDialogLabel"/>
         <h:panelGroup>
             <p:commandLink onclick="permissionCreateDialog.show()">
                 <h:outputText value=" create new permission"/>
             </p:commandLink><br/>
-            <p:selectManyMenu value="#{roleNewController.permissionsToBind}" style="width:250px;height:100px">
+            <p:selectManyMenu value="#{roleNewController.permissionsToBind}" style="width:68.5%;height:100px">
                 <f:selectItems value="#{permissionsListController.getAll()}"  var="perm"
                                itemLabel="#{perm.name}" itemValue="#{perm.name}"/>
             </p:selectManyMenu>
         </h:panelGroup>
 
-        <h:outputText value="Description : " styleClass="inputTitle"/>
-        <p:inputText label="Description" required="true" value="#{roleNewController.description}"/>
+        <h:outputText value="Description" styleClass="inputTitle"/>
+        <p:inputTextarea label="Description" required="true" styleClass="arianeDialogInputTitle" value="#{roleNewController.description}" autoResize="false" style="resize:none"/>
 
     </h:panelGrid>
 </ui:composition>

@@ -3,13 +3,13 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-    <h:panelGrid id="resourceNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid arianeDialogGrid">
+    <h:panelGrid id="resourceNewGrid" columns="1" cellpadding="3" styleClass="ui-widget-content grid arianeDialogGrid">
 
-        <h:outputText value="Name : " styleClass="inputTitle"/>
+        <h:outputText value="Name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Name" required="true" value="#{resourceNewController.name}"/>
 
-        <h:outputText value="Description : " styleClass="inputTitle"/>
-        <p:inputText label="Description" required="true" value="#{resourceNewController.description}"/>
+        <h:outputText value="Description" styleClass="arianeDialogLabel"/>
+        <p:inputTextarea label="Description" styleClass="arianeDialogInputTitle" required="true" autoResize="false" style="resize:none" value="#{resourceNewController.description}"/>
 
     </h:panelGrid>
 </ui:composition>

@@ -4,11 +4,11 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-    <h:panelGrid id="permissionNewGrid" columns="2" columnClasses="colStyle25,colStyle75" cellpadding="5" styleClass="ui-widget-content grid arianeDialogGrid">
-        <h:outputText value="Name : " styleClass="inputTitle"/>
+    <h:panelGrid id="permissionNewGrid" columns="1" cellpadding="3" styleClass="ui-widget-content grid arianeDialogGrid">
+        <h:outputText value="Name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Name" required="true" value="#{permissionNewController.name}"/>
 
-        <h:outputText value="Resource : " styleClass="inputTitle"/>
+        <h:outputText value="Resource" styleClass="arianeDialogLabel"/>
         <h:panelGroup>
             <p:commandLink onclick="resourceCreateDialog.show()">
                 <h:outputText value=" create new resource"/>
@@ -19,8 +19,8 @@
             </h:selectOneMenu>
         </h:panelGroup>
 
-        <h:outputText value="Description : " styleClass="inputTitle"/>
-        <p:inputText label="Description" required="true" value="#{permissionNewController.description}"/>
+        <h:outputText value="Description" styleClass="arianeDialogLabel"/>
+        <p:inputTextarea label="Description" required="true" styleClass="arianeDialogInputTitle" autoResize="false" style="resize:none" value="#{permissionNewController.description}"/>
 
     </h:panelGrid>
 </ui:composition>

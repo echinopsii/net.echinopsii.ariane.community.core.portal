@@ -4,24 +4,24 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-    <h:panelGrid id="groupNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid arianeDialogGrid">
+    <h:panelGrid id="groupNewGrid" columns="1" cellpadding="3" styleClass="ui-widget-content grid arianeDialogGrid">
 
-        <h:outputText value="Name : " styleClass="inputTitle"/>
+        <h:outputText value="Name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Name" required="true" value="#{groupNewController.name}"/>
 
-        <h:outputText value="Roles : " styleClass="inputTitle"/>
+        <h:outputText value="Roles" styleClass="arianeDialogLabel"/>
         <h:panelGroup>
             <p:commandLink onclick="roleCreateDialog.show()">
                 <h:outputText value=" create new role"/>
             </p:commandLink><br/>
-            <p:selectManyMenu value="#{groupNewController.rolesToBind}" style="width:150px;height:100px">
+            <p:selectManyMenu value="#{groupNewController.rolesToBind}" style="width:68.5%;height:100px">
                 <f:selectItems value="#{rolesListController.getAll()}"  var="role"
                                itemLabel="#{role.name}" itemValue="#{role.name}"/>
             </p:selectManyMenu>
         </h:panelGroup>
 
-        <h:outputText value="Description : " styleClass="inputTitle"/>
-        <p:inputText label="Description" required="true" value="#{groupNewController.description}"/>
+        <h:outputText value="Description" styleClass="arianeDialogLabel"/>
+        <p:inputTextarea label="Description" styleClass="arianeDialogInputTitle" required="true" autoResize="false" style="resize:none" value="#{groupNewController.description}"/>
 
     </h:panelGrid>
 </ui:composition>

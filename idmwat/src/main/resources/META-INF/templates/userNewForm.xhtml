@@ -4,46 +4,46 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
 <ui:composition>
-    <h:panelGrid id="userNewGrid" columns="2" columnClasses="colStyle30,colStyle70" cellpadding="5" styleClass="ui-widget-content grid arianeDialogGrid">
+    <h:panelGrid id="userNewGrid" columns="1" cellpadding="3" styleClass="ui-widget-content grid arianeDialogGrid">
 
-        <h:outputText value="Username : " styleClass="inputTitle"/>
+        <h:outputText value="Username" styleClass="arianeDialogLabel"/>
         <p:inputText label="Username" required="true" value="#{userNewController.userName}"/>
 
-        <h:outputText value="First name : " styleClass="inputTitle"/>
+        <h:outputText value="First name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Firstname" required="true" value="#{userNewController.firstName}"/>
 
-        <h:outputText value="Last name : " styleClass="inputTitle"/>
+        <h:outputText value="Last name" styleClass="arianeDialogLabel"/>
         <p:inputText label="Lastname" required="true" value="#{userNewController.lastName}"/>
 
-        <h:outputText value="Email : " styleClass="inputTitle"/>
+        <h:outputText value="Email" styleClass="arianeDialogLabel"/>
         <p:inputText label="Email" required="true" value="#{userNewController.email}"/>
 
-        <h:outputText value="Phone : " styleClass="inputTitle"/>
+        <h:outputText value="Phone" styleClass="arianeDialogLabel"/>
         <p:inputText label="Phone" required="true" value="#{userNewController.phone}"/>
 
-        <h:outputLabel for="pwd1" value="Password : " styleClass="inputTitle"/>
+        <h:outputLabel for="pwd1" value="Password" styleClass="arianeDialogLabel"/>
         <p:password id="pwd1" value="#{userNewController.pwd1}" label="Password" match="pwd2" required="true" feedback="true"/>
 
-        <h:outputLabel for="pwd2" value="Password (again): " styleClass="inputTitle"/>
+        <h:outputLabel for="pwd2" value="Password (again)" styleClass="arianeDialogLabel"/>
         <p:password id="pwd2" value="#{userNewController.pwd2}" label="Password (again)" required="true"/>
 
-        <h:outputText value="Groups : " styleClass="inputTitle"/>
+        <h:outputText value="Groups" styleClass="arianeDialogLabel"/>
         <h:panelGroup>
             <p:commandLink onclick="groupCreateDialog.show()">
                 <h:outputText value=" create new group"/>
             </p:commandLink><br/>
-            <p:selectManyMenu value="#{userNewController.groupsToBind}" style="width:150px;height:100px">
+            <p:selectManyMenu value="#{userNewController.groupsToBind}" style="width:68.5%;height:100px">
                 <f:selectItems value="#{groupsListController.getAll()}"  var="group"
                                itemLabel="#{group.name}" itemValue="#{group.name}"/>
             </p:selectManyMenu>
         </h:panelGroup>
 
-        <h:outputText value="Roles : " styleClass="inputTitle"/>
+        <h:outputText value="Roles" styleClass="arianeDialogLabel"/>
         <h:panelGroup>
             <p:commandLink onclick="roleCreateDialog.show()">
                 <h:outputText value=" create new role"/>
             </p:commandLink><br/>
-            <p:selectManyMenu value="#{userNewController.rolesToBind}" style="width:150px;height:100px">
+            <p:selectManyMenu value="#{userNewController.rolesToBind}" style="width:68.5%;height:100px">
                 <f:selectItems value="#{rolesListController.getAll()}"  var="role"
                                itemLabel="#{role.name}" itemValue="#{role.name}"/>
             </p:selectManyMenu>
