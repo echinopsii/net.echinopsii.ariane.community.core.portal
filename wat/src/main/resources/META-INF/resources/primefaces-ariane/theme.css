@@ -585,6 +585,17 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border: none;
 }
 
+.arianeDialogGrid-noa{
+    width: 100%;
+    border: none;
+
+}
+
+.arianeDialogPanelGrid-td,
+.td{
+    width: 120%;
+}
+
 .arianeDialogGridOSInstance{
     width: 100%;
     border: none;
