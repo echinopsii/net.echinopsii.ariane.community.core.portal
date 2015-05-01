@@ -211,7 +211,7 @@ class portalMailServiceSyringe:
                     else:
                         try:
                             port = int(portStr)
-                            if (port <= 0) and (port > 65535):
+                            if (port <= 0) or (port > 65535):
                                 print("%-- !! Invalid mail service port " + str(port) + ": not in port range")
                             else:
                                 portIsValid = True
@@ -242,6 +242,8 @@ class portalMailServiceSyringe:
                             else:
                                 auth = False
                             authIsValid = True
+                else:
+                    authIsValid = True
 
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPAuth.name, auth)
 
@@ -264,6 +266,8 @@ class portalMailServiceSyringe:
                             else:
                                 ssl = False
                             sslIsValid = True
+                else:
+                    sslIsValid = True
 
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPSSL.name, ssl)
 
@@ -286,6 +290,8 @@ class portalMailServiceSyringe:
                             else:
                                 tls = False
                             tlsIsValid = True
+                else:
+                    tlsIsValid = True
 
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPTLS.name, tls)
 
