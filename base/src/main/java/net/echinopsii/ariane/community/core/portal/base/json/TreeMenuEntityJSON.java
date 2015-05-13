@@ -1,8 +1,8 @@
 /**
- * Copyright (C) 08/05/15 echinopsii
- *
  * Portal Base
  * TreeMenuEntity JSON
+ *
+ * Copyright (C) 08/05/15 echinopsii
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Affero General Public License as
@@ -52,6 +52,8 @@ public class TreeMenuEntityJSON {
         jgenerator.writeArrayFieldStart(TREE_MENU_ENTITY_DISPLAY_ROLES);
         for (String role : entity.getDisplayRoles())
             jgenerator.writeString(role);
+        jgenerator.writeEndArray();
+        jgenerator.writeArrayFieldStart(TREE_MENU_ENTITY_DISPLAY_PERMISSIONS);
         for (String permission : entity.getDisplayPermissions())
             jgenerator.writeString(permission);
         jgenerator.writeEndArray();

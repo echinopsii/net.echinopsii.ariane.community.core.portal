@@ -18,6 +18,7 @@
  */
 package net.echinopsii.ariane.community.core.portal.base.model;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,6 +40,8 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
     private boolean isExternal = false;
     private int type;
     private int rank = 0; //LEFT to RIGHT. Must be > 0.
+    private String parentID;
+    @Transient
     private MainMenuEntity parent;
     private String icon;
     private String actionListener;
@@ -91,6 +94,8 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
         return rank;
     }
 
+    public String getParentID() { return parentID; };
+
     /**
      * Return the parent of this item. <br/>
      * If this item is contained into a submenu then parent is equal to the submenu main menu item.<br/>
@@ -112,6 +117,7 @@ public class MainMenuEntity implements Comparable<MainMenuEntity> {
      */
     public MainMenuEntity setParent(MainMenuEntity parent) {
         this.parent = parent;
+        this.parentID = parent.getId();
         return this;
     }
 

@@ -19,6 +19,7 @@
 
 package net.echinopsii.ariane.community.core.portal.base.model;
 
+import javax.persistence.Transient;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
@@ -37,7 +38,9 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
     private List<String> displayRoles       = new ArrayList<String>();
     private List<String> displayPermissions = new ArrayList<String>();
 
+    @Transient
     private TreeMenuEntity parent = null;
+    @Transient
     private TreeSet<TreeMenuEntity> childs = new TreeSet<TreeMenuEntity>();
 
     /**
