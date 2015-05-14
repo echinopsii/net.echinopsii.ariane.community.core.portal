@@ -18,7 +18,7 @@
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Arial, Helvetica, sans-serif; font-size: 1em; }
 .ui-widget-content { border: 1px solid #f4f4f9; background: #ffffff; color: #404040; }
 .ui-widget-content a { color: #404040; }
-.ui-widget-header { border: 1px solid #f85b37; background: #242122 url("#{resource['primefaces-ariane:images/ui-bg_highlight-soft_15_242122_1x100.png']}") 50% 50% repeat-x; color: #f4f4f9; font-weight: bold; }
+.ui-widget-header { border: 1px solid #f85b37; background: #333 url("#{resource['primefaces-ariane:images/ui-bg_highlight-soft_15_242122_1x100.png']}") 50% 50% repeat-x; color: #f4f4f9; font-weight: bold; }
 .ui-widget-header a { color: #f4f4f9; }
 
 /* Interaction states
@@ -624,4 +624,12 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeEmbeddedGrid .ui-widget-content .grid
 {
     color: #FFF;
+}
+
+.arianeDashboard .arianeTransparentBg3-uiwc .ui-widget-content,
+.arianeDashboard .ui-carousel .ui-widget, .ui-widget-content .ui-corner-all,
+.arianeDashboard .ui-carousel-header .ui-widget-header .ui-corner-all
+{
+    border: none !important;
+    border-radius: 0px !important;
 }
