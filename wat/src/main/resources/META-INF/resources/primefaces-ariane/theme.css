@@ -635,6 +635,12 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     border-bottom: 2px solid #DF513D;
 }
 
+.arianeDataTablePaginator .ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options
+{
+    color: #FFF !important;
+    background: none repeat scroll 0% 0% #333 !important;
+}
+
 .arianeDataTable .ui-layout-unit-content .ui-widget-content,
 .arianeDataTable .ui-panelmenu .ui-panelmenu-panel,
 .arianeDataTable .ui-panelmenu .ui-panelmenu-header,
