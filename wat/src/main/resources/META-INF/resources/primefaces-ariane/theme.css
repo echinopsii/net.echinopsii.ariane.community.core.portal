@@ -509,6 +509,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeTransparentBg3-div,
 .arianeTransparentBg3-uiwc .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
+    border: none;
 }
 
 .arianeTransparentBg3-div-noi,
@@ -626,10 +627,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     color: #FFF;
 }
 
-.arianeDashboard .arianeTransparentBg3-uiwc .ui-widget-content,
-.arianeDashboard .ui-carousel .ui-widget, .ui-widget-content .ui-corner-all,
-.arianeDashboard .ui-carousel-header .ui-widget-header .ui-corner-all
+.arianeDashboard .ui-carousel .ui-carousel-header
 {
-    border: none !important;
+    border: none;
     border-radius: 0px !important;
 }
