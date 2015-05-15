@@ -275,6 +275,11 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
         return this;
     }
 
+    public TreeMenuEntity removeChildTreeMenuEntity(TreeMenuEntity child) {
+        this.childs.remove(child);
+        return this;
+    }
+
     /**
      * Get the tree menu entity childs
      *
@@ -333,12 +338,13 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
      */
     public TreeMenuEntity findTreeMenuEntityFromContextAddress(String contextAddress) {
         TreeMenuEntity ret = null;
-        if (this.contextAddress!=null && this.contextAddress.equals(contextAddress)) {
-            ret = this;
-        } else {
-            for (TreeMenuEntity entity : childs) {
-                ret = entity.findTreeMenuEntityFromContextAddress(contextAddress);
-                if (ret!=null) break;
+        if (!contextAddress.equals("")) {
+            if (this.contextAddress!=null && this.contextAddress.equals(contextAddress)) ret = this;
+            else {
+                for (TreeMenuEntity entity : childs) {
+                    ret = entity.findTreeMenuEntityFromContextAddress(contextAddress);
+                    if (ret!=null) break;
+                }
             }
         }
         return ret;
@@ -355,10 +361,7 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
 
         TreeMenuEntity that = (TreeMenuEntity) o;
 
-        if (!id.equals(that.id)) {
-            return false;
-        }
-        if (!value.equals(that.value)) {
+        if (!id.equals(that.id) && !value.equals(that.value)) {
             return false;
         }
 
