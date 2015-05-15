@@ -20,7 +20,7 @@
                                     <ui:fragment rendered="#{arianeidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{userProfileController.username}"/>
+                                                <p:inputText required="true" label="text" styleClass="arianeDialogInputTitle" value="#{userProfileController.username}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
@@ -32,7 +32,7 @@
                                     <ui:fragment rendered="#{arianeidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{userProfileController.firstname}"/>
+                                                <p:inputText required="true" label="text" styleClass="arianeDialogInputTitle" value="#{userProfileController.firstname}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
@@ -44,7 +44,7 @@
                                     <ui:fragment rendered="#{arianeidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{userProfileController.lastname}"/>
+                                                <p:inputText required="true" label="text" styleClass="arianeDialogInputTitle" value="#{userProfileController.lastname}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
@@ -56,7 +56,7 @@
                                     <ui:fragment rendered="#{arianeidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{userProfileController.email}"/>
+                                                <p:inputText required="true" label="text" styleClass="arianeDialogInputTitle" value="#{userProfileController.email}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
@@ -68,7 +68,7 @@
                                     <ui:fragment rendered="#{arianeidm:hasRole('Jedi')}">
                                         <h:form>
                                             <p:inplace editor="true">
-                                                <p:inputText required="true" label="text" value="#{userProfileController.phone}"/>
+                                                <p:inputText required="true" label="text" styleClass="arianeDialogInputTitle" value="#{userProfileController.phone}"/>
                                             </p:inplace>
                                         </h:form>
                                     </ui:fragment>
@@ -82,11 +82,11 @@
                                     <h:panelGrid columns="2" id="pwdGrid">
                                         <h:panelGroup>
                                             <h:panelGrid columns="2" id="matchGrid">
-                                                <h:outputLabel for="pwd1" value="Password : " />
-                                                <p:password id="pwd1" value="#{userProfileController.pwd1}" label="Password" match="pwd2" required="true" feedback="true"/>
+                                                <h:outputLabel for="pwd1" value="Password : " styleClass="inputTitle"/>
+                                                <p:password id="pwd1" value="#{userProfileController.pwd1}" label="Password" styleClass="arianeDialogInputTitle" match="pwd2" required="true" feedback="true"/>
 
-                                                <h:outputLabel for="pwd2" value="Password (again): " />
-                                                <p:password id="pwd2" value="#{userProfileController.pwd2}" label="Password (again)" required="true"/>
+                                                <h:outputLabel for="pwd2" value="Password (again): " styleClass="inputTitle" />
+                                                <p:password id="pwd2" value="#{userProfileController.pwd2}" label="Password (again)" styleClass="arianeDialogInputTitle" required="true"/>
                                             </h:panelGrid>
                                         </h:panelGroup>
                                         <h:panelGroup>
@@ -179,7 +179,7 @@
                         </p:accordionPanel>
                     </div>
                     <div style="width:49%; float:right;">
-                        <p:accordionPanel id="portalPreferencesOnRight" multiple="true" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
+                        <p:accordionPanel id="portalPreferencesOnRight" multiple="true" styleClass="arianeDataTable arianeTransparentBg3-div arianeTransparentBg3-uiwc">
                             <p:tab title="Your theme (current theme is #{userProfileController.theme})">
                                 <p:dataGrid var="atheme" value="#{themeSwitcherController.advancedThemes}" columns="3"
                                             rows="9" paginator="true"
