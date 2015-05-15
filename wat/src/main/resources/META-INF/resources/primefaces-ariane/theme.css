@@ -632,7 +632,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arineDataTableMenuForm,
 .ui-panelmenu .ui-menuitem .ui-state-hover{
     background: none;
-    border-left: 2px solid #DF513D;
+    border-left-color: #DF513D;
 }
 
 .arianeDataTableLayout .ui-layout-unit-header, .ui-layout-unit-footer
