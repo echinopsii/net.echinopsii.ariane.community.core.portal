@@ -511,6 +511,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeTransparentBg3-uiwc .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
     border: none;
+    border-radius: 0px;
 }
 
 .arianeTransparentBg3-div-noi,
@@ -626,6 +627,12 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeEmbeddedGrid .ui-widget-content .grid
 {
     color: #FFF;
+}
+
+.arineDataTableMenuForm,
+.ui-panelmenu .ui-menuitem .ui-state-hover{
+    background: none;
+    border-left: 2px solid #DF513D;
 }
 
 .arianeDataTableLayout .ui-layout-unit-header, .ui-layout-unit-footer
