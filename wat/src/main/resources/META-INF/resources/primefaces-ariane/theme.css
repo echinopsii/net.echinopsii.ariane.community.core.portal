@@ -18,15 +18,15 @@
 .ui-widget input, .ui-widget select, .ui-widget textarea, .ui-widget button { font-family: Arial, Helvetica, sans-serif; font-size: 1em; }
 .ui-widget-content { border: 1px solid #f4f4f9; background: #ffffff; color: #404040; }
 .ui-widget-content a { color: #404040; }
-.ui-widget-header { border: 1px solid #f85b37; background: #333 url("#{resource['primefaces-ariane:images/ui-bg_highlight-soft_15_242122_1x100.png']}") 50% 50% repeat-x; color: #f4f4f9; font-weight: bold; }
+.ui-widget-header { border: 1px solid #f85b37; background: none repeat scroll 0% 0% #333; color: #f4f4f9; font-weight: bold; }
 .ui-widget-header a { color: #f4f4f9; }
 
 /* Interaction states
 ----------------------------------*/
 .ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default {
     -moz-box-shadow: inset 1px 1px 0 rgba(255,255,255,0.05); border: 1px solid #404040;
-    background: #242122 url("#{resource['primefaces-ariane:images/ui-bg_highlight-soft_15_242122_1x100.png']}") 50% 50% repeat-x;
-    font-weight: normal; color: #fafafa; }
+    background: none repeat scroll 0% 0% #333;
+    font-weight: normal; color: #fafafa; border-radius: 0px; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #fafafa; text-decoration: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus {
     -moz-box-shadow: inset 1px 1px 0 rgba(255,255,255,0.15);
@@ -313,6 +313,7 @@
     -webkit-box-shadow: inset 0 2px 2px #8f8f8f;
     box-shadow: inset 0 2px 2px #8f8f8f;
     color: #304915;
+    box-shadow: none;
 }
 
 .ui-inputtext.ui-state-active, .ui-widget-content .ui-inputtext.ui-state-active, .ui-widget-header .ui-inputtext.ui-state-active {
@@ -510,6 +511,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeTransparentBg3-uiwc .ui-widget-content {
     background: rgba(255,255,255,0.3) !important;
     border: none;
+    border-radius: 0px;
 }
 
 .arianeTransparentBg3-div-noi,
@@ -532,7 +534,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     color: black;
     border-radius: 0px;
     box-shadow: none !important;
-    border-top: 2px solid #DF513D;
+    border-top: 2px solid #DF513D !important;
 
 }
 
@@ -625,6 +627,35 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeEmbeddedGrid .ui-widget-content .grid
 {
     color: #FFF;
+}
+
+.arineDataTableMenuForm,
+.ui-panelmenu .ui-menuitem .ui-state-hover{
+    background: none;
+    border-left-color: #DF513D;
+}
+
+.arianeDataTableLayout .ui-layout-unit-header, .ui-layout-unit-footer
+{
+    border: none;
+    border-radius: 0px !important;
+    border-bottom: 2px solid #DF513D;
+}
+
+.arianeDataTablePaginator .ui-paginator .ui-paginator-current, .ui-paginator .ui-paginator-rpp-options
+{
+    color: #FFF !important;
+    background: none repeat scroll 0% 0% #333 !important;
+}
+
+.arianeDataTable .ui-layout-unit-content .ui-widget-content,
+.arianeDataTable .ui-panelmenu .ui-panelmenu-panel,
+.arianeDataTable .ui-panelmenu .ui-panelmenu-header,
+.arianeDataTable .ui-panelmenu .ui-menuitem-link,
+.arianeDataTable .ui-breadcrumb, .ui-paginator,
+.arianeDataTable .ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer
+{
+    border-radius: 0px !important;
 }
 
 .arianeDashboard .ui-carousel .ui-carousel-header
