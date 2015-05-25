@@ -655,7 +655,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 .arianeDataTable .ui-panelmenu .ui-panelmenu-header,
 .arianeDataTable .ui-panelmenu .ui-menuitem-link,
 .arianeDataTable .ui-breadcrumb, .ui-paginator,
-.arianeDataTable .ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer
+.arianeDataTable .ui-datatable .ui-datatable-header, .ui-datatable .ui-datatable-footer,
+.arianeDataTable .ui-panel .ui-panel-titlebar
 {
     border-radius: 0px !important;
 }
