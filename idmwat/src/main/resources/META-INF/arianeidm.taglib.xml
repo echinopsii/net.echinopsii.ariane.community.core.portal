@@ -33,7 +33,23 @@
         <function-signature>
             java.lang.Boolean isAuthenticated()
         </function-signature>
-    </function>getPageAfterLogin
+    </function>
+
+    <function>
+        <function-name>canDisplayTreeMenuEntity</function-name>
+        <function-class>net.echinopsii.ariane.community.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-signature>
+            java.lang.Boolean canDisplayTreeMenuEntity(net.echinopsii.ariane.community.core.portal.base.model.TreeMenuEntity)
+        </function-signature>
+    </function>
+
+    <function>
+        <function-name>canActionOnTreeMenuEntity</function-name>
+        <function-class>net.echinopsii.ariane.community.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-signature>
+            java.lang.Boolean canActionOnTreeMenuEntity(net.echinopsii.ariane.community.core.portal.base.model.TreeMenuEntity, java.lang.String)
+        </function-signature>
+    </function>
 
     <function>
         <function-name>getPageAfterLogin</function-name>

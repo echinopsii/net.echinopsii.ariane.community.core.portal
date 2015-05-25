@@ -21,6 +21,7 @@ package net.echinopsii.ariane.community.core.portal.idmwat.tools;
 
 import net.echinopsii.ariane.community.core.idm.base.model.jpa.User;
 import net.echinopsii.ariane.community.core.idm.base.model.jpa.UserPreference;
+import net.echinopsii.ariane.community.core.portal.base.model.TreeMenuEntity;
 import net.echinopsii.ariane.community.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
@@ -146,6 +147,26 @@ public final class IDMViewUtils {
     public static boolean hasRole(String role) {
         log.debug("principal : {} ; role : {} - {}", new Object[]{SecurityUtils.getSubject().getPrincipal(), role, SecurityUtils.getSubject().hasRole(role)});
         return SecurityUtils.getSubject().hasRole(role);
+    }
+
+    public static boolean canDisplayTreeMenuEntity(TreeMenuEntity entity) {
+        for (String displayRole : entity.getDisplayRoles())
+            if (SecurityUtils.getSubject().hasRole(displayRole)) return true;
+        for (String displayPermission : entity.getDisplayPermissions())
+            if (SecurityUtils.getSubject().isPermitted(displayPermission)) return true;
+        return false;
+    }
+
+    public static boolean canActionOnTreeMenuEntity(TreeMenuEntity entity, String action) {
+        List<String> actionRoles = entity.getOtherActionsRoles().get(action);
+        List<String> actionPerms = entity.getOtherActionsPerms().get(action);
+        if (actionRoles!=null)
+            for (String displayRole : actionRoles)
+                if (SecurityUtils.getSubject().hasRole(displayRole)) return true;
+        if (actionPerms!=null)
+            for (String displayPermission : actionPerms)
+                if (SecurityUtils.getSubject().isPermitted(displayPermission)) return true;
+        return false;
     }
 
     private IDMViewUtils() {
