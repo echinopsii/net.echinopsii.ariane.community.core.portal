@@ -48,6 +48,8 @@ public class UserProfileController implements Serializable {
     private static final long serialVersionUID = 1L;
     private static final Logger log = LoggerFactory.getLogger(UserProfileController.class);
 
+    private boolean isInitialized = false;
+
     private Subject subject ;
     private User    user ;
 
@@ -63,6 +65,8 @@ public class UserProfileController implements Serializable {
 
     private String username ;
 
+    private String preferedPage ;
+
     private List<Group> groups ;
     private List<Role>  roles  ;
     private List<Permission> permissions;
@@ -70,79 +74,96 @@ public class UserProfileController implements Serializable {
     private HashMap<String, String> preferences = new HashMap<>();
 
     public void init() {
-        subject = SecurityUtils.getSubject();
-        log.debug("INIT : {}, {}, {} ", new Object[]{subject, (subject != null ? subject.isAuthenticated() : "null"), (subject != null ? subject.getPrincipal() : "null")});
-        if (subject!=null && subject.isAuthenticated()) {
-            EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
-            CriteriaBuilder builder = em.getCriteriaBuilder();
-            CriteriaQuery<User> cmpCriteria = builder.createQuery(User.class);
-            Root<User> cmpRoot = cmpCriteria.from(User.class);
-            cmpCriteria.select(cmpRoot).where(builder.equal(cmpRoot.<String>get("userName"), subject.getPrincipal().toString()));
-            TypedQuery<User> cmpQuery = em.createQuery(cmpCriteria);
-            cmpQuery.setHint("org.hibernate.readOnly", true);
-            IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(cmpQuery);
-            cmpQuery.setHint("org.hibernate.cacheable", true);
-            cmpQuery.setHint("org.hibernate.cacheRegion", "ariane.core.idm.cache.queries");
-            try {
-                user = cmpQuery.getSingleResult();
-            } catch (Exception e) {
-                throw e;
-            }
-
-            log.debug("begin user profile initialization");
-            em.getTransaction().begin();
-            username = user.getUserName();
-            firstname = user.getFirstName();
-            lastname = user.getLastName();
-            email = user.getEmail();
-            phone = user.getPhone();
-            groups = new ArrayList<Group>(user.getGroups());
-            roles = new ArrayList<Role>(user.getRoles());
-            for (Group group : user.getGroups())
-                for (Role role : group.getRoles())
-                    if (!roles.contains(role))
-                        roles.add(role);
-            permissions = new ArrayList<Permission>();
-            for (Role role : roles)
-                permissions.addAll(role.getPermissions());
-
-            UserPreference themePreference = null;
-            for (UserPreference preference : user.getPreferences()) {
-                if (preference.getPkey().equals("cctheme")) {
-                    themePreference = preference;
-                    break;
+        if (!isInitialized) {
+            subject = SecurityUtils.getSubject();
+            if (subject!=null && subject.isAuthenticated()) {
+                EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+                CriteriaBuilder builder = em.getCriteriaBuilder();
+                CriteriaQuery<User> cmpCriteria = builder.createQuery(User.class);
+                Root<User> cmpRoot = cmpCriteria.from(User.class);
+                cmpCriteria.select(cmpRoot).where(builder.equal(cmpRoot.<String>get("userName"), subject.getPrincipal().toString()));
+                TypedQuery<User> cmpQuery = em.createQuery(cmpCriteria);
+                cmpQuery.setHint("org.hibernate.readOnly", true);
+                IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().setFlushModeManual(cmpQuery);
+                cmpQuery.setHint("org.hibernate.cacheable", true);
+                cmpQuery.setHint("org.hibernate.cacheRegion", "ariane.core.idm.cache.queries");
+                try {
+                    user = cmpQuery.getSingleResult();
+                } catch (Exception e) {
+                    throw e;
                 }
-            }
-            if (themePreference==null) {
-                themePreference = new UserPreference().setUserR(user).setPkeyR("cctheme").setPvalueR("ariane");
-                em.persist(themePreference);
-                user.getPreferences().add(themePreference);
-            }
-            theme = themePreference.getPvalue();
 
-            for (UserPreferenceSection section : UserPreferencesRegistryConsumer.getInstance().getUserPreferencesRegistry().getUserPreferenceSections()) {
-                for (UserPreferenceEntity entity : section.getEntityRegistry()) {
-                    UserPreference userPreference = null;
-                    for (UserPreference preference : user.getPreferences()) {
-                        if (preference.getPkey().equals(entity.getFieldName())) {
-                            userPreference = preference;
-                            break;
+                log.debug("begin user profile initialization");
+                em.getTransaction().begin();
+                username = user.getUserName();
+                firstname = user.getFirstName();
+                lastname = user.getLastName();
+                email = user.getEmail();
+                phone = user.getPhone();
+                groups = new ArrayList<Group>(user.getGroups());
+                roles = new ArrayList<Role>(user.getRoles());
+                for (Group group : user.getGroups())
+                    for (Role role : group.getRoles())
+                        if (!roles.contains(role))
+                            roles.add(role);
+                permissions = new ArrayList<Permission>();
+                for (Role role : roles)
+                    permissions.addAll(role.getPermissions());
+
+                UserPreference themePreference = null;
+                for (UserPreference preference : user.getPreferences()) {
+                    if (preference.getPkey().equals("cctheme")) {
+                        themePreference = preference;
+                        break;
+                    }
+                }
+                if (themePreference==null) {
+                    themePreference = new UserPreference().setUserR(user).setPkeyR("cctheme").setPvalueR("ariane");
+                    em.persist(themePreference);
+                    user.getPreferences().add(themePreference);
+                }
+                theme = themePreference.getPvalue();
+
+                UserPreference startupPagePreference = null;
+                for (UserPreference preference : user.getPreferences()) {
+                    if (preference.getPkey().equals("ccstartuppage")) {
+                        startupPagePreference = preference;
+                        break;
+                    }
+                }
+                if (startupPagePreference==null) {
+                    startupPagePreference = new UserPreference().setUserR(user).setPkeyR("ccstartuppage").setPvalueR("");
+                    em.persist(startupPagePreference);
+                    user.getPreferences().add(startupPagePreference);
+                }
+                preferedPage = startupPagePreference.getPvalue();
+
+                for (UserPreferenceSection section : UserPreferencesRegistryConsumer.getInstance().getUserPreferencesRegistry().getUserPreferenceSections()) {
+                    for (UserPreferenceEntity entity : section.getEntityRegistry()) {
+                        UserPreference userPreference = null;
+                        for (UserPreference preference : user.getPreferences()) {
+                            if (preference.getPkey().equals(entity.getFieldName())) {
+                                userPreference = preference;
+                                break;
+                            }
                         }
+                        if (userPreference==null) {
+                            userPreference = new UserPreference().setUserR(user).setPkeyR(entity.getFieldName()).setPvalueR(entity.getFieldDefault());
+                            em.persist(userPreference);
+                            user.getPreferences().add(userPreference);
+                        }
+                        preferences.put(userPreference.getPkey(), userPreference.getPvalue());
+                        FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(userPreference.getPkey(), userPreference.getPvalue());
                     }
-                    if (userPreference==null) {
-                        userPreference = new UserPreference().setUserR(user).setPkeyR(entity.getFieldName()).setPvalueR(entity.getFieldDefault());
-                        em.persist(userPreference);
-                        user.getPreferences().add(userPreference);
-                    }
-                    preferences.put(userPreference.getPkey(), userPreference.getPvalue());
-                    FacesContext.getCurrentInstance().getExternalContext().getSessionMap().put(userPreference.getPkey(), userPreference.getPvalue());
                 }
-            }
 
-            log.debug("End user profile initialization");
-            em.flush();
-            em.getTransaction().commit();
-            em.close();
+                log.debug("End user profile initialization");
+                em.flush();
+                em.getTransaction().commit();
+                em.close();
+
+                isInitialized = true;
+            }
         }
     }
 
@@ -152,8 +173,7 @@ public class UserProfileController implements Serializable {
      * @return logged user profile theme
      */
     public String getTheme() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         log.debug("Theme : {}", new Object[]{theme});
         return theme;
     }
@@ -164,8 +184,7 @@ public class UserProfileController implements Serializable {
      * @param theme primefaces theme
      */
     public void setTheme(String theme) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.theme = theme;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -181,14 +200,36 @@ public class UserProfileController implements Serializable {
         em.close();
     }
 
+    public String getPreferedPage() {
+        init();
+        return preferedPage;
+    }
+
+    public void setPreferedPage(String preferedPage) {
+        init();
+        this.preferedPage = preferedPage;
+        EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+        em.getTransaction().begin();
+        user = em.find(user.getClass(), user.getId());
+        for (UserPreference userPreference : user.getPreferences()) {
+            if (userPreference.getPkey().equals("ccstartuppage")) {
+                userPreference.setPvalue(preferedPage);
+                break;
+            }
+        }
+        em.flush();
+        em.getTransaction().commit();
+        em.close();
+    }
+
+
     /**
      * get logged user name
      *
      * @return logged user name
      */
     public String getUsername() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         return username;
     }
 
@@ -198,8 +239,7 @@ public class UserProfileController implements Serializable {
      * @param username
      */
     public void setUsername(String username) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.username = username;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -216,8 +256,7 @@ public class UserProfileController implements Serializable {
      * @return logged first name
      */
     public String getFirstname() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         return firstname;
     }
 
@@ -227,8 +266,7 @@ public class UserProfileController implements Serializable {
      * @param firstname
      */
     public void setFirstname(String firstname) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.firstname = firstname;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -245,8 +283,7 @@ public class UserProfileController implements Serializable {
      * @return logged user first name
      */
     public String getLastname() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         return lastname;
     }
 
@@ -256,8 +293,7 @@ public class UserProfileController implements Serializable {
      * @param lastname
      */
     public void setLastname(String lastname) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.lastname = lastname;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -283,8 +319,7 @@ public class UserProfileController implements Serializable {
      * @param email
      */
     public void setEmail(String email) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.email = email;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -310,8 +345,7 @@ public class UserProfileController implements Serializable {
      * @param phone
      */
     public void setPhone(String phone) {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         this.phone = phone;
         EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         em.getTransaction().begin();
@@ -359,8 +393,7 @@ public class UserProfileController implements Serializable {
     }
 
     public void resetPassword() {
-        if (subject == null || !subject.isAuthenticated())
-            init();
+        init();
         if (this.pwd1 != null && this.pwd1.equals(this.pwd2)) {
             EntityManager em = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
             em.getTransaction().begin();

@@ -21,6 +21,7 @@ package net.echinopsii.ariane.community.core.portal.idmwat.controller;
 import net.echinopsii.ariane.community.core.idm.base.model.jpa.User;
 import net.echinopsii.ariane.community.core.portal.idmwat.controller.user.UsersListController;
 import net.echinopsii.ariane.community.core.portal.idmwat.plugin.MailServiceConsumer;
+import net.echinopsii.ariane.community.core.portal.idmwat.tools.IDMViewUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -115,7 +116,9 @@ public class LoginController implements Serializable{
 
         FacesContext.getCurrentInstance().addMessage(null, msg);
         context.addCallbackParam("loggedIn", loggedIn);
-        context.addCallbackParam("redirectTo", "/");
+        context.addCallbackParam("redirectTo", IDMViewUtils.getPageAfterLogin());
+        ExternalContext ec = FacesContext.getCurrentInstance().getExternalContext();
+        ec.redirect(IDMViewUtils.getPageAfterLogin());
     }
 
     /**

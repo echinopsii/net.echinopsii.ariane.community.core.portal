@@ -40,6 +40,8 @@ public class TreeMenuEntityJSON {
     public final static String TREE_MENU_ENTITY_ICON = "icon";
     public final static String TREE_MENU_ENTITY_DISPLAY_ROLES = "displayRoles";
     public final static String TREE_MENU_ENTITY_DISPLAY_PERMISSIONS = "displayPermissions";
+    public final static String TREE_MENU_ENTITY_PARENT_ENTITY_ID = "parentTreeMenuEntityID";
+    public final static String TREE_MENU_ENTITY_CHILDS_ENTITY_IDS = "childsID";
 
     public final static void treeMenuEntity2JSON(TreeMenuEntity entity, JsonGenerator jgenerator) throws IOException {
         jgenerator.writeStartObject();
@@ -49,14 +51,23 @@ public class TreeMenuEntityJSON {
         jgenerator.writeStringField(TREE_MENU_ENTITY_CONTEXT_ADDRESS, entity.getContextAddress());
         jgenerator.writeStringField(TREE_MENU_ENTITY_ICON, entity.getIcon());
         jgenerator.writeStringField(TREE_MENU_ENTITY_DESCRIPTION, entity.getDescription());
+
         jgenerator.writeArrayFieldStart(TREE_MENU_ENTITY_DISPLAY_ROLES);
         for (String role : entity.getDisplayRoles())
             jgenerator.writeString(role);
         jgenerator.writeEndArray();
+
         jgenerator.writeArrayFieldStart(TREE_MENU_ENTITY_DISPLAY_PERMISSIONS);
         for (String permission : entity.getDisplayPermissions())
             jgenerator.writeString(permission);
         jgenerator.writeEndArray();
+
+        jgenerator.writeStringField(TREE_MENU_ENTITY_PARENT_ENTITY_ID, (entity.getParentTreeMenuEntity()!=null) ? entity.getParentTreeMenuEntity().getId() : "-1");
+        jgenerator.writeArrayFieldStart(TREE_MENU_ENTITY_CHILDS_ENTITY_IDS);
+        for (TreeMenuEntity child : entity.getChildTreeMenuEntities())
+            jgenerator.writeString(child.getId());
+        jgenerator.writeEndArray();
+
         jgenerator.writeEndObject();
     }
 
@@ -65,7 +76,15 @@ public class TreeMenuEntityJSON {
         ByteArrayOutputStream outStream = new ByteArrayOutputStream();
         JsonGenerator jgenerator = jFactory.createGenerator(outStream, JsonEncoding.UTF8);
         treeMenuEntity2JSON(entity, jgenerator);
+        jgenerator.close();
         return ToolBox.getOuputStreamContent(outStream, "UTF-8");
+    }
+
+    public final static void manyTreeMenuEntity2JSON(Set<TreeMenuEntity> treeMenuEntitySet, JsonGenerator jgenerator) throws IOException {
+        for (TreeMenuEntity treeMenuEntity : treeMenuEntitySet) {
+            treeMenuEntity2JSON(treeMenuEntity, jgenerator);
+            manyTreeMenuEntity2JSON(treeMenuEntity.getChildTreeMenuEntities(), jgenerator);
+        }
     }
 
     public final static String manyTreeMenuEntity2JSON(Set<TreeMenuEntity> treeMenuEntitySet) throws IOException {
@@ -74,10 +93,10 @@ public class TreeMenuEntityJSON {
         JsonGenerator jgenerator = jFactory.createGenerator(outStream, JsonEncoding.UTF8);
         jgenerator.writeStartObject();
         jgenerator.writeArrayFieldStart("treeMenuEntities");
-        for (TreeMenuEntity treeMenuEntity : treeMenuEntitySet)
-            treeMenuEntity2JSON(treeMenuEntity, jgenerator);
+        manyTreeMenuEntity2JSON(treeMenuEntitySet, jgenerator);
         jgenerator.writeEndArray();
         jgenerator.writeEndObject();
+        jgenerator.close();
         return ToolBox.getOuputStreamContent(outStream, "UTF-8");
     }
 

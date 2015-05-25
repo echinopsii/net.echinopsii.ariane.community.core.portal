@@ -12,7 +12,6 @@
             <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/admin-system.css" />
         </ui:define>
         <ui:define name="moduleContent">
-            <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <p:growl id="systemGrowl" showDetail="true"/>
                 <div id="admsysBg" class="backgroundAdmSys">
                     <p:tabView id="systemTabView" orientation="left" style="border: 0px" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc arianeTransparentBg0-uitp-uiwc">
@@ -201,7 +200,6 @@
                                          update=":systemGrowl"/>
                     </h:form>
                 </p:dialog>
-            </ui:fragment>
         </ui:define>
     </ui:composition>
 </h:body>

@@ -67,7 +67,7 @@ public class Registrator implements Runnable {
             */
 
             submenuCount = 0;
-            MainMenuEntity helpSB = new MainMenuEntity("helpSButton", "Help", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HELP_RANK, "icon-question-sign icon-large");
+            MainMenuEntity helpSB = new MainMenuEntity("helpSButton", /*"Help"*/" ", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HELP_RANK, "icon-question-sign icon-large");
             OsgiActivator.mainPortalMainRightMenuEntityList.add(helpSB);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(helpSB);
 
@@ -96,7 +96,7 @@ public class Registrator implements Runnable {
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
 
             submenuCount = 0;
-            MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", "Administration", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-admin-ariane");
+            MainMenuEntity adminSB = new MainMenuEntity("administrationSButton", /*"Administration"*/ " ", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_ADMIN_RANK, "icon-admin-ariane");
             adminSB.getDisplayRoles().add("secadmin");
             adminSB.getDisplayRoles().add("secreviewer");
             adminSB.getDisplayPermissions().add("secResource:display");
@@ -180,7 +180,7 @@ public class Registrator implements Runnable {
             */
 
             submenuCount = 0;
-            MainMenuEntity homeEntity = new MainMenuEntity("homeSButton", "Home", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HOME_RANK, "icon-home icon-large");
+            MainMenuEntity homeEntity = new MainMenuEntity("homeSButton", /*"Home"*/ " ", null, MenuEntityType.TYPE_MENU_SUBMENU, MAIN_MENU_HOME_RANK, "icon-home icon-large");
             OsgiActivator.mainPortalMainRightMenuEntityList.add(homeEntity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(homeEntity);
 

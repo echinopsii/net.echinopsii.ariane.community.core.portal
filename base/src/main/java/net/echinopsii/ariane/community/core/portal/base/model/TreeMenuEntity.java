@@ -21,6 +21,7 @@ package net.echinopsii.ariane.community.core.portal.base.model;
 
 import javax.persistence.Transient;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.TreeSet;
 
@@ -37,6 +38,9 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
     private String icon                     = "";
     private List<String> displayRoles       = new ArrayList<String>();
     private List<String> displayPermissions = new ArrayList<String>();
+
+    private HashMap<String, List<String>> otherActionsRoles = new HashMap();
+    private HashMap<String, List<String>> otherActionsPerms = new HashMap();
 
     @Transient
     private TreeMenuEntity parent = null;
@@ -243,6 +247,96 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
     }
 
     /**
+     *
+     * @return other action roles of this tree menu entity
+     */
+    public HashMap<String, List<String>> getOtherActionsRoles() {
+        return otherActionsRoles;
+    }
+
+    /**
+     *
+     * @param otherActionsRoles
+     */
+    public void setOtherActionsRoles(HashMap<String, List<String>> otherActionsRoles) {
+        this.otherActionsRoles = otherActionsRoles;
+    }
+
+    /**
+     *
+     * @param action
+     * @param role
+     * @return
+     */
+    public TreeMenuEntity addOtherActionRole(String action, String role) {
+        List<String> roles = this.otherActionsRoles.get(action);
+        if ( roles != null) roles.add(role);
+        else {
+            roles = new ArrayList<>();
+            roles.add(role);
+            this.otherActionsRoles.put(action, roles);
+        }
+        return this;
+    }
+
+    /**
+     *
+     * @param action
+     * @param role
+     * @return
+     */
+    public TreeMenuEntity removeOtherActionRole(String action, String role) {
+        List<String> roles = this.otherActionsRoles.get(action);
+        if ( roles != null) roles.remove(role);
+        return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public HashMap<String, List<String>> getOtherActionsPerms() {
+        return otherActionsPerms;
+    }
+
+    /**
+     *
+     * @param otherActionsPerms
+     */
+    public void setOtherActionsPerms(HashMap<String, List<String>> otherActionsPerms) {
+        this.otherActionsPerms = otherActionsPerms;
+    }
+
+    /**
+     *
+     * @param action
+     * @param perm
+     * @return
+     */
+    public TreeMenuEntity addOtherActionPerm(String action, String perm) {
+        List<String> perms = this.otherActionsPerms.get(action);
+        if ( perms != null) perms.add(perm);
+        else {
+            perms = new ArrayList<>();
+            perms.add(perm);
+            this.otherActionsPerms.put(action, perms);
+        }
+        return this;
+    }
+
+    /**
+     *
+     * @param action
+     * @param perm
+     * @return
+     */
+    public TreeMenuEntity removeOtherActionPerm(String action, String perm) {
+        List<String> perms = this.otherActionsPerms.get(action);
+        if (perms != null) perms.remove(perm);
+        return this;
+    }
+
+    /**
      * Set the tree menu entity parent
      *
      * @param parent
@@ -272,6 +366,18 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
      */
     public TreeMenuEntity addChildTreeMenuEntity(TreeMenuEntity child) {
         this.childs.add(child);
+        return this;
+    }
+
+    /**
+     * Remove a child from this tree menu entity
+     *
+     * @param child
+     *
+     * @return this tree menu entity
+     */
+    public TreeMenuEntity removeChildTreeMenuEntity(TreeMenuEntity child) {
+        this.childs.remove(child);
         return this;
     }
 
@@ -333,12 +439,13 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
      */
     public TreeMenuEntity findTreeMenuEntityFromContextAddress(String contextAddress) {
         TreeMenuEntity ret = null;
-        if (this.contextAddress!=null && this.contextAddress.equals(contextAddress)) {
-            ret = this;
-        } else {
-            for (TreeMenuEntity entity : childs) {
-                ret = entity.findTreeMenuEntityFromContextAddress(contextAddress);
-                if (ret!=null) break;
+        if (!contextAddress.equals("")) {
+            if (this.contextAddress!=null && this.contextAddress.equals(contextAddress)) ret = this;
+            else {
+                for (TreeMenuEntity entity : childs) {
+                    ret = entity.findTreeMenuEntityFromContextAddress(contextAddress);
+                    if (ret!=null) break;
+                }
             }
         }
         return ret;
@@ -355,10 +462,7 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
 
         TreeMenuEntity that = (TreeMenuEntity) o;
 
-        if (!id.equals(that.id)) {
-            return false;
-        }
-        if (!value.equals(that.value)) {
+        if (!id.equals(that.id) && !value.equals(that.value)) {
             return false;
         }
 

@@ -3,7 +3,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:arianeidm="http://echinopsii.net/ariane/idm">
 <h:head>
     <title>..: ariane :..</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -15,47 +16,49 @@
     <ui:insert name="moduleHeader"></ui:insert>
 </h:head>
 <h:body>
-    <p:growl id="growl" showDetail="true" life="3000" />
-    <p:layout id="mainLayout" fullPage="true">
-        <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
-            <div id="header">
-                <a id="arianeLogo" href="#">Ariane</a>
-                <div id="menutop">
-                    <div id="menuDivLeft">
-                        <h:form id="mainMenuFormLeft" styleClass="mainMenuFC">
-                            <p:menubar model="#{mainMenuController.modelLeft}" style="border:0;margin:0;padding:0" id="menuLeft"/>
-                        </h:form>
-                    </div>
-                    <div id="menuDivRight">
-                        <h:form id="mainMenuFormRight" styleClass="mainMenuFC">
-                            <p:menubar model="#{mainMenuController.modelRight}" style="border:0;margin:0;padding:0" id="menuRight"/>
-                        </h:form>
+    <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
+        <p:growl id="growl" showDetail="true" life="3000" />
+        <p:layout id="mainLayout" fullPage="true">
+            <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
+                <div id="header">
+                    <a id="arianeLogo" href="#">Ariane</a>
+                    <div id="menutop">
+                        <div id="menuDivLeft">
+                            <h:form id="mainMenuFormLeft" styleClass="mainMenuFC">
+                                <p:menubar model="#{mainMenuController.modelLeft}" style="border:0;margin:0;padding:0" id="menuLeft"/>
+                            </h:form>
+                        </div>
+                        <div id="menuDivRight">
+                            <h:form id="mainMenuFormRight" styleClass="mainMenuFC">
+                                <p:menubar model="#{mainMenuController.modelRight}" style="border:0;margin:0;padding:0" id="menuRight"/>
+                            </h:form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </p:layoutUnit>
-        <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit" gutter="0">
-            <p:idleMonitor timeout="600000"
-                           onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
-            <p:dialog header="Logout countdown" resizable="false"
-                      widgetVar="idleDialog" width="350" onShow="pbAjax.start();">
-                <h:outputText value="You're idle since 10mn. Logout count down: " />
-                <p:progressBar widgetVar="pbAjax" ajax="true" value="#{logoutCounterDownController.counter}" styleClass="animated">
-                    <p:ajax event="complete" listener="#{loginController.logout}"/>
-                </p:progressBar>
-            </p:dialog>
-            <ui:insert name="moduleContent"></ui:insert>
-        </p:layoutUnit>
-    </p:layout>
-    <script type="application/javascript">
-        var readyStateCheckInterval = setInterval(function(){
-            if (document.readyState === "complete") {
-                $("#mainCenter").height($("#mainCenter").height()+5);
-                clearInterval(readyStateCheckInterval);
-                $("#mainMenuFormLeft").children(".ui-menu").width($("#mainMenuFormLeft").width())
-                $("#mainMenuFormRight").children(".ui-menu").width($("#mainMenuFormRight").width())
-            }
-        }, 100);
-    </script>
+            </p:layoutUnit>
+            <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit" gutter="0">
+                <p:idleMonitor timeout="600000"
+                               onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
+                <p:dialog header="Logout countdown" resizable="false"
+                          widgetVar="idleDialog" width="350" onShow="pbAjax.start();">
+                    <h:outputText value="You're idle since 10mn. Logout count down: " />
+                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{logoutCounterDownController.counter}" styleClass="animated">
+                        <p:ajax event="complete" listener="#{loginController.logout}"/>
+                    </p:progressBar>
+                </p:dialog>
+                <ui:insert name="moduleContent"></ui:insert>
+            </p:layoutUnit>
+        </p:layout>
+        <script type="application/javascript">
+            var readyStateCheckInterval = setInterval(function(){
+                if (document.readyState === "complete") {
+                    $("#mainCenter").height($("#mainCenter").height()+5);
+                    clearInterval(readyStateCheckInterval);
+                    $("#mainMenuFormLeft").children(".ui-menu").width($("#mainMenuFormLeft").width())
+                    $("#mainMenuFormRight").children(".ui-menu").width($("#mainMenuFormRight").width())
+                }
+            }, 100);
+        </script>
+    </ui:fragment>
 </h:body>
 </html>

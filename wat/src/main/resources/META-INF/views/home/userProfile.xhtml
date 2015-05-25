@@ -9,7 +9,6 @@
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <p:growl id="userProfileGrowl" showDetail="true"/>
                 <div id="usraccBg" class="backgroundUsrAcc">
                     <div style="width:49%; float:left;">
@@ -75,6 +74,13 @@
                                     <ui:fragment rendered="#{!arianeidm:hasRole('Jedi')}">
                                         <h:outputText value="#{userProfileController.phone}"/>
                                     </ui:fragment>
+
+                                    <h:outputText value="Prefered startup page : " styleClass="inputTitle"/>
+                                    <h:form>
+                                       <p:inplace editor="true">
+                                           <p:inputText required="true" label="text" value="#{userProfileController.phone}"/>
+                                       </p:inplace>
+                                    </h:form>
                                 </h:panelGrid>
                             </p:tab>
                             <p:tab title="Reset your password">
@@ -194,7 +200,38 @@
                                         </h:form>
                                     </p:panel>
                                 </p:dataGrid>
+
                             </p:tab>
+                            <p:tab title="Startup Page">
+                                <h:form>
+                                    <h:outputText value="Your startup page : " styleClass="inputTitle"/>
+
+                                    <p:inplace id="startupPage_defined" label="#{userProfileController.preferedPage}" editor="true"
+                                            rendered="#{userProfileController.preferedPage!=null or not userProfileController.preferedPage eq ''}">
+                                        <h:selectOneMenu value="#{userProfileController.preferedPage}">
+                                            <f:selectItem itemLabel="Last page visited" itemValue="" />
+                                            <f:selectItem itemLabel="Directories" itemValue="/ariane/views/directories/main.jsf" />
+                                            <f:selectItem itemLabel="Injector" itemValue="/ariane/views/injectors/main.jsf" />
+                                            <f:selectItem itemLabel="Mapping" itemValue="/ariane/views/mapping.jsf" />
+                                            <f:selectItem itemLabel="User Home" itemValue="/ariane/views/home/userProfile.jsf" />
+                                        </h:selectOneMenu>
+                                        <p:ajax event="save" update="@form" />
+                                    </p:inplace>
+
+                                    <p:inplace id="startupPage_notDefined" label="Last page visited" editor="true"
+                                               rendered="#{userProfileController.preferedPage==null or userProfileController.preferedPage eq ''}">
+                                        <h:selectOneMenu value="#{userProfileController.preferedPage}">
+                                            <f:selectItem itemLabel="Last page visited" itemValue="" />
+                                            <f:selectItem itemLabel="Directories" itemValue="/ariane/views/directories/main.jsf" />
+                                            <f:selectItem itemLabel="Injector" itemValue="/ariane/views/injectors/main.jsf" />
+                                            <f:selectItem itemLabel="Mapping" itemValue="/ariane/views/mapping.jsf" />
+                                            <f:selectItem itemLabel="User Home" itemValue="/ariane/views/home/userProfile.jsf" />
+                                        </h:selectOneMenu>
+                                        <p:ajax event="save" update="@form" />
+                                    </p:inplace>
+                                </h:form>
+                            </p:tab>
+
                         </p:accordionPanel>
                         <p:accordionPanel id="componentPreferencesOnRight" multiple="true" value="#{userHomeController.preferencesSectionsOnRight}"
                                           var="section" styleClass="arianeTransparentBg3-div arianeTransparentBg3-uiwc">
@@ -262,8 +299,6 @@
                             $("#usraccBg").css({height: $(document).height() - 48});
                     };
                 </script>
-
-            </ui:fragment>
         </ui:define>
     </ui:composition>
 </h:body>

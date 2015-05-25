@@ -10,7 +10,6 @@
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
                 <div id="admsecBg" class="backgroundAdmSec">
                     <p:tabView id="securityTabView" orientation="top" styleClass="arianeTransparentBg3-div-noi arianeTransparentBg3-uiwc-noi" style="border: 0px">
                         <p:tab rendered="#{arianeidm:hasPermission('secUser:display')}">
@@ -1001,7 +1000,6 @@
                                                  :securityTabView:resourceTableForm:resourceTableMessages"/>
                     </h:form>
                 </p:dialog>
-            </ui:fragment>
         </ui:define>
     </ui:composition>
 </h:body>

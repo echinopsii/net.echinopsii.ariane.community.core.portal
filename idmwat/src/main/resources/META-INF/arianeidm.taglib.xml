@@ -33,6 +33,13 @@
         <function-signature>
             java.lang.Boolean isAuthenticated()
         </function-signature>
+    </function>getPageAfterLogin
+
+    <function>
+        <function-name>getPageAfterLogin</function-name>
+        <function-class>net.echinopsii.ariane.community.core.portal.idmwat.tools.IDMViewUtils</function-class>
+        <function-signature>
+            java.lang.String getPageAfterLogin()
+        </function-signature>
     </function>
-    
 </facelet-taglib>

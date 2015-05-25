@@ -442,9 +442,9 @@ body #menutop .pui-menu ul li li, body #menutop .ui-menu ul li li{border: none; 
 body #menutop .pui-menu ul li li:hover, body #menutop .ui-menu ul li li:hover{border: none; padding: 0;}
 body #menutop .pui-menu li ul, body #menutop .ui-menu li ul{width: auto; background: #333; border: none;}
 
-body #menuDivRight {width: 478px !important; float: right;}
+body #menuDivRight {width: 300px !important; float: right;}
 body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 478px !important}
-body #menuDivRight ul {float: right; width: 478px !important}
+body #menuDivRight ul {float: right; width: 300px !important}
 body #menuDivRight ul .ui-menu-child {float: right; width: 180px !important}
 
 body #menutop .pui-separator, body #menutop .ui-separator {border-top: none !important; border-bottom: 1px solid #4b4b4b !important;}
@@ -562,6 +562,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 }
 
 .arianeDialogInputTitle,
+.ui-widget-content input[type=text],
+.ui-widget-content input[type=password],
 .ui-dialog-content input[type=text],
 .ui-dialog-content input[type=password]{
     outline: medium none !important;

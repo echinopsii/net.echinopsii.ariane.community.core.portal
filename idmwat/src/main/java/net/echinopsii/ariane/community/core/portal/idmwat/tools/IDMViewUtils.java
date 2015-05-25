@@ -19,12 +19,19 @@
 
 package net.echinopsii.ariane.community.core.portal.idmwat.tools;
 
+import net.echinopsii.ariane.community.core.idm.base.model.jpa.User;
+import net.echinopsii.ariane.community.core.idm.base.model.jpa.UserPreference;
 import net.echinopsii.ariane.community.core.portal.idmwat.plugin.IDMJPAProviderConsumer;
 import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -61,7 +68,74 @@ public final class IDMViewUtils {
 
     public static boolean isAuthenticated() {
         log.debug("principal : {} ; authenticated : {} ", new Object[]{SecurityUtils.getSubject().getPrincipal(),SecurityUtils.getSubject().isAuthenticated()});
-        return SecurityUtils.getSubject().isAuthenticated();
+        boolean ret = SecurityUtils.getSubject().isAuthenticated();
+        if (ret) {
+            EntityManager entityManager = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+
+            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<User> userCriteria = builder.createQuery(User.class);
+            Root<User> userRoot = userCriteria.from(User.class);
+            userCriteria.select(userRoot).where(builder.equal(userRoot.<String>get("userName"), SecurityUtils.getSubject().getPrincipal()));
+            TypedQuery<User> userQuery = entityManager.createQuery(userCriteria);
+
+            User user = userQuery.getSingleResult();
+            if (user != null) {
+                String theCurrentPage = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() +
+                        FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
+                entityManager.getTransaction().begin();
+                UserPreference currentPage = null;
+                for (UserPreference userPreference : user.getPreferences()) {
+                    if (userPreference.getPkey().equals("cccurrentpage")) {
+                        currentPage = userPreference;
+                        userPreference.setPvalue(theCurrentPage);
+                        break;
+                    }
+                }
+                if (currentPage == null) {
+                    currentPage = new UserPreference().setUserR(user).setPkeyR("cccurrentpage").setPvalueR(theCurrentPage);
+                    entityManager.persist(currentPage);
+                    user.getPreferences().add(currentPage);
+                }
+                entityManager.flush();
+                entityManager.getTransaction().commit();
+            }
+            entityManager.close();
+        }
+        return ret;
+    }
+
+    public static String getPageAfterLogin() {
+        String ret = "/ariane/views/login.jsf";
+        if (SecurityUtils.getSubject()!=null) {
+            EntityManager entityManager = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
+
+            CriteriaBuilder builder = entityManager.getCriteriaBuilder();
+            CriteriaQuery<User> userCriteria = builder.createQuery(User.class);
+            Root<User> userRoot = userCriteria.from(User.class);
+            userCriteria.select(userRoot).where(builder.equal(userRoot.<String>get("userName"), SecurityUtils.getSubject().getPrincipal()));
+            TypedQuery<User> userQuery = entityManager.createQuery(userCriteria);
+
+            User user = userQuery.getSingleResult();
+            if (user != null) {
+                ret = null;
+                for (UserPreference userPreference : user.getPreferences()) {
+                    if (userPreference.getPkey().equals("ccstartuppage")) {
+                        ret = userPreference.getPvalue();
+                        break;
+                    }
+                }
+                if (ret == null || ret.equals(""))
+                    for (UserPreference userPreference : user.getPreferences()) {
+                        if (userPreference.getPkey().equals("cccurrentpage")) {
+                            ret = userPreference.getPvalue();
+                            break;
+                        }
+                    }
+                if (ret == null || ret.equals(""))
+                    ret = "/ariane/views/home/userProfile.jsf";
+            }
+        }
+        return ret;
     }
 
     public static boolean hasPermission(String permission) {
