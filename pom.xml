@@ -6,7 +6,7 @@
     <groupId>net.echinopsii.ariane.community.core</groupId>
     <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
     <name>Ariane Community Core Portal Parent</name>
-    <version>0.6.2-SNAPSHOT</version>
+    <version>0.6.2</version>
     <packaging>pom</packaging>
 
     <modules>
