@@ -168,6 +168,7 @@ class portalMailServiceSyringe:
             else:
                 username = userDefault
 
+            self.portalMailServiceCUValues[cpPortalMailServiceUser.name] = username
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceUser.name, username)
 
             passwordDefault = self.portalMailServiceCUValues[cpPortalMailServicePassword.name]
@@ -181,6 +182,7 @@ class portalMailServiceSyringe:
             else:
                 password = passwordDefault
 
+            self.portalMailServiceCUValues[cpPortalMailServicePassword.name] = password
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServicePassword.name, password)
 
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceFrom.name, self.portalMailServiceCUValues[cpPortalMailServiceFrom.name])
@@ -196,6 +198,7 @@ class portalMailServiceSyringe:
             else:
                 hostname = hostnameDefault
 
+            self.portalMailServiceCUValues[cpPortalMailServiceSMTPHost.name] = hostname
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPHost.name, hostname)
 
             portIsValid = False
@@ -222,6 +225,7 @@ class portalMailServiceSyringe:
                     port = portDefault
                     portIsValid = True
 
+            self.portalMailServiceCUValues[cpPortalMailServiceSMTPPort.name] = port
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPPort.name, port)
 
             authIsValid = False
@@ -246,6 +250,7 @@ class portalMailServiceSyringe:
                 else:
                     authIsValid = True
 
+            self.portalMailServiceCUValues[cpPortalMailServiceSMTPAuth.name] = auth
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPAuth.name, auth)
 
             sslIsValid = False
@@ -270,6 +275,7 @@ class portalMailServiceSyringe:
                 else:
                     sslIsValid = True
 
+            self.portalMailServiceCUValues[cpPortalMailServiceSMTPSSL.name] = ssl
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPSSL.name, ssl)
 
             tlsIsValid = False
@@ -294,6 +300,7 @@ class portalMailServiceSyringe:
                 else:
                     tlsIsValid = True
 
+            self.portalMailServiceCUValues[cpPortalMailServiceSMTPTLS.name] = tls
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceSMTPTLS.name, tls)
 
     def inject(self):
