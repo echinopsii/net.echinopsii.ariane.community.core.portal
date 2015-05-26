@@ -14,6 +14,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+import getpass
 import json
 import os
 from tools.AConfParamNotNone import AConfParamNotNone
@@ -174,7 +175,7 @@ class portalMailServiceSyringe:
 
             password = ""
             if not self.silent:
-                password = input("%-- >> Define mail service password " + passwordDefaultUI + ": ")
+                password = getpass.getpass("%-- >> Define mail service password " + passwordDefaultUI + ": ")
                 if password == "" or password is None:
                     password = passwordDefault
             else:
