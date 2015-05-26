@@ -172,11 +172,10 @@ class portalMailServiceSyringe:
             self.portalMailServiceProcessor.setKeyParamValue(cpPortalMailServiceUser.name, username)
 
             passwordDefault = self.portalMailServiceCUValues[cpPortalMailServicePassword.name]
-            passwordDefaultUI = "[default - " + passwordDefault + "] "
 
             password = ""
             if not self.silent:
-                password = getpass.getpass("%-- >> Define mail service password " + passwordDefaultUI + ": ")
+                password = getpass.getpass("%-- >> Define mail service password : ")
                 if password == "" or password is None:
                     password = passwordDefault
             else:
