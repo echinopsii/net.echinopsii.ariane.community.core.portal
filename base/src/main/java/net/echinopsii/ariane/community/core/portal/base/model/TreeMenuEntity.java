@@ -39,6 +39,8 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
     private List<String> displayRoles       = new ArrayList<String>();
     private List<String> displayPermissions = new ArrayList<String>();
 
+    private String remoteInjectorTreeEntityGearsCacheId = null;
+    private String remoteInjectorTreeEntityComponentsCacheId = null;
     private HashMap<String, List<String>> otherActionsRoles = new HashMap();
     private HashMap<String, List<String>> otherActionsPerms = new HashMap();
 
@@ -334,6 +336,38 @@ public class TreeMenuEntity implements Comparable<TreeMenuEntity> {
         List<String> perms = this.otherActionsPerms.get(action);
         if (perms != null) perms.remove(perm);
         return this;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getRemoteInjectorTreeEntityGearsCacheId() {
+        return remoteInjectorTreeEntityGearsCacheId;
+    }
+
+    /**
+     *
+     * @param remoteInjectorTreeEntityGearsCacheId
+     */
+    public void setRemoteInjectorTreeEntityGearsCacheId(String remoteInjectorTreeEntityGearsCacheId) {
+        this.remoteInjectorTreeEntityGearsCacheId = remoteInjectorTreeEntityGearsCacheId;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public String getRemoteInjectorTreeEntityComponentsCacheId() {
+        return remoteInjectorTreeEntityComponentsCacheId;
+    }
+
+    /**
+     *
+     * @param remoteInjectorTreeEntityComponentsCacheId
+     */
+    public void setRemoteInjectorTreeEntityComponentsCacheId(String remoteInjectorTreeEntityComponentsCacheId) {
+        this.remoteInjectorTreeEntityComponentsCacheId = remoteInjectorTreeEntityComponentsCacheId;
     }
 
     /**

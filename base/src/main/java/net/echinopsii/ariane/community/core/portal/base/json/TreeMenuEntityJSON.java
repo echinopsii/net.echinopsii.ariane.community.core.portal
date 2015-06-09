@@ -22,7 +22,6 @@ package net.echinopsii.ariane.community.core.portal.base.json;
 import com.fasterxml.jackson.core.JsonEncoding;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.core.JsonGenerator;
-import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import net.echinopsii.ariane.community.core.portal.base.model.TreeMenuEntity;
 
@@ -40,6 +39,10 @@ public class TreeMenuEntityJSON {
     public final static String TREE_MENU_ENTITY_ICON = "icon";
     public final static String TREE_MENU_ENTITY_DISPLAY_ROLES = "displayRoles";
     public final static String TREE_MENU_ENTITY_DISPLAY_PERMISSIONS = "displayPermissions";
+    public final static String TREE_MENU_ENTITY_OTHER_ACTIONS_ROLES = "otherActionsRoles";
+    public final static String TREE_MENU_ENTITY_OTHER_ACTIONS_PERMISSIONS = "otherActionsPermissions";
+    public final static String TREE_MENU_ENTITY_REMOTE_INJECTOR_TREE_ENTITY_GEARS_CACHE_ID = "remoteInjectorTreeEntityGearsCacheId";
+    public final static String TREE_MENU_ENTITY_REMOTE_INJECTOR_TREE_ENTITY_COMPONENTS_CACHE_ID = "remoteInjectorTreeEntityComponentsCacheId";
     public final static String TREE_MENU_ENTITY_PARENT_ENTITY_ID = "parentTreeMenuEntityID";
     public final static String TREE_MENU_ENTITY_CHILDS_ENTITY_IDS = "childsID";
 
@@ -67,6 +70,26 @@ public class TreeMenuEntityJSON {
         for (TreeMenuEntity child : entity.getChildTreeMenuEntities())
             jgenerator.writeString(child.getId());
         jgenerator.writeEndArray();
+
+        if (entity.getOtherActionsRoles().size()>0) {
+            jgenerator.writeObjectFieldStart(TREE_MENU_ENTITY_OTHER_ACTIONS_ROLES);
+            for (String actionName : entity.getOtherActionsRoles().keySet())
+                jgenerator.writeObjectField(actionName, entity.getOtherActionsRoles().get(actionName));
+            jgenerator.writeEndObject();
+        }
+
+        if (entity.getOtherActionsPerms().size()>0) {
+            jgenerator.writeObjectFieldStart(TREE_MENU_ENTITY_OTHER_ACTIONS_PERMISSIONS);
+            for (String actionName : entity.getOtherActionsPerms().keySet())
+                jgenerator.writeObjectField(actionName, entity.getOtherActionsPerms().get(actionName));
+            jgenerator.writeEndObject();
+        }
+
+        if (entity.getRemoteInjectorTreeEntityGearsCacheId()!=null)
+            jgenerator.writeStringField(TREE_MENU_ENTITY_REMOTE_INJECTOR_TREE_ENTITY_GEARS_CACHE_ID, entity.getRemoteInjectorTreeEntityGearsCacheId());
+
+        if (entity.getRemoteInjectorTreeEntityComponentsCacheId()!=null)
+            jgenerator.writeStringField(TREE_MENU_ENTITY_REMOTE_INJECTOR_TREE_ENTITY_COMPONENTS_CACHE_ID, entity.getRemoteInjectorTreeEntityComponentsCacheId());
 
         jgenerator.writeEndObject();
     }
