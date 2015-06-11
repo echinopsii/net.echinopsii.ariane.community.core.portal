@@ -1,6 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:p="http://primefaces.org/ui"
@@ -12,53 +13,55 @@
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/font-awesome.css" />
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/main.css" />
     <script type="text/javascript" src="#{request.contextPath}/ajs/modernizr/modernizr.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js"></script>
     <ui:insert name="moduleHeader"></ui:insert>
 </h:head>
 <h:body>
-    <ui:fragment rendered="#{arianeidm:isAuthenticated()}">
-        <p:growl id="growl" showDetail="true" life="3000" />
-        <p:layout id="mainLayout" fullPage="true">
-            <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
-                <div id="header">
-                    <a id="arianeLogo" href="#">Ariane</a>
-                    <div id="menutop">
-                        <div id="menuDivLeft">
-                            <h:form id="mainMenuFormLeft" styleClass="mainMenuFC">
-                                <p:menubar model="#{mainMenuController.modelLeft}" style="border:0;margin:0;padding:0" id="menuLeft"/>
-                            </h:form>
-                        </div>
-                        <div id="menuDivRight">
-                            <h:form id="mainMenuFormRight" styleClass="mainMenuFC">
-                                <p:menubar model="#{mainMenuController.modelRight}" style="border:0;margin:0;padding:0" id="menuRight"/>
-                            </h:form>
+    <c:if test="#{arianeidm:isAuthenticated()}">
+        <ui:fragment>
+            <p:growl id="growl" showDetail="true" life="3000" />
+            <p:layout id="mainLayout" fullPage="true">
+                <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
+                    <div id="header">
+                        <a id="arianeLogo" href="#">Ariane</a>
+                        <div id="menutop">
+                            <div id="menuDivLeft">
+                                <h:form id="mainMenuFormLeft" styleClass="mainMenuFC">
+                                    <p:menubar model="#{mainMenuController.modelLeft}" style="border:0;margin:0;padding:0" id="menuLeft"/>
+                                </h:form>
+                            </div>
+                            <div id="menuDivRight">
+                                <h:form id="mainMenuFormRight" styleClass="mainMenuFC">
+                                    <p:menubar model="#{mainMenuController.modelRight}" style="border:0;margin:0;padding:0" id="menuRight"/>
+                                </h:form>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </p:layoutUnit>
-            <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit" gutter="0">
-                <p:idleMonitor timeout="600000"
-                               onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
-                <p:dialog header="Logout countdown" resizable="false"
-                          widgetVar="idleDialog" width="350" onShow="pbAjax.start();">
-                    <h:outputText value="You're idle since 10mn. Logout count down: " />
-                    <p:progressBar widgetVar="pbAjax" ajax="true" value="#{logoutCounterDownController.counter}" styleClass="animated">
-                        <p:ajax event="complete" listener="#{loginController.logout}"/>
-                    </p:progressBar>
-                </p:dialog>
-                <ui:insert name="moduleContent"></ui:insert>
-            </p:layoutUnit>
-        </p:layout>
-        <script type="application/javascript">
-            var readyStateCheckInterval = setInterval(function(){
-                if (document.readyState === "complete") {
-                    $("#mainCenter").height($("#mainCenter").height()+5);
-                    clearInterval(readyStateCheckInterval);
-                    $("#mainMenuFormLeft").children(".ui-menu").width($("#mainMenuFormLeft").width())
-                    $("#mainMenuFormRight").children(".ui-menu").width($("#mainMenuFormRight").width())
-                }
-            }, 100);
-        </script>
-    </ui:fragment>
+                </p:layoutUnit>
+                <p:layoutUnit id="mainCenter" position="center" styleClass="main-layout-unit" gutter="0">
+                    <p:idleMonitor timeout="600000"
+                                   onidle="idleDialog.show();" onactive="pbAjax.cancel();pbAjax.setValue(0);idleDialog.hide();"/>
+                    <p:dialog header="Logout countdown" resizable="false"
+                              widgetVar="idleDialog" width="350" onShow="pbAjax.start();">
+                        <h:outputText value="You're idle since 10mn. Logout count down: " />
+                        <p:progressBar widgetVar="pbAjax" ajax="true" value="#{logoutCounterDownController.counter}" styleClass="animated">
+                            <p:ajax event="complete" listener="#{loginController.logout}"/>
+                        </p:progressBar>
+                    </p:dialog>
+                    <ui:insert name="moduleContent"></ui:insert>
+                </p:layoutUnit>
+            </p:layout>
+            <script type="application/javascript">
+                var readyStateCheckInterval = setInterval(function(){
+                    if (document.readyState === "complete") {
+                        $("#mainCenter").height($("#mainCenter").height()+5);
+                        clearInterval(readyStateCheckInterval);
+                        $("#mainMenuFormLeft").children(".ui-menu").width($("#mainMenuFormLeft").width())
+                        $("#mainMenuFormRight").children(".ui-menu").width($("#mainMenuFormRight").width())
+                    }
+                }, 100);
+            </script>
+        </ui:fragment>
+    </c:if>
 </h:body>
 </html>
