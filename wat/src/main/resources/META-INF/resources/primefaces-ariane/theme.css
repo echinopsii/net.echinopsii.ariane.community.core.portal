@@ -398,7 +398,13 @@
 }
 
 /*Redefine elements*/
-body .pui-notify, body .ui-shadow{box-shadow: none !important;}
+body .pui-notify {box-shadow: none !important;}
+
+body .ui-shadow {
+    -moz-box-shadow: 0px 0px 2px rgba(223,81,61,0.3);
+    -webkit-box-shadow: 0px 0px 2px rgba(223,81,61,0.3);
+    box-shadow: 0px 0px 2px rgba(223,81,61,0.3);
+}
 
 body .pui-growl-item-container, body .ui-growl-item-container{background: #f85b37; border: 1px solid rgba(0, 0, 0, 0.7);}
 body .pui-growl-item, body .ui-growl-item{background: rgba(0, 0, 0, 0.5); color: #fff; box-shadow: none !important;}
@@ -525,7 +531,6 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     color: black;
     border-radius: 0px;
     box-shadow: none !important;
-
 }
 
 .arianeDialogTitleBar,
@@ -533,9 +538,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background: rgba(255, 255, 255, 1) !important;
     color: black;
     border-radius: 0px;
-    box-shadow: none !important;
-    border-top: 2px solid #DF513D !important;
-
+    border-top: 1px solid #DF513D !important;
 }
 
 .arianeDialogCloseButton,
@@ -569,7 +572,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     outline: medium none !important;
     box-shadow: none !important;
     border-radius: 0px;
-    width: 65%;
+    width: 85%;
     color: #000 !important;
 
 }
@@ -586,7 +589,7 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 
 .arianeDialogGrid{
     width: 80%;
-    margin: 0% 22%;
+    margin: 0% 15%;
     border: none;
 }
 
