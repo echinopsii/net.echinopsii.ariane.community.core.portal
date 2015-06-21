@@ -260,3 +260,28 @@ img.right {
     margin:0;
     padding:0;
 }
+
+
+
+/* ADD ARIANE RABBITMQ WEBFONT */
+.icon-rabbitmq-injector:before {
+	content: "\e600";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
+.icon-rabbitmq-directory:before {
+	content: "\e601";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
+.icon-rabbitmq-node:before {
+	content: "\e602";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
