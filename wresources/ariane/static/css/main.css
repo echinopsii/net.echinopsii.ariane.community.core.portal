@@ -260,3 +260,37 @@ img.right {
     margin:0;
     padding:0;
 }
+
+@font-face {
+	font-family: 'ariane-rabbitmq';
+	src:url('../afonts/ariane-rabbitmq.eot?j5bucj');
+	src:url('../afonts/ariane-rabbitmq.eot?#iefixj5bucj') format('embedded-opentype'),
+		url('../afonts/ariane-rabbitmq.ttf?j5bucj') format('truetype'),
+		url('../afonts/ariane-rabbitmq.woff?j5bucj') format('woff'),
+		url('../afonts/ariane-rabbitmq.svg?j5bucj#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+
+.icon-rabbitmq-injector:before {
+	content: "\e600";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
+.icon-rabbitmq-directory:before {
+	content: "\e601";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
+.icon-rabbitmq-node:before {
+	content: "\e602";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq';
+}
