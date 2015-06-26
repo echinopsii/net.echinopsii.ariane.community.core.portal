@@ -27,6 +27,7 @@ import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.persistence.EntityManager;
 import javax.persistence.TypedQuery;
@@ -38,6 +39,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Utilities for working with Java Server Faces views. Taglib defined in arianeidm.taglib.xml.
@@ -81,8 +83,19 @@ public final class IDMViewUtils {
 
             User user = userQuery.getSingleResult();
             if (user != null) {
-                String theCurrentPage = FacesContext.getCurrentInstance().getExternalContext().getRequestContextPath() +
-                        FacesContext.getCurrentInstance().getExternalContext().getRequestServletPath();
+                ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+                String theCurrentPage = externalContext.getRequestContextPath() + externalContext.getRequestServletPath();
+                Map<String, String> paramerMap = externalContext.getRequestParameterMap();
+                if (paramerMap.size()>0 && externalContext.getRequestServletPath().contains("external")) {
+                    int idx = 0;
+                    theCurrentPage += "?";
+                    for (String parameterName : paramerMap.keySet()) {
+                        idx++;
+                        theCurrentPage += parameterName + "=" + paramerMap.get(parameterName);
+                        if (idx < paramerMap.size())
+                            theCurrentPage += "&";
+                    }
+                }
                 entityManager.getTransaction().begin();
                 UserPreference currentPage = null;
                 for (UserPreference userPreference : user.getPreferences()) {
