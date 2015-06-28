@@ -285,3 +285,53 @@ img.right {
 	-moz-osx-font-smoothing: grayscale;
 	font-family: 'ariane-rabbitmq';
 }
+
+
+/***************************************
+ADD ARIANE RABBITMQ & TIBCORV WEBFONT */
+/**************************************/
+@font-face {
+	font-family: 'ariane-rabbitmq-tibcorv';
+	src:url('../afonts/ariane-rabbitmq-tibco.eot?j5bucj');
+	src:url('../afonts/ariane-rabbitmq-tibco.eot?#iefixj5bucj') format('embedded-opentype'),
+		url('../afonts/ariane-rabbitmq-tibco.ttf?j5bucj') format('truetype'),
+		url('../afonts/ariane-rabbitmq-tibco.woff?j5bucj') format('woff'),
+		url('../afonts/ariane-rabbitmq-tibco.svg?j5bucj#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+.icon-rabbitmq-injector:before {
+	content: "\e600";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq-tibcorv';
+}
+.icon-rabbitmq-directory:before {
+	content: "\e601";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq-tibcorv';
+}
+.icon-rabbitmq-node:before {
+	content: "\e602";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq-tibcorv';
+}
+.icon-tibcorv-bus-multicast:before {
+	content: "\e603";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq-tibcorv';
+}
+.icon-tibcorv-node:before {
+	content: "\e604";
+	/* Better Font Rendering =========== */
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-rabbitmq-tibcorv';
+}
