@@ -69,10 +69,10 @@ body #menuDivLeft .pui-menu,body #menuDivLeft .ui_menu {float: left;}
 body #menuDivLeft ul {float: left; width: 400px }
 body #menuDivLeft ul .ui-menu-child {float: right; width: 180px }
 
-body #menuDivRight {width: 500px; float: right;}
+body #menuDivRight {width: 260px; float: right;}
 body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 500px}
-body #menuDivRight ul {float: right; width: 500px}
-body #menuDivRight ul .ui-menu-child {float: right; width: 500px}
+body #menuDivRight ul {float: right; width: 260px}
+body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 
 body #mainCenter {top: 38px !important;}
 body #mainTop-resizer {display: none !important}

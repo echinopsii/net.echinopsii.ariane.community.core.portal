@@ -422,8 +422,8 @@ body .ui-state-highlight .ui-growl-icon-close::before{content:"\F05C" !important
 #header{background: #333;}
 
 /*--first level*/
-body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 0px 2px 0; border-right: 1px solid #4b4b4b}
-body #menutop .pui-menu li:first-child, body #menutop .ui-menu li:first-child{border-left: 1px solid #4b4b4b;}
+body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 0px 2px 0; border-right: 0px;}
+body #menutop .pui-menu li:first-child, body #menutop .ui-menu li:first-child{border-left: 0px;}
 body #menutop .pui-menu li a, body #menutop .ui-menu li a{padding: 7px 2px 2px 0;border-radius: 0; margin: 0 10px; color: #fff;}
 body #menutop .pui-menu li:hover, body #menutop .ui-menu li:hover{border-bottom: 2px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
 
@@ -448,9 +448,9 @@ body #menutop .pui-menu ul li li, body #menutop .ui-menu ul li li{border: none; 
 body #menutop .pui-menu ul li li:hover, body #menutop .ui-menu ul li li:hover{border: none; padding: 0;}
 body #menutop .pui-menu li ul, body #menutop .ui-menu li ul{width: auto; background: #333; border: none;}
 
-body #menuDivRight {width: 300px !important; float: right;}
+body #menuDivRight {width: 304px !important; float: right;}
 body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 478px !important}
-body #menuDivRight ul {float: right; width: 300px !important}
+body #menuDivRight ul {float: right; width: 304px !important}
 body #menuDivRight ul .ui-menu-child {float: right; width: 180px !important}
 
 body #menutop .pui-separator, body #menutop .ui-separator {border-top: none !important; border-bottom: 1px solid #4b4b4b !important;}
