@@ -313,6 +313,12 @@ img.right {
 	font-family: 'ariane-tibcorv';
 	content: "\e604";
 }
+.icon-tibocrv-injector:before {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	font-family: 'ariane-tibcorv';
+    content: "\e600";
+}
 
 
 /***************************************
