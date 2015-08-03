@@ -18,4 +18,4 @@
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.{{module.name}}.{{s.name}}" version="[{{vmin}},{{vmax}})"/>
         {% endif -%}
         {%- endfor %}
-{% endblock %}
+{% endblock -%}
