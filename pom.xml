@@ -5,18 +5,19 @@
     <!-- General information -->
     <groupId>net.echinopsii.ariane.community.core</groupId>
     <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
+    <version>0.7.0</version>
     <name>Ariane Community Core Portal Parent</name>
-    <version>0.6.4-SNAPSHOT</version>
     <packaging>pom</packaging>
-
+    
     <modules>
-        <module>wresources</module>
         <module>base</module>
-	    <module>idmwat</module>
         <module>wat</module>
+        <module>idmwat</module>
         <module>wab</module>
+        <module>wresources</module>
+        
     </modules>
-
+    
     <repositories>
         <repository>
             <id>nexus.echinopsii.net</id>
@@ -99,10 +100,10 @@
         <version.rome.rome>1.0</version.rome.rome>
 
         <!-- Ariane module dependencies -->
-        <version.net.echinopsii.ariane.core.idm>0.4.2-SNAPSHOT</version.net.echinopsii.ariane.core.idm>
+        <version.net.echinopsii.ariane.core.idm>0.4.2</version.net.echinopsii.ariane.core.idm>
         <version.net.echinopsii.ariane.core.idm.min>0.4.0</version.net.echinopsii.ariane.core.idm.min>
         <version.net.echinopsii.ariane.core.idm.max>0.5.0</version.net.echinopsii.ariane.core.idm.max>
-
+        
         <!-- Technical stuff -->
         <version.commons.beanutils>1.8.3</version.commons.beanutils>
         <version.org.apache.ipojo>1.11.0</version.org.apache.ipojo>
@@ -138,7 +139,6 @@
         <!-- jUnit test version -->
         <version.junit.junit>4.11</version.junit.junit>
     </properties>
-
     <build>
         <pluginManagement>
             <plugins>
