@@ -91,6 +91,15 @@ body#applications{
   background: url(../aimages/ariane/svg/applications.svg) center center no-repeat;
   background-size: 300px 300px;
 }
+body#security{
+  background: url(../aimages/ariane/svg/security.svg) center center no-repeat;
+  background-size: 300px 300px;
+}
+body#system{
+  background: url(../aimages/ariane/svg/system.svg) center center no-repeat;
+  background-size: 300px 300px;
+}
+
 
 #header{float: left; width: 100%;}
 a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(../aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;
