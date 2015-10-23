@@ -419,13 +419,13 @@ body .ui-state-highlight .ui-growl-icon-close::before{content:"\F05C" !important
 
 
 /*MENU TOP*/
-#header{background: #333;}
+#header{background: #333; height:37px; box-shadow: 0px -1px 1.5px 1.5px #333; }
 
 /*--first level*/
 body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 0px 2px 0; border-right: 0px;}
 body #menutop .pui-menu li:first-child, body #menutop .ui-menu li:first-child{border-left: 0px;}
 body #menutop .pui-menu li a, body #menutop .ui-menu li a{padding: 7px 2px 2px 0;border-radius: 0; margin: 0 10px; color: #fff;}
-body #menutop .pui-menu li:hover, body #menutop .ui-menu li:hover{border-bottom: 2px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
+body #menutop .pui-menu li:hover, body #menutop .ui-menu li:hover{border-bottom: 2.5px solid #fa4226; background: rgba(204, 204, 204, 0.1);padding-bottom: 0 !important;cursor:pointer; color: #fff;}
 
 body #menutop .pui-menu li:hover a, body #menutop .pui-menu li a:hover,
 body #menutop .pui-menu li a:visited, body #menutop .pui-menu li a:focus, body #menutop .pui-menu:hover,
@@ -460,37 +460,51 @@ body #menutop .pui-menu::before, body #menutop .pui-menu::after, body #menutop .
 body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margin: 0 !important}
 
 /***** BACKGROUNDS *****/
+.arianeBg {
+    background: #ffffff; /* Old browsers */
+    background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #d1d1d1 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #ffffff 0%,#d1d1d1 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1d1d1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+}
+
 .backgroundDirectory{
-    background: url(/aimages/ariane/bg-ariane-directory.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(/aimages/ariane/svg/directories.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;
 }
 .backgroundInjector{
-    background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(/aimages/ariane/svg/injectors.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;
 }
 .backgroundMapping{
-    background: url(/aimages/ariane/bg-ariane-mapping.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(/aimages/ariane/svg/mapping.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;
 }
 .backgroundAdmSec{
-    background: url(/aimages/ariane/bg-ariane-security.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(/aimages/ariane/svg/security.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;
 }
 .backgroundAdmSys{
-    background: url(/aimages/ariane/bg-ariane-system.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(/aimages/ariane/svg/system.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;

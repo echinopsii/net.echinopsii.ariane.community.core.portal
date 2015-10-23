@@ -127,9 +127,9 @@ requirejs (
 		
 		//test notify                 
        
-        $('#t-btn-show').puibutton({  
+        $('#btn-notify').puibutton({
             click: function() {  
-                $('#notifytop').puinotify('show', '<h1>PrimeUI Notify Widget</h1> <p>Notify is a notification bar that can be positioned at the top or bottom of screen.</p>');  
+                $('#notifybottom').puinotify('show', '<h1>PrimeUI Notify Widget</h1> <p>Notify is a notification bar that can be positioned at the top or bottom of screen.</p>');
             }  
         });  
   

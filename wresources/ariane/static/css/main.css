@@ -52,55 +52,6 @@ button,
     padding-left:  0 !important;
 }
 
-/*** BACKGROUNDS ***/
-html{
-  background: #ffffff; /* Old browsers */
-  background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #d1d1d1 100%); /* FF3.6+ */
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
-  background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
-  background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Opera 12+ */
-  background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* IE10+ */
-  background: radial-gradient(ellipse at center,  #ffffff 0%,#d1d1d1 100%); /* W3C */
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1d1d1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
-}
-body#admin{
-  background: url(../aimages/ariane/svg/admin.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#mapping{
-  background: url(../aimages/ariane/svg/mapping.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#routingArea{
-  background: url(../aimages/ariane/svg/routing-area.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#subnet{
-  background: url(../aimages/ariane/svg/subnet.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#injectors{
-  background: url(../aimages/ariane/svg/injectors.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#directories{
-  background: url(../aimages/ariane/svg/directories.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#applications{
-  background: url(../aimages/ariane/svg/applications.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#security{
-  background: url(../aimages/ariane/svg/security.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-body#system{
-  background: url(../aimages/ariane/svg/system.svg) center center no-repeat;
-  background-size: 300px 300px;
-}
-
-
 #header{float: left; width: 100%;}
 a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(../aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;
              position: absolute; left: 0; top: 0; z-index: 1111;}
