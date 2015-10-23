@@ -669,27 +669,6 @@
                     </p:tabView>
                 </div>
 
-                <script type="application/javascript">
-                    var readyStateCheckIntervalDir = setInterval(function(){
-                        if (document.readyState === "complete") {
-                            clearInterval(readyStateCheckIntervalDir);
-                            var bg = $("#admsecBg").css("background");
-                            if (bg.indexOf("bg-ariane-security.jpg") > -1)
-                                $("#admsecBg").css({height: $(document).height() - 43});
-                            else
-                                $("#admsecBg").css({height: $(document).height() - 48});
-                        }
-                    }, 100);
-
-                    window.onresize = function(event) {
-                        var bg = $("#admsecBg").css("background");
-                        if (bg.indexOf("bg-ariane-security.jpg") > -1)
-                            $("#admsecBg").css({height: $(document).height() - 43});
-                        else
-                            $("#admsecBg").css({height: $(document).height() - 48});
-                    };
-                </script>
-
                 <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Confirm your remove order !" widgetVar="userRemoveDialog"
                           width="500" showEffect="fade" hideEffect="explode" closeOnEscape="true">
                     <h:form id="removeUserDialogForm">
@@ -916,10 +895,6 @@
                         </p:dataList>
                     </h:form>
                 </p:dialog>
-
-
-
-
 
                 <p:dialog styleClass="arianeDialog arianeDialogTitleBar arianeDialogCloseButton" header="Create a new user" widgetVar="userCreateDialog"
                           width="450" showEffect="fade" hideEffect="explode" closeOnEscape="true">

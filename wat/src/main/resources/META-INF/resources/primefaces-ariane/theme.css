@@ -465,36 +465,42 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 .backgroundInjector{
     background: url(/aimages/ariane/bg-ariane-injector.jpg) center center no-repeat;
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 .backgroundMapping{
     background: url(/aimages/ariane/bg-ariane-mapping.jpg) center center no-repeat;
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 .backgroundAdmSec{
     background: url(/aimages/ariane/bg-ariane-security.jpg) center center no-repeat;
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 .backgroundAdmSys{
     background: url(/aimages/ariane/bg-ariane-system.jpg) center center no-repeat;
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 .backgroundUsrAcc{
     background: url(/aimages/ariane/bg-ariane-manage-account.jpg) center center no-repeat;
     background-size: cover;
     overflow-x: auto;
     overflow-y: auto;
+    height: 100%;
 }
 
 /***** TRANSPARENT ARIANE CLASS *****/

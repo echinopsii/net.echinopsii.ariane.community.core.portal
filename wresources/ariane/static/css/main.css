@@ -132,6 +132,10 @@ body #mainTop-resizer {display: none !important}
     margin: 0;
 }
 
+.main-layout-unit .ui-layout-unit-content {
+    height: 100%
+}
+
 .pui-menu .ui-menu {
     float: left;position: relative; z-index: 222;
     width: 100%

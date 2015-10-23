@@ -159,28 +159,6 @@
                     </p:tabView>
                 </div>
 
-                <script type="application/javascript">
-                    var readyStateCheckIntervalDir = setInterval(function(){
-                        if (document.readyState === "complete") {
-                            clearInterval(readyStateCheckIntervalDir);
-                            var bg = $("#admsysBg").css("background");
-                            if (bg.indexOf("bg-ariane-system.jpg") > -1)
-                                $("#admsysBg").css({height: $(document).height() - 43});
-                            else
-                                $("#admsysBg").css({height: $(document).height() - 48});
-                        }
-                    }, 100);
-
-                    window.onresize = function(event) {
-                        var bg = $("#admsysBg").css("background");
-                        if (bg.indexOf("bg-ariane-system.jpg") > -1)
-                            $("#admsysBg").css({height: $(document).height() - 43});
-                        else
-                            $("#admsysBg").css({height: $(document).height() - 48});
-                    };
-                </script>
-
-
                 <p:dialog header="Mail test" widgetVar="mailTestDialog"
                           width="500" showEffect="fade" hideEffect="explode">
                     <h:form>

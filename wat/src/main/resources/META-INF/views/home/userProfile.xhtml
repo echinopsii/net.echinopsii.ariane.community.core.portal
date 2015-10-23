@@ -279,26 +279,6 @@
                         </p:accordionPanel>
                     </div>
                 </div>
-                <script type="application/javascript">
-                    var readyStateCheckIntervalDir = setInterval(function(){
-                        if (document.readyState === "complete") {
-                            clearInterval(readyStateCheckIntervalDir);
-                            var bg = $("#usraccBg").css("background");
-                            if (bg.indexOf("bg-ariane-manage-account.jpg") > -1)
-                                $("#usraccBg").css({height: $(document).height() - 43});
-                            else
-                                $("#usraccBg").css({height: $(document).height() - 48});
-                        }
-                    }, 100);
-
-                    window.onresize = function(event) {
-                        var bg = $("#usraccBg").css("background");
-                        if (bg.indexOf("bg-ariane-manage-account.jpg") > -1)
-                            $("#usraccBg").css({height: $(document).height() - 43});
-                        else
-                            $("#usraccBg").css({height: $(document).height() - 48});
-                    };
-                </script>
         </ui:define>
     </ui:composition>
 </h:body>
