@@ -1,0 +1,27 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+<ui:composition>
+    <p:dialog header="Mail test" widgetVar="mailTestDialog"
+              width="500" showEffect="fade" hideEffect="explode">
+        <h:form>
+            <h:panelGrid columns="2" cellpadding="5">
+                <h:outputText value="To : " styleClass="inputTitle"/>
+                <p:inputText id="to" label="to" required="true" value="#{mailServiceController.mailTestTO}"/>
+
+                <h:outputText value="Subject : " styleClass="inputTitle"/>
+                <p:inputText id="sub" label="sub" required="true" value="#{mailServiceController.mailTestSubject}"/>
+
+                <h:outputText value="Body : " styleClass="inputTitle"/>
+                <p:inputText id="body" label="body" required="true" value="#{mailServiceController.mailTestBody}"/>
+            </h:panelGrid>
+
+            <p:commandButton value="Send" id="sendTest" styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+                             actionListener="#{mailServiceController.testSenderEntity}" oncomplete="mailTestDialog.hide();"
+                             update=":systemGrowl"/>
+        </h:form>
+    </p:dialog>
+</ui:composition>
+</html>

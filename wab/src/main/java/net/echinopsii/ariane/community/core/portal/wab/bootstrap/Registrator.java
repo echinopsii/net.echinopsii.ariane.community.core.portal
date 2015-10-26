@@ -19,9 +19,11 @@
 
 package net.echinopsii.ariane.community.core.portal.wab.bootstrap;
 
+import net.echinopsii.ariane.community.core.portal.base.model.UIInsertEntity;
 import net.echinopsii.ariane.community.core.portal.wat.plugin.MainMenuRegistryConsumer;
 import net.echinopsii.ariane.community.core.portal.base.model.MainMenuEntity;
 import net.echinopsii.ariane.community.core.portal.base.model.MenuEntityType;
+import net.echinopsii.ariane.community.core.portal.wat.plugin.SystemRegistryConsumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,12 +43,8 @@ public class Registrator implements Runnable {
 
     @Override
     public void run() {
-        int submenuCount;
-        MainMenuEntity entity;
-
         //TODO : remove this uuugly sleep
         //TODO : check a better way to start war after OSGI layer
-
         while(MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry()==null)
             try {
                 log.debug("Ariane Portal main menu registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
@@ -56,6 +54,9 @@ public class Registrator implements Runnable {
             }
 
         try {
+            int submenuCount;
+            MainMenuEntity entity;
+
             /*
             entity = new MainMenuEntity("dashboardMItem", "Dashboard", "#", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_DASH_RANK, "icon-dashboard icon-large");
             OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
@@ -225,6 +226,28 @@ public class Registrator implements Runnable {
 
             log.debug("{} has registered its main menu items", new Object[]{OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME});
 
+        } catch (Exception e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        //TODO : remove this uuugly sleep
+        //TODO : check a better way to start war after OSGI layer
+        while(SystemRegistryConsumer.getInstance().getSystemEntityRegistry()==null)
+            try {
+                log.debug("Ariane Portal system items registry is missing to load {}. Sleep some times...", OsgiActivator.PORTAL_MAIN_MENU_REGISTRATOR_SERVICE_NAME);
+                Thread.sleep(10000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+
+        try {
+            UIInsertEntity entity1 = new UIInsertEntity().setUiInsertNameR("mailServiceTab").
+                    setUiIncludeSrcR("/templates/mailServiceTab.xhtml");
+            SystemRegistryConsumer.getInstance().getSystemEntityRegistry().registerTabMenuEntity(entity1);
+
+            UIInsertEntity entity2 = new UIInsertEntity().setUiInsertNameR("mailServiceDialog").
+                    setUiIncludeSrcR("/templates/mailServiceDialog.xhtml");
+            SystemRegistryConsumer.getInstance().getSystemEntityRegistry().registerDialogEntity(entity2);
         } catch (Exception e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }

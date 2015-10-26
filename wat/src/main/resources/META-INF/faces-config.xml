@@ -9,6 +9,11 @@
         <managed-bean-scope>request</managed-bean-scope>
     </managed-bean>
     <managed-bean>
+        <managed-bean-name>systemUIController</managed-bean-name>
+        <managed-bean-class>net.echinopsii.ariane.community.core.portal.wat.controller.SystemUIController</managed-bean-class>
+        <managed-bean-scope>request</managed-bean-scope>
+    </managed-bean>
+    <managed-bean>
         <managed-bean-name>themeSwitcherController</managed-bean-name>
         <managed-bean-class>net.echinopsii.ariane.community.core.portal.wat.controller.ThemeSwitcherController</managed-bean-class>
         <managed-bean-scope>request</managed-bean-scope>
