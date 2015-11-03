@@ -350,7 +350,7 @@ img.right {
 	font-style: normal;
 }
 .icon-router:before {
-    content: "\e900";
+    content: "\e902";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-rabbitmq-more';
@@ -362,7 +362,7 @@ img.right {
     font-family: 'ariane-rabbitmq-more';
 }
 .icon-nic:before {
-    content: "\e902";
+    content: "\e900";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-rabbitmq-more';
