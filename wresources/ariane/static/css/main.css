@@ -340,7 +340,7 @@ img.right {
 /******* OTHERS ICONS WEBFONT *********/
 /**************************************/
 @font-face {
-	font-family: 'ariane-rabbitmq-more';
+	font-family: 'ariane-more';
 	src:url('../afonts/arianeicons-more.eot?j5bucj');
 	src:url('../afonts/arianeicons-more.eot?#iefixj5bucj') format('embedded-opentype'),
 		url('../afonts/arianeicons-more.ttf?j5bucj') format('truetype'),
@@ -349,27 +349,27 @@ img.right {
 	font-weight: normal;
 	font-style: normal;
 }
-.icon-nic:before {
+.icon-router:before {
     content: "\e902";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-rabbitmq-more';
-}
-.icon-router:before {
-    content: "\e900";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-rabbitmq-more';
+    font-family: 'ariane-more';
 }
 .icon-procos-injector:before {
     content: "\e901";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-rabbitmq-more';
+    font-family: 'ariane-more';
+}
+.icon-nic:before {
+    content: "\e900";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'ariane-more';
 }
 .icon-ip:before {
     content: "\e903";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-rabbitmq-more';
+    font-family: 'ariane-more';
 }
