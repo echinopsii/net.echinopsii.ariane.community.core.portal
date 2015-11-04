@@ -349,20 +349,20 @@ img.right {
 	font-weight: normal;
 	font-style: normal;
 }
-.icon-router:before {
+.icon-nic:before {
     content: "\e902";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'ariane-rabbitmq-more';
+}
+.icon-router:before {
+    content: "\e900";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-rabbitmq-more';
 }
 .icon-procos-injector:before {
     content: "\e901";
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-rabbitmq-more';
-}
-.icon-nic:before {
-    content: "\e900";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-rabbitmq-more';
