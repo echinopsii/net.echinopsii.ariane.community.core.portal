@@ -462,13 +462,13 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
 /***** BACKGROUNDS *****/
 .arianeBg {
     background: #ffffff; /* Old browsers */
-    background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #d1d1d1 100%); /* FF3.6+ */
-    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#d1d1d1)); /* Chrome,Safari4+ */
-    background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Chrome10+,Safari5.1+ */
-    background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* Opera 12+ */
-    background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#d1d1d1 100%); /* IE10+ */
-    background: radial-gradient(ellipse at center,  #ffffff 0%,#d1d1d1 100%); /* W3C */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#d1d1d1',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+    background: -moz-radial-gradient(center, ellipse cover,  #ffffff 0%, #bfbfbf 100%); /* FF3.6+ */
+    background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#ffffff), color-stop(100%,#bfbfbf)); /* Chrome,Safari4+ */
+    background: -webkit-radial-gradient(center, ellipse cover,  #ffffff 0%,#bfbfbf 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-radial-gradient(center, ellipse cover,  #ffffff 0%,#bfbfbf 100%); /* Opera 12+ */
+    background: -ms-radial-gradient(center, ellipse cover,  #ffffff 0%,#bfbfbf 100%); /* IE10+ */
+    background: radial-gradient(ellipse at center,  #ffffff 0%,#bfbfbf 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#bfbfbf',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
     overflow-x: auto;
     overflow-y: auto;
     height: 100%
@@ -510,8 +510,8 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     height: 100%;
 }
 .backgroundUsrAcc{
-    background: url(../../../../aimages/ariane/bg-ariane-manage-account.jpg) center center no-repeat;
-    background-size: cover;
+    background: url(../../../../aimages/ariane/svg/user.svg) center center no-repeat;
+    background-size: 500px 500px;
     overflow-x: auto;
     overflow-y: auto;
     height: 100%;
