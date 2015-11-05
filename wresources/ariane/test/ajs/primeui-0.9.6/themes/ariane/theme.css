@@ -516,6 +516,13 @@ body .ui-layout-unit-content, body .ui-layout-unit {padding: 0 !important; margi
     overflow-y: auto;
     height: 100%;
 }
+.backgroundAbout{
+    background: url(../../../../aimages/ariane/svg/bg-about.svg) center center no-repeat;
+    background-size: 500px 500px;
+    overflow-x: auto;
+    overflow-y: auto;
+    height: 100%;
+}
 
 /***** TRANSPARENT ARIANE CLASS *****/
 .arianeTransparentBg0-div,
