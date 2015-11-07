@@ -12,5 +12,29 @@
     <groupId>net.echinopsii.ariane.community.core.portal</groupId>
     <artifactId>net.echinopsii.ariane.community.core.portal.wresources</artifactId>
     <name>Ariane Community Core Portal Web Resources</name>
-    
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludes>
+                        <exclude>**/*-min.js</exclude>
+                        <exclude>**/*-min.css</exclude>
+                        <exclude>**/*.min.js</exclude>
+                        <exclude>**/*.min.css</exclude>
+                    </excludes>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
 </project>
