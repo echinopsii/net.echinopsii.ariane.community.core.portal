@@ -5,13 +5,14 @@
     <parent>
         <groupId>net.echinopsii.ariane.community.core</groupId>
         <artifactId>net.echinopsii.ariane.community.core.portal</artifactId>
-        <version>0.7.1-SNAPSHOT</version>
+        <version>0.7.1</version>
         <relativePath>..</relativePath>
     </parent>
 
     <groupId>net.echinopsii.ariane.community.core.portal</groupId>
     <artifactId>net.echinopsii.ariane.community.core.portal.wresources</artifactId>
     <name>Ariane Community Core Portal Web Resources</name>
+    
 
     <build>
         <plugins>
