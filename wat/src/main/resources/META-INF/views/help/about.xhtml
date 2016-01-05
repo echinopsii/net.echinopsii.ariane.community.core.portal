@@ -10,17 +10,37 @@
 <h:body>
     <ui:composition template="/templates/mainLayout.xhtml">
         <ui:define name="moduleContent">
-            <div align="center" style="height: 100%; width: 100%" >
-                <iframe id="aboutframe" width="99%" height="99%" frameborder="0" />
-            </div>
-            <script type="text/javascript">
-                function aboutLoader() {
-                    var aboutframe = document.getElementById('aboutframe');
-                    aboutframe.src = "http://ariane.echinopsii.net"
-                }
+            <div id="aboutOContainer" class="backgroundAbout">
+                <div id="aboutIContainer">
+                    <div id="aboutModal">
 
-                aboutLoader();
-            </script>
+                        <h1>Ariane, a masterpiece by echinopsii</h1>
+                        <h3>Be prepared for some serious coolness!</h3>
+
+                        <hr />
+
+                        <p>As technologies are growing everywhere around us they tend to be more and more connected, and so more and more complex. Providing tools to help people understand and interact safely with their digital world is our main mission.</p>
+
+                        <p>Our first contribution to this huge goal is the Ariane project which provides a framework to map all the pieces of your digital world. This project is managed through our collaborative ecosystem and the final goal, to build a complete map of our digital world, isn't possible without community help...</p>
+
+                        <p>
+                            Need to know more ? Have a look on some other resources : <br/>
+                            <br/> <a href="http://ariane.echinopsii.net" target="_blank">Ariane web site</a>
+                            <br/> <a href="http://confluence.echinopsii.net" target="_blank">Ariane Confluence documentation</a>
+                            <br/> <a href="http://jira.echinopsii.net" target="_blank">Ariane Jira tracker</a>
+                            <br/> <a href="https://kiwiirc.com/client/irc.freenode.net/#ariane.echinopsii" target="_blank">Ariane chat room on freenode</a>
+                            <br/> <a href="http://echinopsii.net" target="_blank">echinopsii web site</a>
+                        </p>
+
+                        <p>Ariane 0.7.2 - 2016.01.06 <br/> Powered by OpenSource Software.</p>
+                        
+                        <hr />
+
+                        <div class="center"><img src="/aimages/ariane/ariane-by-echinpopsii.png" /></div>
+
+                    </div>
+                </div>
+            </div>
         </ui:define>
     </ui:composition>
 </h:body>

@@ -416,13 +416,13 @@ img.right {
     font-weight: normal;
     font-style: normal;
 }
-#aboutContainer {
+#aboutOContainer {
     display: table;
     position: absolute;
     height: 100%;
     width: 100%;
 }
-#aboutBg {
+#aboutIContainer {
     display: table-cell;
     vertical-align: middle;
 }
@@ -430,6 +430,7 @@ img.right {
     margin-left: auto;
     margin-right: auto;
     width: 720px;
+    min-height: 500px;
     height: auto;
     padding: 20px;
     text-align: justify;
@@ -440,12 +441,23 @@ img.right {
 }
 #aboutModal p {
     -webkit-font-smoothing: antialiased;
-    -webkit-column-count: 2; /* Chrome, Safari, Opera */
-    -moz-column-count: 2; /* Firefox */
-    column-count: 2;
+    -webkit-column-count: 1; /* Chrome, Safari, Opera */
+    -moz-column-count: 1; /* Firefox */
+    column-count: 1;
     -webkit-column-gap: 20px; /* Chrome, Safari, Opera */
     -moz-column-gap: 20px; /* Firefox */
     column-gap: 20px;
+    font-size: 16px !important;
+}
+#aboutModal a:link {
+    color: #f85b37;
+}
+#aboutModal a:visited {
+    color: #f85b37;
+}
+#aboutModal a:hover {
+    color: #333;
+    text-decoration: none;
 }
 #aboutModal h1 {
     text-transform: uppercase;
@@ -455,12 +467,4 @@ img.right {
 .center {
     text-align: center;
     -webkit-font-smoothing: antialiased;
-}
-#totem {
-    float: left;
-    display: block;
-    padding-top: 140px;
-    height: 500px;
-    width: 240px;
-    margin-right: 40px;
 }
