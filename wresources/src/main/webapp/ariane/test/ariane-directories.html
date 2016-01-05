@@ -25,13 +25,28 @@
             font-size: 12px !important;
         }
     </style>
-
+    
+	<script language="javascript"> 
+		function toggle(elementId) {
+			var ele = document.getElementById(elementId);
+			var btn = document.getElementById("showHideMenu");
+			if(ele.classList.contains == "showMenu") {
+	    		ele.classList.toggle("showMenu");
+	    		btn.classList.toggle("open");
+		  	}
+			else {
+				ele.classList.toggle("hideMenu");
+				btn.classList.toggle("closed");
+			}
+		} 
+	</script>
+	
     <script data-main="ajs/require-primeui.js" src="./ajs/require/require.js"></script>
     <title>Ariane Directory CSS Test</title>
 </head>
 <body>
     <div id="mainTop">
-        <div id="header">
+        <div id="header" class="showMenu">
             <a id="arianeLogo" href="#">Ariane</a>
             <div id="menutop">
                 <div id="menuDivLeft">
@@ -41,7 +56,7 @@
                         <li><a data-icon="icon-mapping-ariane icon-large" href="ariane-mapping.html">Mapping</a></li>
                     </ul>
                 </div>
-
+				
                 <div id="menuDivRight">
                     <ul id="menuRight">
                         <li>
@@ -73,11 +88,13 @@
             </div>
         </div>
     </div>
-    <div id="mainCenter"
-            style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 43px;
-            bottom: 0px; overflow:auto;">
+    <div id="mainCenter" style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 43px; bottom: 0px; overflow:auto;">
+	    
         <div id="arianeBg" class="arianeBg">
             <div id="directoryBg" class="backgroundDirectory">
+	            
+	            <a id="showHideMenu" href="javascript:toggle('mainCenter');">show</a>
+	            					            
                 <icon class="arianeico-datacenter-ariane"></icon>
                 <icon class="arianeico-datacenter-ariane icon-2x"></icon>
                 <icon class="arianeico-datacenter-ariane icon-3x"></icon>

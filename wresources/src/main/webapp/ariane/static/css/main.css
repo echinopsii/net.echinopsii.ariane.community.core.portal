@@ -53,6 +53,18 @@ button,
 }
 
 #header{float: left; width: 100%;}
+#header.showMenu {
+	-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;
+}
+#header.showMenu.hideMenu {
+	margin-top: -35px;
+}
+
+
 a#arianeLogo{width: 30px; height: 30px; display: inline-block; background: url(../aimages/ariane/logo-ariane.png) no-repeat; text-indent: -9000px; float: left; margin: 4px 20px 0 20px;
              position: absolute; left: 0; top: 0; z-index: 1111;}
 
@@ -74,7 +86,23 @@ body #menuDivRight .pui-menu, body #menuDivRight .ui_menu {float: right; width: 
 body #menuDivRight ul {float: right; width: 260px}
 body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 
-body #mainCenter {top: 38px !important;}
+#showHideMenu { position: absolute; left: 50%; top: 20px; -webkit-transition: all 300ms ease;
+-moz-transition: all 300ms ease;
+-ms-transition: all 300ms ease;
+-o-transition: all 300ms ease;
+transition: all 300ms ease;}
+.hideMenu #showHideMenu { position: absolute; left: 50%; top: 10px; z-index: 8960; }
+
+body #mainCenter {top: 38px !important;-webkit-transition: all 300ms ease;
+	-moz-transition: all 300ms ease;
+	-ms-transition: all 300ms ease;
+	-o-transition: all 300ms ease;
+	transition: all 300ms ease;}
+body #mainCenter.hideMenu {
+	top: 2px !important;
+}
+
+
 body #mainTop-resizer {display: none !important}
 
 .main-layout-unit.ui-layout-unit {
