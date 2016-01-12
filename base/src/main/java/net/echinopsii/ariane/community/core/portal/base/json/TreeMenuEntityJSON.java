@@ -73,15 +73,23 @@ public class TreeMenuEntityJSON {
 
         if (entity.getOtherActionsRoles().size()>0) {
             jgenerator.writeObjectFieldStart(TREE_MENU_ENTITY_OTHER_ACTIONS_ROLES);
-            for (String actionName : entity.getOtherActionsRoles().keySet())
-                jgenerator.writeObjectField(actionName, entity.getOtherActionsRoles().get(actionName));
+            for (String actionName : entity.getOtherActionsRoles().keySet()) {
+                jgenerator.writeArrayFieldStart(actionName);
+                for (String roles : entity.getOtherActionsRoles().get(actionName))
+                    jgenerator.writeString(roles);
+                jgenerator.writeEndArray();
+            }
             jgenerator.writeEndObject();
         }
 
         if (entity.getOtherActionsPerms().size()>0) {
             jgenerator.writeObjectFieldStart(TREE_MENU_ENTITY_OTHER_ACTIONS_PERMISSIONS);
-            for (String actionName : entity.getOtherActionsPerms().keySet())
-                jgenerator.writeObjectField(actionName, entity.getOtherActionsPerms().get(actionName));
+            for (String actionName : entity.getOtherActionsPerms().keySet()) {
+                jgenerator.writeArrayFieldStart(actionName);
+                for (String permissions : entity.getOtherActionsPerms().get(actionName))
+                    jgenerator.writeString(permissions);
+                jgenerator.writeEndArray();
+            }
             jgenerator.writeEndObject();
         }
 
