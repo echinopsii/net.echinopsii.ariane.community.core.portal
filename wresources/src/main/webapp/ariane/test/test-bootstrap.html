@@ -2,53 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    
+    <!-- Styles -->
     <link rel="stylesheet" href="ajs/jquery-ui-1.10.3.custom/css/ui-lightness/jquery-ui-1.10.3.custom.css"/>
     <link rel="stylesheet" href="ajs/primeui-0.9.6/themes/ariane/theme.css" />
     <link rel="stylesheet" href="ajs/primeui-0.9.6/development/primeui-0.9.6.css" />
-    <link type="text/css" rel="stylesheet" href="acss/font-awesome.min.css" />
     <link type="text/css" rel="stylesheet" href="acss/main.css" />
-    
-    <script src="ajs/jquery/jquery-1.9.1.js"></script>
-        
-    <!-- Latest compiled and minified CSS -->
+    <link type="text/css" rel="stylesheet" href="acss/font-awesome.css" />
+            
+    <!-- Bootstrap -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-	    
-    <style type="text/css" media="screen">
-        input,
-        select,
-        textarea,
-        button,
-        .ui-widget,
-        .ui-widget input,
-        .ui-widget select,
-        .ui-widget textarea,
-        .ui-widget button,
-        .ui-widget-header,
-        .ui-widget-content,
-        .ui-widget-header .ui-widget-header
-        .ui-widget-content .ui-widget-content {
-            font-family: Arial, "Trebuchet MS", Verdana, sans-serif;
-            font-size: 12px !important;
-        }
-    </style>
-    
-	<script language="javascript"> 
-		function toggle(elementId) {
-			var ele = document.getElementById(elementId);
-			var btn = document.getElementById("showHideMenu");
-			if(ele.classList.contains == "showMenu") {
-	    		ele.classList.toggle("showMenu");
-	    		btn.classList.toggle("open");
-		  	}
-			else {
-				ele.classList.toggle("hideMenu");
-				btn.classList.toggle("closed");
-			}
-		} 
-	</script>
 	
+	<!-- Scripts -->
+	<script src="ajs/jquery/jquery-1.9.1.js"></script>
     <script data-main="ajs/require-primeui.js" src="./ajs/require/require.js"></script>
+    
     <title>Ariane Directory CSS Test</title>
 </head>
 <body>
@@ -98,134 +67,10 @@
             </div>
         </div>
     </div>
+    
     <div id="mainCenter" style="position: absolute; margin: 0px; left: 0px; right: 0px; top: 43px; bottom: 0px; overflow:auto;">
-	    
         <div id="arianeBg" class="arianeBg">
-            <div id="directoryBg" class="backgroundDirectory">
-	            
-	            
-	            <!-- BEGIN BOOTSTRAP TESTS -->
-	            
-	            
-				<nav class="navbar navbar-default">
-				  <div class="container-fluid">
-				    <!-- Brand and toggle get grouped for better mobile display -->
-				    <div class="navbar-header">
-				      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-				        <span class="sr-only">Toggle navigation</span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				        <span class="icon-bar"></span>
-				      </button>
-				      <a class="navbar-brand" href="#">Brand</a>
-				    </div>
-				
-				    <!-- Collect the nav links, forms, and other content for toggling -->
-				    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				      <ul class="nav navbar-nav">
-				        <li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
-				        <li><a href="#">Link</a></li>
-				        <li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				            <li><a href="#">Action</a></li>
-				            <li><a href="#">Another action</a></li>
-				            <li><a href="#">Something else here</a></li>
-				            <li role="separator" class="divider"></li>
-				            <li><a href="#">Separated link</a></li>
-				            <li role="separator" class="divider"></li>
-				            <li><a href="#">One more separated link</a></li>
-				          </ul>
-				        </li>
-				      </ul>
-				      <form class="navbar-form navbar-left" role="search">
-				        <div class="form-group">
-				          <input type="text" class="form-control" placeholder="Search">
-				        </div>
-				        <button type="submit" class="btn btn-default">Submit</button>
-				      </form>
-				      <ul class="nav navbar-nav navbar-right">
-				        <li><a href="#">Link</a></li>
-				        <li class="dropdown">
-				          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Dropdown <span class="caret"></span></a>
-				          <ul class="dropdown-menu">
-				            <li><a href="#">Action</a></li>
-				            <li><a href="#">Another action</a></li>
-				            <li><a href="#">Something else here</a></li>
-				            <li role="separator" class="divider"></li>
-				            <li><a href="#">Separated link</a></li>
-				          </ul>
-				        </li>
-				      </ul>
-				    </div><!-- /.navbar-collapse -->
-				  </div><!-- /.container-fluid -->
-				</nav>	            
-	            
-	            <div class="container-fluid">		            
-		            <div class="row">
-		            	<div class="jumbotron text-center">
-						  <h1>This is a fuck** big jumbotron</h1>
-						  <p>...</p>
-						  <p><a class="btn btn-primary btn-lg" href="http://getbootstrap.com/components/#jumbotron" role="button">Learn more</a></p>
-						</div>
-		            </div>
-	            </div>
-	            <div class="container">
-					<div class="row">
-						<div class="col-xs-12 text-center">
-							<h3>Ariane icons <span class="label label-info">New</span></h3>
-							<div class="media">
-							  <div class="media-left media-middle">
-							    <a href="#">
-							      <img class="media-object" src="aimages/ariane/logo-ariane-login.png" alt="...">
-							    </a>
-							  </div>
-							  <div class="media-left">
-							    <h4 class="media-heading">Media heading</h4>
-								    <p class="text-left">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi. Nam liber tempor cum soluta nobis eleifend option congue nihil imperdiet doming id quod mazim placerat facer possim assum. Typi non habent claritatem insitam; est usus legentis in iis qui facit eorum claritatem. Investigationes demonstraverunt lectores legere me lius quod ii legunt saepius. Claritas est etiam processus dynamicus, qui sequitur mutationem consuetudium lectorum. Mirum est notare quam littera gothica, quam nunc putamus parum claram, anteposuerit litterarum formas humanitatis per seacula quarta decima et quinta decima. Eodem modo typi, qui nunc nobis videntur parum clari, fiant sollemnes in futurum.</p>
-							  </div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-xs-12">
-							<div class="panel panel-default">
-							  <div class="panel-body">
-								  
-							    <a href="#">Inbox <span class="badge">42</span></a>	
-							    
-							    <div class="col-xs-4">
-								    <div class="input-group">
-									  <span class="input-group-addon" id="basic-addon1">@</span>
-									  <input type="text" class="form-control" placeholder="Username" aria-describedby="basic-addon1">
-									</div>
-									
-									<div class="input-group">
-									  <input type="text" class="form-control" placeholder="Recipient's username" aria-describedby="basic-addon2">
-									  <span class="input-group-addon" id="basic-addon2">@example.com</span>
-									</div>
-									
-									<div class="input-group">
-									  <span class="input-group-addon">$</span>
-									  <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
-									  <span class="input-group-addon">.00</span>
-									</div>
-									
-									<label for="basic-url">Your vanity URL</label>
-									<div class="input-group">
-									  <span class="input-group-addon" id="basic-addon3">https://example.com/users/</span>
-									  <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
-									</div>
-							    </div>
-							    
-							  </div>
-							</div>
-						</div>
-					</div>
-				</div>
-	            
-	            <!-- END BOOTSTRAP TESTS, IT WORKS ;) -->
-	            
+            <div id="directoryBg" class="backgroundDirectory">           
 	            
 	            <icon class="arianeico-datacenter-ariane"></icon>
                 <icon class="arianeico-datacenter-ariane icon-2x"></icon>
@@ -311,8 +156,27 @@
                 <icon class="icon-ip icon-5x"></icon>
                 <icon class="icon-ip icon-6x"></icon>
                 <icon class="icon-ip icon-7x"></icon><br />
+                
             </div>
         </div>
     </div>
+    
 </body>
+
+<!-- Collapse Menu -->
+<script language="javascript"> 
+	function toggle(elementId) {
+		var ele = document.getElementById(elementId);
+		var btn = document.getElementById("showHideMenu");
+		if(ele.classList.contains == "showMenu") {
+    		ele.classList.toggle("showMenu");
+    		btn.classList.toggle("open");
+	  	}
+		else {
+			ele.classList.toggle("hideMenu");
+			btn.classList.toggle("closed");
+		}
+	} 
+</script>
+	
 </html>
