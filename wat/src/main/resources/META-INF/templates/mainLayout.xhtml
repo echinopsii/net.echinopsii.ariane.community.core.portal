@@ -14,6 +14,21 @@
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/font-awesome-min.css" />
     <link type="text/css" rel="stylesheet" href="#{request.contextPath}/acss/main-min.css" />
     <script type="text/javascript" src="#{request.contextPath}/ajs/modernizr/modernizr-min.js"></script>
+    <script type="text/javascript">
+        function toggle(elementId) {
+            var ele = document.getElementById(elementId),
+                elejq = $('#'+elementId);
+            var btn = document.getElementById("showHideMenu");
+            if(ele.classList.contains("hideMenu")) {
+                elejq.height(elejq.height()-36);
+            }
+            else {
+                elejq.height(elejq.height()+36);
+            }
+            ele.classList.toggle("hideMenu");
+            btn.classList.toggle("closed");
+        }
+    </script>
     <ui:insert name="moduleHeader"></ui:insert>
 </h:head>
 <h:body>
@@ -21,6 +36,7 @@
         <ui:fragment>
             <p:growl id="growl" showDetail="true" life="3000" />
             <p:layout id="mainLayout" fullPage="true">
+                <a id="showHideMenu" href="javascript:toggle('mainCenter');"></a>
                 <p:layoutUnit id="mainTop" position="north" styleClass="main-layout-unit" gutter="0">
                     <div id="header">
                         <a id="arianeLogo" href="#">Ariane</a>

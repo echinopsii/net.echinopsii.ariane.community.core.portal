@@ -21,11 +21,10 @@
     <title>Ariane Directory CSS Test</title>
 </head>
 <body>
+    <a id="showHideMenu" href="javascript:toggle('mainCenter');"></a>
     <div id="mainTop">
         <div id="header" class="showMenu">
-	        
-	        <a id="showHideMenu" href="javascript:toggle('mainCenter');"></a>
-	        
+
             <a id="arianeLogo" href="#">Ariane</a>
             <div id="menutop">
                 <div id="menuDivLeft">
@@ -166,16 +165,10 @@
 <!-- Collapse Menu -->
 <script language="javascript"> 
 	function toggle(elementId) {
-		var ele = document.getElementById(elementId);
-		var btn = document.getElementById("showHideMenu");
-		if(ele.classList.contains == "showMenu") {
-    		ele.classList.toggle("showMenu");
-    		btn.classList.toggle("open");
-	  	}
-		else {
-			ele.classList.toggle("hideMenu");
-			btn.classList.toggle("closed");
-		}
+        var ele = document.getElementById(elementId);
+        var btn = document.getElementById("showHideMenu");
+        ele.classList.toggle("hideMenu");
+        btn.classList.toggle("closed");
 	} 
 </script>
 	

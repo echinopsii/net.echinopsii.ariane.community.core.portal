@@ -15,7 +15,7 @@
         <module>idmwat</module>
         <module>wab</module>
         <module>wresources</module>
-        
+
     </modules>
     
     <repositories>

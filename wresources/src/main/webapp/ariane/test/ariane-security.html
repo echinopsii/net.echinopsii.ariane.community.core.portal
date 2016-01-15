@@ -30,6 +30,7 @@
     <title>Ariane Security CSS Test</title>
 </head>
 <body>
+    <a id="showHideMenu" href="javascript:toggle('mainCenter');"></a>
     <div id="mainTop">
         <div id="header">
             <a id="arianeLogo" href="#">Ariane</a>
@@ -81,4 +82,13 @@
         </div>
     </div>
 </body>
+<!-- Collapse Menu -->
+<script language="javascript">
+    function toggle(elementId) {
+        var ele = document.getElementById(elementId);
+        var btn = document.getElementById("showHideMenu");
+        ele.classList.toggle("hideMenu");
+        btn.classList.toggle("closed");
+    }
+</script>
 </html>
