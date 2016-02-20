@@ -437,6 +437,24 @@ img.right {
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-more';
 }
+.icon-docker-injector:before {
+    content: "\e901";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'ariane-more';
+}
+.icon-common-directory:before {
+    content: "\e901";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'ariane-more';
+}
+.icon-common-injector:before {
+    content: "\e901";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-family: 'ariane-more';
+}
 
 /**************************************/
 /************* ABOUT PAGE *************/
