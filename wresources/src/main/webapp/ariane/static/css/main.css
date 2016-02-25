@@ -91,7 +91,6 @@ body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 	width: 30px;
 	height: 15px;
 	display: block;
-	background: rgb(51, 51, 51);
 	position: absolute;
 	color: #ccc;
 	left: 50%;
@@ -124,6 +123,14 @@ body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 }
 #showHideMenu:hover {
 	color: #e13809;
+}
+.icon-angle-toogle:before {
+    font-family: FontAwesome;
+    content: "\f106";
+}
+.icon-angle-toogle.closed:before {
+    font-family: FontAwesome;
+    content: "\f107";
 }
 
 body #mainCenter {
