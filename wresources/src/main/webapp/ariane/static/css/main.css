@@ -87,15 +87,15 @@ body #menuDivRight ul {float: right; width: 260px}
 body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 
 /*** Button Collapse Menu ***/
-#showHideMenu { 
+#showHideMenu {
 	width: 30px;
 	height: 15px;
 	display: block;
 	background: rgb(51, 51, 51);
-	position: absolute; 
+	position: absolute;
 	color: #ccc;
-	left: 50%; 
-	top: 10px; 
+	left: 50%;
+	top: 10px;
 	z-index: 9900;
 	-webkit-transition: all 300ms ease;
 	-moz-transition: all 300ms ease;
@@ -110,7 +110,7 @@ body #menuDivRight ul .ui-menu-child {float: right; width: 180px}
 	left: 10px;
 	top: 0;
 }
-#showHideMenu.closed { 
+#showHideMenu.closed {
 	top: 0;
 	background: rgb(51, 51, 51);
 	border-radius: 0px 0px 3px 3px
@@ -437,23 +437,40 @@ img.right {
     -moz-osx-font-smoothing: grayscale;
     font-family: 'ariane-more';
 }
+
+
+/**************************************/
+/************* ABOUT PAGE *************/
+/**************************************/
+
+@font-face {
+    font-family: 'ariane-sys';
+    src:    url('../afonts/arianeicons-sys.eot?7rwt3b');
+    src:    url('../afonts/arianeicons-sys.eot?7rwt3b#iefix') format('embedded-opentype'),
+            url('../afonts/arianeicons-sys.ttf?7rwt3b') format('truetype'),
+            url('../afonts/arianeicons-sys.woff?7rwt3b') format('woff'),
+            url('../afonts/arianeicons-sys.svg?7rwt3b#icomoon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 .icon-docker-injector:before {
     content: "\e901";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-more';
+    font-family: 'ariane-sys';
 }
+/*TODO*/
 .icon-common-directory:before {
-    content: "\e901";
+    content: "\e900";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-more';
+    font-family: 'ariane-sys';
 }
 .icon-common-injector:before {
-    content: "\e901";
+    content: "\e900";
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    font-family: 'ariane-more';
+    font-family: 'ariane-sys';
 }
 
 /**************************************/
