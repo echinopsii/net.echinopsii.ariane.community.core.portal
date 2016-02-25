@@ -419,7 +419,7 @@ body .ui-state-highlight .ui-growl-icon-close::before{content:"\F05C" !important
 
 
 /*MENU TOP*/
-#header{background: #333; height:37px; box-shadow: 0px -1px 1.5px 1.5px #333;}
+#header{background: #333; height:37px; box-shadow: 0 -1px 2px 2px #333;}
 
 /*--first level*/
 body #menutop .pui-menu li, body #menutop .ui-menu li {border-radius: 0; padding: 0px 0px 2px 0; border-right: 0px;}
