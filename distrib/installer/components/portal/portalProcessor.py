@@ -25,16 +25,18 @@ __author__ = 'mffrench'
 
 
 class portalProcessor:
-    def __init__(self, idmDBConfig, homeDirPath, silent):
+    def __init__(self, home_dir_path, directory_db_conf, idm_db_conf, silent):
         print("\n%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--\n")
         print("%-- Portal configuration : \n")
-        self.homeDirPath = homeDirPath
+        self.homeDirPath = home_dir_path
+        self.idmDBConfig = idm_db_conf
+        self.directoryDBConfig = directory_db_conf
 
         kernelRepositoryDirPath = self.homeDirPath + "/repository/ariane-core/"
         if not os.path.exists(kernelRepositoryDirPath):
             os.makedirs(kernelRepositoryDirPath, 0o755)
 
-        self.portalIDMSQLPopulator = dbIDMMySQLPopulator(idmDBConfig)
+        self.portalIDMSQLPopulator = dbIDMMySQLPopulator(idm_db_conf)
         self.portalMailServiceSyringe = portalMailServiceSyringe(kernelRepositoryDirPath, silent)
         self.portalMailServiceSyringe.shootBuilder()
 
