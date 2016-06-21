@@ -15,30 +15,30 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 import os
-# noinspection PyUnresolvedReferences
-from components.portal.cuPortalMailServiceProcessor import portalMailServiceSyringe
-# noinspection PyUnresolvedReferences
-from components.portal.dbIDMMySQLPopulator import dbIDMMySQLPopulator
+from components.portal.CUPortalMailServiceProcessor import PortalMailServiceSyringe
+from components.portal.DBIDMMySQLPopulator import DBIDMMySQLPopulator
 
 
 __author__ = 'mffrench'
 
 
-class portalProcessor:
-    def __init__(self, home_dir_path, directory_db_conf, idm_db_conf, silent):
-        print("\n%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--\n")
+class PortalProcessor:
+    def __init__(self, home_dir_path, directory_db_conf, idm_db_conf, bus_processor, silent):
+        print("\n%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--"
+              "%--%--%--%--%--%--%--%--%--\n")
         print("%-- Portal configuration : \n")
         self.homeDirPath = home_dir_path
         self.idmDBConfig = idm_db_conf
         self.directoryDBConfig = directory_db_conf
+        self.busProcessor = bus_processor
 
-        kernelRepositoryDirPath = self.homeDirPath + "/repository/ariane-core/"
-        if not os.path.exists(kernelRepositoryDirPath):
-            os.makedirs(kernelRepositoryDirPath, 0o755)
+        kernel_repository_dir_path = self.homeDirPath + "/repository/ariane-core/"
+        if not os.path.exists(kernel_repository_dir_path):
+            os.makedirs(kernel_repository_dir_path, 0o755)
 
-        self.portalIDMSQLPopulator = dbIDMMySQLPopulator(idm_db_conf)
-        self.portalMailServiceSyringe = portalMailServiceSyringe(kernelRepositoryDirPath, silent)
-        self.portalMailServiceSyringe.shootBuilder()
+        self.portalIDMSQLPopulator = DBIDMMySQLPopulator(idm_db_conf)
+        self.portalMailServiceSyringe = PortalMailServiceSyringe(kernel_repository_dir_path, silent)
+        self.portalMailServiceSyringe.shoot_builder()
 
     def process(self):
         self.portalIDMSQLPopulator.process()

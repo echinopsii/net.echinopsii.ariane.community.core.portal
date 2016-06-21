@@ -2,7 +2,7 @@
     "order": 1,
     "hook": {
         "package": "components.portal",
-        "module": "portalProcessor",
-        "class": "portalProcessor"
+        "module": "PortalProcessor",
+        "class": "PortalProcessor"
     }
 }
