@@ -23,11 +23,12 @@ __author__ = 'mffrench'
 
 
 class PortalProcessor:
-    def __init__(self, home_dir_path, directory_db_conf, idm_db_conf, bus_processor, silent):
+    def __init__(self, home_dir_path, dist_dep_type, directory_db_conf, idm_db_conf, bus_processor, silent):
         print("\n%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--%--"
               "%--%--%--%--%--%--%--%--%--\n")
         print("%-- Portal configuration : \n")
         self.homeDirPath = home_dir_path
+        self.dist_dep_type = dist_dep_type
         self.idmDBConfig = idm_db_conf
         self.directoryDBConfig = directory_db_conf
         self.busProcessor = bus_processor
