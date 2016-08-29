@@ -65,6 +65,7 @@
                         <Embed-Transitive>true</Embed-Transitive>
                         <Import-Package>
                             net.echinopsii.ariane.community.core.portal.base.plugin;version=${project.version},
+                            net.echinopsii.ariane.community.core.portal.base.json;version=${project.version},
                             net.echinopsii.ariane.community.core.portal.base.model;version=${project.version},
                             net.echinopsii.ariane.community.core.idm.base.proxy;version="[${version.net.echinopsii.ariane.core.idm.min},${version.net.echinopsii.ariane.core.idm.max})",
                             net.echinopsii.ariane.community.core.idm.base.model.jpa;version="[${version.net.echinopsii.ariane.core.idm.min},${version.net.echinopsii.ariane.core.idm.max})",

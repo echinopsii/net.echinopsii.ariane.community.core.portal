@@ -76,4 +76,9 @@
         <managed-bean-class>net.echinopsii.ariane.community.core.portal.idmwat.controller.user.UsersListController</managed-bean-class>
         <managed-bean-scope>session</managed-bean-scope>
     </managed-bean>
+    <managed-bean>
+        <managed-bean-name>arianeIDController</managed-bean-name>
+        <managed-bean-class>net.echinopsii.ariane.community.core.portal.idmwat.controller.ArianeIDController</managed-bean-class>
+        <managed-bean-scope>application</managed-bean-scope>
+    </managed-bean>
 </faces-config>
