@@ -22,6 +22,10 @@
 package net.echinopsii.ariane.community.core.portal.base.model;
 
 public class ArianeDefinition {
+
+    public final static String ARIANE_FRONT_DEP_TYPE_MNO = "mno";
+    public final static String ARIANE_FRONT_DEP_TYPE_FRT = "frt";
+
     private String version;
     private String deploymentType;
     private String deliveryDate;

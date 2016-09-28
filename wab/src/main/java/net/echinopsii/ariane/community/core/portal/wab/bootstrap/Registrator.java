@@ -19,6 +19,8 @@
 
 package net.echinopsii.ariane.community.core.portal.wab.bootstrap;
 
+import net.echinopsii.ariane.community.core.portal.base.json.ArianeIDJSON;
+import net.echinopsii.ariane.community.core.portal.base.model.ArianeDefinition;
 import net.echinopsii.ariane.community.core.portal.base.model.UIInsertEntity;
 import net.echinopsii.ariane.community.core.portal.wat.plugin.MainMenuRegistryConsumer;
 import net.echinopsii.ariane.community.core.portal.base.model.MainMenuEntity;
@@ -54,6 +56,8 @@ public class Registrator implements Runnable {
             }
 
         try {
+
+            ArianeDefinition arianeDefinition = ArianeIDJSON.getArianeIDFromJSON();
             int submenuCount;
             MainMenuEntity entity;
 
@@ -139,11 +143,13 @@ public class Registrator implements Runnable {
             OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
             MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
 
-            entity = new MainMenuEntity("neo4JMItem", "Neo4J Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/neo4j.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
-            entity.getDisplayRoles().add("dbadmin");
-            entity.getDisplayPermissions().add("neo4JConsole:display");
-            OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
-            MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
+            if (arianeDefinition.getDeploymentType().equals(ArianeDefinition.ARIANE_FRONT_DEP_TYPE_MNO)) {
+                entity = new MainMenuEntity("neo4JMItem", "Neo4J Console", MAIN_MENU_PORTAL_CONTEXT + "views/admin/neo4j.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
+                entity.getDisplayRoles().add("dbadmin");
+                entity.getDisplayPermissions().add("neo4JConsole:display");
+                OsgiActivator.mainPortalMainRightMenuEntityList.add(entity);
+                MainMenuRegistryConsumer.getInstance().getMainMenuEntityRegistry().registerMainRightMenuEntity(entity);
+            }
 
             entity = new MainMenuEntity("sqlMItem", "SQL Console",  MAIN_MENU_PORTAL_CONTEXT + "views/admin/sql.jsf", MenuEntityType.TYPE_MENU_ITEM, MAIN_MENU_ADMIN_RANK * 10 + submenuCount++, "icon-terminal icon-large").setParent(adminSB);
             entity.getDisplayRoles().add("dbadmin");
