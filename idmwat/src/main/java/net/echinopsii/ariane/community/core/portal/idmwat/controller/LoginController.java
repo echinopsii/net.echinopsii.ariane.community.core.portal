@@ -144,7 +144,10 @@ public class LoginController implements Serializable{
     public void resetPassword() {
         User user = UsersListController.getUserByUserName(username);
         ArrayList<String> to = new ArrayList<>(); to.add(user.getEmail());
-        String newPassword = UUID.randomUUID().toString();
+        String newPassword = null;
+        synchronized (UUID.class) {
+            newPassword = UUID.randomUUID().toString();
+        }
         UsersListController.passwordReset(user,newPassword);
 
         FacesMessage msg = null;
