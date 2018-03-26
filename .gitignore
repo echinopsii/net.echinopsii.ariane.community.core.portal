@@ -1,2 +1,4 @@
+.DS*
+*/**/.DS*
 */target
 distrib/*.iml
