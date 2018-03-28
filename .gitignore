@@ -2,3 +2,5 @@
 */**/.DS*
 */target
 distrib/*.iml
+.DS_Store
+*/**/.DS_Store
