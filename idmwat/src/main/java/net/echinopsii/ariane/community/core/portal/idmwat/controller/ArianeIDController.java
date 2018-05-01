@@ -26,7 +26,6 @@ import net.echinopsii.ariane.community.core.portal.base.model.ArianeDefinition;
 
 public class ArianeIDController {
     private boolean isInitialized = false;
-    private ArianeDefinition arianeDefinition;
 
     private String arianeIDDeliveryYear;
     private String arianeIDDeliveryDate;
@@ -34,7 +33,7 @@ public class ArianeIDController {
 
     public void init() {
         if (!isInitialized) {
-            arianeDefinition = ArianeIDJSON.getArianeIDFromJSON();
+            ArianeDefinition arianeDefinition = ArianeIDJSON.getArianeIDFromJSON();
             arianeIDDeliveryDate = arianeDefinition.getDeliveryDate();
             arianeIDDeliveryYear = arianeDefinition.getDeliveryYear();
             arianeIDVersion = arianeDefinition.getVersion();

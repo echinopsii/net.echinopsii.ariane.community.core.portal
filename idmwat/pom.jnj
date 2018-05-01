@@ -143,6 +143,8 @@
                             javax.faces.webapp;version="${version.javax.faces.api}",
                             javax.persistence;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
                             javax.persistence.criteria;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
+                            javax.servlet;version="${version.javax.servlet.servlet-api}",
+                            javax.servlet.http;version="${version.javax.servlet.servlet-api}",
                             javax.transaction;version="${version.javax.transaction.jta}",
                             javax.ws.rs;version="[${version.osgimin.org.jboss.resteasy},${version.osgimax.org.jboss.resteasy})",
                             javax.ws.rs.core;version="[${version.osgimin.org.jboss.resteasy},${version.osgimax.org.jboss.resteasy})",

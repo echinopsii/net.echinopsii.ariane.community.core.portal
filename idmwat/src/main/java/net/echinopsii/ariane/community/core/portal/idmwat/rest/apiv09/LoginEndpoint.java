@@ -17,7 +17,7 @@
  * You should have received a copy of the GNU Affero General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package net.echinopsii.ariane.community.core.portal.idmwat.rest;
+package net.echinopsii.ariane.community.core.portal.idmwat.rest.apiv09;
 
 import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.Path;
@@ -41,7 +41,7 @@ import java.security.Key;
 /**
  *
  */
-@Path("/login")
+@Path("/api/v09/login")
 public class LoginEndpoint {
     private static final Logger log = LoggerFactory.getLogger(LoginEndpoint.class);
 
