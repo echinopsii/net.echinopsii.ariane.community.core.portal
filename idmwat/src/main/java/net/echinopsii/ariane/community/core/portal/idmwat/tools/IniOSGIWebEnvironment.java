@@ -24,6 +24,7 @@ import org.apache.shiro.ShiroException;
 import org.apache.shiro.config.ConfigurationException;
 import org.apache.shiro.config.Ini;
 import org.apache.shiro.config.IniFactorySupport;
+import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.io.ResourceUtils;
 import org.apache.shiro.util.CollectionUtils;
 import org.apache.shiro.util.Destroyable;
@@ -32,6 +33,7 @@ import org.apache.shiro.util.StringUtils;
 import org.apache.shiro.web.config.IniFilterChainResolverFactory;
 import org.apache.shiro.web.env.ResourceBasedWebEnvironment;
 import org.apache.shiro.web.filter.mgt.FilterChainResolver;
+import org.apache.shiro.web.filter.mgt.PathMatchingFilterChainResolver;
 import org.apache.shiro.web.mgt.WebSecurityManager;
 import org.apache.shiro.web.util.WebUtils;
 import org.slf4j.Logger;
@@ -153,10 +155,17 @@ public class IniOSGIWebEnvironment extends ResourceBasedWebEnvironment implement
             //only create a resolver if the 'filters' or 'urls' sections are defined:
             Ini.Section urls = ini.getSection(IniFilterChainResolverFactory.URLS);
             Ini.Section filters = ini.getSection(IniFilterChainResolverFactory.FILTERS);
-            if (!CollectionUtils.isEmpty(urls) || !CollectionUtils.isEmpty(filters)) {
+            Ini.Section main = ini.getSection(IniSecurityManagerFactory.MAIN_SECTION_NAME);
+            if (!CollectionUtils.isEmpty(urls) || !CollectionUtils.isEmpty(main) || !CollectionUtils.isEmpty(filters)) {
                 //either the urls section or the filters section was defined.  Go ahead and create the resolver:
                 IniFilterChainResolverFactory factory = new IniFilterChainResolverFactory(ini, this.objects);
                 resolver = factory.getInstance();
+                /*
+                if (resolver instanceof  PathMatchingFilterChainResolver) {
+                    for (Entry entry : main.entrySet())
+                    ((PathMatchingFilterChainResolver) resolver).getFilterChainManager();
+                }
+                */
             }
         }
 

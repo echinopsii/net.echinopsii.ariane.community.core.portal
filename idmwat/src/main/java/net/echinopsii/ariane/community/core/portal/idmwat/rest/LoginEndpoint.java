@@ -19,10 +19,13 @@
  */
 package net.echinopsii.ariane.community.core.portal.idmwat.rest;
 
+import javax.crypto.spec.SecretKeySpec;
 import javax.ws.rs.Path;
 
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import net.echinopsii.ariane.community.core.idm.base.json.LoginJSON;
-import net.echinopsii.ariane.community.core.idm.base.json.ToolBox;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -32,7 +35,8 @@ import org.slf4j.LoggerFactory;
 import javax.ws.rs.*;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
-import java.io.ByteArrayOutputStream;
+import javax.xml.bind.DatatypeConverter;
+import java.security.Key;
 
 /**
  *
@@ -43,17 +47,23 @@ public class LoginEndpoint {
 
     @POST
     public Response Login(@QueryParam("payload") String payload) {
+        SignatureAlgorithm sigAlg = SignatureAlgorithm.HS256;
+        byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("secret");
+        Key signingKey = new SecretKeySpec(apiKeySecretBytes, sigAlg.getJcaName());
+
         Subject subject = SecurityUtils.getSubject();
         Response ret;
 
         try {
-            ByteArrayOutputStream outStream = new ByteArrayOutputStream();
             LoginJSON.JSONFriendlyLogin loginRequest = LoginJSON.JSON2Login(payload);
+            JwtBuilder builder = Jwts.builder()
+                    .setSubject(loginRequest.getUsername())
+                    .signWith(sigAlg, signingKey);
+
             UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getUsername(), loginRequest.getPassword());
             subject.login(token);
-            String result = ToolBox.getOuputStreamContent(outStream, "UTF-8");
+            String result = builder.compact();
             ret = Response.status(Status.OK).entity(result).build();
-            // msg = new FacesMessage(FacesMessage.SEVERITY_INFO, "Welcome", username);
         } catch (Exception e) {
             ret = Response.status(Status.OK).entity("Login Error").build();
         }
