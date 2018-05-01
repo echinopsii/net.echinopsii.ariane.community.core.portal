@@ -9,4 +9,4 @@
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.wat" version="[0.7.0,0.8.0)"/>
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.idmwat" version="[0.7.0,0.8.0)"/>
         <artifact type="bundle" name="net.echinopsii.ariane.community.core.portal.wab" version="[0.7.0,0.8.0)"/>
-        </plan>
+</plan>
