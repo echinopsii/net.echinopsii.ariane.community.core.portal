@@ -47,20 +47,37 @@ import java.util.Map;
 public final class IDMViewUtils {
     private static final Logger log = LoggerFactory.getLogger(IDMViewUtils.class);
 
-    public static <T> List<T> asList(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
-        if (collectionName == null && collectionName.equals(""))
-            return null;
-
+    public static Method getMethodID(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
         String methodName = "get"+collectionName.substring(0, 1).toUpperCase() + collectionName.substring(1);
-        Method getter = null;
-        Method id = null;
+        Method id;
         try {
-            getter = object.getClass().getDeclaredMethod(methodName);
             id = object.getClass().getDeclaredMethod("getId");
         } catch (NoSuchMethodException e) {
             log.warn("No such method : {} or getId", methodName);
             return null;
         }
+        return id;
+    }
+
+    public static Method getMethodGetter(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
+        String methodName = "get"+collectionName.substring(0, 1).toUpperCase() + collectionName.substring(1);
+        Method getter;
+        try {
+            getter = object.getClass().getDeclaredMethod(methodName);
+        } catch (NoSuchMethodException e) {
+            log.warn("No such method : {} or getId", methodName);
+            return null;
+        }
+        return getter;
+    }
+
+
+    public static <T> List<T> asList(Object object, String collectionName) throws InvocationTargetException, IllegalAccessException {
+        if (collectionName == null && collectionName.equals(""))
+            return null;
+
+        Method id = IDMViewUtils.getMethodID(object, collectionName);
+        Method getter = IDMViewUtils.getMethodGetter(object, collectionName);
 
         EntityManager entityManager = IDMJPAProviderConsumer.getInstance().getIdmJpaProvider().createEM();
         object = entityManager.find(object.getClass(), id.invoke(object));

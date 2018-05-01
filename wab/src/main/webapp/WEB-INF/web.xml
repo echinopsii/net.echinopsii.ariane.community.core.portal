@@ -22,6 +22,7 @@
         <url-pattern>/rest/*</url-pattern>
     </servlet-mapping>
 
+
     <!-- SHIRO CONFIGURATION -->
     <context-param>
         <param-name>shiroEnvironmentClass</param-name>

@@ -28,6 +28,11 @@
             <version>${version.net.echinopsii.ariane.core.idm}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <version>0.7.0</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -144,6 +149,9 @@
                             javax.persistence;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
                             javax.persistence.criteria;version="[${version.osgimin.javax.persistence},${version.osgimax.javax.persistence})",
                             javax.transaction;version="${version.javax.transaction.jta}",
+                            javax.ws.rs;version="[${version.osgimin.org.jboss.resteasy},${version.osgimax.org.jboss.resteasy})",
+                            javax.ws.rs.core;version="[${version.osgimin.org.jboss.resteasy},${version.osgimax.org.jboss.resteasy})",
+                            javax.ws.rs.ext;version="[${version.osgimin.org.jboss.resteasy},${version.osgimax.org.jboss.resteasy})",
                             org.apache.shiro;version="${version.org.apache.shiro}",
                             org.apache.shiro.authc;version="${version.org.apache.shiro}",
                             org.apache.shiro.config;version="${version.org.apache.shiro}",
