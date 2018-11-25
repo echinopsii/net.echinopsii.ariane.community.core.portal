@@ -25,7 +25,7 @@ import javax.ws.rs.Path;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import net.echinopsii.ariane.community.core.idm.base.json.LoginJSON;
+import net.echinopsii.ariane.community.core.idm.base.json.LoginReq;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -33,6 +33,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.DatatypeConverter;
@@ -46,7 +47,11 @@ public class LoginEndpoint {
     private static final Logger log = LoggerFactory.getLogger(LoginEndpoint.class);
 
     @POST
-    public Response Login(@QueryParam("payload") String payload) {
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response Login(final LoginReq loginRequest) {
+        log.warn("loginRequest: " + loginRequest.toString());
+
         SignatureAlgorithm sigAlg = SignatureAlgorithm.HS256;
         byte[] apiKeySecretBytes = DatatypeConverter.parseBase64Binary("secret");
         Key signingKey = new SecretKeySpec(apiKeySecretBytes, sigAlg.getJcaName());
@@ -55,21 +60,22 @@ public class LoginEndpoint {
         Response ret;
 
         try {
-            LoginJSON.JSONFriendlyLogin loginRequest = LoginJSON.JSON2Login(payload);
             JwtBuilder builder = Jwts.builder()
                     .setSubject(loginRequest.getUsername())
                     .signWith(sigAlg, signingKey);
 
             UsernamePasswordToken token = new UsernamePasswordToken(loginRequest.getUsername(), loginRequest.getPassword());
             subject.login(token);
-            String result = builder.compact();
+            String result = "{\"token\": \"" + builder.compact() + "\"}";
+            log.warn("Result: " + result);
             ret = Response.status(Status.OK).entity(result).build();
         } catch (Exception e) {
-            ret = Response.status(Status.OK).entity("Login Error").build();
+            log.error("Error while authenticating : " + e.getMessage());
+            ret = Response.status(Status.UNAUTHORIZED).entity("{\"message\": \"Login Error\"}").build();
         }
 
-        log.debug("Is authenticated:{} ; Is remembered:{}", new Object[]{subject.isAuthenticated(), subject.isRemembered()});
-        log.debug("Principal:{}", new Object[]{(subject.getPrincipal() != null) ? subject.getPrincipal().toString() : "guest"});
+        log.warn("Is authenticated:{} ; Is remembered:{}", new Object[]{subject.isAuthenticated(), subject.isRemembered()});
+        log.warn("Principal:{}", new Object[]{(subject.getPrincipal() != null) ? subject.getPrincipal().toString() : "guest"});
         return ret;
     }
 }

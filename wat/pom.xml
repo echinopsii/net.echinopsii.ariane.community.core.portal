@@ -28,6 +28,12 @@
             <version>${project.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat</groupId>
+            <artifactId>tomcat-util</artifactId>
+            <version>7.0.35</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 
     <build>
@@ -171,6 +177,7 @@
                             org.apache.shiro.web.subject.support;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.util;version="${version.org.apache.shiro}",
                             org.apache.shiro.web.tags;version="${version.org.apache.shiro}",
+                            org.apache.tomcat.util.res;version="${version.org.apache.tomcat}",
                             org.primefaces;version="${version.org.primefaces.primefaces}",
                             org.primefaces.application;version="${version.org.primefaces.primefaces}",
                             org.primefaces.component.accordionpanel;version="${version.org.primefaces.primefaces}",
